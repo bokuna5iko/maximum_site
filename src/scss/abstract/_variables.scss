@@ -1,0 +1,22 @@
+// Палитра (Dark Moto Theme)
+$bg-main: #0d0d0d;
+$bg-card: #161618;
+$bg-card-hover: #1f1f22;
+
+$text-primary: #ffffff;
+$text-secondary: #a1a1aa;
+
+// Акцентные авто-цвета
+$accent-red: #ff2a00; // Красная зона спидометра
+$accent-orange: #ff5500; // Кнопки действия
+$accent-glow: rgba(255, 42, 0, 0.35);
+
+// Шрифты и сетка
+$font-main:
+  "Inter",
+  system-ui,
+  -apple-system,
+  sans-serif;
+$radius-sm: 8px;
+$radius-md: 14px;
+$transition-fast: 0.25s ease;

@@ -1,0 +1,25 @@
+// Abstract
+@use "abstract/variables" as *;
+@use "abstract/reset";
+@use "abstract/mixins";
+
+// Components
+@use "components/buttons";
+@use "components/cards";
+@use "components/modal";
+@use "components/quiz";
+
+// Layout
+@use "layout/header";
+@use "layout/hero";
+@use "layout/showcase";
+@use "layout/service-hub";
+@use "layout/contacts";
+@use "layout/mobile-bar";
+
+body {
+  background-color: $bg-main;
+  color: $text-primary;
+  font-family: $font-main;
+  overflow-x: hidden;
+}
