@@ -1,0 +1,78 @@
+@use "../abstract/variables" as *;
+
+.card {
+  position: relative;
+  background-color: $bg-card;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: $radius-md;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all $transition-fast;
+  overflow: hidden;
+
+  &:hover {
+    background-color: $bg-card-hover;
+    border-color: rgba(255, 85, 0, 0.4);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+  }
+
+  &--accent {
+    border-color: rgba(255, 42, 0, 0.3);
+    background: linear-gradient(
+      180deg,
+      rgba(255, 42, 0, 0.05) 0%,
+      $bg-card 100%
+    );
+  }
+
+  &__tag {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    color: $text-secondary;
+    text-transform: uppercase;
+
+    &--red {
+      background: rgba(255, 42, 0, 0.2);
+      color: $accent-red;
+      border: 1px solid rgba(255, 42, 0, 0.3);
+    }
+  }
+
+  &__title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: $text-primary;
+    padding-right: 40px; // Место под tag
+  }
+
+  &__specs {
+    list-style: none;
+    margin-bottom: 24px;
+
+    li {
+      font-size: 0.9rem;
+      color: $text-secondary;
+      margin-bottom: 8px;
+      line-height: 1.4;
+
+      span {
+        color: #e4e4e7;
+        font-weight: 600;
+      }
+    }
+  }
+
+  &__action {
+    margin-top: auto;
+  }
+}

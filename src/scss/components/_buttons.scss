@@ -1,0 +1,42 @@
+@use "../abstract/variables" as *;
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 28px;
+  border-radius: $radius-sm;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: all $transition-fast;
+
+  &--primary {
+    background: linear-gradient(135deg, $accent-red 0%, $accent-orange 100%);
+    color: #ffffff;
+    box-shadow: 0 4px 20px $accent-glow;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 25px rgba(255, 42, 0, 0.5);
+    }
+  }
+
+  &--outline {
+    background: transparent;
+    color: $text-primary;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.4);
+      transform: translateY(-2px);
+    }
+
+    &--full {
+      width: 100%;
+    }
+  }
+}

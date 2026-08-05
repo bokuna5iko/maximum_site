@@ -1,0 +1,135 @@
+@use "../abstract/variables" as *;
+
+.contacts-section {
+  padding: 80px 0 60px;
+  background: linear-gradient(180deg, $bg-main 0%, #121214 100%);
+}
+
+// Блок дилерских брендов
+.brands-block {
+  text-align: center;
+  margin-bottom: 60px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+  &__title {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: $text-secondary;
+    margin-bottom: 24px;
+  }
+}
+
+.brands-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+
+  .brand-item {
+    padding: 12px 24px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: $radius-sm;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: #e4e4e7;
+    letter-spacing: 1px;
+    transition: all $transition-fast;
+
+    &:hover {
+      border-color: $accent-orange;
+      color: #fff;
+      transform: translateY(-2px);
+    }
+  }
+}
+
+// Контакты и Карта
+.contacts-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: stretch;
+
+  @media (max-width: 868px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.contacts-info {
+  display: flex;
+  flex-direction: column;
+
+  .text-left {
+    text-align: left;
+    margin-bottom: 12px;
+  }
+
+  .contacts-desc {
+    color: $text-secondary;
+    margin-bottom: 30px;
+    line-height: 1.5;
+  }
+}
+
+.contacts-list {
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+
+  .contact-icon {
+    font-size: 1.4rem;
+  }
+
+  strong {
+    display: block;
+    font-size: 0.85rem;
+    color: $text-secondary;
+    margin-bottom: 2px;
+  }
+
+  p,
+  a {
+    color: $text-primary;
+    font-size: 1rem;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: $accent-orange;
+  }
+}
+
+.contacts-map {
+  min-height: 380px;
+  border-radius: $radius-md;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+}
+
+// Подвал
+.footer {
+  padding: 30px 0 100px; // Запас под Mobile Bottom Bar
+  background-color: #09090a;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  text-align: center;
+  color: $text-secondary;
+  font-size: 0.85rem;
+
+  &__note {
+    margin-top: 6px;
+    font-size: 0.75rem;
+    opacity: 0.6;
+  }
+}

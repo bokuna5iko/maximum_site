@@ -1,9 +1,10 @@
 import "../scss/main.scss";
 import { initSpeedometerAnimation } from "./animation.js";
+import { initQuiz } from "./quiz.js";
+import { initModals } from "./modal.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("MAXIMUM Website Initialized 🏎️");
-
-  // Запуск GSAP анимации спидометра
   initSpeedometerAnimation();
+  initQuiz();
+  initModals(); // <-- Запуск Модалок
 });
