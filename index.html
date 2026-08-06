@@ -38,27 +38,18 @@
     <section class="hero" id="hero">
       <canvas id="water-drops-canvas" class="hero__water-canvas"></canvas>
 
-      <div class="hero__parallax-container">
-        <div class="hero__layer hero__layer--bg" data-speed="0.02">
-          <img
-            src="/src/assets/images/hero-bg.jpg"
-            alt="Фон дилерского центра"
-          />
-        </div>
-
-        <div class="hero__layer hero__layer--main" data-speed="0.05">
-          <img
-            src="/src/assets/images/jet-ski-main.png"
-            alt="Гидроцикл МАКСИМУМ"
-          />
-        </div>
-
-        <div class="hero__layer hero__layer--drops" data-speed="0.12">
-          <img
-            src="/src/assets/images/drops-foreground.png"
-            alt="Брызги воды"
-          />
-        </div>
+      <div class="hero__video-wrapper">
+        <video
+          class="hero__video"
+          autoplay
+          loop
+          muted
+          playsinline
+          poster="/src/assets/images/hero-bg.jpg"
+        >
+          <source src="/src/assets/images/hero-video.mp4" type="video/mp4" />
+        </video>
+        <div class="hero__video-overlay"></div>
       </div>
 
       <div class="container hero__container">
