@@ -1,10 +1,11 @@
 import "../scss/main.scss";
-import { initSpeedometerAnimation } from "./animation.js";
 import { initQuiz } from "./quiz.js";
 import { initModals } from "./modal.js";
+import { initHeroParallax, initWaterDrops } from "./parallax.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-  initSpeedometerAnimation();
   initQuiz();
-  initModals(); // <-- Запуск Модалок
+  initModals();
+  initHeroParallax(); // 3D-параллакс мыши
+  initWaterDrops(); // Стекающие капли на экране
 });

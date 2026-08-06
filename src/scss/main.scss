@@ -17,9 +17,10 @@
 @use "layout/contacts";
 @use "layout/mobile-bar";
 
+// Глобальные базовые стили
 body {
   background-color: $bg-main;
-  color: $text-primary;
+  color: $text-dark;
   font-family: $font-main;
   overflow-x: hidden;
 }

@@ -1,22 +1,42 @@
-// Палитра (Dark Moto Theme)
-$bg-main: #0d0d0d;
-$bg-card: #161618;
-$bg-card-hover: #1f1f22;
+// Основные фоны (Светлый титаново-серебристый базис)
+$bg-main: #f4f6f9; // Светлый чистый фон основных секций
+$bg-main-alt: #e9ecef; // Альтернативный светло-серый для контраста
+$bg-surface: #ffffff; // Чисто белый фон подложек/белых карточек
 
-$text-primary: #ffffff;
-$text-secondary: #a1a1aa;
+// Контрастные тёмные фоны (Наследие фасада магазина и премиум-карточек)
+$bg-dark-card: #18191c; // Тёмно-графитовый фон премиум-карточек и Hero
+$bg-dark-hover: #222429; // Фон карточек при наведении
 
-// Акцентные авто-цвета
-$accent-red: #ff2a00; // Красная зона спидометра
-$accent-orange: #ff5500; // Кнопки действия
-$accent-glow: rgba(255, 42, 0, 0.35);
+// Текст
+$text-dark: #1e293b; // Основной текст на светлом фоне
+$text-muted: #64748b; // Вторичный текст на светлом фоне
+$text-light: #ffffff; // Основной текст на тёмных карточках
+$text-light-muted: #94a3b8; // Вторичный текст на тёмных карточках
 
-// Шрифты и сетка
+// Акцентные цвета
+$accent-orange: #ff5500; // Оранжевый (фасад магазина, главные CTA кнопки)
+$accent-red: #ff2a00; // Красная зона
+$accent-cyan: #00b4d8; // Электрический голубой (Плашки "В наличии")
+$accent-cyan-glow: rgba(0, 180, 216, 0.35);
+$accent-orange-glow: rgba(255, 85, 0, 0.35);
+$accent-glow: $accent-orange-glow;
+
+// Шрифты
+$font-header:
+  "Russo One", "Montserrat", sans-serif; // Брутальный технологичный шрифт
 $font-main:
   "Inter",
   system-ui,
   -apple-system,
   sans-serif;
+
+// Скругляния и эффекты
 $radius-sm: 8px;
-$radius-md: 14px;
-$transition-fast: 0.25s ease;
+$radius-md: 16px;
+$radius-lg: 24px;
+$transition-fast: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+
+// Алиасы совместимости (чтобы старые селекторы не выбивали ошибку)
+$text-primary: $text-dark;
+$text-secondary: $text-muted;
+$accent-glow: $accent-orange-glow;

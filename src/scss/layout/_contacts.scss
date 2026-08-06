@@ -2,21 +2,21 @@
 
 .contacts-section {
   padding: 80px 0 60px;
-  background: linear-gradient(180deg, $bg-main 0%, #121214 100%);
+  background-color: $bg-main-alt;
 }
 
-// Блок дилерских брендов
 .brands-block {
   text-align: center;
   margin-bottom: 60px;
   padding-bottom: 40px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid #cbd5e1;
 
   &__title {
-    font-size: 0.9rem;
+    font-family: $font-header;
+    font-size: 0.95rem;
     text-transform: uppercase;
     letter-spacing: 2px;
-    color: $text-secondary;
+    color: $text-muted;
     margin-bottom: 24px;
   }
 }
@@ -26,28 +26,28 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 24px;
+  gap: 20px;
 
   .brand-item {
     padding: 12px 24px;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: $bg-surface;
+    border: 1px solid #cbd5e1;
     border-radius: $radius-sm;
-    font-weight: 800;
+    font-family: $font-header;
     font-size: 1.1rem;
-    color: #e4e4e7;
+    color: $text-dark;
     letter-spacing: 1px;
     transition: all $transition-fast;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 
     &:hover {
       border-color: $accent-orange;
-      color: #fff;
+      color: $accent-orange;
       transform: translateY(-2px);
     }
   }
 }
 
-// Контакты и Карта
 .contacts-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -69,7 +69,7 @@
   }
 
   .contacts-desc {
-    color: $text-secondary;
+    color: $text-muted;
     margin-bottom: 30px;
     line-height: 1.5;
   }
@@ -94,15 +94,16 @@
   strong {
     display: block;
     font-size: 0.85rem;
-    color: $text-secondary;
+    color: $text-muted;
     margin-bottom: 2px;
   }
 
   p,
   a {
-    color: $text-primary;
+    color: $text-dark;
     font-size: 1rem;
     text-decoration: none;
+    font-weight: 600;
   }
 
   a:hover {
@@ -114,17 +115,15 @@
   min-height: 380px;
   border-radius: $radius-md;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+  border: 1px solid #cbd5e1;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
-// Подвал
 .footer {
-  padding: 30px 0 100px; // Запас под Mobile Bottom Bar
-  background-color: #09090a;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 30px 0 100px;
+  background-color: #0f172a;
+  color: #94a3b8;
   text-align: center;
-  color: $text-secondary;
   font-size: 0.85rem;
 
   &__note {

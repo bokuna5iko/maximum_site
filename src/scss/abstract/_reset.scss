@@ -1,3 +1,28 @@
+@use "variables" as *;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: $bg-main;
+  color: $text-dark;
+  font-family: $font-main;
+  overflow-x: hidden;
+  line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+h4,
+.section-title {
+  font-family: $font-header;
+  letter-spacing: 1px;
+}
+
 .container {
   width: 100%;
   max-width: 1200px;
@@ -11,14 +36,14 @@
 
   .section-title {
     font-size: clamp(1.8rem, 3vw, 2.4rem);
-    font-weight: 800;
+    font-weight: 400;
+    color: $text-dark;
     margin-bottom: 10px;
     text-transform: uppercase;
-    letter-spacing: 1px;
   }
 
   .section-subtitle {
-    color: #a1a1aa;
+    color: $text-muted;
     font-size: 1rem;
   }
 }

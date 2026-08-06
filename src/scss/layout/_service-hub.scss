@@ -16,17 +16,21 @@
 }
 
 .service-card {
-  background: $bg-card;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: $bg-surface;
+  border: 1px solid #e2e8f0;
   border-radius: $radius-md;
   padding: 35px 30px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  transition: transform $transition-fast;
+  transition:
+    transform $transition-fast,
+    box-shadow $transition-fast;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
 
   &:hover {
     transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
     border-color: rgba(255, 85, 0, 0.3);
   }
 
@@ -36,13 +40,14 @@
   }
 
   &__title {
+    font-family: $font-header;
     font-size: 1.4rem;
-    font-weight: 700;
     margin-bottom: 12px;
+    color: $text-dark;
   }
 
   &__desc {
-    color: $text-secondary;
+    color: $text-muted;
     font-size: 0.95rem;
     line-height: 1.5;
     margin-bottom: 24px;
