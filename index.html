@@ -34,24 +34,45 @@
       </div>
     </header>
 
-    <!-- БЛОК 1: HERO-ЭКРАН (Тёмно-графитовый контраст) -->
+    <!-- БЛОК 1: HERO-ЭКРАН -->
     <section class="hero" id="hero">
+      <!-- Стекающие капли на Canvas -->
       <canvas id="water-drops-canvas" class="hero__water-canvas"></canvas>
 
-      <div class="hero__video-wrapper">
-        <video
-          class="hero__video"
-          autoplay
-          loop
-          muted
-          playsinline
-          poster="/src/assets/images/hero-bg.jpg"
-        >
-          <source src="/src/assets/images/hero-video.mp4" type="video/mp4" />
-        </video>
+      <!-- СЛАЙДЕР ВИДЕОФОНОВ -->
+      <div class="hero__video-slider">
+        <div class="hero__video-slide active" data-season="jetski">
+          <video autoplay loop muted playsinline class="hero__video">
+            <source src="/src/assets/images/hero-jetski.mp4" type="video/mp4" />
+          </video>
+        </div>
+
+        <div class="hero__video-slide" data-season="atv">
+          <video autoplay loop muted playsinline class="hero__video">
+            <source src="/src/assets/images/hero-atv.mp4" type="video/mp4" />
+          </video>
+        </div>
+
+        <div class="hero__video-slide" data-season="snow">
+          <video autoplay loop muted playsinline class="hero__video">
+            <source
+              src="/src/assets/images/hero-snowmobile.mp4"
+              type="video/mp4"
+            />
+          </video>
+        </div>
+
+        <div class="hero__video-slide" data-season="boat">
+          <video autoplay loop muted playsinline class="hero__video">
+            <source src="/src/assets/images/hero-boat.mp4" type="video/mp4" />
+          </video>
+        </div>
+
+        <!-- Тёмный оверлей -->
         <div class="hero__video-overlay"></div>
       </div>
 
+      <!-- ЦЕНТРАЛЬНЫЙ КОНТЕНТ (UI) -->
       <div class="container hero__container">
         <div class="hero__badge">
           <span class="pulse-dot"></span>
@@ -73,6 +94,33 @@
             Записаться на сервис
           </button>
         </div>
+      </div>
+
+      <!-- МИНИМАЛИСТИЧНЫЕ КВАДРАТНЫЕ ТАБЫ (В самом низу Hero) -->
+      <div class="hero__season-bar">
+        <button class="season-card active" data-slide="0">
+          <span class="season-card__label">GTR / WATER</span>
+          <span class="season-card__title">ГИДРОЦИКЛЫ</span>
+          <span class="season-card__line"></span>
+        </button>
+
+        <button class="season-card" data-slide="1">
+          <span class="season-card__label">OFF-ROAD / 4X4</span>
+          <span class="season-card__title">КВАДРОЦИКЛЫ</span>
+          <span class="season-card__line"></span>
+        </button>
+
+        <button class="season-card" data-slide="2">
+          <span class="season-card__label">SNOW / MOUNTAIN</span>
+          <span class="season-card__title">СНЕГОХОДЫ</span>
+          <span class="season-card__line"></span>
+        </button>
+
+        <button class="season-card" data-slide="3">
+          <span class="season-card__label">MARINE / OUTBOARD</span>
+          <span class="season-card__title">КАТЕРА И МОТОРЫ</span>
+          <span class="season-card__line"></span>
+        </button>
       </div>
     </section>
 
