@@ -10,6 +10,10 @@
   text-align: center;
   font-size: 0.8rem;
   color: $text-muted;
+
+  a {
+    color: $accent-orange;
+  }
 }
 
 .instock__grid {
@@ -65,6 +69,10 @@
 
     &.is-snow {
       background: linear-gradient(135deg, #334155, #0f172a);
+    }
+
+    &.is-trailer {
+      background: linear-gradient(135deg, #57534e, #292524);
     }
 
     &.is-gear {

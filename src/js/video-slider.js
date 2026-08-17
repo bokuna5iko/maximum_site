@@ -1,11 +1,14 @@
+import { getSeason } from "./config.js";
+
 export function initVideoSlider() {
   const slides = document.querySelectorAll(".hero__video-slide");
   const tabs = document.querySelectorAll(".season-card");
 
   if (!slides.length || !tabs.length) return;
 
-  let currentIndex = 0;
-  const slideInterval = 6500; // Автопереключение каждые 6.5 секунд
+  const startBySeason = { offroad: 0, water: 1, snow: 3 };
+  let currentIndex = startBySeason[getSeason()] ?? 0;
+  const slideInterval = 6500;
   let timer = null;
 
   function goToSlide(index) {
@@ -50,5 +53,6 @@ export function initVideoSlider() {
     });
   });
 
+  goToSlide(currentIndex);
   startAutoPlay();
 }

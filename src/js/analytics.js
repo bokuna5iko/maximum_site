@@ -46,8 +46,12 @@ export function initClickTracking() {
       trackGoal("click_phone");
       return;
     }
-    if (link.dataset.track === "route" || href.includes("yandex.ru/maps")) {
+    if (link.dataset.track === "route" || href.includes("2gis.ru")) {
       trackGoal("click_route");
+      return;
+    }
+    if (link.dataset.track === "reviews") {
+      trackGoal("click_reviews");
       return;
     }
     if (link.dataset.track === "whatsapp" || href.includes("wa.me")) {

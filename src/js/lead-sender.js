@@ -1,11 +1,16 @@
-import { CONFIG, getWhatsAppUrl, isTelegramConfigured } from "./config.js";
+import {
+  CONFIG,
+  getTelegramChatId,
+  getWhatsAppUrl,
+  isTelegramConfigured,
+} from "./config.js";
 import { trackGoal } from "./analytics.js";
 
 const LEAD_TITLES = {
-  testdrive: "Запись на тест-драйв / визит в салон",
-  quiz: "Квиз: подбор техники и визит",
-  service: "Запись на сервис / ТО",
-  parts: "Подбор запчастей по VIN",
+  testdrive: "ПРОДАЖИ: запись на тест-драйв / визит",
+  quiz: "ПРОДАЖИ: квиз, подбор и визит",
+  service: "СЕРВИС: запись на ТО",
+  parts: "СЕРВИС: подбор запчастей",
 };
 
 const LEAD_GOALS = {
@@ -17,7 +22,7 @@ const LEAD_GOALS = {
 
 function formatLead(type, fields) {
   const title = LEAD_TITLES[type] || "Заявка с сайта";
-  const lines = [title, `Сайт: ${CONFIG.BRAND}`, ""];
+  const lines = [title, `Сайт: ${CONFIG.BRAND}`, `Город: ${CONFIG.CITY}`, ""];
 
   for (const [label, value] of Object.entries(fields)) {
     if (value) lines.push(`• ${label}: ${value}`);
@@ -26,13 +31,14 @@ function formatLead(type, fields) {
   return lines.join("\n");
 }
 
-async function sendToTelegram(text) {
+async function sendToTelegram(text, type) {
+  const chatId = getTelegramChatId(type);
   const url = `https://api.telegram.org/bot${CONFIG.TELEGRAM_BOT_TOKEN}/sendMessage`;
   const response = await fetch(url, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      chat_id: CONFIG.TELEGRAM_CHAT_ID,
+      chat_id: chatId,
       text,
     }),
   });
@@ -43,31 +49,32 @@ async function sendToTelegram(text) {
 }
 
 /**
- * Отправляет заявку менеджеру. WhatsApp клиенту не открывается сам.
- * @returns {{ text: string, deliveredVia: "telegram" | "pending", whatsappUrl: string }}
+ * @returns {{ text: string, deliveredVia: "telegram" | "pending", whatsappUrl: string, type: string, fields: object }}
  */
 export async function sendLead({ type, fields }) {
   const text = formatLead(type, fields);
   let deliveredVia = "pending";
 
-  if (isTelegramConfigured()) {
+  if (isTelegramConfigured(type)) {
     try {
-      await sendToTelegram(text);
+      await sendToTelegram(text, type);
       deliveredVia = "telegram";
     } catch (error) {
-      console.warn("Не удалось отправить в Telegram, оставляем WhatsApp как канал:", error);
+      console.warn("Не удалось отправить в Telegram:", error);
     }
   } else {
     console.warn(
-      "Telegram-бот не настроен: заполните TELEGRAM_BOT_TOKEN и TELEGRAM_CHAT_ID в src/js/config.js",
+      "Telegram-бот не настроен: заполните TELEGRAM_BOT_TOKEN и chat_id в src/js/config.js",
     );
   }
 
   trackGoal(LEAD_GOALS[type]);
 
   return {
+    type,
+    fields,
     text,
     deliveredVia,
-    whatsappUrl: getWhatsAppUrl(text),
+    whatsappUrl: getWhatsAppUrl(text, type),
   };
 }

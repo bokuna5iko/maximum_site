@@ -1,0 +1,192 @@
+@use "../abstract/variables" as *;
+
+.visit {
+  padding: 80px 0;
+  background-color: $bg-main;
+}
+
+.visit__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 28px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.visit-card {
+  background: $bg-surface;
+  border: 1px solid #e2e8f0;
+  border-radius: $radius-md;
+  padding: 24px 22px;
+
+  &__step {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: $accent-orange;
+    margin-bottom: 8px;
+  }
+
+  &__title {
+    font-family: $font-header;
+    font-size: 1.15rem;
+    margin-bottom: 8px;
+    color: $text-dark;
+  }
+
+  &__text {
+    color: $text-muted;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+}
+
+.deal {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 20px;
+  align-items: stretch;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.deal-card {
+  background: $bg-dark-card;
+  color: $text-light;
+  border-radius: $radius-md;
+  padding: 28px 24px;
+
+  &--light {
+    background: $bg-surface;
+    color: $text-dark;
+    border: 1px solid #e2e8f0;
+  }
+
+  &__title {
+    font-family: $font-header;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+
+  &__text {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: $text-light-muted;
+    margin-bottom: 16px;
+  }
+
+  &--light &__text {
+    color: $text-muted;
+  }
+
+  &__list {
+    list-style: none;
+    font-size: 0.92rem;
+    color: #e2e8f0;
+
+    li {
+      margin-bottom: 6px;
+    }
+  }
+
+  &--light &__list {
+    color: $text-dark;
+  }
+}
+
+.gis-proof {
+  padding: 80px 0 40px;
+  background-color: $bg-main-alt;
+
+  .text-left {
+    text-align: left;
+  }
+}
+
+.gis-proof__head {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: flex-end;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+
+.gis-score {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+
+  &__value {
+    font-family: $font-header;
+    font-size: 3rem;
+    color: $text-dark;
+    line-height: 1;
+  }
+
+  &__meta {
+    color: $text-muted;
+    font-size: 0.95rem;
+  }
+}
+
+.gis-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.gis-tag {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  background: $bg-surface;
+  border: 1px solid #e2e8f0;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: $text-dark;
+}
+
+.gis-reviews {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.gis-review {
+  margin: 0;
+  background: $bg-surface;
+  border: 1px solid #e2e8f0;
+  border-radius: $radius-md;
+  padding: 22px;
+
+  &__text {
+    color: $text-dark;
+    line-height: 1.5;
+    margin-bottom: 12px;
+  }
+
+  &__author {
+    font-size: 0.82rem;
+    color: $text-muted;
+  }
+}
+
+.gis-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}

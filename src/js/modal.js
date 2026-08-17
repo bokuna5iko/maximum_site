@@ -69,6 +69,9 @@ export function initModals() {
   document.querySelector("#open-service-modal")?.addEventListener("click", () => {
     openModal("service");
   });
+  document.querySelector("#visit-open-service")?.addEventListener("click", () => {
+    openModal("service");
+  });
 
   closeBtn?.addEventListener("click", closeModal);
   overlay?.addEventListener("click", closeModal);
@@ -155,18 +158,39 @@ function setupFormSubmit(formSelector, type, labels) {
   });
 }
 
-export function showSuccessModal({ deliveredVia, whatsappUrl }) {
+export function showSuccessModal({ deliveredVia, whatsappUrl, type, fields = {} }) {
   const modal = document.querySelector("#modal-success");
   const note = document.querySelector("#success-note");
   const wa = document.querySelector("#success-whatsapp");
   const route = document.querySelector("#success-route");
+  const title = document.querySelector("#success-title");
+  const text = document.querySelector("#success-text");
 
   if (!modal) return;
+
+  const slot = fields["Слот визита"];
+  const model = fields["Модель"] || fields["Категория"];
+
+  if (type === "testdrive" || type === "quiz") {
+    if (title) title.textContent = "Ждём вас в салоне";
+    if (text) {
+      const when = slot || "в согласованное время";
+      text.textContent = model
+        ? `Запись: ${when}. Подготовим ${model}. Менеджер подтвердит визит.`
+        : `Запись: ${when}. Менеджер подтвердит визит и подготовит модели.`;
+    }
+  } else if (type === "service") {
+    if (title) title.textContent = "Заявка на ТО принята";
+    if (text) text.textContent = "Сервис свяжется, чтобы подтвердить дату и работу.";
+  } else {
+    if (title) title.textContent = "Заявка на запчасти принята";
+    if (text) text.textContent = "Подберём по заявке и перезвоним.";
+  }
 
   if (note) {
     if (deliveredVia === "telegram") {
       note.hidden = true;
-    } else if (isTelegramConfigured()) {
+    } else if (isTelegramConfigured(type)) {
       note.hidden = false;
       note.textContent =
         "Не удалось отправить менеджеру автоматически. Напишите в WhatsApp, чтобы заявка точно дошла.";
@@ -183,7 +207,7 @@ export function showSuccessModal({ deliveredVia, whatsappUrl }) {
   }
 
   if (route) {
-    route.href = CONFIG.MAPS_URL;
+    route.href = CONFIG.MAPS_ROUTE || CONFIG.MAPS_URL;
     route.dataset.track = "route";
   }
 

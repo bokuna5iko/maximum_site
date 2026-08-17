@@ -3,19 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Центр Техники МАКСИМУМ | Техника в наличии и тест-драйв</title>
+    <title>Центр Техники МАКСИМУМ | Якутск, техника в наличии</title>
     <meta
       name="description"
-      content="Официальный дилер BRP, Suzuki, Tohatsu и Русской Механики. Живое наличие в салоне, запись на тест-драйв, авторизованный сервис и подбор запчастей."
+      content="Салон техники Maximum в Якутске, ул. 50 лет Советской Армии, 77. Квадроциклы, лодки, прицепы, снегоходы и сервис. Рейтинг 4.9 на 2ГИС. Запись на тест-драйв."
     />
     <meta property="og:type" content="website" />
     <meta
       property="og:title"
-      content="Центр Техники МАКСИМУМ | Техника в наличии и тест-драйв"
+      content="Центр Техники МАКСИМУМ | Якутск, техника в наличии"
     />
     <meta
       property="og:description"
-      content="Приезжайте смотреть живые модели: квадроциклы, гидроциклы, лодки и снегоходы. Запись на тест-драйв без звонка вслепую."
+      content="Живые модели в салоне на 50 лет Советской Армии, 77. Отзывы и фото — в 2ГИС. Запишитесь на визит."
     />
     <meta property="og:locale" content="ru_RU" />
 
@@ -34,17 +34,18 @@
         <nav class="header__nav" id="header-nav">
           <a href="#in-stock" class="header__link">Наличие</a>
           <a href="#quiz" class="header__link">Подбор</a>
+          <a href="#reviews" class="header__link">2ГИС</a>
           <a href="#service-hub" class="header__link">Сервис</a>
           <a href="#contacts" class="header__link">Контакты</a>
         </nav>
 
         <div class="header__phone">
           <a
-            href="tel:+79000000000"
+            href="tel:+79247659421"
             class="header__phone-link"
             data-bind-href="PHONE_SALES"
             data-bind-text="PHONE_SALES_DISPLAY"
-            >+7 (900) 000-00-00</a
+            >+7 (924) 765-94-21</a
           >
         </div>
 
@@ -66,15 +67,21 @@
       <canvas id="water-drops-canvas" class="hero__water-canvas"></canvas>
 
       <div class="hero__video-slider">
-        <div class="hero__video-slide active" data-season="jetski">
+        <div class="hero__video-slide active" data-season="atv">
           <video autoplay loop muted playsinline class="hero__video">
-            <source src="/src/assets/images/hero-jetski.mp4" type="video/mp4" />
+            <source src="/src/assets/images/hero-atv.mp4" type="video/mp4" />
           </video>
         </div>
 
-        <div class="hero__video-slide" data-season="atv">
+        <div class="hero__video-slide" data-season="boat">
           <video autoplay loop muted playsinline class="hero__video">
-            <source src="/src/assets/images/hero-atv.mp4" type="video/mp4" />
+            <source src="/src/assets/images/hero-boat.mp4" type="video/mp4" />
+          </video>
+        </div>
+
+        <div class="hero__video-slide" data-season="jetski">
+          <video autoplay loop muted playsinline class="hero__video">
+            <source src="/src/assets/images/hero-jetski.mp4" type="video/mp4" />
           </video>
         </div>
 
@@ -84,12 +91,6 @@
               src="/src/assets/images/hero-snowmobile.mp4"
               type="video/mp4"
             />
-          </video>
-        </div>
-
-        <div class="hero__video-slide" data-season="boat">
-          <video autoplay loop muted playsinline class="hero__video">
-            <source src="/src/assets/images/hero-boat.mp4" type="video/mp4" />
           </video>
         </div>
 
@@ -108,7 +109,11 @@
           Запишитесь на тест-драйв
         </h1>
         <p class="hero__subtitle">
-          Живые модели в салоне — не выбирайте квадроцикл или лодку вслепую
+          Якутск, ул. 50 лет Советской Армии, 77. Живые модели в салоне
+        </p>
+        <p class="hero__subtitle" data-season-line style="margin-top: -18px; font-size: 0.95rem">
+          Сейчас в Якутске: лодки, моторы и квадры в зале. Снегоходы — запись на
+          сезон
         </p>
 
         <div class="hero__actions">
@@ -121,26 +126,26 @@
 
       <div class="hero__season-bar">
         <button class="season-card active" data-slide="0" type="button">
-          <span class="season-card__label">GTR / WATER</span>
-          <span class="season-card__title">ГИДРОЦИКЛЫ</span>
-          <span class="season-card__line"></span>
-        </button>
-
-        <button class="season-card" data-slide="1" type="button">
           <span class="season-card__label">OFF-ROAD / 4X4</span>
           <span class="season-card__title">КВАДРОЦИКЛЫ</span>
           <span class="season-card__line"></span>
         </button>
 
+        <button class="season-card" data-slide="1" type="button">
+          <span class="season-card__label">MARINE / OUTBOARD</span>
+          <span class="season-card__title">ЛОДКИ И МОТОРЫ</span>
+          <span class="season-card__line"></span>
+        </button>
+
         <button class="season-card" data-slide="2" type="button">
-          <span class="season-card__label">SNOW / MOUNTAIN</span>
-          <span class="season-card__title">СНЕГОХОДЫ</span>
+          <span class="season-card__label">GTR / WATER</span>
+          <span class="season-card__title">ГИДРОЦИКЛЫ</span>
           <span class="season-card__line"></span>
         </button>
 
         <button class="season-card" data-slide="3" type="button">
-          <span class="season-card__label">MARINE / OUTBOARD</span>
-          <span class="season-card__title">КАТЕРА И МОТОРЫ</span>
+          <span class="season-card__label">SNOW / СЕЗОН</span>
+          <span class="season-card__title">СНЕГОХОДЫ</span>
           <span class="season-card__line"></span>
         </button>
       </div>
@@ -156,9 +161,70 @@
         </div>
         <div class="instock__grid" id="in-stock-grid"></div>
         <p class="instock__note">
-          Демо-наличие для запуска сайта. Перед визитом уточните у менеджера,
-          что стоит в зале сегодня.
+          Наличие демо для запуска сайта — перед визитом уточните у менеджера.
+          Живые фото зала и техники смотрите в
+          <a href="https://2gis.ru/yakutsk/firm/7037402698753912/tab/photos" data-bind-href="MAPS_PHOTOS" target="_blank" rel="noopener noreferrer">карточке 2ГИС</a>.
         </p>
+      </div>
+    </section>
+
+    <section class="visit" id="visit">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Как проходит визит</h2>
+          <p class="section-subtitle">
+            30–40 минут в салоне. Без звонка вслепую — вы уже выбрали модель
+          </p>
+        </div>
+        <div class="visit__grid">
+          <article class="visit-card">
+            <span class="visit-card__step">Шаг 1</span>
+            <h3 class="visit-card__title">Запишитесь на время</h3>
+            <p class="visit-card__text">
+              Выберите модель из наличия и слот. Менеджер подтвердит визит и
+              подготовит технику к показу.
+            </p>
+          </article>
+          <article class="visit-card">
+            <span class="visit-card__step">Шаг 2</span>
+            <h3 class="visit-card__title">Приезжайте в салон</h3>
+            <p class="visit-card__text">
+              ул. 50 лет Советской Армии, 77, 1–2 этаж. Свободная парковка у
+              здания, можно с семьёй.
+            </p>
+          </article>
+          <article class="visit-card">
+            <span class="visit-card__step">Шаг 3</span>
+            <h3 class="visit-card__title">Смотрите живьём</h3>
+            <p class="visit-card__text">
+              Садитесь, сравниваете 1–2 модели, обсуждаете комплектацию. Решение
+              — в зале, не в чате.
+            </p>
+          </article>
+        </div>
+        <div class="deal">
+          <div class="deal-card">
+            <h3 class="deal-card__title">Условия сделки — в салоне</h3>
+            <p class="deal-card__text">
+              Не считаем рассрочку на сайте вслепую. На конкретной модели
+              покажем, как удобнее купить.
+            </p>
+            <ul class="deal-card__list">
+              <li>Оплата картой, наличными, по QR и через банк</li>
+              <li>Как удобнее купить — покажем на выбранной модели в зале</li>
+            </ul>
+          </div>
+          <div class="deal-card deal-card--light">
+            <h3 class="deal-card__title">Сервис рядом</h3>
+            <p class="deal-card__text">
+              Отдельный номер на ремонт и запчасти: моторы, снегоходы, надувные
+              лодки. Пока техника на ТО — можно зайти в зал.
+            </p>
+            <button class="btn btn--primary" id="visit-open-service" type="button">
+              Записаться на ТО
+            </button>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -222,6 +288,24 @@
                 data-target="boat-kit"
               >
                 Подобрать комплект в салоне
+              </button>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card__tag">В наличии</div>
+            <div class="card__content">
+              <h3 class="card__title">Прицепы</h3>
+              <ul class="card__specs">
+                <li><span>Для:</span> техника, хозяйство, перевозка</li>
+                <li><span>Зал:</span> смотрим живьём, подбираем под задачу</li>
+              </ul>
+              <button
+                class="btn btn--primary btn--full card__action"
+                type="button"
+                data-target="store-stock"
+              >
+                Узнать наличие в салоне
               </button>
             </div>
           </article>
@@ -325,12 +409,7 @@
               </h3>
               <div class="quiz-options">
                 <label class="quiz-option">
-                  <input
-                    type="radio"
-                    name="category"
-                    value="Гидроциклы"
-                    checked
-                  />
+                  <input type="radio" name="category" value="Гидроциклы" />
                   <div class="quiz-option__content">
                     <span class="quiz-option__title">Гидроциклы</span>
                   </div>
@@ -340,6 +419,7 @@
                     type="radio"
                     name="category"
                     value="Квадроциклы / Снегоходы"
+                    checked
                   />
                   <div class="quiz-option__content">
                     <span class="quiz-option__title"
@@ -353,6 +433,12 @@
                     <span class="quiz-option__title"
                       >Лодки & Лодочные моторы</span
                     >
+                  </div>
+                </label>
+                <label class="quiz-option">
+                  <input type="radio" name="category" value="Прицепы" />
+                  <div class="quiz-option__content">
+                    <span class="quiz-option__title">Прицепы</span>
                   </div>
                 </label>
                 <label class="quiz-option">
@@ -554,6 +640,50 @@
       </div>
     </section>
 
+    <section class="gis-proof" id="reviews">
+      <div class="container">
+        <div class="gis-proof__head">
+          <div>
+            <h2 class="section-title text-left">Нас выбирают в 2ГИС</h2>
+            <p class="section-subtitle" style="text-align: left">
+              Живые фото зала, комментарии и оценки — только там. Яндекс и Google
+              салон не ведёт.
+            </p>
+          </div>
+          <div class="gis-score">
+            <span class="gis-score__value" data-bind-text="GIS_RATING">4.9</span>
+            <span class="gis-score__meta">
+              <span data-bind-text="GIS_RATINGS_COUNT">353</span> оценок ·
+              <span data-bind-text="GIS_REVIEWS_COUNT">146</span> отзывов ·
+              <span data-bind-text="GIS_PHOTOS_COUNT">81</span> фото
+            </span>
+          </div>
+        </div>
+        <div class="gis-tags" id="gis-highlights"></div>
+        <div class="gis-reviews" id="gis-reviews"></div>
+        <div class="gis-actions">
+          <a
+            class="btn btn--primary"
+            href="https://2gis.ru/yakutsk/firm/7037402698753912/tab/reviews"
+            data-bind-href="MAPS_REVIEWS"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-track="reviews"
+            >Читать отзывы в 2ГИС</a
+          >
+          <a
+            class="btn btn--outline-dark"
+            href="https://2gis.ru/yakutsk/firm/7037402698753912/tab/photos"
+            data-bind-href="MAPS_PHOTOS"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-track="reviews"
+            >Смотреть фото салона</a
+          >
+        </div>
+      </div>
+    </section>
+
     <section class="contacts-section" id="contacts">
       <div class="container">
         <div class="brands-block">
@@ -573,8 +703,8 @@
           <div class="contacts-info">
             <h2 class="section-title text-left">Дилерский центр МАКСИМУМ</h2>
             <p class="contacts-desc">
-              Ждём вас в салоне. Техника в наличии, тест-драйв и оригинальные
-              запчасти.
+              Якутск, Промышленный округ. Техника в наличии, тест-драйв,
+              оригинальные запчасти.
             </p>
 
             <div class="contacts-list">
@@ -582,7 +712,7 @@
                 <div>
                   <strong>Адрес:</strong>
                   <p data-bind-text="ADDRESS_FULL">
-                    г. [Ваш Город], ул. Автомобильная, д. 15
+                    г. Якутск, ул. 50 лет Советской Армии, 77, 1–2 этаж
                   </p>
                 </div>
               </div>
@@ -591,57 +721,92 @@
                 <div>
                   <strong>График работы:</strong>
                   <p data-bind-text="HOURS">
-                    Пн–Пт: 09:00 – 20:00 | Сб–Вс: 10:00 – 18:00
+                    Пн–Сб: 09:00 – 18:00 | Вс: 10:00 – 16:00
                   </p>
                 </div>
               </div>
 
               <div class="contact-item">
                 <div>
-                  <strong>Отдел продаж:</strong>
+                  <strong>Продажи, 2 этаж:</strong>
                   <a
-                    href="tel:+79000000000"
+                    href="tel:+79247659421"
                     data-bind-href="PHONE_SALES"
                     data-bind-text="PHONE_SALES_DISPLAY"
-                    >+7 (900) 000-00-00</a
+                    >+7 (924) 765-94-21</a
                   >
                 </div>
               </div>
 
               <div class="contact-item">
                 <div>
-                  <strong>Сервисный центр:</strong>
+                  <strong>Продажи, 1 этаж:</strong>
                   <a
-                    href="tel:+79000000001"
+                    href="tel:+79247650172"
+                    data-bind-href="PHONE_SALES_FLOOR1"
+                    data-bind-text="PHONE_SALES_FLOOR1_DISPLAY"
+                    >+7 (924) 765-01-72</a
+                  >
+                </div>
+              </div>
+
+              <div class="contact-item">
+                <div>
+                  <strong>Сервис и запчасти:</strong>
+                  <a
+                    href="tel:+79247659728"
                     data-bind-href="PHONE_SERVICE"
                     data-bind-text="PHONE_SERVICE_DISPLAY"
-                    >+7 (900) 000-00-01</a
+                    >+7 (924) 765-97-28</a
+                  >
+                </div>
+              </div>
+
+              <div class="contact-item">
+                <div>
+                  <strong>Ремонт надувных лодок:</strong>
+                  <a
+                    href="tel:+79241786931"
+                    data-bind-href="PHONE_BOATS_REPAIR"
+                    data-bind-text="PHONE_BOATS_REPAIR_DISPLAY"
+                    >+7 (924) 178-69-31</a
                   >
                 </div>
               </div>
             </div>
 
-            <a
-              href="https://yandex.ru/maps/"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn btn--primary"
-              data-bind-href="MAPS_URL"
-              data-track="route"
-            >
-              Построить маршрут
-            </a>
+            <div class="gis-actions">
+              <a
+                href="https://2gis.ru/yakutsk/firm/7037402698753912"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn--primary"
+                data-bind-href="MAPS_ROUTE"
+                data-track="route"
+              >
+                Маршрут в 2ГИС
+              </a>
+              <a
+                href="https://t.me/maximum_centre"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn--outline-dark"
+                data-bind-href="TELEGRAM_CHANNEL"
+              >
+                Telegram салона
+              </a>
+            </div>
           </div>
 
           <div class="contacts-map">
             <iframe
               data-bind="MAPS_EMBED"
-              src="https://yandex.ru/map-widget/v1/?um=constructor%3A36e6545b&amp;source=constructor"
+              src="https://widgets.2gis.com/widget?type=firmsonmap&amp;options=%7B%22pos%22%3A%7B%22lat%22%3A62.096611%2C%22lon%22%3A129.802778%2C%22zoom%22%3A16%7D%2C%22opt%22%3A%7B%22city%22%3A%22yakutsk%22%7D%2C%22org%22%3A%227037402698753912%22%7D"
               width="100%"
               height="100%"
               style="border: 0; border-radius: 16px"
               allowfullscreen
-              title="Карта дилерского центра МАКСИМУМ"
+              title="Салон Maximum на карте 2ГИС"
             >
             </iframe>
           </div>
@@ -856,8 +1021,8 @@
         <button class="modal__close" id="success-close" type="button">
           &times;
         </button>
-        <h3 class="modal__success-title">Заявка принята</h3>
-        <p class="modal__success-text">
+        <h3 class="modal__success-title" id="success-title">Заявка принята</h3>
+        <p class="modal__success-text" id="success-text">
           Менеджер подтвердит визит и подготовит модели к показу.
         </p>
         <p class="modal__success-note" id="success-note"></p>
@@ -865,7 +1030,7 @@
           <a
             class="btn btn--primary"
             id="success-whatsapp"
-            href="https://wa.me/79000000000"
+            href="https://wa.me/79247659421"
             target="_blank"
             rel="noopener noreferrer"
             data-track="whatsapp"
@@ -874,11 +1039,11 @@
           <a
             class="btn btn--outline-dark"
             id="success-route"
-            href="https://yandex.ru/maps/"
+            href="https://2gis.ru/yakutsk/firm/7037402698753912"
             target="_blank"
             rel="noopener noreferrer"
             data-track="route"
-            >Построить маршрут</a
+            >Открыть в 2ГИС</a
           >
         </div>
       </div>
@@ -886,7 +1051,7 @@
 
     <div class="mobile-bottom-bar">
       <a
-        href="tel:+79000000000"
+        href="tel:+79247659421"
         class="mobile-bar-btn"
         data-bind-href="PHONE_SALES"
       >
@@ -894,7 +1059,7 @@
         <span class="bar-label">Позвонить</span>
       </a>
       <a
-        href="https://wa.me/79000000000"
+        href="https://wa.me/79247659421"
         target="_blank"
         rel="noopener noreferrer"
         class="mobile-bar-btn mobile-bar-btn--wa"
@@ -905,11 +1070,11 @@
         <span class="bar-label">WhatsApp</span>
       </a>
       <a
-        href="https://yandex.ru/maps/"
+        href="https://2gis.ru/yakutsk/firm/7037402698753912"
         target="_blank"
         rel="noopener noreferrer"
         class="mobile-bar-btn"
-        data-bind-href="MAPS_URL"
+        data-bind-href="MAPS_ROUTE"
         data-track="route"
       >
         <span class="bar-icon">📍</span>
