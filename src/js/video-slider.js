@@ -40,5 +40,15 @@ export function initVideoSlider() {
     });
   });
 
+  document.querySelectorAll(".hero__video").forEach((video) => {
+    video.addEventListener("error", () => {
+      video.style.display = "none";
+    });
+    const source = video.querySelector("source");
+    source?.addEventListener("error", () => {
+      video.style.display = "none";
+    });
+  });
+
   startAutoPlay();
 }

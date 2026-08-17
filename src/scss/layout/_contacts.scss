@@ -131,4 +131,32 @@
     font-size: 0.75rem;
     opacity: 0.6;
   }
+
+  &__links {
+    margin-top: 10px;
+
+    a {
+      color: #cbd5e1;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+  }
+}
+
+.privacy {
+  padding: 40px 0 110px;
+  background: #0f172a;
+  color: #94a3b8;
+  font-size: 0.9rem;
+
+  h2 {
+    color: $text-light;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+  }
+
+  p {
+    max-width: 720px;
+    line-height: 1.6;
+  }
 }

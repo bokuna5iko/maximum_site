@@ -12,11 +12,53 @@
   z-index: 900;
   display: flex;
   align-items: center;
+  position: relative;
 
   &__container {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 16px;
+  }
+
+  &__burger {
+    display: none;
+    width: 42px;
+    height: 42px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background: $bg-surface;
+    cursor: pointer;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 0;
+
+    span {
+      display: block;
+      width: 18px;
+      height: 2px;
+      background: $text-dark;
+      transition: transform $transition-fast, opacity $transition-fast;
+    }
+
+    &.is-open span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    &.is-open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    &.is-open span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    @media (max-width: 768px) {
+      display: flex;
+      order: 3;
+    }
   }
 
   &__logo {
@@ -38,6 +80,24 @@
 
     @media (max-width: 768px) {
       display: none;
+      position: absolute;
+      top: 65px;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      gap: 0;
+      background: $bg-surface;
+      border-bottom: 1px solid #e2e8f0;
+      padding: 8px 20px 16px;
+
+      &.is-open {
+        display: flex;
+      }
+
+      .header__link {
+        padding: 12px 0;
+        border-bottom: 1px solid #f1f5f9;
+      }
     }
   }
 
@@ -58,9 +118,16 @@
     text-decoration: none;
     font-size: 0.95rem;
     font-weight: 700;
+    white-space: nowrap;
 
     &:hover {
       text-decoration: underline;
+    }
+  }
+
+  @media (max-width: 768px) {
+    &__phone {
+      margin-left: auto;
     }
   }
 }

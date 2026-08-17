@@ -3,9 +3,22 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Центр Техники МАКСИМУМ | Официальный Дилер</title>
+    <title>Центр Техники МАКСИМУМ | Техника в наличии и тест-драйв</title>
+    <meta
+      name="description"
+      content="Официальный дилер BRP, Suzuki, Tohatsu и Русской Механики. Живое наличие в салоне, запись на тест-драйв, авторизованный сервис и подбор запчастей."
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="Центр Техники МАКСИМУМ | Техника в наличии и тест-драйв"
+    />
+    <meta
+      property="og:description"
+      content="Приезжайте смотреть живые модели: квадроциклы, гидроциклы, лодки и снегоходы. Запись на тест-драйв без звонка вслепую."
+    />
+    <meta property="og:locale" content="ru_RU" />
 
-    <!-- ШРИФТЫ: Russo One (Заголовки) + Inter (Текст) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -14,32 +27,44 @@
     />
   </head>
   <body>
-    <!-- ШАПКА САЙТА (Светлая полупрозрачная) -->
     <header class="header">
       <div class="container header__container">
-        <a href="#" class="header__logo">МАКСИМУМ</a>
+        <a href="#hero" class="header__logo">МАКСИМУМ</a>
 
-        <nav class="header__nav">
-          <a href="#showcase" class="header__link">Каталог</a>
+        <nav class="header__nav" id="header-nav">
+          <a href="#in-stock" class="header__link">Наличие</a>
           <a href="#quiz" class="header__link">Подбор</a>
-          <a href="#service-hub" class="header__link">Сервис & Запчасти</a>
+          <a href="#service-hub" class="header__link">Сервис</a>
           <a href="#contacts" class="header__link">Контакты</a>
         </nav>
 
         <div class="header__phone">
-          <a href="tel:+79000000000" class="header__phone-link"
-            >📞 +7 (900) 000-00-00</a
+          <a
+            href="tel:+79000000000"
+            class="header__phone-link"
+            data-bind-href="PHONE_SALES"
+            data-bind-text="PHONE_SALES_DISPLAY"
+            >+7 (900) 000-00-00</a
           >
         </div>
+
+        <button
+          class="header__burger"
+          id="header-burger"
+          type="button"
+          aria-label="Открыть меню"
+          aria-expanded="false"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
     </header>
 
-    <!-- БЛОК 1: HERO-ЭКРАН -->
     <section class="hero" id="hero">
-      <!-- Стекающие капли на Canvas -->
       <canvas id="water-drops-canvas" class="hero__water-canvas"></canvas>
 
-      <!-- СЛАЙДЕР ВИДЕОФОНОВ -->
       <div class="hero__video-slider">
         <div class="hero__video-slide active" data-season="jetski">
           <video autoplay loop muted playsinline class="hero__video">
@@ -68,55 +93,52 @@
           </video>
         </div>
 
-        <!-- Тёмный оверлей -->
         <div class="hero__video-overlay"></div>
       </div>
 
-      <!-- ЦЕНТРАЛЬНЫЙ КОНТЕНТ (UI) -->
       <div class="container hero__container">
         <div class="hero__badge">
           <span class="pulse-dot"></span>
           Официальный дилер BRP, Suzuki, Tohatsu, Русская Механика
         </div>
 
-        <div class="hero__logo-wrapper">
-          <h1 class="hero__logo-placeholder">MAXIMUM</h1>
-        </div>
-
-        <p class="hero__title">
-          Продажа техники, экипировки <br />
-          и авторизованный сервис
+        <p class="hero__brand">МАКСИМУМ</p>
+        <h1 class="hero__title">
+          Техника в наличии.<br />
+          Запишитесь на тест-драйв
+        </h1>
+        <p class="hero__subtitle">
+          Живые модели в салоне — не выбирайте квадроцикл или лодку вслепую
         </p>
 
         <div class="hero__actions">
-          <a href="#showcase" class="btn btn--primary">Подобрать технику</a>
-          <button class="btn btn--outline" id="open-service-modal">
+          <a href="#in-stock" class="btn btn--primary">Смотреть наличие</a>
+          <button class="btn btn--outline" id="open-service-modal" type="button">
             Записаться на сервис
           </button>
         </div>
       </div>
 
-      <!-- МИНИМАЛИСТИЧНЫЕ КВАДРАТНЫЕ ТАБЫ (В самом низу Hero) -->
       <div class="hero__season-bar">
-        <button class="season-card active" data-slide="0">
+        <button class="season-card active" data-slide="0" type="button">
           <span class="season-card__label">GTR / WATER</span>
           <span class="season-card__title">ГИДРОЦИКЛЫ</span>
           <span class="season-card__line"></span>
         </button>
 
-        <button class="season-card" data-slide="1">
+        <button class="season-card" data-slide="1" type="button">
           <span class="season-card__label">OFF-ROAD / 4X4</span>
           <span class="season-card__title">КВАДРОЦИКЛЫ</span>
           <span class="season-card__line"></span>
         </button>
 
-        <button class="season-card" data-slide="2">
+        <button class="season-card" data-slide="2" type="button">
           <span class="season-card__label">SNOW / MOUNTAIN</span>
           <span class="season-card__title">СНЕГОХОДЫ</span>
           <span class="season-card__line"></span>
         </button>
 
-        <button class="season-card" data-slide="3">
+        <button class="season-card" data-slide="3" type="button">
           <span class="season-card__label">MARINE / OUTBOARD</span>
           <span class="season-card__title">КАТЕРА И МОТОРЫ</span>
           <span class="season-card__line"></span>
@@ -124,17 +146,50 @@
       </div>
     </section>
 
-    <!-- БЛОК 2: ИНТЕРАКТИВНАЯ ВИТРИНА -->
+    <section class="instock" id="in-stock">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Сейчас в салоне</h2>
+          <p class="section-subtitle">
+            Живые единицы. Приезжайте посмотреть, не выбирайте вслепую
+          </p>
+        </div>
+        <div class="instock__grid" id="in-stock-grid"></div>
+        <p class="instock__note">
+          Демо-наличие для запуска сайта. Перед визитом уточните у менеджера,
+          что стоит в зале сегодня.
+        </p>
+      </div>
+    </section>
+
     <section class="showcase" id="showcase">
       <div class="container">
         <div class="section-header">
-          <h2 class="section-title">Каталог и Сервис</h2>
+          <h2 class="section-title">Направления салона</h2>
           <p class="section-subtitle">
-            Выберите категорию для быстрого подбора или записи
+            Визит, сервис или подбор запчастей — каждый сценарий отдельно
           </p>
         </div>
 
         <div class="showcase__grid">
+          <article class="card">
+            <div class="card__tag">В наличии</div>
+            <div class="card__content">
+              <h3 class="card__title">Гидроциклы</h3>
+              <ul class="card__specs">
+                <li><span>Бренды:</span> BRP Sea-Doo</li>
+                <li><span>Сезон:</span> вода, прогулки, семья</li>
+              </ul>
+              <button
+                class="btn btn--primary btn--full card__action"
+                type="button"
+                data-target="test-drive"
+              >
+                Записаться на тест-драйв
+              </button>
+            </div>
+          </article>
+
           <article class="card">
             <div class="card__tag">В наличии</div>
             <div class="card__content">
@@ -145,6 +200,7 @@
               </ul>
               <button
                 class="btn btn--primary btn--full card__action"
+                type="button"
                 data-target="test-drive"
               >
                 Уточнить наличие / Тест-драйв
@@ -162,9 +218,10 @@
               </ul>
               <button
                 class="btn btn--primary btn--full card__action"
+                type="button"
                 data-target="boat-kit"
               >
-                Подобрать комплект
+                Подобрать комплект в салоне
               </button>
             </div>
           </article>
@@ -179,9 +236,10 @@
               </ul>
               <button
                 class="btn btn--primary btn--full card__action"
+                type="button"
                 data-target="gear-size"
               >
-                Забронировать размер
+                Забронировать размер в зале
               </button>
             </div>
           </article>
@@ -195,6 +253,7 @@
               </ul>
               <button
                 class="btn btn--outline btn--full card__action"
+                type="button"
                 data-target="parts-order"
               >
                 Оставить заявку на подбор
@@ -212,6 +271,7 @@
               </ul>
               <button
                 class="btn btn--primary btn--full card__action"
+                type="button"
                 data-target="service-modal"
               >
                 Записаться на ТО / Ремонт
@@ -228,6 +288,7 @@
               </ul>
               <button
                 class="btn btn--outline btn--full card__action"
+                type="button"
                 data-target="store-stock"
               >
                 Узнать наличие в магазине
@@ -238,15 +299,14 @@
       </div>
     </section>
 
-    <!-- БЛОК 3: ИНТЕРАКТИВНЫЙ КВИЗ -->
     <section class="quiz-section" id="quiz">
       <div class="container">
         <div class="quiz-card">
           <div class="quiz-card__header">
-            <span class="quiz-card__badge">🚀 Быстрый подбор за 30 секунд</span>
+            <span class="quiz-card__badge">Подбор и запись в салон</span>
             <h2 class="quiz-card__title">Не знаете, что выбрать?</h2>
             <p class="quiz-card__subtitle">
-              Ответьте на 3 вопроса и получите подборку с ценами в WhatsApp
+              Подберём 1–2 модели под задачу и запишем вас в салон
             </p>
 
             <div class="quiz-progress">
@@ -268,11 +328,20 @@
                   <input
                     type="radio"
                     name="category"
-                    value="Квадроциклы / Снегоходы"
+                    value="Гидроциклы"
                     checked
                   />
                   <div class="quiz-option__content">
-                    <span class="quiz-option__icon">🚜</span>
+                    <span class="quiz-option__title">Гидроциклы</span>
+                  </div>
+                </label>
+                <label class="quiz-option">
+                  <input
+                    type="radio"
+                    name="category"
+                    value="Квадроциклы / Снегоходы"
+                  />
+                  <div class="quiz-option__content">
                     <span class="quiz-option__title"
                       >Квадроциклы & Снегоходы</span
                     >
@@ -281,9 +350,8 @@
                 <label class="quiz-option">
                   <input type="radio" name="category" value="Лодки / Моторы" />
                   <div class="quiz-option__content">
-                    <span class="quiz-option__icon">🚤</span>
                     <span class="quiz-option__title"
-                      >Лодки & Лодочные Моторы</span
+                      >Лодки & Лодочные моторы</span
                     >
                   </div>
                 </label>
@@ -294,14 +362,12 @@
                     value="Экипировка / Защита"
                   />
                   <div class="quiz-option__content">
-                    <span class="quiz-option__icon">🛡️</span>
                     <span class="quiz-option__title">Экипировка & Защита</span>
                   </div>
                 </label>
                 <label class="quiz-option">
                   <input type="radio" name="category" value="Запчасти / ТО" />
                   <div class="quiz-option__content">
-                    <span class="quiz-option__icon">🔧</span>
                     <span class="quiz-option__title"
                       >Запчасти & Обслуживание</span
                     >
@@ -323,7 +389,6 @@
                     checked
                   />
                   <div class="quiz-option__content">
-                    <span class="quiz-option__icon">🎣</span>
                     <span class="quiz-option__title">Охота & Рыбалка</span>
                   </div>
                 </label>
@@ -334,7 +399,6 @@
                     value="Активный отдых и туризм"
                   />
                   <div class="quiz-option__content">
-                    <span class="quiz-option__icon">🌲</span>
                     <span class="quiz-option__title"
                       >Активный отдых & Семейный туризм</span
                     >
@@ -343,7 +407,6 @@
                 <label class="quiz-option">
                   <input type="radio" name="purpose" value="Спорт и Экстрим" />
                   <div class="quiz-option__content">
-                    <span class="quiz-option__icon">⚡</span>
                     <span class="quiz-option__title">Спорт & Экстрим</span>
                   </div>
                 </label>
@@ -354,7 +417,6 @@
                     value="Работа и хозяйственные задачи"
                   />
                   <div class="quiz-option__content">
-                    <span class="quiz-option__icon">📦</span>
                     <span class="quiz-option__title"
                       >Работа & Хозяйственные задачи</span
                     >
@@ -365,24 +427,71 @@
 
             <div class="quiz-step" data-step="3">
               <h3 class="quiz-step__question">
-                3. Куда отправить подобранные варианты?
+                3. Когда удобно приехать в салон?
               </h3>
-              <div class="quiz-form">
+              <div class="quiz-options">
+                <label class="quiz-option">
+                  <input
+                    type="radio"
+                    name="visit_slot"
+                    value="Завтра 12:00"
+                    checked
+                  />
+                  <div class="quiz-option__content">
+                    <span class="quiz-option__title">Завтра 12:00</span>
+                  </div>
+                </label>
+                <label class="quiz-option">
+                  <input type="radio" name="visit_slot" value="Завтра 18:00" />
+                  <div class="quiz-option__content">
+                    <span class="quiz-option__title">Завтра 18:00</span>
+                  </div>
+                </label>
+                <label class="quiz-option">
+                  <input type="radio" name="visit_slot" value="Суббота" />
+                  <div class="quiz-option__content">
+                    <span class="quiz-option__title">Суббота</span>
+                  </div>
+                </label>
+                <label class="quiz-option">
+                  <input
+                    type="radio"
+                    name="visit_slot"
+                    value="Перезвоните, согласуем"
+                  />
+                  <div class="quiz-option__content">
+                    <span class="quiz-option__title"
+                      >Перезвоните, согласуем</span
+                    >
+                  </div>
+                </label>
+              </div>
+
+              <div class="quiz-form" style="margin-top: 24px">
                 <div class="quiz-form__group">
-                  <label for="quiz-phone">Ваш номер WhatsApp / Telegram:</label>
+                  <label for="quiz-phone">Телефон для подтверждения визита</label>
                   <input
                     type="tel"
                     id="quiz-phone"
                     class="quiz-input"
                     placeholder="+7 (9XX) XXX-XX-XX"
-                    required
+                    autocomplete="tel"
                   />
                 </div>
+                <label class="form-consent">
+                  <input type="checkbox" id="quiz-consent" />
+                  <span
+                    >Согласен на
+                    <a href="#privacy">обработку персональных данных</a></span
+                  >
+                </label>
+                <p class="quiz-error" id="quiz-error"></p>
                 <button
                   class="btn btn--primary btn--full quiz-submit-btn"
                   id="send-quiz-btn"
+                  type="button"
                 >
-                  💬 Получить подборку в WhatsApp
+                  Записаться и получить подборку
                 </button>
               </div>
             </div>
@@ -390,44 +499,54 @@
 
           <div class="quiz-card__footer">
             <button
-              class="btn btn--outline quiz-nav-btn"
+              class="btn btn--outline-dark quiz-nav-btn"
               id="quiz-prev-btn"
+              type="button"
               style="display: none"
             >
               Назад
             </button>
-            <button class="btn btn--primary quiz-nav-btn" id="quiz-next-btn">
-              Далее ➔
+            <button
+              class="btn btn--primary quiz-nav-btn"
+              id="quiz-next-btn"
+              type="button"
+            >
+              Далее
             </button>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- БЛОК 4: СЕРВИСНЫЙ ХАБ -->
     <section class="service-hub" id="service-hub">
       <div class="container">
         <div class="service-hub__grid">
           <div class="service-card">
-            <div class="service-card__icon">🛠️</div>
-            <h3 class="service-card__title">Авторизованный Сервис</h3>
+            <h3 class="service-card__title">Авторизованный сервис</h3>
             <p class="service-card__desc">
               Плановое ТО, диагностика, консервация и ремонт техники с
               сохранением гарантии завода.
             </p>
-            <button class="btn btn--primary btn--full" id="btn-open-service">
+            <button
+              class="btn btn--primary btn--full"
+              id="btn-open-service"
+              type="button"
+            >
               Записаться на ТО
             </button>
           </div>
 
           <div class="service-card">
-            <div class="service-card__icon">📦</div>
             <h3 class="service-card__title">Запчасти & Расходники</h3>
             <p class="service-card__desc">
-              Оригинальные детали BRP, Suzuki, Tohatsu, РМ. Подберем по VIN-коду
+              Оригинальные детали BRP, Suzuki, Tohatsu, РМ. Подберём по VIN-коду
               за 15 минут.
             </p>
-            <button class="btn btn--outline btn--full" id="btn-open-parts">
+            <button
+              class="btn btn--outline-dark btn--full"
+              id="btn-open-parts"
+              type="button"
+            >
               Заказать подбор запчастей
             </button>
           </div>
@@ -435,7 +554,6 @@
       </div>
     </section>
 
-    <!-- БЛОК 5: ОФЛАЙН-ТОЧКА & ДИЛЕРЫ -->
     <section class="contacts-section" id="contacts">
       <div class="container">
         <div class="brands-block">
@@ -455,40 +573,50 @@
           <div class="contacts-info">
             <h2 class="section-title text-left">Дилерский центр МАКСИМУМ</h2>
             <p class="contacts-desc">
-              Ждем вас в нашем дилерском центре. Техника в наличии, тест-драйв и
-              оригинальные запчасти.
+              Ждём вас в салоне. Техника в наличии, тест-драйв и оригинальные
+              запчасти.
             </p>
 
             <div class="contacts-list">
               <div class="contact-item">
-                <span class="contact-icon">📍</span>
                 <div>
                   <strong>Адрес:</strong>
-                  <p>г. [Ваш Город], ул. Автомобильная, д. 15</p>
+                  <p data-bind-text="ADDRESS_FULL">
+                    г. [Ваш Город], ул. Автомобильная, д. 15
+                  </p>
                 </div>
               </div>
 
               <div class="contact-item">
-                <span class="contact-icon">🕒</span>
                 <div>
                   <strong>График работы:</strong>
-                  <p>Пн–Пт: 09:00 – 20:00 | Сб–Вс: 10:00 – 18:00</p>
+                  <p data-bind-text="HOURS">
+                    Пн–Пт: 09:00 – 20:00 | Сб–Вс: 10:00 – 18:00
+                  </p>
                 </div>
               </div>
 
               <div class="contact-item">
-                <span class="contact-icon">📞</span>
                 <div>
                   <strong>Отдел продаж:</strong>
-                  <a href="tel:+79000000000">+7 (900) 000-00-00</a>
+                  <a
+                    href="tel:+79000000000"
+                    data-bind-href="PHONE_SALES"
+                    data-bind-text="PHONE_SALES_DISPLAY"
+                    >+7 (900) 000-00-00</a
+                  >
                 </div>
               </div>
 
               <div class="contact-item">
-                <span class="contact-icon">🔧</span>
                 <div>
                   <strong>Сервисный центр:</strong>
-                  <a href="tel:+79000000001">+7 (900) 000-00-01</a>
+                  <a
+                    href="tel:+79000000001"
+                    data-bind-href="PHONE_SERVICE"
+                    data-bind-text="PHONE_SERVICE_DISPLAY"
+                    >+7 (900) 000-00-01</a
+                  >
                 </div>
               </div>
             </div>
@@ -496,20 +624,24 @@
             <a
               href="https://yandex.ru/maps/"
               target="_blank"
+              rel="noopener noreferrer"
               class="btn btn--primary"
+              data-bind-href="MAPS_URL"
+              data-track="route"
             >
-              📍 Построить маршрут в Яндекс.Картах
+              Построить маршрут
             </a>
           </div>
 
           <div class="contacts-map">
             <iframe
+              data-bind="MAPS_EMBED"
               src="https://yandex.ru/map-widget/v1/?um=constructor%3A36e6545b&amp;source=constructor"
               width="100%"
               height="100%"
-              frameborder="0"
               style="border: 0; border-radius: 16px"
-              allowfullscreen="true"
+              allowfullscreen
+              title="Карта дилерского центра МАКСИМУМ"
             >
             </iframe>
           </div>
@@ -517,7 +649,6 @@
       </div>
     </section>
 
-    <!-- ПОДВАЛ -->
     <footer class="footer">
       <div class="container footer__container">
         <p>
@@ -525,26 +656,95 @@
           защищены.
         </p>
         <p class="footer__note">Не является публичной офертой.</p>
+        <p class="footer__links">
+          <a href="#privacy">Согласие на обработку персональных данных</a>
+        </p>
       </div>
     </footer>
 
-    <!-- МОДАЛЬНОЕ ОКНО -->
-    <div class="modal" id="modal-service">
+    <section class="privacy" id="privacy">
+      <div class="container">
+        <h2>Согласие на обработку персональных данных</h2>
+        <p>
+          Отправляя заявку, вы соглашаетесь на обработку номера телефона и
+          указанных сведений для связи по записи в салон, сервису и подбору
+          техники. Данные не передаются третьим лицам, кроме канала доставки
+          заявки (Telegram / WhatsApp).
+        </p>
+      </div>
+    </section>
+
+    <div class="modal" id="modal-lead">
       <div class="modal__overlay" id="modal-overlay"></div>
       <div class="modal__content">
-        <button class="modal__close" id="modal-close">&times;</button>
+        <button class="modal__close" id="modal-close" type="button">
+          &times;
+        </button>
 
         <div class="modal__tabs">
-          <button class="modal__tab active" data-tab="tab-service">
+          <button class="modal__tab active" data-tab="tab-testdrive" type="button">
+            Тест-драйв
+          </button>
+          <button class="modal__tab" data-tab="tab-service" type="button">
             Запись на ТО
           </button>
-          <button class="modal__tab" data-tab="tab-parts">
-            Подбор запчастей по VIN
+          <button class="modal__tab" data-tab="tab-parts" type="button">
+            Запчасти
           </button>
         </div>
 
         <form
           class="modal__form active"
+          id="form-testdrive"
+          data-tab-content="tab-testdrive"
+        >
+          <div class="form-group">
+            <label for="testdrive-model">Модель из наличия</label>
+            <select
+              class="form-input"
+              id="testdrive-model"
+              name="testdrive_model"
+              required
+            ></select>
+          </div>
+          <div class="form-group">
+            <label for="testdrive-slot">Когда приехать</label>
+            <select class="form-input" id="testdrive-slot" name="testdrive_slot" required>
+              <option value="Завтра 12:00">Завтра 12:00</option>
+              <option value="Завтра 18:00">Завтра 18:00</option>
+              <option value="Суббота">Суббота</option>
+              <option value="Перезвоните, согласуем">
+                Перезвоните, согласуем
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="testdrive-phone">Телефон</label>
+            <input
+              type="tel"
+              class="form-input"
+              id="testdrive-phone"
+              name="client_phone"
+              placeholder="+7 (9XX) XXX-XX-XX"
+              autocomplete="tel"
+              required
+            />
+          </div>
+          <label class="form-consent">
+            <input type="checkbox" name="consent" required />
+            <span
+              >Согласен на
+              <a href="#privacy">обработку персональных данных</a></span
+            >
+          </label>
+          <p class="form-error"></p>
+          <button type="submit" class="btn btn--primary btn--full">
+            Записаться в салон
+          </button>
+        </form>
+
+        <form
+          class="modal__form"
           id="form-service"
           data-tab-content="tab-service"
         >
@@ -571,15 +771,24 @@
             />
           </div>
           <div class="form-group">
-            <label>Ваш телефон / WhatsApp</label>
+            <label>Телефон / WhatsApp</label>
             <input
               type="tel"
               class="form-input"
               name="client_phone"
               placeholder="+7 (9XX) XXX-XX-XX"
+              autocomplete="tel"
               required
             />
           </div>
+          <label class="form-consent">
+            <input type="checkbox" name="consent" required />
+            <span
+              >Согласен на
+              <a href="#privacy">обработку персональных данных</a></span
+            >
+          </label>
+          <p class="form-error"></p>
           <button type="submit" class="btn btn--primary btn--full">
             Отправить заявку на ТО
           </button>
@@ -606,7 +815,7 @@
             />
           </div>
           <div class="form-group">
-            <label>Что требуется подшиты/купить?</label>
+            <label>Что требуется подобрать / купить?</label>
             <input
               type="text"
               class="form-input"
@@ -616,37 +825,93 @@
             />
           </div>
           <div class="form-group">
-            <label>Ваш телефон / Telegram</label>
+            <label>Телефон / WhatsApp</label>
             <input
               type="tel"
               class="form-input"
               name="client_phone"
               placeholder="+7 (9XX) XXX-XX-XX"
+              autocomplete="tel"
               required
             />
           </div>
+          <label class="form-consent">
+            <input type="checkbox" name="consent" required />
+            <span
+              >Согласен на
+              <a href="#privacy">обработку персональных данных</a></span
+            >
+          </label>
+          <p class="form-error"></p>
           <button type="submit" class="btn btn--primary btn--full">
-            Запросить подбор в WhatsApp
+            Запросить подбор запчастей
           </button>
         </form>
       </div>
     </div>
 
-    <!-- MOBILE BOTTOM BAR (Тёмный графит) -->
+    <div class="modal modal--success" id="modal-success">
+      <div class="modal__overlay" id="success-overlay"></div>
+      <div class="modal__content">
+        <button class="modal__close" id="success-close" type="button">
+          &times;
+        </button>
+        <h3 class="modal__success-title">Заявка принята</h3>
+        <p class="modal__success-text">
+          Менеджер подтвердит визит и подготовит модели к показу.
+        </p>
+        <p class="modal__success-note" id="success-note"></p>
+        <div class="modal__success-actions">
+          <a
+            class="btn btn--primary"
+            id="success-whatsapp"
+            href="https://wa.me/79000000000"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-track="whatsapp"
+            >Написать в WhatsApp</a
+          >
+          <a
+            class="btn btn--outline-dark"
+            id="success-route"
+            href="https://yandex.ru/maps/"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-track="route"
+            >Построить маршрут</a
+          >
+        </div>
+      </div>
+    </div>
+
     <div class="mobile-bottom-bar">
-      <a href="tel:+79000000000" class="mobile-bar-btn">
+      <a
+        href="tel:+79000000000"
+        class="mobile-bar-btn"
+        data-bind-href="PHONE_SALES"
+      >
         <span class="bar-icon">📞</span>
         <span class="bar-label">Позвонить</span>
       </a>
       <a
         href="https://wa.me/79000000000"
         target="_blank"
+        rel="noopener noreferrer"
         class="mobile-bar-btn mobile-bar-btn--wa"
+        data-bind-href="PHONE_WHATSAPP"
+        data-track="whatsapp"
       >
         <span class="bar-icon">💬</span>
         <span class="bar-label">WhatsApp</span>
       </a>
-      <a href="https://yandex.ru/maps/" target="_blank" class="mobile-bar-btn">
+      <a
+        href="https://yandex.ru/maps/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="mobile-bar-btn"
+        data-bind-href="MAPS_URL"
+        data-track="route"
+      >
         <span class="bar-icon">📍</span>
         <span class="bar-label">Маршрут</span>
       </a>

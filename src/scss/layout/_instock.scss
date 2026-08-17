@@ -1,0 +1,119 @@
+@use "../abstract/variables" as *;
+
+.instock {
+  padding: 90px 0 70px;
+  background-color: $bg-main-alt;
+}
+
+.instock__note {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 0.8rem;
+  color: $text-muted;
+}
+
+.instock__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+
+  @media (max-width: 992px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.instock-card {
+  background: $bg-surface;
+  border: 1px solid #e2e8f0;
+  border-radius: $radius-md;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform $transition-fast, border-color $transition-fast;
+
+  &:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 85, 0, 0.35);
+  }
+
+  &__visual {
+    height: 132px;
+    display: flex;
+    align-items: flex-end;
+    padding: 14px 18px;
+    color: $text-light;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+
+    &.is-jetski {
+      background: linear-gradient(135deg, #0e7490, #155e75);
+    }
+
+    &.is-atv {
+      background: linear-gradient(135deg, #3f6212, #1a2e05);
+    }
+
+    &.is-boat {
+      background: linear-gradient(135deg, #1d4ed8, #1e3a8a);
+    }
+
+    &.is-snow {
+      background: linear-gradient(135deg, #334155, #0f172a);
+    }
+
+    &.is-gear {
+      background: linear-gradient(135deg, #9a3412, #7c2d12);
+    }
+  }
+
+  &__body {
+    padding: 20px 20px 22px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  &__badge {
+    align-self: flex-start;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: $accent-cyan;
+    background: rgba(0, 180, 216, 0.12);
+    border: 1px solid rgba(0, 180, 216, 0.25);
+    border-radius: 6px;
+    padding: 3px 8px;
+    margin-bottom: 10px;
+  }
+
+  &__title {
+    font-family: $font-header;
+    font-size: 1.15rem;
+    color: $text-dark;
+    margin-bottom: 6px;
+  }
+
+  &__price {
+    font-weight: 700;
+    color: $accent-orange;
+    margin-bottom: 12px;
+  }
+
+  &__specs {
+    list-style: none;
+    margin-bottom: 18px;
+    flex-grow: 1;
+
+    li {
+      font-size: 0.88rem;
+      color: $text-muted;
+      margin-bottom: 4px;
+    }
+  }
+}

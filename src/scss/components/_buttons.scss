@@ -38,6 +38,19 @@
     }
   }
 
+  &--outline-dark {
+    background: transparent;
+    color: $text-dark;
+    border: 1px solid #cbd5e1;
+
+    &:hover {
+      background: #f8fafc;
+      border-color: $accent-orange;
+      color: $accent-orange;
+      transform: translateY(-2px);
+    }
+  }
+
   &--full {
     width: 100%;
   }

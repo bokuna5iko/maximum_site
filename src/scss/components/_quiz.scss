@@ -166,3 +166,11 @@
     }
   }
 }
+
+.quiz-error {
+  min-height: 1.2em;
+  font-size: 0.85rem;
+  color: $accent-red;
+  margin-top: 8px;
+  text-align: left;
+}

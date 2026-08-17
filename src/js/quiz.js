@@ -1,4 +1,6 @@
-import { sendToWhatsApp } from "./lead-sender.js";
+import { isValidRuPhone } from "./config.js";
+import { sendLead } from "./lead-sender.js";
+import { showSuccessModal } from "./modal.js";
 
 export function initQuiz() {
   let currentStep = 1;
@@ -9,66 +11,73 @@ export function initQuiz() {
   const progressBar = document.querySelector("#quiz-progress-bar");
   const sendBtn = document.querySelector("#send-quiz-btn");
   const phoneInput = document.querySelector("#quiz-phone");
+  const errorNode = document.querySelector("#quiz-error");
 
   if (!nextBtn || !prevBtn) return;
 
-  // Обновление отображения шагов и прогресса
   function updateQuiz() {
     document.querySelectorAll(".quiz-step").forEach((step) => {
-      step.classList.remove("active");
-      if (parseInt(step.dataset.step) === currentStep) {
-        step.classList.add("active");
-      }
+      step.classList.toggle("active", parseInt(step.dataset.step, 10) === currentStep);
     });
 
-    const progressPercent = (currentStep / totalSteps) * 100;
-    progressBar.style.width = `${progressPercent}%`;
-
+    if (progressBar) {
+      progressBar.style.width = `${(currentStep / totalSteps) * 100}%`;
+    }
     prevBtn.style.display = currentStep > 1 ? "inline-flex" : "none";
     nextBtn.style.display = currentStep === totalSteps ? "none" : "inline-flex";
   }
 
-  // Перемещение по шагам
   nextBtn.addEventListener("click", () => {
     if (currentStep < totalSteps) {
-      currentStep++;
+      currentStep += 1;
       updateQuiz();
     }
   });
 
   prevBtn.addEventListener("click", () => {
     if (currentStep > 1) {
-      currentStep--;
+      currentStep -= 1;
       updateQuiz();
     }
   });
 
-  // Отправка данных квиза
-  sendBtn?.addEventListener("click", (e) => {
-    e.preventDefault();
+  sendBtn?.addEventListener("click", async (event) => {
+    event.preventDefault();
 
     const phone = phoneInput.value.trim();
-    if (!phone) {
-      alert("Пожалуйста, введите ваш номер телефона!");
+    const slot = document.querySelector('input[name="visit_slot"]:checked')?.value;
+    const consent = document.querySelector("#quiz-consent")?.checked;
+
+    if (!slot) {
+      errorNode.textContent = "Выберите удобное время визита.";
+      return;
+    }
+    if (!isValidRuPhone(phone)) {
+      errorNode.textContent = "Введите номер телефона в формате +7 9XX XXX-XX-XX.";
+      return;
+    }
+    if (!consent) {
+      errorNode.textContent = "Нужно согласие на обработку персональных данных.";
       return;
     }
 
-    const category =
-      document.querySelector('input[name="category"]:checked')?.value ||
-      "Не указано";
-    const purpose =
-      document.querySelector('input[name="purpose"]:checked')?.value ||
-      "Не указано";
+    errorNode.textContent = "";
+    sendBtn.disabled = true;
 
-    // Собираем текст заявки
-    const message =
-      `⚡ *Заявка с сайта: Результат Квиза*\n\n` +
-      `📌 *Категория:* ${category}\n` +
-      `🎯 *Цель:* ${purpose}\n` +
-      `📞 *Телефон клиента:* ${phone}\n\n` +
-      `Жду подборку вариантов и консультацию!`;
-
-    // Отправляем через наш единый модуль lead-sender
-    sendToWhatsApp(message);
+    try {
+      const result = await sendLead({
+        type: "quiz",
+        fields: {
+          Категория:
+            document.querySelector('input[name="category"]:checked')?.value || "Не указано",
+          Цель: document.querySelector('input[name="purpose"]:checked')?.value || "Не указано",
+          "Слот визита": slot,
+          Телефон: phone,
+        },
+      });
+      showSuccessModal(result);
+    } finally {
+      sendBtn.disabled = false;
+    }
   });
 }

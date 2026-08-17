@@ -1,46 +1,73 @@
-// Конфигурация контактов магазина
-const CONFIG = {
-  PHONE_WHATSAPP: "79000000000", // Укажи реальный номер менеджера (без +)
-  TELEGRAM_BOT_TOKEN: "", // Если захотим использовать Telegram-бота
-  TELEGRAM_CHAT_ID: "",
+import { CONFIG, getWhatsAppUrl, isTelegramConfigured } from "./config.js";
+import { trackGoal } from "./analytics.js";
+
+const LEAD_TITLES = {
+  testdrive: "Запись на тест-драйв / визит в салон",
+  quiz: "Квиз: подбор техники и визит",
+  service: "Запись на сервис / ТО",
+  parts: "Подбор запчастей по VIN",
 };
 
-/**
- * Отправка сформированного лида в WhatsApp
- * @param {string} text - Готовое форматированное сообщение
- */
-export function sendToWhatsApp(text) {
-  const encodedText = encodeURIComponent(text);
-  const whatsappUrl = `https://wa.me/${CONFIG.PHONE_WHATSAPP}?text=${encodedText}`;
-  window.open(whatsappUrl, "_blank");
+const LEAD_GOALS = {
+  testdrive: "lead_testdrive",
+  quiz: "lead_quiz",
+  service: "lead_service",
+  parts: "lead_parts",
+};
+
+function formatLead(type, fields) {
+  const title = LEAD_TITLES[type] || "Заявка с сайта";
+  const lines = [title, `Сайт: ${CONFIG.BRAND}`, ""];
+
+  for (const [label, value] of Object.entries(fields)) {
+    if (value) lines.push(`• ${label}: ${value}`);
+  }
+
+  return lines.join("\n");
+}
+
+async function sendToTelegram(text) {
+  const url = `https://api.telegram.org/bot${CONFIG.TELEGRAM_BOT_TOKEN}/sendMessage`;
+  const response = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      chat_id: CONFIG.TELEGRAM_CHAT_ID,
+      text,
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error(`Telegram HTTP ${response.status}`);
+  }
 }
 
 /**
- * Отправка заявки в Telegram-бота (если понадобится бэкенд без БД)
+ * Отправляет заявку менеджеру. WhatsApp клиенту не открывается сам.
+ * @returns {{ text: string, deliveredVia: "telegram" | "pending", whatsappUrl: string }}
  */
-export async function sendToTelegram(text) {
-  if (!CONFIG.TELEGRAM_BOT_TOKEN || !CONFIG.TELEGRAM_CHAT_ID) {
+export async function sendLead({ type, fields }) {
+  const text = formatLead(type, fields);
+  let deliveredVia = "pending";
+
+  if (isTelegramConfigured()) {
+    try {
+      await sendToTelegram(text);
+      deliveredVia = "telegram";
+    } catch (error) {
+      console.warn("Не удалось отправить в Telegram, оставляем WhatsApp как канал:", error);
+    }
+  } else {
     console.warn(
-      "Telegram Bot Credentials не настроены, перенаправляем в WhatsApp",
+      "Telegram-бот не настроен: заполните TELEGRAM_BOT_TOKEN и TELEGRAM_CHAT_ID в src/js/config.js",
     );
-    sendToWhatsApp(text);
-    return;
   }
 
-  try {
-    const url = `https://api.telegram.org/bot${CONFIG.TELEGRAM_BOT_TOKEN}/sendMessage`;
-    await fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        chat_id: CONFIG.TELEGRAM_CHAT_ID,
-        text: text,
-        parse_mode: "Markdown",
-      }),
-    });
-    alert("Заявка успешно отправлена менеджеру!");
-  } catch (error) {
-    console.error("Ошибка отправки в Telegram:", error);
-    sendToWhatsApp(text); // Фолбэк на WhatsApp в случае ошибки
-  }
+  trackGoal(LEAD_GOALS[type]);
+
+  return {
+    text,
+    deliveredVia,
+    whatsappUrl: getWhatsAppUrl(text),
+  };
 }
