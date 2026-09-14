@@ -1,4 +1,4 @@
-import { allKnobs, getTickAngles, mechanics } from '../mark.config.js';
+import { allKnobs, getTickAngles, getToothAngles, mechanics } from '../mark.config.js';
 
 const registry = allKnobs();
 
@@ -17,6 +17,7 @@ const DEG_KEYS = new Set(
 );
 
 const tickAngles = getTickAngles();
+const toothAngles = getToothAngles();
 
 function normalizeAngle(deg) {
   return ((deg % 360) + 360) % 360;
@@ -55,12 +56,12 @@ export function applyKnobs(svgEl, partial) {
   }
 }
 
-/** True if GSAP's numeric needle path from prev→curr passes tickDeg. */
-function crossedTick(prev, curr, tickDeg) {
+/** True if GSAP's numeric needle path from prev→curr passes targetDeg. */
+function crossedAngle(prev, curr, targetDeg) {
   if (prev === curr) return false;
   const lo = Math.min(prev, curr);
   const hi = Math.max(prev, curr);
-  const t0 = normalizeAngle(tickDeg);
+  const t0 = normalizeAngle(targetDeg);
   for (let k = -2; k <= 2; k++) {
     const t = t0 + k * 360;
     if (t > lo && t < hi) return true;
@@ -71,7 +72,17 @@ function crossedTick(prev, curr, tickDeg) {
 function detectCrossedTicks(prevAngle, currAngle) {
   const crossed = [];
   for (let i = 0; i < tickAngles.length; i++) {
-    if (crossedTick(prevAngle, currAngle, tickAngles[i])) {
+    if (crossedAngle(prevAngle, currAngle, tickAngles[i])) {
+      crossed.push(i);
+    }
+  }
+  return crossed;
+}
+
+function detectCrossedTeeth(prevAngle, currAngle) {
+  const crossed = [];
+  for (let i = 0; i < toothAngles.length; i++) {
+    if (crossedAngle(prevAngle, currAngle, toothAngles[i])) {
       crossed.push(i);
     }
   }
@@ -80,6 +91,7 @@ function detectCrossedTicks(prevAngle, currAngle) {
 
 const tweenStore = new WeakMap();
 const pulseStore = new WeakMap();
+const latchStore = new WeakMap();
 
 function getTween(svgEl) {
   return tweenStore.get(svgEl) ?? svgEl._markTween ?? null;
@@ -116,6 +128,27 @@ function killPulseTweens(svgEl) {
   setPulseTweens(svgEl, {});
 }
 
+function getLatchTweens(svgEl) {
+  return latchStore.get(svgEl) ?? svgEl._markLatchTweens ?? {};
+}
+
+function setLatchTweens(svgEl, tweens) {
+  if (Object.keys(tweens).length) {
+    latchStore.set(svgEl, tweens);
+    svgEl._markLatchTweens = tweens;
+  } else {
+    latchStore.delete(svgEl);
+    delete svgEl._markLatchTweens;
+  }
+}
+
+function killLatchTweens(svgEl) {
+  for (const tween of Object.values(getLatchTweens(svgEl))) {
+    tween.kill();
+  }
+  setLatchTweens(svgEl, {});
+}
+
 function pulseTickKick(svgEl, state, gsap, tickIndex) {
   const kickKey = `tickKick${tickIndex}`;
   const pulses = { ...getPulseTweens(svgEl) };
@@ -140,19 +173,41 @@ function pulseTickKick(svgEl, state, gsap, tickIndex) {
   setPulseTweens(svgEl, pulses);
 }
 
-function makeTickStrikeHandler(svgEl, state, gsap) {
+function latchToothReveal(svgEl, state, gsap, toothIndex) {
+  const revealKey = `toothReveal${toothIndex}`;
+  if (state[revealKey] >= 1) return;
+  const latches = { ...getLatchTweens(svgEl) };
+  latches[toothIndex]?.kill();
+  const tween = gsap.to(state, {
+    duration: mechanics.toothReveal.durationSec,
+    ease: 'back.out(1.7)',
+    [revealKey]: 1,
+    onUpdate: () => applyKnobs(svgEl, state),
+    onComplete: () => {
+      const next = { ...getLatchTweens(svgEl) };
+      if (next[toothIndex] === tween) delete next[toothIndex];
+      setLatchTweens(svgEl, next);
+    },
+  });
+  latches[toothIndex] = tween;
+  setLatchTweens(svgEl, latches);
+}
+
+function makeNeedleCrossHandler(svgEl, state, gsap) {
   let prevAngle = state.needleAngle;
 
   return () => {
     const currAngle = state.needleAngle;
-    if (state.tickReact <= 0 || prevAngle === currAngle) {
-      prevAngle = currAngle;
-      return;
+    if (prevAngle === currAngle) return;
+    if (state.tickReact > 0) {
+      for (const i of detectCrossedTicks(prevAngle, currAngle)) {
+        pulseTickKick(svgEl, state, gsap, i);
+      }
     }
-
-    const crossed = detectCrossedTicks(prevAngle, currAngle);
-    for (const i of crossed) {
-      pulseTickKick(svgEl, state, gsap, i);
+    if (state.toothReact > 0) {
+      for (const i of detectCrossedTeeth(prevAngle, currAngle)) {
+        latchToothReveal(svgEl, state, gsap, i);
+      }
     }
     prevAngle = currAngle;
   };
@@ -166,6 +221,7 @@ export function stop(svgEl, gsap, snapToRest = true) {
     setTween(svgEl, null);
   }
   killPulseTweens(svgEl);
+  killLatchTweens(svgEl);
   if (snapToRest) applyKnobs(svgEl, REST_KNOBS);
 }
 
@@ -182,7 +238,7 @@ export function play(svgEl, scene, gsap) {
   applyKnobs(svgEl, fromState);
 
   const state = { ...fromState };
-  const onTickStrike = makeTickStrikeHandler(svgEl, state, gsap);
+  const onNeedleCross = makeNeedleCrossHandler(svgEl, state, gsap);
   const tl = gsap.timeline();
 
   for (const step of scene.steps ?? []) {
@@ -192,7 +248,7 @@ export function play(svgEl, scene, gsap) {
       ease: step.ease ?? 'none',
       ...targets,
       onUpdate: () => {
-        onTickStrike();
+        onNeedleCross();
         applyKnobs(svgEl, state);
       },
     });

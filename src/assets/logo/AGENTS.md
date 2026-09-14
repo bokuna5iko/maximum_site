@@ -25,11 +25,11 @@
 
 - viewBox `0 0 200 200`, центр `(100, 100)`
 - Стрелка: `0deg` = 12 часов, дальше по часовой
-- Покой (identity): `--needle-angle: 34deg`, `--plate-open: 1`, `--word-spread: 1`, `--red-draw: 1`, `--ring-spin: 0deg`, `--mark-scale: 1`, `--mark-opacity: 1`, `--tick-react: 0`, все `--tick-kick-N: 0`, `--needle-impact: 1`, `--red-heat: 0`, `--hub-pulse: 1`
+- Покой (identity): `--needle-angle: 34deg`, `--plate-open: 1`, `--word-spread: 1`, `--red-draw: 1`, `--ring-spin: 0deg`, `--mark-scale: 1`, `--mark-opacity: 1`, `--tick-react: 0`, `--tooth-react: 0`, все `--tick-kick-N: 0`, все `--tooth-reveal-N: 1`, `--needle-impact: 1`, `--red-heat: 0`, `--hub-pulse: 1`
 
 ## Ручки (анимация только ими)
 
-Реестр в `mark.config.js` → `knobs` + сгенерированные `tickKick0`…`tickKick{n-1}` через `allKnobs()`. Runtime импортирует `allKnobs()` — не дублировать rest/css в `runtime.js`.
+Реестр в `mark.config.js` → `knobs` + сгенерированные `tickKick0`…`tickKick{n-1}` и `toothReveal0`…`toothReveal{n-1}` через `allKnobs()`. Runtime импортирует `allKnobs()` — не дублировать rest/css в `runtime.js`.
 
 На корневом `<svg>`:
 
@@ -43,6 +43,8 @@
 - `--mark-scale`, `--mark-opacity` — появление всего знака
 - `--tick-react` — `0..1`, включает авто-удар рисок при движении стрелки (runtime)
 - `--tick-kick-N` — `0..1` на каждую риску; CSS `scale` от центра viewBox; runtime пульсирует при пересечении угла стрелкой
+- `--tooth-react` — `0..1`, включает авто-раскрытие зубьев при движении стрелки (runtime)
+- `--tooth-reveal-N` — `0..1` на каждый зуб; CSS `scale` от центра viewBox; rest `1` (все зубья видны); runtime **защёлкивает** `0→1` при пересечении и не сбрасывает
 - `--hub-pulse` — `1` в покое, `scale` на `#mark-hub` (внутри `#mark-needle-mass`)
 
 `--red-start` / `--red-end` в SVG для справки; дуга запечена. Сектор менять в `mark.config.js` + пересборка, не анимировать эти две переменные.
@@ -51,13 +53,17 @@
 
 Конструктор эмитит `--tick-kick-N` + `data-angle` на группах `#mark-tick-N`. CSS: `scale(calc(1 + var(--tick-react) * var(--tick-kick-N) * kickScale))`. Runtime при `tickReact > 0` смотрит числовой путь GSAP `prev→curr` (рост = по часовой, спад = против) и пульсирует kick → 0 за `mechanics.tickStrike.decaySec`, если развёрнутый угол риски попал в интервал. Сцены **не** ключируют каждую риску — только `tickReact` и движение стрелки.
 
+### Tooth reveal (зубья протектора)
+
+Конструктор эмитит `--tooth-reveal-N` + `data-angle` на группах `#mark-tooth-N` внутри `#mark-teeth`. CSS: `scale(var(--tooth-reveal-N))` — **без** умножения на `--tooth-react` (react только гейтит runtime). В покое `reveal=1`, зубья видны как сегодня. Runtime при `toothReact > 0` и пересечении угла зуба защёлкивает `0→1` с `back.out(1.7)` за `mechanics.toothReveal.durationSec` и **оставляет на 1** (не пульс, не decay). Сцены **не** ключируют зубья — только `toothReact`, `hiddenTeethFrom()` в `from` и движение стрелки.
+
 ### Needle waypoints (стрелка)
 
 Сцены **не** хардкодят градусы для intro-пути стрелки. Источник — `introNeedleSweep()` в `mark.config.js` + хелперы `normalizeDeg`, `unwindClockwise`, `unwindCounterclockwise`.
 
-**Почему unwrap:** GSAP интерполирует сырые числа. `248 → 80` уменьшается (против часовой). Чтобы sweep по часовой прошёл через все риски и вошёл в красную зону, нужна развёрнутая возрастающая числовая линия: `236 → 440`, затем отскок `440 → 394`.
+**Почему unwrap:** GSAP интерполирует сырые числа. `248 → 80` уменьшается (против часовой). Чтобы sweep по часовой прошёл через все зубья (128…232), все риски (248…38) и вошёл в красную зону, нужна развёрнутая возрастающая числовая линия: `116 → 440`, затем отскок `440 → 394`.
 
-Параметры в `mechanics.needleSweep`: `leadDeg` (старт до первой риски), `redInsetDeg` (пик = `red.endDeg - inset`). Текущая геометрия даёт `start ≈ 236`, `peakNorm = 80`, `peak ≈ 440`, `settled ≈ 394`, `restNorm = 34`.
+Параметры в `mechanics.needleSweep`: `leadDeg` (старт до первого зуба), `redInsetDeg` (пик = `red.endDeg - inset`). Текущая геометрия даёт `start ≈ 116`, `peakNorm = 80`, `peak ≈ 440`, `settled ≈ 394`, `restNorm = 34`. Путь: протектор → риски → красная зона → отскок.
 
 **Покой в реестре** остаётся `knobs.needleAngle.rest = 34`. После intro live CSS может быть `394deg` — тот же визуальный угол. Reset / `prefers-reduced-motion` сбрасывают в `34deg`.
 
@@ -67,15 +73,15 @@
 
 1. Появление циферблата (`markOpacity` / `markScale`)
 2. Красная зона (`redDraw`)
-3. Стрелка: clockwise pre-sweep (`introNeedleSweep().start` → `.peak`) — все риски, вход в красную зону
+3. Стрелка: clockwise pre-sweep (`introNeedleSweep().start` → `.peak`, 1.7s) — зубья по одному, все риски, вход в красную зону
 4. Отскок к покою (`needle.peak` → `needle.settled`)
 5. **Одновременно** `plateOpen: 1` и `wordSpread: 1`
 
-В `from` включён `tickReact: 1` — риски кликают при движении стрелки. Не раскрывать пустой шильдик до текста: получается «квадрат, потом буквы». Плашка и слово растут от лезвия вместе.
+В `from` включены `tickReact: 1`, `toothReact: 1` и `hiddenTeethFrom()` (все `--tooth-reveal-N: 0`) — зубья и риски реагируют при движении стрелки. Не раскрывать пустой шильдик до текста: получается «квадрат, потом буквы». Плашка и слово растут от лезвия вместе.
 
 ## Слои (id без суффикса в `maximum-mark.svg`)
 
-`mark-ring` → `mark-teeth` → `mark-disk` → `mark-red` + `mark-red-heat` → `mark-ticks` (`mark-tick-0`… группы, поверх красной дуги) → `mark-banner` → MAXI/MUM → `mark-needle` → `mark-needle-mass` → paths + `mark-hub`
+`mark-ring` → `mark-teeth` (`mark-tooth-0`… группы с path внутри) → `mark-disk` → `mark-red` + `mark-red-heat` → `mark-ticks` (`mark-tick-0`… группы, поверх красной дуги) → `mark-banner` → MAXI/MUM → `mark-needle` → `mark-needle-mass` → paths + `mark-hub`
 
 Стрелка — два уровня transform: `#mark-needle` (rotate `--needle-angle`), `#mark-needle-mass` (scale `--needle-impact`). Хаб внутри mass.
 
@@ -96,7 +102,7 @@
 
 ### Как добавить ручку
 
-1. Добавить в `knobs` в `mark.config.js` (или расширить генерацию tick kicks).
+1. Добавить в `knobs` в `mark.config.js` (или расширить генерацию tick kicks / tooth reveals в `allKnobs()`).
 2. Привязать CSS в `build-mark.js` (style block / inline transform).
 3. `node src/assets/logo/build-mark.js`
 4. Runtime подхватит из `allKnobs()` автоматически.

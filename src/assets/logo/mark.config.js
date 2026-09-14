@@ -16,6 +16,7 @@ export const knobs = {
   markScale: { css: '--mark-scale', rest: 1, unit: '' },
   markOpacity: { css: '--mark-opacity', rest: 1, unit: '' },
   tickReact: { css: '--tick-react', rest: 0, unit: '' },
+  toothReact: { css: '--tooth-react', rest: 0, unit: '' },
   needleImpact: { css: '--needle-impact', rest: 1, unit: '' },
   redHeat: { css: '--red-heat', rest: 0, unit: '' },
   hubPulse: { css: '--hub-pulse', rest: 1, unit: '' },
@@ -25,6 +26,9 @@ export const mechanics = {
   tickStrike: {
     kickScale: 0.07,
     decaySec: 0.12,
+  },
+  toothReveal: {
+    durationSec: 0.18,
   },
   needleSweep: {
     leadDeg: 12,
@@ -137,6 +141,11 @@ export function getTickAngles() {
   return lerpAngle(startDeg, endDeg, count);
 }
 
+export function getToothAngles() {
+  const { startDeg, endDeg, count } = config.teeth;
+  return lerpAngle(startDeg, endDeg, count);
+}
+
 /** Normalize any degree to 0..360 */
 export function normalizeDeg(deg) {
   return ((deg % 360) + 360) % 360;
@@ -162,8 +171,8 @@ export function unwindCounterclockwise(from, toNorm) {
 
 /** Intro needle path: pre-sweep start → redline peak → bounce to rest */
 export function introNeedleSweep() {
-  const ticks = getTickAngles();
-  const start = ticks[0] - mechanics.needleSweep.leadDeg;
+  const teeth = getToothAngles();
+  const start = teeth[0] - mechanics.needleSweep.leadDeg;
   const peakNorm = config.red.endDeg - mechanics.needleSweep.redInsetDeg;
   const restNorm = knobs.needleAngle.rest;
   const peak = unwindClockwise(start, peakNorm);
@@ -173,11 +182,26 @@ export function introNeedleSweep() {
 
 export function allKnobs() {
   const tickAngles = getTickAngles();
+  const toothAngles = getToothAngles();
   const tickKicks = {};
   for (let i = 0; i < tickAngles.length; i++) {
     tickKicks[`tickKick${i}`] = { css: `--tick-kick-${i}`, rest: 0, unit: '' };
   }
-  return { ...knobs, ...tickKicks };
+  const toothReveals = {};
+  for (let i = 0; i < toothAngles.length; i++) {
+    toothReveals[`toothReveal${i}`] = { css: `--tooth-reveal-${i}`, rest: 1, unit: '' };
+  }
+  return { ...knobs, ...tickKicks, ...toothReveals };
+}
+
+/** Intro from-state: all tooth reveals hidden */
+export function hiddenTeethFrom() {
+  const toothAngles = getToothAngles();
+  const out = {};
+  for (let i = 0; i < toothAngles.length; i++) {
+    out[`toothReveal${i}`] = 0;
+  }
+  return out;
 }
 
 export function formatKnobCssValue(knob) {

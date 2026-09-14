@@ -8,8 +8,8 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import config, {
   knobs,
-  lerpAngle,
   getTickAngles,
+  getToothAngles,
   buildSvgStyleMap,
   mechanics,
   introNeedleSweep,
@@ -62,7 +62,7 @@ function buildTicks(suffix) {
 }
 
 function buildTeeth(suffix) {
-  const angles = lerpAngle(teeth.startDeg, teeth.endDeg, teeth.count);
+  const angles = getToothAngles();
   const tipR = teeth.baseR + teeth.depth;
   const baseDegPerPx = 180 / Math.PI / teeth.baseR;
   const tipDegPerPx = 180 / Math.PI / tipR;
@@ -81,7 +81,10 @@ function buildTeeth(suffix) {
         `L ${baseRight.x.toFixed(3)} ${baseRight.y.toFixed(3)}`,
         'Z',
       ].join(' ');
-      return `    <path id="${elId(`mark-tooth-${i}`, suffix)}" d="${d}" fill="${colors.white}" stroke="${colors.black}" stroke-width="${ring.outerStroke}" stroke-linejoin="miter"/>`;
+      const toothId = elId(`mark-tooth-${i}`, suffix);
+      return `    <g id="${toothId}" data-angle="${deg.toFixed(3)}" data-tooth="${i}">
+      <path d="${d}" fill="${colors.black}" stroke="${colors.black}" stroke-width="${ring.outerStroke}" stroke-linejoin="miter"/>
+    </g>`;
     })
     .join('\n');
 }
@@ -118,12 +121,24 @@ function buildSvg(overrides = {}, suffix = '') {
   const wordLeftId = elId('mark-word-left', suffix);
   const wordRightId = elId('mark-word-right', suffix);
   const tickAngles = getTickAngles();
+  const toothAngles = getToothAngles();
 
   const tickCssRules = tickAngles
     .map((_, i) => {
       const tickId = elId(`mark-tick-${i}`, suffix);
       return `    #${rootId} #${tickId} {
       transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-${i}) * ${kickScale}));
+      transform-origin: ${cx}px ${cy}px;
+      transform-box: view-box;
+    }`;
+    })
+    .join('\n');
+
+  const toothCssRules = toothAngles
+    .map((_, i) => {
+      const toothId = elId(`mark-tooth-${i}`, suffix);
+      return `    #${rootId} #${toothId} {
+      transform: scale(var(--tooth-reveal-${i}));
       transform-origin: ${cx}px ${cy}px;
       transform-box: view-box;
     }`;
@@ -193,6 +208,7 @@ ${varBlock}
       letter-spacing: ${word.letterSpacing};
     }
 ${tickCssRules}
+${toothCssRules}
   </style>
 
   <g id="${elId('mark-ring', suffix)}">
@@ -265,6 +281,11 @@ function buildPreviewHtml(svgBody) {
       label: 'Tick 7 kicked (--tick-react: 1, --tick-kick-7: 1)',
       overrides: { '--tick-react': '1', '--tick-kick-7': '1' },
       suffix: 'tick-kick',
+    },
+    {
+      label: 'Tooth 3 hidden (--tooth-reveal-3: 0)',
+      overrides: { '--tooth-reveal-3': '0' },
+      suffix: 'tooth-hidden',
     },
     {
       label: 'Needle impact (--needle-impact: 1.04)',

@@ -1,5 +1,5 @@
 /** Intro scene — declarative knobs only; GSAP lives in runtime.js */
-import { introNeedleSweep } from '../mark.config.js';
+import { introNeedleSweep, hiddenTeethFrom } from '../mark.config.js';
 
 const needle = introNeedleSweep();
 
@@ -15,6 +15,8 @@ export const intro = {
     needleAngle: needle.start,
     ringSpin: 0,
     tickReact: 1,
+    toothReact: 1,
+    ...hiddenTeethFrom(),
   },
   steps: [
     {
@@ -33,7 +35,7 @@ export const intro = {
       },
     },
     {
-      duration: 1.25,
+      duration: 1.7,
       ease: 'power2.out',
       vars: {
         needleAngle: needle.peak,

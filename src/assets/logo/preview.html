@@ -72,6 +72,7 @@
   --mark-scale: 1;
   --mark-opacity: 1;
   --tick-react: 0;
+  --tooth-react: 0;
   --needle-impact: 1;
   --red-heat: 0;
   --hub-pulse: 1;
@@ -83,6 +84,13 @@
   --tick-kick-5: 0;
   --tick-kick-6: 0;
   --tick-kick-7: 0;
+  --tooth-reveal-0: 1;
+  --tooth-reveal-1: 1;
+  --tooth-reveal-2: 1;
+  --tooth-reveal-3: 1;
+  --tooth-reveal-4: 1;
+  --tooth-reveal-5: 1;
+  --tooth-reveal-6: 1;
   --red-start: 12deg;
   --red-end: 88deg;
 ">
@@ -177,6 +185,41 @@
       transform-origin: 100px 100px;
       transform-box: view-box;
     }
+    #mark-root #mark-tooth-0 {
+      transform: scale(var(--tooth-reveal-0));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root #mark-tooth-1 {
+      transform: scale(var(--tooth-reveal-1));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root #mark-tooth-2 {
+      transform: scale(var(--tooth-reveal-2));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root #mark-tooth-3 {
+      transform: scale(var(--tooth-reveal-3));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root #mark-tooth-4 {
+      transform: scale(var(--tooth-reveal-4));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root #mark-tooth-5 {
+      transform: scale(var(--tooth-reveal-5));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root #mark-tooth-6 {
+      transform: scale(var(--tooth-reveal-6));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
   </style>
 
   <g id="mark-ring">
@@ -186,13 +229,27 @@
   </g>
 
   <g id="mark-teeth">
-    <path id="mark-tooth-0" d="M 170.619 148.199 L 174.058 153.737 L 170.057 158.858 L 163.852 156.861 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-1" d="M 153.052 167.050 L 154.685 173.361 L 149.340 177.057 L 144.011 173.302 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-2" d="M 130.667 179.811 L 130.345 186.322 L 124.142 188.258 L 120.174 183.086 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-3" d="M 105.496 185.323 L 103.249 191.442 L 96.751 191.442 L 94.504 185.323 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-4" d="M 79.826 183.086 L 75.858 188.258 L 69.655 186.322 L 69.333 179.811 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-5" d="M 55.989 173.302 L 50.660 177.057 L 45.315 173.361 L 46.948 167.050 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-6" d="M 36.148 156.861 L 29.943 158.858 L 25.942 153.737 L 29.381 148.199 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    <g id="mark-tooth-0" data-angle="128.000" data-tooth="0">
+      <path d="M 170.619 148.199 L 174.058 153.737 L 170.057 158.858 L 163.852 156.861 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-1" data-angle="145.333" data-tooth="1">
+      <path d="M 153.052 167.050 L 154.685 173.361 L 149.340 177.057 L 144.011 173.302 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-2" data-angle="162.667" data-tooth="2">
+      <path d="M 130.667 179.811 L 130.345 186.322 L 124.142 188.258 L 120.174 183.086 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-3" data-angle="180.000" data-tooth="3">
+      <path d="M 105.496 185.323 L 103.249 191.442 L 96.751 191.442 L 94.504 185.323 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-4" data-angle="197.333" data-tooth="4">
+      <path d="M 79.826 183.086 L 75.858 188.258 L 69.655 186.322 L 69.333 179.811 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-5" data-angle="214.667" data-tooth="5">
+      <path d="M 55.989 173.302 L 50.660 177.057 L 45.315 173.361 L 46.948 167.050 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-6" data-angle="232.000" data-tooth="6">
+      <path d="M 36.148 156.861 L 29.943 158.858 L 25.942 153.737 L 29.381 148.199 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
   </g>
 
   <circle id="mark-disk" cx="100" cy="100" r="65" fill="#201E1E"/>
@@ -288,6 +345,7 @@
   --mark-scale: 1;
   --mark-opacity: 1;
   --tick-react: 0;
+  --tooth-react: 0;
   --needle-impact: 1;
   --red-heat: 0;
   --hub-pulse: 1;
@@ -299,6 +357,13 @@
   --tick-kick-5: 0;
   --tick-kick-6: 0;
   --tick-kick-7: 0;
+  --tooth-reveal-0: 1;
+  --tooth-reveal-1: 1;
+  --tooth-reveal-2: 1;
+  --tooth-reveal-3: 1;
+  --tooth-reveal-4: 1;
+  --tooth-reveal-5: 1;
+  --tooth-reveal-6: 1;
   --red-start: 12deg;
   --red-end: 88deg;
 ">
@@ -393,6 +458,41 @@
       transform-origin: 100px 100px;
       transform-box: view-box;
     }
+    #mark-root-rest #mark-tooth-0-rest {
+      transform: scale(var(--tooth-reveal-0));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-rest #mark-tooth-1-rest {
+      transform: scale(var(--tooth-reveal-1));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-rest #mark-tooth-2-rest {
+      transform: scale(var(--tooth-reveal-2));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-rest #mark-tooth-3-rest {
+      transform: scale(var(--tooth-reveal-3));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-rest #mark-tooth-4-rest {
+      transform: scale(var(--tooth-reveal-4));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-rest #mark-tooth-5-rest {
+      transform: scale(var(--tooth-reveal-5));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-rest #mark-tooth-6-rest {
+      transform: scale(var(--tooth-reveal-6));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
   </style>
 
   <g id="mark-ring-rest">
@@ -402,13 +502,27 @@
   </g>
 
   <g id="mark-teeth-rest">
-    <path id="mark-tooth-0-rest" d="M 170.619 148.199 L 174.058 153.737 L 170.057 158.858 L 163.852 156.861 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-1-rest" d="M 153.052 167.050 L 154.685 173.361 L 149.340 177.057 L 144.011 173.302 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-2-rest" d="M 130.667 179.811 L 130.345 186.322 L 124.142 188.258 L 120.174 183.086 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-3-rest" d="M 105.496 185.323 L 103.249 191.442 L 96.751 191.442 L 94.504 185.323 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-4-rest" d="M 79.826 183.086 L 75.858 188.258 L 69.655 186.322 L 69.333 179.811 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-5-rest" d="M 55.989 173.302 L 50.660 177.057 L 45.315 173.361 L 46.948 167.050 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-6-rest" d="M 36.148 156.861 L 29.943 158.858 L 25.942 153.737 L 29.381 148.199 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    <g id="mark-tooth-0-rest" data-angle="128.000" data-tooth="0">
+      <path d="M 170.619 148.199 L 174.058 153.737 L 170.057 158.858 L 163.852 156.861 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-1-rest" data-angle="145.333" data-tooth="1">
+      <path d="M 153.052 167.050 L 154.685 173.361 L 149.340 177.057 L 144.011 173.302 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-2-rest" data-angle="162.667" data-tooth="2">
+      <path d="M 130.667 179.811 L 130.345 186.322 L 124.142 188.258 L 120.174 183.086 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-3-rest" data-angle="180.000" data-tooth="3">
+      <path d="M 105.496 185.323 L 103.249 191.442 L 96.751 191.442 L 94.504 185.323 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-4-rest" data-angle="197.333" data-tooth="4">
+      <path d="M 79.826 183.086 L 75.858 188.258 L 69.655 186.322 L 69.333 179.811 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-5-rest" data-angle="214.667" data-tooth="5">
+      <path d="M 55.989 173.302 L 50.660 177.057 L 45.315 173.361 L 46.948 167.050 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-6-rest" data-angle="232.000" data-tooth="6">
+      <path d="M 36.148 156.861 L 29.943 158.858 L 25.942 153.737 L 29.381 148.199 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
   </g>
 
   <circle id="mark-disk-rest" cx="100" cy="100" r="65" fill="#201E1E"/>
@@ -501,6 +615,7 @@
   --mark-scale: 1;
   --mark-opacity: 1;
   --tick-react: 0;
+  --tooth-react: 0;
   --needle-impact: 1;
   --red-heat: 0;
   --hub-pulse: 1;
@@ -512,6 +627,13 @@
   --tick-kick-5: 0;
   --tick-kick-6: 0;
   --tick-kick-7: 0;
+  --tooth-reveal-0: 1;
+  --tooth-reveal-1: 1;
+  --tooth-reveal-2: 1;
+  --tooth-reveal-3: 1;
+  --tooth-reveal-4: 1;
+  --tooth-reveal-5: 1;
+  --tooth-reveal-6: 1;
   --red-start: 12deg;
   --red-end: 88deg;
 ">
@@ -606,6 +728,41 @@
       transform-origin: 100px 100px;
       transform-box: view-box;
     }
+    #mark-root-plate-shut #mark-tooth-0-plate-shut {
+      transform: scale(var(--tooth-reveal-0));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-plate-shut #mark-tooth-1-plate-shut {
+      transform: scale(var(--tooth-reveal-1));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-plate-shut #mark-tooth-2-plate-shut {
+      transform: scale(var(--tooth-reveal-2));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-plate-shut #mark-tooth-3-plate-shut {
+      transform: scale(var(--tooth-reveal-3));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-plate-shut #mark-tooth-4-plate-shut {
+      transform: scale(var(--tooth-reveal-4));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-plate-shut #mark-tooth-5-plate-shut {
+      transform: scale(var(--tooth-reveal-5));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-plate-shut #mark-tooth-6-plate-shut {
+      transform: scale(var(--tooth-reveal-6));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
   </style>
 
   <g id="mark-ring-plate-shut">
@@ -615,13 +772,27 @@
   </g>
 
   <g id="mark-teeth-plate-shut">
-    <path id="mark-tooth-0-plate-shut" d="M 170.619 148.199 L 174.058 153.737 L 170.057 158.858 L 163.852 156.861 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-1-plate-shut" d="M 153.052 167.050 L 154.685 173.361 L 149.340 177.057 L 144.011 173.302 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-2-plate-shut" d="M 130.667 179.811 L 130.345 186.322 L 124.142 188.258 L 120.174 183.086 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-3-plate-shut" d="M 105.496 185.323 L 103.249 191.442 L 96.751 191.442 L 94.504 185.323 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-4-plate-shut" d="M 79.826 183.086 L 75.858 188.258 L 69.655 186.322 L 69.333 179.811 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-5-plate-shut" d="M 55.989 173.302 L 50.660 177.057 L 45.315 173.361 L 46.948 167.050 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-6-plate-shut" d="M 36.148 156.861 L 29.943 158.858 L 25.942 153.737 L 29.381 148.199 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    <g id="mark-tooth-0-plate-shut" data-angle="128.000" data-tooth="0">
+      <path d="M 170.619 148.199 L 174.058 153.737 L 170.057 158.858 L 163.852 156.861 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-1-plate-shut" data-angle="145.333" data-tooth="1">
+      <path d="M 153.052 167.050 L 154.685 173.361 L 149.340 177.057 L 144.011 173.302 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-2-plate-shut" data-angle="162.667" data-tooth="2">
+      <path d="M 130.667 179.811 L 130.345 186.322 L 124.142 188.258 L 120.174 183.086 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-3-plate-shut" data-angle="180.000" data-tooth="3">
+      <path d="M 105.496 185.323 L 103.249 191.442 L 96.751 191.442 L 94.504 185.323 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-4-plate-shut" data-angle="197.333" data-tooth="4">
+      <path d="M 79.826 183.086 L 75.858 188.258 L 69.655 186.322 L 69.333 179.811 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-5-plate-shut" data-angle="214.667" data-tooth="5">
+      <path d="M 55.989 173.302 L 50.660 177.057 L 45.315 173.361 L 46.948 167.050 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-6-plate-shut" data-angle="232.000" data-tooth="6">
+      <path d="M 36.148 156.861 L 29.943 158.858 L 25.942 153.737 L 29.381 148.199 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
   </g>
 
   <circle id="mark-disk-plate-shut" cx="100" cy="100" r="65" fill="#201E1E"/>
@@ -714,6 +885,7 @@
   --mark-scale: 1;
   --mark-opacity: 1;
   --tick-react: 0;
+  --tooth-react: 0;
   --needle-impact: 1;
   --red-heat: 0;
   --hub-pulse: 1;
@@ -725,6 +897,13 @@
   --tick-kick-5: 0;
   --tick-kick-6: 0;
   --tick-kick-7: 0;
+  --tooth-reveal-0: 1;
+  --tooth-reveal-1: 1;
+  --tooth-reveal-2: 1;
+  --tooth-reveal-3: 1;
+  --tooth-reveal-4: 1;
+  --tooth-reveal-5: 1;
+  --tooth-reveal-6: 1;
   --red-start: 12deg;
   --red-end: 88deg;
 ">
@@ -819,6 +998,41 @@
       transform-origin: 100px 100px;
       transform-box: view-box;
     }
+    #mark-root-collapsed #mark-tooth-0-collapsed {
+      transform: scale(var(--tooth-reveal-0));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-collapsed #mark-tooth-1-collapsed {
+      transform: scale(var(--tooth-reveal-1));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-collapsed #mark-tooth-2-collapsed {
+      transform: scale(var(--tooth-reveal-2));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-collapsed #mark-tooth-3-collapsed {
+      transform: scale(var(--tooth-reveal-3));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-collapsed #mark-tooth-4-collapsed {
+      transform: scale(var(--tooth-reveal-4));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-collapsed #mark-tooth-5-collapsed {
+      transform: scale(var(--tooth-reveal-5));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-collapsed #mark-tooth-6-collapsed {
+      transform: scale(var(--tooth-reveal-6));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
   </style>
 
   <g id="mark-ring-collapsed">
@@ -828,13 +1042,27 @@
   </g>
 
   <g id="mark-teeth-collapsed">
-    <path id="mark-tooth-0-collapsed" d="M 170.619 148.199 L 174.058 153.737 L 170.057 158.858 L 163.852 156.861 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-1-collapsed" d="M 153.052 167.050 L 154.685 173.361 L 149.340 177.057 L 144.011 173.302 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-2-collapsed" d="M 130.667 179.811 L 130.345 186.322 L 124.142 188.258 L 120.174 183.086 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-3-collapsed" d="M 105.496 185.323 L 103.249 191.442 L 96.751 191.442 L 94.504 185.323 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-4-collapsed" d="M 79.826 183.086 L 75.858 188.258 L 69.655 186.322 L 69.333 179.811 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-5-collapsed" d="M 55.989 173.302 L 50.660 177.057 L 45.315 173.361 L 46.948 167.050 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-6-collapsed" d="M 36.148 156.861 L 29.943 158.858 L 25.942 153.737 L 29.381 148.199 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    <g id="mark-tooth-0-collapsed" data-angle="128.000" data-tooth="0">
+      <path d="M 170.619 148.199 L 174.058 153.737 L 170.057 158.858 L 163.852 156.861 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-1-collapsed" data-angle="145.333" data-tooth="1">
+      <path d="M 153.052 167.050 L 154.685 173.361 L 149.340 177.057 L 144.011 173.302 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-2-collapsed" data-angle="162.667" data-tooth="2">
+      <path d="M 130.667 179.811 L 130.345 186.322 L 124.142 188.258 L 120.174 183.086 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-3-collapsed" data-angle="180.000" data-tooth="3">
+      <path d="M 105.496 185.323 L 103.249 191.442 L 96.751 191.442 L 94.504 185.323 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-4-collapsed" data-angle="197.333" data-tooth="4">
+      <path d="M 79.826 183.086 L 75.858 188.258 L 69.655 186.322 L 69.333 179.811 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-5-collapsed" data-angle="214.667" data-tooth="5">
+      <path d="M 55.989 173.302 L 50.660 177.057 L 45.315 173.361 L 46.948 167.050 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-6-collapsed" data-angle="232.000" data-tooth="6">
+      <path d="M 36.148 156.861 L 29.943 158.858 L 25.942 153.737 L 29.381 148.199 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
   </g>
 
   <circle id="mark-disk-collapsed" cx="100" cy="100" r="65" fill="#201E1E"/>
@@ -919,7 +1147,7 @@
   - No <animate> or @keyframes in this file
 -->
 <svg id="mark-root-needle-presweep" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="Maximum logo mark" style="
-  --needle-angle: 236deg;
+  --needle-angle: 116deg;
   --word-spread: 1;
   --plate-open: 1;
   --red-draw: 1;
@@ -927,6 +1155,7 @@
   --mark-scale: 1;
   --mark-opacity: 1;
   --tick-react: 0;
+  --tooth-react: 0;
   --needle-impact: 1;
   --red-heat: 0;
   --hub-pulse: 1;
@@ -938,6 +1167,13 @@
   --tick-kick-5: 0;
   --tick-kick-6: 0;
   --tick-kick-7: 0;
+  --tooth-reveal-0: 1;
+  --tooth-reveal-1: 1;
+  --tooth-reveal-2: 1;
+  --tooth-reveal-3: 1;
+  --tooth-reveal-4: 1;
+  --tooth-reveal-5: 1;
+  --tooth-reveal-6: 1;
   --red-start: 12deg;
   --red-end: 88deg;
 ">
@@ -1032,6 +1268,41 @@
       transform-origin: 100px 100px;
       transform-box: view-box;
     }
+    #mark-root-needle-presweep #mark-tooth-0-needle-presweep {
+      transform: scale(var(--tooth-reveal-0));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-needle-presweep #mark-tooth-1-needle-presweep {
+      transform: scale(var(--tooth-reveal-1));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-needle-presweep #mark-tooth-2-needle-presweep {
+      transform: scale(var(--tooth-reveal-2));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-needle-presweep #mark-tooth-3-needle-presweep {
+      transform: scale(var(--tooth-reveal-3));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-needle-presweep #mark-tooth-4-needle-presweep {
+      transform: scale(var(--tooth-reveal-4));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-needle-presweep #mark-tooth-5-needle-presweep {
+      transform: scale(var(--tooth-reveal-5));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-needle-presweep #mark-tooth-6-needle-presweep {
+      transform: scale(var(--tooth-reveal-6));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
   </style>
 
   <g id="mark-ring-needle-presweep">
@@ -1041,13 +1312,27 @@
   </g>
 
   <g id="mark-teeth-needle-presweep">
-    <path id="mark-tooth-0-needle-presweep" d="M 170.619 148.199 L 174.058 153.737 L 170.057 158.858 L 163.852 156.861 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-1-needle-presweep" d="M 153.052 167.050 L 154.685 173.361 L 149.340 177.057 L 144.011 173.302 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-2-needle-presweep" d="M 130.667 179.811 L 130.345 186.322 L 124.142 188.258 L 120.174 183.086 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-3-needle-presweep" d="M 105.496 185.323 L 103.249 191.442 L 96.751 191.442 L 94.504 185.323 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-4-needle-presweep" d="M 79.826 183.086 L 75.858 188.258 L 69.655 186.322 L 69.333 179.811 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-5-needle-presweep" d="M 55.989 173.302 L 50.660 177.057 L 45.315 173.361 L 46.948 167.050 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-6-needle-presweep" d="M 36.148 156.861 L 29.943 158.858 L 25.942 153.737 L 29.381 148.199 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    <g id="mark-tooth-0-needle-presweep" data-angle="128.000" data-tooth="0">
+      <path d="M 170.619 148.199 L 174.058 153.737 L 170.057 158.858 L 163.852 156.861 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-1-needle-presweep" data-angle="145.333" data-tooth="1">
+      <path d="M 153.052 167.050 L 154.685 173.361 L 149.340 177.057 L 144.011 173.302 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-2-needle-presweep" data-angle="162.667" data-tooth="2">
+      <path d="M 130.667 179.811 L 130.345 186.322 L 124.142 188.258 L 120.174 183.086 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-3-needle-presweep" data-angle="180.000" data-tooth="3">
+      <path d="M 105.496 185.323 L 103.249 191.442 L 96.751 191.442 L 94.504 185.323 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-4-needle-presweep" data-angle="197.333" data-tooth="4">
+      <path d="M 79.826 183.086 L 75.858 188.258 L 69.655 186.322 L 69.333 179.811 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-5-needle-presweep" data-angle="214.667" data-tooth="5">
+      <path d="M 55.989 173.302 L 50.660 177.057 L 45.315 173.361 L 46.948 167.050 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-6-needle-presweep" data-angle="232.000" data-tooth="6">
+      <path d="M 36.148 156.861 L 29.943 158.858 L 25.942 153.737 L 29.381 148.199 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
   </g>
 
   <circle id="mark-disk-needle-presweep" cx="100" cy="100" r="65" fill="#201E1E"/>
@@ -1120,7 +1405,7 @@
     </g>
   </g>
 </svg></div>
-      <figcaption>Needle pre-sweep (--needle-angle: 236deg)</figcaption>
+      <figcaption>Needle pre-sweep (--needle-angle: 116deg)</figcaption>
     </figure>
     <figure class="panel">
       <div class="mark-wrap"><!--
@@ -1140,6 +1425,7 @@
   --mark-scale: 1;
   --mark-opacity: 1;
   --tick-react: 0;
+  --tooth-react: 0;
   --needle-impact: 1;
   --red-heat: 0;
   --hub-pulse: 1;
@@ -1151,6 +1437,13 @@
   --tick-kick-5: 0;
   --tick-kick-6: 0;
   --tick-kick-7: 0;
+  --tooth-reveal-0: 1;
+  --tooth-reveal-1: 1;
+  --tooth-reveal-2: 1;
+  --tooth-reveal-3: 1;
+  --tooth-reveal-4: 1;
+  --tooth-reveal-5: 1;
+  --tooth-reveal-6: 1;
   --red-start: 12deg;
   --red-end: 88deg;
 ">
@@ -1245,6 +1538,41 @@
       transform-origin: 100px 100px;
       transform-box: view-box;
     }
+    #mark-root-needle-red #mark-tooth-0-needle-red {
+      transform: scale(var(--tooth-reveal-0));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-needle-red #mark-tooth-1-needle-red {
+      transform: scale(var(--tooth-reveal-1));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-needle-red #mark-tooth-2-needle-red {
+      transform: scale(var(--tooth-reveal-2));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-needle-red #mark-tooth-3-needle-red {
+      transform: scale(var(--tooth-reveal-3));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-needle-red #mark-tooth-4-needle-red {
+      transform: scale(var(--tooth-reveal-4));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-needle-red #mark-tooth-5-needle-red {
+      transform: scale(var(--tooth-reveal-5));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-needle-red #mark-tooth-6-needle-red {
+      transform: scale(var(--tooth-reveal-6));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
   </style>
 
   <g id="mark-ring-needle-red">
@@ -1254,13 +1582,27 @@
   </g>
 
   <g id="mark-teeth-needle-red">
-    <path id="mark-tooth-0-needle-red" d="M 170.619 148.199 L 174.058 153.737 L 170.057 158.858 L 163.852 156.861 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-1-needle-red" d="M 153.052 167.050 L 154.685 173.361 L 149.340 177.057 L 144.011 173.302 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-2-needle-red" d="M 130.667 179.811 L 130.345 186.322 L 124.142 188.258 L 120.174 183.086 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-3-needle-red" d="M 105.496 185.323 L 103.249 191.442 L 96.751 191.442 L 94.504 185.323 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-4-needle-red" d="M 79.826 183.086 L 75.858 188.258 L 69.655 186.322 L 69.333 179.811 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-5-needle-red" d="M 55.989 173.302 L 50.660 177.057 L 45.315 173.361 L 46.948 167.050 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-6-needle-red" d="M 36.148 156.861 L 29.943 158.858 L 25.942 153.737 L 29.381 148.199 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    <g id="mark-tooth-0-needle-red" data-angle="128.000" data-tooth="0">
+      <path d="M 170.619 148.199 L 174.058 153.737 L 170.057 158.858 L 163.852 156.861 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-1-needle-red" data-angle="145.333" data-tooth="1">
+      <path d="M 153.052 167.050 L 154.685 173.361 L 149.340 177.057 L 144.011 173.302 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-2-needle-red" data-angle="162.667" data-tooth="2">
+      <path d="M 130.667 179.811 L 130.345 186.322 L 124.142 188.258 L 120.174 183.086 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-3-needle-red" data-angle="180.000" data-tooth="3">
+      <path d="M 105.496 185.323 L 103.249 191.442 L 96.751 191.442 L 94.504 185.323 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-4-needle-red" data-angle="197.333" data-tooth="4">
+      <path d="M 79.826 183.086 L 75.858 188.258 L 69.655 186.322 L 69.333 179.811 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-5-needle-red" data-angle="214.667" data-tooth="5">
+      <path d="M 55.989 173.302 L 50.660 177.057 L 45.315 173.361 L 46.948 167.050 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-6-needle-red" data-angle="232.000" data-tooth="6">
+      <path d="M 36.148 156.861 L 29.943 158.858 L 25.942 153.737 L 29.381 148.199 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
   </g>
 
   <circle id="mark-disk-needle-red" cx="100" cy="100" r="65" fill="#201E1E"/>
@@ -1353,6 +1695,7 @@
   --mark-scale: 1;
   --mark-opacity: 1;
   --tick-react: 0;
+  --tooth-react: 0;
   --needle-impact: 1;
   --red-heat: 0;
   --hub-pulse: 1;
@@ -1364,6 +1707,13 @@
   --tick-kick-5: 0;
   --tick-kick-6: 0;
   --tick-kick-7: 0;
+  --tooth-reveal-0: 1;
+  --tooth-reveal-1: 1;
+  --tooth-reveal-2: 1;
+  --tooth-reveal-3: 1;
+  --tooth-reveal-4: 1;
+  --tooth-reveal-5: 1;
+  --tooth-reveal-6: 1;
   --red-start: 12deg;
   --red-end: 88deg;
 ">
@@ -1458,6 +1808,41 @@
       transform-origin: 100px 100px;
       transform-box: view-box;
     }
+    #mark-root-red-spin #mark-tooth-0-red-spin {
+      transform: scale(var(--tooth-reveal-0));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-red-spin #mark-tooth-1-red-spin {
+      transform: scale(var(--tooth-reveal-1));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-red-spin #mark-tooth-2-red-spin {
+      transform: scale(var(--tooth-reveal-2));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-red-spin #mark-tooth-3-red-spin {
+      transform: scale(var(--tooth-reveal-3));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-red-spin #mark-tooth-4-red-spin {
+      transform: scale(var(--tooth-reveal-4));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-red-spin #mark-tooth-5-red-spin {
+      transform: scale(var(--tooth-reveal-5));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-red-spin #mark-tooth-6-red-spin {
+      transform: scale(var(--tooth-reveal-6));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
   </style>
 
   <g id="mark-ring-red-spin">
@@ -1467,13 +1852,27 @@
   </g>
 
   <g id="mark-teeth-red-spin">
-    <path id="mark-tooth-0-red-spin" d="M 170.619 148.199 L 174.058 153.737 L 170.057 158.858 L 163.852 156.861 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-1-red-spin" d="M 153.052 167.050 L 154.685 173.361 L 149.340 177.057 L 144.011 173.302 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-2-red-spin" d="M 130.667 179.811 L 130.345 186.322 L 124.142 188.258 L 120.174 183.086 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-3-red-spin" d="M 105.496 185.323 L 103.249 191.442 L 96.751 191.442 L 94.504 185.323 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-4-red-spin" d="M 79.826 183.086 L 75.858 188.258 L 69.655 186.322 L 69.333 179.811 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-5-red-spin" d="M 55.989 173.302 L 50.660 177.057 L 45.315 173.361 L 46.948 167.050 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-6-red-spin" d="M 36.148 156.861 L 29.943 158.858 L 25.942 153.737 L 29.381 148.199 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    <g id="mark-tooth-0-red-spin" data-angle="128.000" data-tooth="0">
+      <path d="M 170.619 148.199 L 174.058 153.737 L 170.057 158.858 L 163.852 156.861 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-1-red-spin" data-angle="145.333" data-tooth="1">
+      <path d="M 153.052 167.050 L 154.685 173.361 L 149.340 177.057 L 144.011 173.302 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-2-red-spin" data-angle="162.667" data-tooth="2">
+      <path d="M 130.667 179.811 L 130.345 186.322 L 124.142 188.258 L 120.174 183.086 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-3-red-spin" data-angle="180.000" data-tooth="3">
+      <path d="M 105.496 185.323 L 103.249 191.442 L 96.751 191.442 L 94.504 185.323 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-4-red-spin" data-angle="197.333" data-tooth="4">
+      <path d="M 79.826 183.086 L 75.858 188.258 L 69.655 186.322 L 69.333 179.811 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-5-red-spin" data-angle="214.667" data-tooth="5">
+      <path d="M 55.989 173.302 L 50.660 177.057 L 45.315 173.361 L 46.948 167.050 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-6-red-spin" data-angle="232.000" data-tooth="6">
+      <path d="M 36.148 156.861 L 29.943 158.858 L 25.942 153.737 L 29.381 148.199 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
   </g>
 
   <circle id="mark-disk-red-spin" cx="100" cy="100" r="65" fill="#201E1E"/>
@@ -1566,6 +1965,7 @@
   --mark-scale: 1;
   --mark-opacity: 1;
   --tick-react: 1;
+  --tooth-react: 0;
   --needle-impact: 1;
   --red-heat: 0;
   --hub-pulse: 1;
@@ -1577,6 +1977,13 @@
   --tick-kick-5: 0;
   --tick-kick-6: 0;
   --tick-kick-7: 1;
+  --tooth-reveal-0: 1;
+  --tooth-reveal-1: 1;
+  --tooth-reveal-2: 1;
+  --tooth-reveal-3: 1;
+  --tooth-reveal-4: 1;
+  --tooth-reveal-5: 1;
+  --tooth-reveal-6: 1;
   --red-start: 12deg;
   --red-end: 88deg;
 ">
@@ -1671,6 +2078,41 @@
       transform-origin: 100px 100px;
       transform-box: view-box;
     }
+    #mark-root-tick-kick #mark-tooth-0-tick-kick {
+      transform: scale(var(--tooth-reveal-0));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-tick-kick #mark-tooth-1-tick-kick {
+      transform: scale(var(--tooth-reveal-1));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-tick-kick #mark-tooth-2-tick-kick {
+      transform: scale(var(--tooth-reveal-2));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-tick-kick #mark-tooth-3-tick-kick {
+      transform: scale(var(--tooth-reveal-3));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-tick-kick #mark-tooth-4-tick-kick {
+      transform: scale(var(--tooth-reveal-4));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-tick-kick #mark-tooth-5-tick-kick {
+      transform: scale(var(--tooth-reveal-5));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-tick-kick #mark-tooth-6-tick-kick {
+      transform: scale(var(--tooth-reveal-6));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
   </style>
 
   <g id="mark-ring-tick-kick">
@@ -1680,13 +2122,27 @@
   </g>
 
   <g id="mark-teeth-tick-kick">
-    <path id="mark-tooth-0-tick-kick" d="M 170.619 148.199 L 174.058 153.737 L 170.057 158.858 L 163.852 156.861 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-1-tick-kick" d="M 153.052 167.050 L 154.685 173.361 L 149.340 177.057 L 144.011 173.302 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-2-tick-kick" d="M 130.667 179.811 L 130.345 186.322 L 124.142 188.258 L 120.174 183.086 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-3-tick-kick" d="M 105.496 185.323 L 103.249 191.442 L 96.751 191.442 L 94.504 185.323 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-4-tick-kick" d="M 79.826 183.086 L 75.858 188.258 L 69.655 186.322 L 69.333 179.811 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-5-tick-kick" d="M 55.989 173.302 L 50.660 177.057 L 45.315 173.361 L 46.948 167.050 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-6-tick-kick" d="M 36.148 156.861 L 29.943 158.858 L 25.942 153.737 L 29.381 148.199 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    <g id="mark-tooth-0-tick-kick" data-angle="128.000" data-tooth="0">
+      <path d="M 170.619 148.199 L 174.058 153.737 L 170.057 158.858 L 163.852 156.861 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-1-tick-kick" data-angle="145.333" data-tooth="1">
+      <path d="M 153.052 167.050 L 154.685 173.361 L 149.340 177.057 L 144.011 173.302 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-2-tick-kick" data-angle="162.667" data-tooth="2">
+      <path d="M 130.667 179.811 L 130.345 186.322 L 124.142 188.258 L 120.174 183.086 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-3-tick-kick" data-angle="180.000" data-tooth="3">
+      <path d="M 105.496 185.323 L 103.249 191.442 L 96.751 191.442 L 94.504 185.323 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-4-tick-kick" data-angle="197.333" data-tooth="4">
+      <path d="M 79.826 183.086 L 75.858 188.258 L 69.655 186.322 L 69.333 179.811 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-5-tick-kick" data-angle="214.667" data-tooth="5">
+      <path d="M 55.989 173.302 L 50.660 177.057 L 45.315 173.361 L 46.948 167.050 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-6-tick-kick" data-angle="232.000" data-tooth="6">
+      <path d="M 36.148 156.861 L 29.943 158.858 L 25.942 153.737 L 29.381 148.199 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
   </g>
 
   <circle id="mark-disk-tick-kick" cx="100" cy="100" r="65" fill="#201E1E"/>
@@ -1770,6 +2226,276 @@
   - Animate via CSS variables on <svg>; never edit path d
   - No <animate> or @keyframes in this file
 -->
+<svg id="mark-root-tooth-hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="Maximum logo mark" style="
+  --needle-angle: 34deg;
+  --word-spread: 1;
+  --plate-open: 1;
+  --red-draw: 1;
+  --ring-spin: 0deg;
+  --mark-scale: 1;
+  --mark-opacity: 1;
+  --tick-react: 0;
+  --tooth-react: 0;
+  --needle-impact: 1;
+  --red-heat: 0;
+  --hub-pulse: 1;
+  --tick-kick-0: 0;
+  --tick-kick-1: 0;
+  --tick-kick-2: 0;
+  --tick-kick-3: 0;
+  --tick-kick-4: 0;
+  --tick-kick-5: 0;
+  --tick-kick-6: 0;
+  --tick-kick-7: 0;
+  --tooth-reveal-0: 1;
+  --tooth-reveal-1: 1;
+  --tooth-reveal-2: 1;
+  --tooth-reveal-3: 0;
+  --tooth-reveal-4: 1;
+  --tooth-reveal-5: 1;
+  --tooth-reveal-6: 1;
+  --red-start: 12deg;
+  --red-end: 88deg;
+">
+  <style>
+    #mark-root-tooth-hidden {
+      transform: scale(var(--mark-scale));
+      transform-origin: 100px 100px;
+      opacity: var(--mark-opacity);
+    }
+    #mark-root-tooth-hidden #mark-teeth-tooth-hidden {
+      transform: rotate(var(--ring-spin));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-tooth-hidden #mark-red-tooth-hidden,
+    #mark-root-tooth-hidden #mark-red-heat-tooth-hidden {
+      stroke-dasharray: 1;
+      stroke-dashoffset: calc(1 - var(--red-draw));
+    }
+    #mark-root-tooth-hidden #mark-red-heat-tooth-hidden {
+      opacity: var(--red-heat);
+    }
+    #mark-root-tooth-hidden #mark-needle-tooth-hidden {
+      transform: rotate(var(--needle-angle));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-tooth-hidden #mark-needle-mass-tooth-hidden {
+      transform: scale(var(--needle-impact));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-tooth-hidden #mark-hub-tooth-hidden {
+      transform: scale(var(--hub-pulse));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-tooth-hidden #mark-banner-tooth-hidden {
+      transform: scaleX(var(--plate-open));
+      transform-origin: 100px 100px;
+    }
+    #mark-root-tooth-hidden #mark-word-left-tooth-hidden {
+      transform: translateX(calc((1 - var(--word-spread)) * 58px));
+    }
+    #mark-root-tooth-hidden #mark-word-right-tooth-hidden {
+      transform: translateX(calc((var(--word-spread) - 1) * 58px));
+    }
+    #mark-root-tooth-hidden .mark-word {
+      font-family: 'Russo One', sans-serif;
+      font-style: italic;
+      font-size: 20px;
+      font-weight: 400;
+      letter-spacing: -0.06em;
+    }
+    #mark-root-tooth-hidden #mark-tick-0-tooth-hidden {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-0) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-tooth-hidden #mark-tick-1-tooth-hidden {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-1) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-tooth-hidden #mark-tick-2-tooth-hidden {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-2) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-tooth-hidden #mark-tick-3-tooth-hidden {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-3) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-tooth-hidden #mark-tick-4-tooth-hidden {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-4) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-tooth-hidden #mark-tick-5-tooth-hidden {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-5) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-tooth-hidden #mark-tick-6-tooth-hidden {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-6) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-tooth-hidden #mark-tick-7-tooth-hidden {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-7) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-tooth-hidden #mark-tooth-0-tooth-hidden {
+      transform: scale(var(--tooth-reveal-0));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-tooth-hidden #mark-tooth-1-tooth-hidden {
+      transform: scale(var(--tooth-reveal-1));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-tooth-hidden #mark-tooth-2-tooth-hidden {
+      transform: scale(var(--tooth-reveal-2));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-tooth-hidden #mark-tooth-3-tooth-hidden {
+      transform: scale(var(--tooth-reveal-3));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-tooth-hidden #mark-tooth-4-tooth-hidden {
+      transform: scale(var(--tooth-reveal-4));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-tooth-hidden #mark-tooth-5-tooth-hidden {
+      transform: scale(var(--tooth-reveal-5));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-tooth-hidden #mark-tooth-6-tooth-hidden {
+      transform: scale(var(--tooth-reveal-6));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+  </style>
+
+  <g id="mark-ring-tooth-hidden">
+    <circle cx="100" cy="100" r="77" fill="none" stroke="#FFFFFF" stroke-width="17"/>
+    <circle cx="100" cy="100" r="85.5" fill="none" stroke="#201E1E" stroke-width="1.5"/>
+    <circle cx="100" cy="100" r="68.5" fill="none" stroke="#201E1E" stroke-width="1.20"/>
+  </g>
+
+  <g id="mark-teeth-tooth-hidden">
+    <g id="mark-tooth-0-tooth-hidden" data-angle="128.000" data-tooth="0">
+      <path d="M 170.619 148.199 L 174.058 153.737 L 170.057 158.858 L 163.852 156.861 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-1-tooth-hidden" data-angle="145.333" data-tooth="1">
+      <path d="M 153.052 167.050 L 154.685 173.361 L 149.340 177.057 L 144.011 173.302 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-2-tooth-hidden" data-angle="162.667" data-tooth="2">
+      <path d="M 130.667 179.811 L 130.345 186.322 L 124.142 188.258 L 120.174 183.086 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-3-tooth-hidden" data-angle="180.000" data-tooth="3">
+      <path d="M 105.496 185.323 L 103.249 191.442 L 96.751 191.442 L 94.504 185.323 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-4-tooth-hidden" data-angle="197.333" data-tooth="4">
+      <path d="M 79.826 183.086 L 75.858 188.258 L 69.655 186.322 L 69.333 179.811 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-5-tooth-hidden" data-angle="214.667" data-tooth="5">
+      <path d="M 55.989 173.302 L 50.660 177.057 L 45.315 173.361 L 46.948 167.050 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-6-tooth-hidden" data-angle="232.000" data-tooth="6">
+      <path d="M 36.148 156.861 L 29.943 158.858 L 25.942 153.737 L 29.381 148.199 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+  </g>
+
+  <circle id="mark-disk-tooth-hidden" cx="100" cy="100" r="65" fill="#201E1E"/>
+
+  <path id="mark-red-tooth-hidden" d="M 116.009 24.683 A 77 77 0 0 1 176.953 97.313" fill="none" stroke="#ED3237" stroke-width="17" stroke-linecap="butt" pathLength="1"/>
+  <path id="mark-red-heat-tooth-hidden" d="M 116.009 24.683 A 77 77 0 0 1 176.953 97.313" fill="none" stroke="#c41218" stroke-width="17" stroke-linecap="butt" pathLength="1"/>
+
+  <g id="mark-ticks-tooth-hidden">
+    <g id="mark-tick-0-tooth-hidden" data-angle="248.000" data-tick="0">
+      <polygon points="34.839,128.198 22.117,131.467 33.540,124.981" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-1-tooth-hidden" data-angle="269.429" data-tick="1">
+      <polygon points="29.042,102.442 16.004,100.838 29.007,98.973" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-2-tooth-hidden" data-angle="290.857" data-tick="2">
+      <polygon points="33.055,76.350 21.504,70.093 34.290,73.108" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-3-tooth-hidden" data-angle="312.286" data-tick="3">
+      <polygon points="46.323,53.527 37.857,43.482 48.657,50.960" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-4-tooth-hidden" data-angle="333.714" data-tick="4">
+      <polygon points="67.012,37.129 62.801,24.686 70.123,35.592" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-5-tooth-hidden" data-angle="355.143" data-tick="5">
+      <polygon points="92.262,29.423 92.888,16.302 95.719,29.129" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-6-tooth-hidden" data-angle="16.571" data-tick="6">
+      <polygon points="118.581,31.475 123.958,19.489 121.907,32.464" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-7-tooth-hidden" data-angle="38.000" data-tick="7">
+      <polygon points="142.332,43.000 151.716,33.807 145.066,45.136" fill="#201E1E"/>
+    </g>
+  </g>
+
+  <defs>
+    <clipPath id="clip-banner-left-tooth-hidden">
+      <rect x="41.000" y="81.000" width="71" height="38"/>
+    </clipPath>
+    <clipPath id="clip-banner-right-tooth-hidden">
+      <rect x="88" y="81.000" width="71" height="38"/>
+    </clipPath>
+    <mask id="mask-word-slash-tooth-hidden" maskUnits="userSpaceOnUse">
+      <rect x="0" y="0" width="200" height="200" fill="#ffffff"/>
+      <g transform="rotate(34 100 100)">
+        <path d="M 100.000 13.000 L 102.300 100.000 L 100.000 144.000 Z" fill="#000000"/>
+        <path d="M 100.000 13.000 L 100.000 144.000 L 97.700 100.000 Z" fill="#000000"/>
+      </g>
+    </mask>
+  </defs>
+
+  <g id="mark-banner-tooth-hidden">
+    <rect x="41.000" y="87.000" width="118" height="26" rx="2" fill="#1A1B1E" stroke="#F2F2F2" stroke-width="1.8"/>
+    <g clip-path="url(#clip-banner-left-tooth-hidden)">
+      <g mask="url(#mask-word-slash-tooth-hidden)">
+        <text id="mark-word-left-tooth-hidden" class="mark-word" x="100" y="106" text-anchor="end" fill="#FFFFFF">MAXI</text>
+      </g>
+    </g>
+    <g clip-path="url(#clip-banner-right-tooth-hidden)">
+      <g mask="url(#mask-word-slash-tooth-hidden)">
+        <text id="mark-word-right-tooth-hidden" class="mark-word" x="100" y="106" text-anchor="start" fill="#ED3237">MUM</text>
+      </g>
+    </g>
+  </g>
+
+  <g id="mark-needle-tooth-hidden">
+    <g id="mark-needle-mass-tooth-hidden">
+      <path d="M 100.000 13.000 L 102.300 100.000 L 100.000 144.000 Z" fill="#3A3A3A" stroke="#201E1E" stroke-width="0.45" stroke-linejoin="round"/>
+      <path d="M 100.000 13.000 L 100.000 144.000 L 97.700 100.000 Z" fill="#F0F0F0" stroke="#201E1E" stroke-width="0.45" stroke-linejoin="round"/>
+      <circle id="mark-hub-tooth-hidden" cx="100" cy="100" r="2.2" fill="#FFFFFF" stroke="#201E1E" stroke-width="0.8"/>
+    </g>
+  </g>
+</svg></div>
+      <figcaption>Tooth 3 hidden (--tooth-reveal-3: 0)</figcaption>
+    </figure>
+    <figure class="panel">
+      <div class="mark-wrap"><!--
+  Coordinate contract:
+  - viewBox 0 0 200 200
+  - Center (100, 100)
+  - Needle 0° = 12 o'clock, clockwise positive
+  - Animate via CSS variables on <svg>; never edit path d
+  - No <animate> or @keyframes in this file
+-->
 <svg id="mark-root-needle-impact" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="Maximum logo mark" style="
   --needle-angle: 34deg;
   --word-spread: 1;
@@ -1779,6 +2505,7 @@
   --mark-scale: 1;
   --mark-opacity: 1;
   --tick-react: 0;
+  --tooth-react: 0;
   --needle-impact: 1.04;
   --red-heat: 0;
   --hub-pulse: 1;
@@ -1790,6 +2517,13 @@
   --tick-kick-5: 0;
   --tick-kick-6: 0;
   --tick-kick-7: 0;
+  --tooth-reveal-0: 1;
+  --tooth-reveal-1: 1;
+  --tooth-reveal-2: 1;
+  --tooth-reveal-3: 1;
+  --tooth-reveal-4: 1;
+  --tooth-reveal-5: 1;
+  --tooth-reveal-6: 1;
   --red-start: 12deg;
   --red-end: 88deg;
 ">
@@ -1884,6 +2618,41 @@
       transform-origin: 100px 100px;
       transform-box: view-box;
     }
+    #mark-root-needle-impact #mark-tooth-0-needle-impact {
+      transform: scale(var(--tooth-reveal-0));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-needle-impact #mark-tooth-1-needle-impact {
+      transform: scale(var(--tooth-reveal-1));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-needle-impact #mark-tooth-2-needle-impact {
+      transform: scale(var(--tooth-reveal-2));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-needle-impact #mark-tooth-3-needle-impact {
+      transform: scale(var(--tooth-reveal-3));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-needle-impact #mark-tooth-4-needle-impact {
+      transform: scale(var(--tooth-reveal-4));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-needle-impact #mark-tooth-5-needle-impact {
+      transform: scale(var(--tooth-reveal-5));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-needle-impact #mark-tooth-6-needle-impact {
+      transform: scale(var(--tooth-reveal-6));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
   </style>
 
   <g id="mark-ring-needle-impact">
@@ -1893,13 +2662,27 @@
   </g>
 
   <g id="mark-teeth-needle-impact">
-    <path id="mark-tooth-0-needle-impact" d="M 170.619 148.199 L 174.058 153.737 L 170.057 158.858 L 163.852 156.861 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-1-needle-impact" d="M 153.052 167.050 L 154.685 173.361 L 149.340 177.057 L 144.011 173.302 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-2-needle-impact" d="M 130.667 179.811 L 130.345 186.322 L 124.142 188.258 L 120.174 183.086 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-3-needle-impact" d="M 105.496 185.323 L 103.249 191.442 L 96.751 191.442 L 94.504 185.323 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-4-needle-impact" d="M 79.826 183.086 L 75.858 188.258 L 69.655 186.322 L 69.333 179.811 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-5-needle-impact" d="M 55.989 173.302 L 50.660 177.057 L 45.315 173.361 L 46.948 167.050 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-6-needle-impact" d="M 36.148 156.861 L 29.943 158.858 L 25.942 153.737 L 29.381 148.199 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    <g id="mark-tooth-0-needle-impact" data-angle="128.000" data-tooth="0">
+      <path d="M 170.619 148.199 L 174.058 153.737 L 170.057 158.858 L 163.852 156.861 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-1-needle-impact" data-angle="145.333" data-tooth="1">
+      <path d="M 153.052 167.050 L 154.685 173.361 L 149.340 177.057 L 144.011 173.302 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-2-needle-impact" data-angle="162.667" data-tooth="2">
+      <path d="M 130.667 179.811 L 130.345 186.322 L 124.142 188.258 L 120.174 183.086 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-3-needle-impact" data-angle="180.000" data-tooth="3">
+      <path d="M 105.496 185.323 L 103.249 191.442 L 96.751 191.442 L 94.504 185.323 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-4-needle-impact" data-angle="197.333" data-tooth="4">
+      <path d="M 79.826 183.086 L 75.858 188.258 L 69.655 186.322 L 69.333 179.811 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-5-needle-impact" data-angle="214.667" data-tooth="5">
+      <path d="M 55.989 173.302 L 50.660 177.057 L 45.315 173.361 L 46.948 167.050 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-6-needle-impact" data-angle="232.000" data-tooth="6">
+      <path d="M 36.148 156.861 L 29.943 158.858 L 25.942 153.737 L 29.381 148.199 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
   </g>
 
   <circle id="mark-disk-needle-impact" cx="100" cy="100" r="65" fill="#201E1E"/>
@@ -1992,6 +2775,7 @@
   --mark-scale: 1;
   --mark-opacity: 1;
   --tick-react: 0;
+  --tooth-react: 0;
   --needle-impact: 1;
   --red-heat: 1;
   --hub-pulse: 1;
@@ -2003,6 +2787,13 @@
   --tick-kick-5: 0;
   --tick-kick-6: 0;
   --tick-kick-7: 0;
+  --tooth-reveal-0: 1;
+  --tooth-reveal-1: 1;
+  --tooth-reveal-2: 1;
+  --tooth-reveal-3: 1;
+  --tooth-reveal-4: 1;
+  --tooth-reveal-5: 1;
+  --tooth-reveal-6: 1;
   --red-start: 12deg;
   --red-end: 88deg;
 ">
@@ -2097,6 +2888,41 @@
       transform-origin: 100px 100px;
       transform-box: view-box;
     }
+    #mark-root-red-heat #mark-tooth-0-red-heat {
+      transform: scale(var(--tooth-reveal-0));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-red-heat #mark-tooth-1-red-heat {
+      transform: scale(var(--tooth-reveal-1));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-red-heat #mark-tooth-2-red-heat {
+      transform: scale(var(--tooth-reveal-2));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-red-heat #mark-tooth-3-red-heat {
+      transform: scale(var(--tooth-reveal-3));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-red-heat #mark-tooth-4-red-heat {
+      transform: scale(var(--tooth-reveal-4));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-red-heat #mark-tooth-5-red-heat {
+      transform: scale(var(--tooth-reveal-5));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-red-heat #mark-tooth-6-red-heat {
+      transform: scale(var(--tooth-reveal-6));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
   </style>
 
   <g id="mark-ring-red-heat">
@@ -2106,13 +2932,27 @@
   </g>
 
   <g id="mark-teeth-red-heat">
-    <path id="mark-tooth-0-red-heat" d="M 170.619 148.199 L 174.058 153.737 L 170.057 158.858 L 163.852 156.861 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-1-red-heat" d="M 153.052 167.050 L 154.685 173.361 L 149.340 177.057 L 144.011 173.302 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-2-red-heat" d="M 130.667 179.811 L 130.345 186.322 L 124.142 188.258 L 120.174 183.086 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-3-red-heat" d="M 105.496 185.323 L 103.249 191.442 L 96.751 191.442 L 94.504 185.323 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-4-red-heat" d="M 79.826 183.086 L 75.858 188.258 L 69.655 186.322 L 69.333 179.811 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-5-red-heat" d="M 55.989 173.302 L 50.660 177.057 L 45.315 173.361 L 46.948 167.050 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-6-red-heat" d="M 36.148 156.861 L 29.943 158.858 L 25.942 153.737 L 29.381 148.199 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    <g id="mark-tooth-0-red-heat" data-angle="128.000" data-tooth="0">
+      <path d="M 170.619 148.199 L 174.058 153.737 L 170.057 158.858 L 163.852 156.861 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-1-red-heat" data-angle="145.333" data-tooth="1">
+      <path d="M 153.052 167.050 L 154.685 173.361 L 149.340 177.057 L 144.011 173.302 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-2-red-heat" data-angle="162.667" data-tooth="2">
+      <path d="M 130.667 179.811 L 130.345 186.322 L 124.142 188.258 L 120.174 183.086 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-3-red-heat" data-angle="180.000" data-tooth="3">
+      <path d="M 105.496 185.323 L 103.249 191.442 L 96.751 191.442 L 94.504 185.323 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-4-red-heat" data-angle="197.333" data-tooth="4">
+      <path d="M 79.826 183.086 L 75.858 188.258 L 69.655 186.322 L 69.333 179.811 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-5-red-heat" data-angle="214.667" data-tooth="5">
+      <path d="M 55.989 173.302 L 50.660 177.057 L 45.315 173.361 L 46.948 167.050 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-6-red-heat" data-angle="232.000" data-tooth="6">
+      <path d="M 36.148 156.861 L 29.943 158.858 L 25.942 153.737 L 29.381 148.199 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
   </g>
 
   <circle id="mark-disk-red-heat" cx="100" cy="100" r="65" fill="#201E1E"/>
@@ -2205,6 +3045,7 @@
   --mark-scale: 1;
   --mark-opacity: 1;
   --tick-react: 0;
+  --tooth-react: 0;
   --needle-impact: 1;
   --red-heat: 0;
   --hub-pulse: 1.25;
@@ -2216,6 +3057,13 @@
   --tick-kick-5: 0;
   --tick-kick-6: 0;
   --tick-kick-7: 0;
+  --tooth-reveal-0: 1;
+  --tooth-reveal-1: 1;
+  --tooth-reveal-2: 1;
+  --tooth-reveal-3: 1;
+  --tooth-reveal-4: 1;
+  --tooth-reveal-5: 1;
+  --tooth-reveal-6: 1;
   --red-start: 12deg;
   --red-end: 88deg;
 ">
@@ -2310,6 +3158,41 @@
       transform-origin: 100px 100px;
       transform-box: view-box;
     }
+    #mark-root-hub-pulse #mark-tooth-0-hub-pulse {
+      transform: scale(var(--tooth-reveal-0));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-hub-pulse #mark-tooth-1-hub-pulse {
+      transform: scale(var(--tooth-reveal-1));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-hub-pulse #mark-tooth-2-hub-pulse {
+      transform: scale(var(--tooth-reveal-2));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-hub-pulse #mark-tooth-3-hub-pulse {
+      transform: scale(var(--tooth-reveal-3));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-hub-pulse #mark-tooth-4-hub-pulse {
+      transform: scale(var(--tooth-reveal-4));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-hub-pulse #mark-tooth-5-hub-pulse {
+      transform: scale(var(--tooth-reveal-5));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-hub-pulse #mark-tooth-6-hub-pulse {
+      transform: scale(var(--tooth-reveal-6));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
   </style>
 
   <g id="mark-ring-hub-pulse">
@@ -2319,13 +3202,27 @@
   </g>
 
   <g id="mark-teeth-hub-pulse">
-    <path id="mark-tooth-0-hub-pulse" d="M 170.619 148.199 L 174.058 153.737 L 170.057 158.858 L 163.852 156.861 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-1-hub-pulse" d="M 153.052 167.050 L 154.685 173.361 L 149.340 177.057 L 144.011 173.302 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-2-hub-pulse" d="M 130.667 179.811 L 130.345 186.322 L 124.142 188.258 L 120.174 183.086 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-3-hub-pulse" d="M 105.496 185.323 L 103.249 191.442 L 96.751 191.442 L 94.504 185.323 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-4-hub-pulse" d="M 79.826 183.086 L 75.858 188.258 L 69.655 186.322 L 69.333 179.811 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-5-hub-pulse" d="M 55.989 173.302 L 50.660 177.057 L 45.315 173.361 L 46.948 167.050 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
-    <path id="mark-tooth-6-hub-pulse" d="M 36.148 156.861 L 29.943 158.858 L 25.942 153.737 L 29.381 148.199 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    <g id="mark-tooth-0-hub-pulse" data-angle="128.000" data-tooth="0">
+      <path d="M 170.619 148.199 L 174.058 153.737 L 170.057 158.858 L 163.852 156.861 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-1-hub-pulse" data-angle="145.333" data-tooth="1">
+      <path d="M 153.052 167.050 L 154.685 173.361 L 149.340 177.057 L 144.011 173.302 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-2-hub-pulse" data-angle="162.667" data-tooth="2">
+      <path d="M 130.667 179.811 L 130.345 186.322 L 124.142 188.258 L 120.174 183.086 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-3-hub-pulse" data-angle="180.000" data-tooth="3">
+      <path d="M 105.496 185.323 L 103.249 191.442 L 96.751 191.442 L 94.504 185.323 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-4-hub-pulse" data-angle="197.333" data-tooth="4">
+      <path d="M 79.826 183.086 L 75.858 188.258 L 69.655 186.322 L 69.333 179.811 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-5-hub-pulse" data-angle="214.667" data-tooth="5">
+      <path d="M 55.989 173.302 L 50.660 177.057 L 45.315 173.361 L 46.948 167.050 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
+    <g id="mark-tooth-6-hub-pulse" data-angle="232.000" data-tooth="6">
+      <path d="M 36.148 156.861 L 29.943 158.858 L 25.942 153.737 L 29.381 148.199 Z" fill="#201E1E" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    </g>
   </g>
 
   <circle id="mark-disk-hub-pulse" cx="100" cy="100" r="65" fill="#201E1E"/>
