@@ -194,32 +194,63 @@ html.header-reduced .header-spacer {
       display: none;
     }
 
-    &:not(.is-compact) .header__container {
-      flex-direction: column;
-      justify-content: center;
-      gap: 12px;
+    &__container {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-rows: auto auto;
+      align-items: center;
+      justify-items: stretch;
     }
 
-    &:not(.is-compact) .header__burger {
-      display: none;
+    &__logo {
+      grid-column: 1;
+      grid-row: 1;
+      justify-self: start;
+      margin-left: calc(
+        (100% - var(--mark-size)) / 2 * (1 - var(--header-progress))
+      );
     }
 
-    &:not(.is-compact) .header__nav {
+    &__burger {
       display: flex;
-      position: static;
-      flex-wrap: wrap;
-      justify-content: center;
-      background: transparent;
-      border: none;
-      padding: 0;
+      position: absolute;
+      top: 50%;
+      right: 0;
+      z-index: 2;
+      transform: translateY(-50%);
+      opacity: var(--header-progress);
+      pointer-events: none;
     }
 
     &.is-compact .header__burger {
-      display: flex;
+      pointer-events: auto;
     }
 
-    &.is-compact .header__nav {
-      display: none;
+    &__nav {
+      grid-column: 1;
+      grid-row: 2;
+      justify-content: center;
+      transform-origin: calc(100% - 22px) 0;
+      opacity: calc(1 - var(--header-progress));
+      max-height: calc(168px * (1 - var(--header-progress)));
+      overflow: hidden;
+      transform: translate(
+          calc(20px * var(--header-progress)),
+          calc(-16px * var(--header-progress))
+        )
+        scale(calc(1 - 0.55 * var(--header-progress)));
+    }
+
+    &.is-compact .header__nav:not(.is-open) {
+      pointer-events: none;
+      visibility: hidden;
+    }
+
+    &.is-compact .header__nav.is-open {
+      display: flex;
+      visibility: visible;
+      pointer-events: auto;
       position: absolute;
       top: 100%;
       left: 0;
@@ -227,14 +258,15 @@ html.header-reduced .header-spacer {
       z-index: 2;
       flex-direction: column;
       flex-wrap: nowrap;
+      justify-content: flex-start;
       gap: 0;
+      opacity: 1;
+      max-height: none;
+      overflow: visible;
+      transform: none;
       background: $bg-surface;
       border-bottom: 1px solid #e2e8f0;
       padding: 8px 20px 16px;
-
-      &.is-open {
-        display: flex;
-      }
 
       .header__link {
         display: block;

@@ -60,7 +60,16 @@ function updateHeaderLayout() {
     "--header-progress",
     String(progress),
   );
-  getHeaderEl()?.classList.toggle("is-compact", progress >= 0.85);
+  const header = getHeaderEl();
+  const compact = progress >= 0.85;
+  header?.classList.toggle("is-compact", compact);
+  if (!compact) {
+    header?.querySelector(".header__nav")?.classList.remove("is-open");
+    header?.querySelector(".header__burger")?.classList.remove("is-open");
+    const burger = header?.querySelector(".header__burger");
+    if (burger) burger.setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+  }
 }
 
 function injectMark(mount) {
