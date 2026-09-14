@@ -1,0 +1,15 @@
+---
+description: Конструктор и анимации лого Maximum — не гадать по SVG
+globs: src/assets/logo/**,logo-play.html
+alwaysApply: false
+---
+
+# Maximum logo
+
+Перед любой правкой лого прочитай `src/assets/logo/AGENTS.md`.
+
+- Геометрия только в `mark.config.js`, затем `node src/assets/logo/build-mark.js`
+- Анимация только CSS-ручками через `animations/runtime.js`
+- Новый ролик = новый файл в `animations/` + запись в `animations/index.js`
+- Не править path в `maximum-mark.svg`, не вставлять знак на сайт без просьбы
+- Смотреть сцены: `npm run dev` → `http://localhost:ПОРТ/logo-play.html` (порт из терминала). Не `file://` и не `/play.html`

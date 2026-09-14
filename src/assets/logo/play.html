@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Maximum Mark — player moved</title>
+  <script>
+    if (location.protocol !== 'file:') {
+      location.replace('/logo-play.html' + location.search + location.hash);
+    }
+  </script>
+</head>
+<body style="font-family: system-ui, sans-serif; padding: 2rem; max-width: 36rem;">
+  <p>Плеер переехал на <a href="/logo-play.html"><code>/logo-play.html</code></a>.</p>
+  <p>
+    Не открывай этот файл с диска. Запусти <code>npm run dev</code>, в терминале возьми
+    <code>Local: http://localhost:ПОРТ/</code> и открой
+    <code>http://localhost:ПОРТ/logo-play.html</code>.
+  </p>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Maximum Mark — Animation Player</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet"/>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      padding: 2rem;
+      font-family: system-ui, sans-serif;
+      background: #fff;
+      color: #201E1E;
+    }
+    h1 {
+      margin: 0;
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+    .note {
+      margin: 0;
+      color: #555;
+      font-size: 0.9rem;
+      text-align: center;
+      max-width: 36rem;
+      line-height: 1.45;
+    }
+    .mark-stage {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 320px;
+    }
+    #mark-wrap svg {
+      width: 300px;
+      height: 300px;
+      display: block;
+    }
+    #load-error {
+      color: #c41218;
+      font-size: 0.95rem;
+      text-align: center;
+      max-width: 32rem;
+      line-height: 1.45;
+    }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      justify-content: center;
+    }
+    button, select {
+      font: inherit;
+      padding: 0.45rem 0.9rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      background: #fff;
+      cursor: pointer;
+    }
+    button:hover, select:hover {
+      border-color: #201E1E;
+    }
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <h1>Maximum Mark — Animation Player</h1>
+  <p class="note">
+    Адрес в браузере должен быть вида
+    <code>http://localhost:ПОРТ/logo-play.html</code>
+    — порт смотри в терминале у <code>npm run dev</code> (строка Local).
+    Не открывай HTML из проводника и не ходи на <code>/play.html</code>.
+  </p>
+
+  <div class="mark-stage">
+    <div id="mark-wrap" aria-live="polite"></div>
+  </div>
+  <p id="load-error" hidden role="alert"></p>
+
+  <div class="controls">
+    <label>
+      Scene
+      <select id="anim-select"></select>
+    </label>
+    <button type="button" id="btn-play">Play</button>
+    <button type="button" id="btn-replay">Replay</button>
+    <button type="button" id="btn-reset">Reset to rest</button>
+  </div>
+
+  <script>
+    setTimeout(() => {
+      if (document.querySelector('#mark-wrap svg')) return;
+      const el = document.getElementById('load-error');
+      if (!el) return;
+      el.hidden = false;
+      el.innerHTML =
+        'Скрипт плеера не загрузился. Это не тот адрес.<br>' +
+        'В терминале <code>npm run dev</code> найди <code>Local: http://localhost:XXXX/</code><br>' +
+        'и открой <code>http://localhost:XXXX/logo-play.html</code> (подставь свой порт).';
+    }, 1500);
+  </script>
+  <script type="module" src="/src/assets/logo/play.js"></script>
+</body>
+</html>
