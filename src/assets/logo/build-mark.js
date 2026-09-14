@@ -6,13 +6,20 @@
 import { writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import config from './mark.config.js';
+import config, {
+  knobs,
+  lerpAngle,
+  getTickAngles,
+  buildSvgStyleMap,
+  mechanics,
+  introNeedleSweep,
+} from './mark.config.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const outPath = join(__dirname, 'maximum-mark.svg');
 
-const { cx, cy, colors, ring, diskR, ticks, teeth, red, needle, hub, banner, word, css } =
-  config;
+const { cx, cy, colors, ring, diskR, ticks, teeth, red, needle, hub, banner, word } = config;
+const kickScale = mechanics.tickStrike.kickScale;
 
 /** Stable layer id; suffix keeps preview instances unique */
 function elId(name, suffix) {
@@ -37,27 +44,19 @@ function arcPath(cx, cy, r, startDeg, endDeg) {
   return `M ${start.x.toFixed(3)} ${start.y.toFixed(3)} A ${r} ${r} 0 ${largeArc} 1 ${end.x.toFixed(3)} ${end.y.toFixed(3)}`;
 }
 
-function lerpAngle(start, end, count) {
-  if (count <= 1) return [start];
-  const angles = [];
-  let span = end - start;
-  if (span < 0) span += 360;
-  for (let i = 0; i < count; i++) {
-    const a = start + (span * i) / (count - 1);
-    angles.push(((a % 360) + 360) % 360);
-  }
-  return angles;
-}
-
 function buildTicks(suffix) {
-  const angles = lerpAngle(ticks.startDeg, ticks.endDeg, ticks.count);
+  const angles = getTickAngles();
   const hw = ticks.halfWidthDeg;
   return angles
     .map((deg, i) => {
       const outer = polar(cx, cy, ticks.outerR, deg);
       const left = polar(cx, cy, ticks.innerR, deg - hw);
       const right = polar(cx, cy, ticks.innerR, deg + hw);
-      return `    <polygon id="${elId(`mark-tick-${i}`, suffix)}" points="${left.x.toFixed(3)},${left.y.toFixed(3)} ${outer.x.toFixed(3)},${outer.y.toFixed(3)} ${right.x.toFixed(3)},${right.y.toFixed(3)}" fill="${colors.black}"/>`;
+      const tickId = elId(`mark-tick-${i}`, suffix);
+      const points = `${left.x.toFixed(3)},${left.y.toFixed(3)} ${outer.x.toFixed(3)},${outer.y.toFixed(3)} ${right.x.toFixed(3)},${right.y.toFixed(3)}`;
+      return `    <g id="${tickId}" data-angle="${deg.toFixed(3)}" data-tick="${i}">
+      <polygon points="${points}" fill="${colors.black}"/>
+    </g>`;
     })
     .join('\n');
 }
@@ -100,7 +99,7 @@ function buildNeedle() {
 }
 
 function cssVarBlock(overrides = {}) {
-  const vars = { ...css, ...overrides };
+  const vars = { ...buildSvgStyleMap(), ...overrides };
   return Object.entries(vars)
     .map(([k, v]) => `  ${k}: ${v};`)
     .join('\n');
@@ -111,10 +110,25 @@ function buildSvg(overrides = {}, suffix = '') {
   const rootId = suffix ? `mark-root-${suffix}` : 'mark-root';
   const teethId = elId('mark-teeth', suffix);
   const redId = elId('mark-red', suffix);
+  const redHeatId = elId('mark-red-heat', suffix);
   const needleId = elId('mark-needle', suffix);
+  const needleMassId = elId('mark-needle-mass', suffix);
+  const hubId = elId('mark-hub', suffix);
   const bannerId = elId('mark-banner', suffix);
   const wordLeftId = elId('mark-word-left', suffix);
   const wordRightId = elId('mark-word-right', suffix);
+  const tickAngles = getTickAngles();
+
+  const tickCssRules = tickAngles
+    .map((_, i) => {
+      const tickId = elId(`mark-tick-${i}`, suffix);
+      return `    #${rootId} #${tickId} {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-${i}) * ${kickScale}));
+      transform-origin: ${cx}px ${cy}px;
+      transform-box: view-box;
+    }`;
+    })
+    .join('\n');
 
   return `<!--
   Coordinate contract:
@@ -138,13 +152,28 @@ ${varBlock}
       transform-origin: ${cx}px ${cy}px;
       transform-box: view-box;
     }
-    #${rootId} #${redId} {
+    #${rootId} #${redId},
+    #${rootId} #${redHeatId} {
       stroke-dasharray: 1;
       stroke-dashoffset: calc(1 - var(--red-draw));
+    }
+    #${rootId} #${redHeatId} {
+      opacity: var(--red-heat);
     }
     #${rootId} #${needleId} {
       transform: rotate(var(--needle-angle));
       transform-origin: ${cx}px ${cy}px;
+      transform-box: view-box;
+    }
+    #${rootId} #${needleMassId} {
+      transform: scale(var(--needle-impact));
+      transform-origin: ${cx}px ${cy}px;
+      transform-box: view-box;
+    }
+    #${rootId} #${hubId} {
+      transform: scale(var(--hub-pulse));
+      transform-origin: ${cx}px ${cy}px;
+      transform-box: view-box;
     }
     #${rootId} #${bannerId} {
       transform: scaleX(var(--plate-open));
@@ -163,6 +192,7 @@ ${varBlock}
       font-weight: 400;
       letter-spacing: ${word.letterSpacing};
     }
+${tickCssRules}
   </style>
 
   <g id="${elId('mark-ring', suffix)}">
@@ -175,13 +205,14 @@ ${varBlock}
 ${buildTeeth(suffix)}
   </g>
 
-  <g id="${elId('mark-ticks', suffix)}">
-${buildTicks(suffix)}
-  </g>
-
   <circle id="${elId('mark-disk', suffix)}" cx="${cx}" cy="${cy}" r="${diskR}" fill="${colors.black}"/>
 
   <path id="${redId}" d="${redArc}" fill="none" stroke="${colors.red}" stroke-width="${ring.thickness}" stroke-linecap="butt" pathLength="1"/>
+  <path id="${redHeatId}" d="${redArc}" fill="none" stroke="${colors.redAlt}" stroke-width="${ring.thickness}" stroke-linecap="butt" pathLength="1"/>
+
+  <g id="${elId('mark-ticks', suffix)}">
+${buildTicks(suffix)}
+  </g>
 
 ${clipDefs(suffix)}
 
@@ -200,22 +231,55 @@ ${clipDefs(suffix)}
   </g>
 
   <g id="${needleId}">
-    <path d="${needlePath.left}" fill="${colors.needleDark}" stroke="${colors.needleStroke}" stroke-width="0.45" stroke-linejoin="round"/>
-    <path d="${needlePath.right}" fill="${colors.needleFill}" stroke="${colors.needleStroke}" stroke-width="0.45" stroke-linejoin="round"/>
+    <g id="${needleMassId}">
+      <path d="${needlePath.left}" fill="${colors.needleDark}" stroke="${colors.needleStroke}" stroke-width="0.45" stroke-linejoin="round"/>
+      <path d="${needlePath.right}" fill="${colors.needleFill}" stroke="${colors.needleStroke}" stroke-width="0.45" stroke-linejoin="round"/>
+      <circle id="${hubId}" cx="${cx}" cy="${cy}" r="${hub.r}" fill="${colors.hubFill}" stroke="${colors.hubStroke}" stroke-width="${hub.strokeWidth}"/>
+    </g>
   </g>
 </svg>`;
 }
 
 function buildPreviewHtml(svgBody) {
+  const needle = introNeedleSweep();
   const states = [
     { label: 'Rest / final logo', overrides: {}, suffix: 'rest' },
     { label: 'Plate closed (--plate-open: 0)', overrides: { '--plate-open': '0', '--word-spread': '0' }, suffix: 'plate-shut' },
     { label: 'Plate open, words hidden (--word-spread: 0)', overrides: { '--word-spread': '0' }, suffix: 'collapsed' },
-    { label: 'Needle in red zone (--needle-angle: 80deg)', overrides: { '--needle-angle': '80deg' }, suffix: 'needle-red' },
+    {
+      label: `Needle pre-sweep (--needle-angle: ${needle.start}deg)`,
+      overrides: { '--needle-angle': `${needle.start}deg` },
+      suffix: 'needle-presweep',
+    },
+    {
+      label: `Needle redline (--needle-angle: ${needle.peakNorm}deg)`,
+      overrides: { '--needle-angle': `${needle.peakNorm}deg` },
+      suffix: 'needle-red',
+    },
     {
       label: 'Red undrawn + teeth spun (--red-draw: 0, --ring-spin: 20deg)',
       overrides: { '--red-draw': '0', '--ring-spin': '20deg' },
       suffix: 'red-spin',
+    },
+    {
+      label: 'Tick 7 kicked (--tick-react: 1, --tick-kick-7: 1)',
+      overrides: { '--tick-react': '1', '--tick-kick-7': '1' },
+      suffix: 'tick-kick',
+    },
+    {
+      label: 'Needle impact (--needle-impact: 1.04)',
+      overrides: { '--needle-impact': '1.04' },
+      suffix: 'needle-impact',
+    },
+    {
+      label: 'Red heat (--red-heat: 1)',
+      overrides: { '--red-heat': '1' },
+      suffix: 'red-heat',
+    },
+    {
+      label: 'Hub pulse (--hub-pulse: 1.25)',
+      overrides: { '--hub-pulse': '1.25' },
+      suffix: 'hub-pulse',
     },
   ];
 
@@ -305,7 +369,7 @@ const bannerY = banner.y - banner.height / 2;
 const bannerHalf = banner.width / 2;
 const leftTextX = cx - word.centerGapPx / 2;
 const rightTextX = cx + word.centerGapPx / 2;
-const needleRestDeg = parseFloat(String(css['--needle-angle']));
+const needleRestDeg = knobs.needleAngle.rest;
 const redArc = arcPath(cx, cy, ring.midR, red.startDeg, red.endDeg);
 const needlePath = buildNeedle();
 

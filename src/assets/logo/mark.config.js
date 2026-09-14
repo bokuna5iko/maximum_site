@@ -7,6 +7,31 @@
  * Do NOT hand-edit path data in maximum-mark.svg.
  */
 
+export const knobs = {
+  needleAngle: { css: '--needle-angle', rest: 34, unit: 'deg' },
+  wordSpread: { css: '--word-spread', rest: 1, unit: '' },
+  plateOpen: { css: '--plate-open', rest: 1, unit: '' },
+  redDraw: { css: '--red-draw', rest: 1, unit: '' },
+  ringSpin: { css: '--ring-spin', rest: 0, unit: 'deg' },
+  markScale: { css: '--mark-scale', rest: 1, unit: '' },
+  markOpacity: { css: '--mark-opacity', rest: 1, unit: '' },
+  tickReact: { css: '--tick-react', rest: 0, unit: '' },
+  needleImpact: { css: '--needle-impact', rest: 1, unit: '' },
+  redHeat: { css: '--red-heat', rest: 0, unit: '' },
+  hubPulse: { css: '--hub-pulse', rest: 1, unit: '' },
+};
+
+export const mechanics = {
+  tickStrike: {
+    kickScale: 0.07,
+    decaySec: 0.12,
+  },
+  needleSweep: {
+    leadDeg: 12,
+    redInsetDeg: 8,
+  },
+};
+
 export const config = {
   viewBox: 200,
   cx: 100,
@@ -92,19 +117,82 @@ export const config = {
     skewDeg: -9,
     letterSpacing: '-0.06em',
   },
-
-  /** Default CSS custom properties on the root <svg> */
-  css: {
-    '--needle-angle': '34deg',
-    '--word-spread': '1',
-    '--plate-open': '1',
-    '--red-start': '12deg',
-    '--red-end': '88deg',
-    '--red-draw': '1',
-    '--ring-spin': '0deg',
-    '--mark-scale': '1',
-    '--mark-opacity': '1',
-  },
 };
+
+/** 0° = 12 o'clock, clockwise positive; normalizes to 0..360 */
+export function lerpAngle(start, end, count) {
+  if (count <= 1) return [start];
+  const angles = [];
+  let span = end - start;
+  if (span < 0) span += 360;
+  for (let i = 0; i < count; i++) {
+    const a = start + (span * i) / (count - 1);
+    angles.push(((a % 360) + 360) % 360);
+  }
+  return angles;
+}
+
+export function getTickAngles() {
+  const { startDeg, endDeg, count } = config.ticks;
+  return lerpAngle(startDeg, endDeg, count);
+}
+
+/** Normalize any degree to 0..360 */
+export function normalizeDeg(deg) {
+  return ((deg % 360) + 360) % 360;
+}
+
+/** Unwrapped clockwise target on GSAP's numeric line (no extra full revolution when already there) */
+export function unwindClockwise(from, toNorm) {
+  const fromNorm = normalizeDeg(from);
+  const to = normalizeDeg(toNorm);
+  const delta = (to - fromNorm + 360) % 360;
+  if (delta === 0) return from;
+  return from + delta;
+}
+
+/** Unwrapped counterclockwise target on GSAP's numeric line */
+export function unwindCounterclockwise(from, toNorm) {
+  const fromNorm = normalizeDeg(from);
+  const to = normalizeDeg(toNorm);
+  const delta = (fromNorm - to + 360) % 360;
+  if (delta === 0) return from;
+  return from - delta;
+}
+
+/** Intro needle path: pre-sweep start → redline peak → bounce to rest */
+export function introNeedleSweep() {
+  const ticks = getTickAngles();
+  const start = ticks[0] - mechanics.needleSweep.leadDeg;
+  const peakNorm = config.red.endDeg - mechanics.needleSweep.redInsetDeg;
+  const restNorm = knobs.needleAngle.rest;
+  const peak = unwindClockwise(start, peakNorm);
+  const settled = unwindCounterclockwise(peak, restNorm);
+  return { start, peak, settled, peakNorm, restNorm };
+}
+
+export function allKnobs() {
+  const tickAngles = getTickAngles();
+  const tickKicks = {};
+  for (let i = 0; i < tickAngles.length; i++) {
+    tickKicks[`tickKick${i}`] = { css: `--tick-kick-${i}`, rest: 0, unit: '' };
+  }
+  return { ...knobs, ...tickKicks };
+}
+
+export function formatKnobCssValue(knob) {
+  const { rest, unit } = knob;
+  return unit ? `${rest}${unit}` : String(rest);
+}
+
+export function buildSvgStyleMap() {
+  const map = {};
+  for (const knob of Object.values(allKnobs())) {
+    map[knob.css] = formatKnobCssValue(knob);
+  }
+  map['--red-start'] = `${config.red.startDeg}deg`;
+  map['--red-end'] = `${config.red.endDeg}deg`;
+  return map;
+}
 
 export default config;

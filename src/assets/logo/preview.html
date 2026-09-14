@@ -67,12 +67,24 @@
   --needle-angle: 34deg;
   --word-spread: 1;
   --plate-open: 1;
-  --red-start: 12deg;
-  --red-end: 88deg;
   --red-draw: 1;
   --ring-spin: 0deg;
   --mark-scale: 1;
   --mark-opacity: 1;
+  --tick-react: 0;
+  --needle-impact: 1;
+  --red-heat: 0;
+  --hub-pulse: 1;
+  --tick-kick-0: 0;
+  --tick-kick-1: 0;
+  --tick-kick-2: 0;
+  --tick-kick-3: 0;
+  --tick-kick-4: 0;
+  --tick-kick-5: 0;
+  --tick-kick-6: 0;
+  --tick-kick-7: 0;
+  --red-start: 12deg;
+  --red-end: 88deg;
 ">
   <style>
     #mark-root {
@@ -85,13 +97,28 @@
       transform-origin: 100px 100px;
       transform-box: view-box;
     }
-    #mark-root #mark-red {
+    #mark-root #mark-red,
+    #mark-root #mark-red-heat {
       stroke-dasharray: 1;
       stroke-dashoffset: calc(1 - var(--red-draw));
+    }
+    #mark-root #mark-red-heat {
+      opacity: var(--red-heat);
     }
     #mark-root #mark-needle {
       transform: rotate(var(--needle-angle));
       transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root #mark-needle-mass {
+      transform: scale(var(--needle-impact));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root #mark-hub {
+      transform: scale(var(--hub-pulse));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
     }
     #mark-root #mark-banner {
       transform: scaleX(var(--plate-open));
@@ -109,6 +136,46 @@
       font-size: 20px;
       font-weight: 400;
       letter-spacing: -0.06em;
+    }
+    #mark-root #mark-tick-0 {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-0) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root #mark-tick-1 {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-1) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root #mark-tick-2 {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-2) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root #mark-tick-3 {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-3) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root #mark-tick-4 {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-4) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root #mark-tick-5 {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-5) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root #mark-tick-6 {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-6) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root #mark-tick-7 {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-7) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
     }
   </style>
 
@@ -128,20 +195,37 @@
     <path id="mark-tooth-6" d="M 36.148 156.861 L 29.943 158.858 L 25.942 153.737 L 29.381 148.199 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
   </g>
 
-  <g id="mark-ticks">
-    <polygon id="mark-tick-0" points="34.839,128.198 22.117,131.467 33.540,124.981" fill="#201E1E"/>
-    <polygon id="mark-tick-1" points="29.042,102.442 16.004,100.838 29.007,98.973" fill="#201E1E"/>
-    <polygon id="mark-tick-2" points="33.055,76.350 21.504,70.093 34.290,73.108" fill="#201E1E"/>
-    <polygon id="mark-tick-3" points="46.323,53.527 37.857,43.482 48.657,50.960" fill="#201E1E"/>
-    <polygon id="mark-tick-4" points="67.012,37.129 62.801,24.686 70.123,35.592" fill="#201E1E"/>
-    <polygon id="mark-tick-5" points="92.262,29.423 92.888,16.302 95.719,29.129" fill="#201E1E"/>
-    <polygon id="mark-tick-6" points="118.581,31.475 123.958,19.489 121.907,32.464" fill="#201E1E"/>
-    <polygon id="mark-tick-7" points="142.332,43.000 151.716,33.807 145.066,45.136" fill="#201E1E"/>
-  </g>
-
   <circle id="mark-disk" cx="100" cy="100" r="65" fill="#201E1E"/>
 
   <path id="mark-red" d="M 116.009 24.683 A 77 77 0 0 1 176.953 97.313" fill="none" stroke="#ED3237" stroke-width="17" stroke-linecap="butt" pathLength="1"/>
+  <path id="mark-red-heat" d="M 116.009 24.683 A 77 77 0 0 1 176.953 97.313" fill="none" stroke="#c41218" stroke-width="17" stroke-linecap="butt" pathLength="1"/>
+
+  <g id="mark-ticks">
+    <g id="mark-tick-0" data-angle="248.000" data-tick="0">
+      <polygon points="34.839,128.198 22.117,131.467 33.540,124.981" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-1" data-angle="269.429" data-tick="1">
+      <polygon points="29.042,102.442 16.004,100.838 29.007,98.973" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-2" data-angle="290.857" data-tick="2">
+      <polygon points="33.055,76.350 21.504,70.093 34.290,73.108" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-3" data-angle="312.286" data-tick="3">
+      <polygon points="46.323,53.527 37.857,43.482 48.657,50.960" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-4" data-angle="333.714" data-tick="4">
+      <polygon points="67.012,37.129 62.801,24.686 70.123,35.592" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-5" data-angle="355.143" data-tick="5">
+      <polygon points="92.262,29.423 92.888,16.302 95.719,29.129" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-6" data-angle="16.571" data-tick="6">
+      <polygon points="118.581,31.475 123.958,19.489 121.907,32.464" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-7" data-angle="38.000" data-tick="7">
+      <polygon points="142.332,43.000 151.716,33.807 145.066,45.136" fill="#201E1E"/>
+    </g>
+  </g>
 
   <defs>
     <clipPath id="clip-banner-left">
@@ -174,8 +258,11 @@
   </g>
 
   <g id="mark-needle">
-    <path d="M 100.000 13.000 L 102.300 100.000 L 100.000 144.000 Z" fill="#3A3A3A" stroke="#201E1E" stroke-width="0.45" stroke-linejoin="round"/>
-    <path d="M 100.000 13.000 L 100.000 144.000 L 97.700 100.000 Z" fill="#F0F0F0" stroke="#201E1E" stroke-width="0.45" stroke-linejoin="round"/>
+    <g id="mark-needle-mass">
+      <path d="M 100.000 13.000 L 102.300 100.000 L 100.000 144.000 Z" fill="#3A3A3A" stroke="#201E1E" stroke-width="0.45" stroke-linejoin="round"/>
+      <path d="M 100.000 13.000 L 100.000 144.000 L 97.700 100.000 Z" fill="#F0F0F0" stroke="#201E1E" stroke-width="0.45" stroke-linejoin="round"/>
+      <circle id="mark-hub" cx="100" cy="100" r="2.2" fill="#FFFFFF" stroke="#201E1E" stroke-width="0.8"/>
+    </g>
   </g>
 </svg></div>
       <figcaption>Generated maximum-mark.svg (defaults)</figcaption>
@@ -196,12 +283,24 @@
   --needle-angle: 34deg;
   --word-spread: 1;
   --plate-open: 1;
-  --red-start: 12deg;
-  --red-end: 88deg;
   --red-draw: 1;
   --ring-spin: 0deg;
   --mark-scale: 1;
   --mark-opacity: 1;
+  --tick-react: 0;
+  --needle-impact: 1;
+  --red-heat: 0;
+  --hub-pulse: 1;
+  --tick-kick-0: 0;
+  --tick-kick-1: 0;
+  --tick-kick-2: 0;
+  --tick-kick-3: 0;
+  --tick-kick-4: 0;
+  --tick-kick-5: 0;
+  --tick-kick-6: 0;
+  --tick-kick-7: 0;
+  --red-start: 12deg;
+  --red-end: 88deg;
 ">
   <style>
     #mark-root-rest {
@@ -214,13 +313,28 @@
       transform-origin: 100px 100px;
       transform-box: view-box;
     }
-    #mark-root-rest #mark-red-rest {
+    #mark-root-rest #mark-red-rest,
+    #mark-root-rest #mark-red-heat-rest {
       stroke-dasharray: 1;
       stroke-dashoffset: calc(1 - var(--red-draw));
+    }
+    #mark-root-rest #mark-red-heat-rest {
+      opacity: var(--red-heat);
     }
     #mark-root-rest #mark-needle-rest {
       transform: rotate(var(--needle-angle));
       transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-rest #mark-needle-mass-rest {
+      transform: scale(var(--needle-impact));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-rest #mark-hub-rest {
+      transform: scale(var(--hub-pulse));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
     }
     #mark-root-rest #mark-banner-rest {
       transform: scaleX(var(--plate-open));
@@ -238,6 +352,46 @@
       font-size: 20px;
       font-weight: 400;
       letter-spacing: -0.06em;
+    }
+    #mark-root-rest #mark-tick-0-rest {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-0) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-rest #mark-tick-1-rest {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-1) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-rest #mark-tick-2-rest {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-2) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-rest #mark-tick-3-rest {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-3) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-rest #mark-tick-4-rest {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-4) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-rest #mark-tick-5-rest {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-5) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-rest #mark-tick-6-rest {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-6) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-rest #mark-tick-7-rest {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-7) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
     }
   </style>
 
@@ -257,20 +411,37 @@
     <path id="mark-tooth-6-rest" d="M 36.148 156.861 L 29.943 158.858 L 25.942 153.737 L 29.381 148.199 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
   </g>
 
-  <g id="mark-ticks-rest">
-    <polygon id="mark-tick-0-rest" points="34.839,128.198 22.117,131.467 33.540,124.981" fill="#201E1E"/>
-    <polygon id="mark-tick-1-rest" points="29.042,102.442 16.004,100.838 29.007,98.973" fill="#201E1E"/>
-    <polygon id="mark-tick-2-rest" points="33.055,76.350 21.504,70.093 34.290,73.108" fill="#201E1E"/>
-    <polygon id="mark-tick-3-rest" points="46.323,53.527 37.857,43.482 48.657,50.960" fill="#201E1E"/>
-    <polygon id="mark-tick-4-rest" points="67.012,37.129 62.801,24.686 70.123,35.592" fill="#201E1E"/>
-    <polygon id="mark-tick-5-rest" points="92.262,29.423 92.888,16.302 95.719,29.129" fill="#201E1E"/>
-    <polygon id="mark-tick-6-rest" points="118.581,31.475 123.958,19.489 121.907,32.464" fill="#201E1E"/>
-    <polygon id="mark-tick-7-rest" points="142.332,43.000 151.716,33.807 145.066,45.136" fill="#201E1E"/>
-  </g>
-
   <circle id="mark-disk-rest" cx="100" cy="100" r="65" fill="#201E1E"/>
 
   <path id="mark-red-rest" d="M 116.009 24.683 A 77 77 0 0 1 176.953 97.313" fill="none" stroke="#ED3237" stroke-width="17" stroke-linecap="butt" pathLength="1"/>
+  <path id="mark-red-heat-rest" d="M 116.009 24.683 A 77 77 0 0 1 176.953 97.313" fill="none" stroke="#c41218" stroke-width="17" stroke-linecap="butt" pathLength="1"/>
+
+  <g id="mark-ticks-rest">
+    <g id="mark-tick-0-rest" data-angle="248.000" data-tick="0">
+      <polygon points="34.839,128.198 22.117,131.467 33.540,124.981" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-1-rest" data-angle="269.429" data-tick="1">
+      <polygon points="29.042,102.442 16.004,100.838 29.007,98.973" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-2-rest" data-angle="290.857" data-tick="2">
+      <polygon points="33.055,76.350 21.504,70.093 34.290,73.108" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-3-rest" data-angle="312.286" data-tick="3">
+      <polygon points="46.323,53.527 37.857,43.482 48.657,50.960" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-4-rest" data-angle="333.714" data-tick="4">
+      <polygon points="67.012,37.129 62.801,24.686 70.123,35.592" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-5-rest" data-angle="355.143" data-tick="5">
+      <polygon points="92.262,29.423 92.888,16.302 95.719,29.129" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-6-rest" data-angle="16.571" data-tick="6">
+      <polygon points="118.581,31.475 123.958,19.489 121.907,32.464" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-7-rest" data-angle="38.000" data-tick="7">
+      <polygon points="142.332,43.000 151.716,33.807 145.066,45.136" fill="#201E1E"/>
+    </g>
+  </g>
 
   <defs>
     <clipPath id="clip-banner-left-rest">
@@ -303,8 +474,11 @@
   </g>
 
   <g id="mark-needle-rest">
-    <path d="M 100.000 13.000 L 102.300 100.000 L 100.000 144.000 Z" fill="#3A3A3A" stroke="#201E1E" stroke-width="0.45" stroke-linejoin="round"/>
-    <path d="M 100.000 13.000 L 100.000 144.000 L 97.700 100.000 Z" fill="#F0F0F0" stroke="#201E1E" stroke-width="0.45" stroke-linejoin="round"/>
+    <g id="mark-needle-mass-rest">
+      <path d="M 100.000 13.000 L 102.300 100.000 L 100.000 144.000 Z" fill="#3A3A3A" stroke="#201E1E" stroke-width="0.45" stroke-linejoin="round"/>
+      <path d="M 100.000 13.000 L 100.000 144.000 L 97.700 100.000 Z" fill="#F0F0F0" stroke="#201E1E" stroke-width="0.45" stroke-linejoin="round"/>
+      <circle id="mark-hub-rest" cx="100" cy="100" r="2.2" fill="#FFFFFF" stroke="#201E1E" stroke-width="0.8"/>
+    </g>
   </g>
 </svg></div>
       <figcaption>Rest / final logo</figcaption>
@@ -322,12 +496,24 @@
   --needle-angle: 34deg;
   --word-spread: 0;
   --plate-open: 0;
-  --red-start: 12deg;
-  --red-end: 88deg;
   --red-draw: 1;
   --ring-spin: 0deg;
   --mark-scale: 1;
   --mark-opacity: 1;
+  --tick-react: 0;
+  --needle-impact: 1;
+  --red-heat: 0;
+  --hub-pulse: 1;
+  --tick-kick-0: 0;
+  --tick-kick-1: 0;
+  --tick-kick-2: 0;
+  --tick-kick-3: 0;
+  --tick-kick-4: 0;
+  --tick-kick-5: 0;
+  --tick-kick-6: 0;
+  --tick-kick-7: 0;
+  --red-start: 12deg;
+  --red-end: 88deg;
 ">
   <style>
     #mark-root-plate-shut {
@@ -340,13 +526,28 @@
       transform-origin: 100px 100px;
       transform-box: view-box;
     }
-    #mark-root-plate-shut #mark-red-plate-shut {
+    #mark-root-plate-shut #mark-red-plate-shut,
+    #mark-root-plate-shut #mark-red-heat-plate-shut {
       stroke-dasharray: 1;
       stroke-dashoffset: calc(1 - var(--red-draw));
+    }
+    #mark-root-plate-shut #mark-red-heat-plate-shut {
+      opacity: var(--red-heat);
     }
     #mark-root-plate-shut #mark-needle-plate-shut {
       transform: rotate(var(--needle-angle));
       transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-plate-shut #mark-needle-mass-plate-shut {
+      transform: scale(var(--needle-impact));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-plate-shut #mark-hub-plate-shut {
+      transform: scale(var(--hub-pulse));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
     }
     #mark-root-plate-shut #mark-banner-plate-shut {
       transform: scaleX(var(--plate-open));
@@ -364,6 +565,46 @@
       font-size: 20px;
       font-weight: 400;
       letter-spacing: -0.06em;
+    }
+    #mark-root-plate-shut #mark-tick-0-plate-shut {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-0) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-plate-shut #mark-tick-1-plate-shut {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-1) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-plate-shut #mark-tick-2-plate-shut {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-2) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-plate-shut #mark-tick-3-plate-shut {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-3) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-plate-shut #mark-tick-4-plate-shut {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-4) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-plate-shut #mark-tick-5-plate-shut {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-5) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-plate-shut #mark-tick-6-plate-shut {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-6) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-plate-shut #mark-tick-7-plate-shut {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-7) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
     }
   </style>
 
@@ -383,20 +624,37 @@
     <path id="mark-tooth-6-plate-shut" d="M 36.148 156.861 L 29.943 158.858 L 25.942 153.737 L 29.381 148.199 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
   </g>
 
-  <g id="mark-ticks-plate-shut">
-    <polygon id="mark-tick-0-plate-shut" points="34.839,128.198 22.117,131.467 33.540,124.981" fill="#201E1E"/>
-    <polygon id="mark-tick-1-plate-shut" points="29.042,102.442 16.004,100.838 29.007,98.973" fill="#201E1E"/>
-    <polygon id="mark-tick-2-plate-shut" points="33.055,76.350 21.504,70.093 34.290,73.108" fill="#201E1E"/>
-    <polygon id="mark-tick-3-plate-shut" points="46.323,53.527 37.857,43.482 48.657,50.960" fill="#201E1E"/>
-    <polygon id="mark-tick-4-plate-shut" points="67.012,37.129 62.801,24.686 70.123,35.592" fill="#201E1E"/>
-    <polygon id="mark-tick-5-plate-shut" points="92.262,29.423 92.888,16.302 95.719,29.129" fill="#201E1E"/>
-    <polygon id="mark-tick-6-plate-shut" points="118.581,31.475 123.958,19.489 121.907,32.464" fill="#201E1E"/>
-    <polygon id="mark-tick-7-plate-shut" points="142.332,43.000 151.716,33.807 145.066,45.136" fill="#201E1E"/>
-  </g>
-
   <circle id="mark-disk-plate-shut" cx="100" cy="100" r="65" fill="#201E1E"/>
 
   <path id="mark-red-plate-shut" d="M 116.009 24.683 A 77 77 0 0 1 176.953 97.313" fill="none" stroke="#ED3237" stroke-width="17" stroke-linecap="butt" pathLength="1"/>
+  <path id="mark-red-heat-plate-shut" d="M 116.009 24.683 A 77 77 0 0 1 176.953 97.313" fill="none" stroke="#c41218" stroke-width="17" stroke-linecap="butt" pathLength="1"/>
+
+  <g id="mark-ticks-plate-shut">
+    <g id="mark-tick-0-plate-shut" data-angle="248.000" data-tick="0">
+      <polygon points="34.839,128.198 22.117,131.467 33.540,124.981" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-1-plate-shut" data-angle="269.429" data-tick="1">
+      <polygon points="29.042,102.442 16.004,100.838 29.007,98.973" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-2-plate-shut" data-angle="290.857" data-tick="2">
+      <polygon points="33.055,76.350 21.504,70.093 34.290,73.108" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-3-plate-shut" data-angle="312.286" data-tick="3">
+      <polygon points="46.323,53.527 37.857,43.482 48.657,50.960" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-4-plate-shut" data-angle="333.714" data-tick="4">
+      <polygon points="67.012,37.129 62.801,24.686 70.123,35.592" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-5-plate-shut" data-angle="355.143" data-tick="5">
+      <polygon points="92.262,29.423 92.888,16.302 95.719,29.129" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-6-plate-shut" data-angle="16.571" data-tick="6">
+      <polygon points="118.581,31.475 123.958,19.489 121.907,32.464" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-7-plate-shut" data-angle="38.000" data-tick="7">
+      <polygon points="142.332,43.000 151.716,33.807 145.066,45.136" fill="#201E1E"/>
+    </g>
+  </g>
 
   <defs>
     <clipPath id="clip-banner-left-plate-shut">
@@ -429,8 +687,11 @@
   </g>
 
   <g id="mark-needle-plate-shut">
-    <path d="M 100.000 13.000 L 102.300 100.000 L 100.000 144.000 Z" fill="#3A3A3A" stroke="#201E1E" stroke-width="0.45" stroke-linejoin="round"/>
-    <path d="M 100.000 13.000 L 100.000 144.000 L 97.700 100.000 Z" fill="#F0F0F0" stroke="#201E1E" stroke-width="0.45" stroke-linejoin="round"/>
+    <g id="mark-needle-mass-plate-shut">
+      <path d="M 100.000 13.000 L 102.300 100.000 L 100.000 144.000 Z" fill="#3A3A3A" stroke="#201E1E" stroke-width="0.45" stroke-linejoin="round"/>
+      <path d="M 100.000 13.000 L 100.000 144.000 L 97.700 100.000 Z" fill="#F0F0F0" stroke="#201E1E" stroke-width="0.45" stroke-linejoin="round"/>
+      <circle id="mark-hub-plate-shut" cx="100" cy="100" r="2.2" fill="#FFFFFF" stroke="#201E1E" stroke-width="0.8"/>
+    </g>
   </g>
 </svg></div>
       <figcaption>Plate closed (--plate-open: 0)</figcaption>
@@ -448,12 +709,24 @@
   --needle-angle: 34deg;
   --word-spread: 0;
   --plate-open: 1;
-  --red-start: 12deg;
-  --red-end: 88deg;
   --red-draw: 1;
   --ring-spin: 0deg;
   --mark-scale: 1;
   --mark-opacity: 1;
+  --tick-react: 0;
+  --needle-impact: 1;
+  --red-heat: 0;
+  --hub-pulse: 1;
+  --tick-kick-0: 0;
+  --tick-kick-1: 0;
+  --tick-kick-2: 0;
+  --tick-kick-3: 0;
+  --tick-kick-4: 0;
+  --tick-kick-5: 0;
+  --tick-kick-6: 0;
+  --tick-kick-7: 0;
+  --red-start: 12deg;
+  --red-end: 88deg;
 ">
   <style>
     #mark-root-collapsed {
@@ -466,13 +739,28 @@
       transform-origin: 100px 100px;
       transform-box: view-box;
     }
-    #mark-root-collapsed #mark-red-collapsed {
+    #mark-root-collapsed #mark-red-collapsed,
+    #mark-root-collapsed #mark-red-heat-collapsed {
       stroke-dasharray: 1;
       stroke-dashoffset: calc(1 - var(--red-draw));
+    }
+    #mark-root-collapsed #mark-red-heat-collapsed {
+      opacity: var(--red-heat);
     }
     #mark-root-collapsed #mark-needle-collapsed {
       transform: rotate(var(--needle-angle));
       transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-collapsed #mark-needle-mass-collapsed {
+      transform: scale(var(--needle-impact));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-collapsed #mark-hub-collapsed {
+      transform: scale(var(--hub-pulse));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
     }
     #mark-root-collapsed #mark-banner-collapsed {
       transform: scaleX(var(--plate-open));
@@ -490,6 +778,46 @@
       font-size: 20px;
       font-weight: 400;
       letter-spacing: -0.06em;
+    }
+    #mark-root-collapsed #mark-tick-0-collapsed {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-0) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-collapsed #mark-tick-1-collapsed {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-1) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-collapsed #mark-tick-2-collapsed {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-2) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-collapsed #mark-tick-3-collapsed {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-3) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-collapsed #mark-tick-4-collapsed {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-4) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-collapsed #mark-tick-5-collapsed {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-5) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-collapsed #mark-tick-6-collapsed {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-6) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-collapsed #mark-tick-7-collapsed {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-7) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
     }
   </style>
 
@@ -509,20 +837,37 @@
     <path id="mark-tooth-6-collapsed" d="M 36.148 156.861 L 29.943 158.858 L 25.942 153.737 L 29.381 148.199 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
   </g>
 
-  <g id="mark-ticks-collapsed">
-    <polygon id="mark-tick-0-collapsed" points="34.839,128.198 22.117,131.467 33.540,124.981" fill="#201E1E"/>
-    <polygon id="mark-tick-1-collapsed" points="29.042,102.442 16.004,100.838 29.007,98.973" fill="#201E1E"/>
-    <polygon id="mark-tick-2-collapsed" points="33.055,76.350 21.504,70.093 34.290,73.108" fill="#201E1E"/>
-    <polygon id="mark-tick-3-collapsed" points="46.323,53.527 37.857,43.482 48.657,50.960" fill="#201E1E"/>
-    <polygon id="mark-tick-4-collapsed" points="67.012,37.129 62.801,24.686 70.123,35.592" fill="#201E1E"/>
-    <polygon id="mark-tick-5-collapsed" points="92.262,29.423 92.888,16.302 95.719,29.129" fill="#201E1E"/>
-    <polygon id="mark-tick-6-collapsed" points="118.581,31.475 123.958,19.489 121.907,32.464" fill="#201E1E"/>
-    <polygon id="mark-tick-7-collapsed" points="142.332,43.000 151.716,33.807 145.066,45.136" fill="#201E1E"/>
-  </g>
-
   <circle id="mark-disk-collapsed" cx="100" cy="100" r="65" fill="#201E1E"/>
 
   <path id="mark-red-collapsed" d="M 116.009 24.683 A 77 77 0 0 1 176.953 97.313" fill="none" stroke="#ED3237" stroke-width="17" stroke-linecap="butt" pathLength="1"/>
+  <path id="mark-red-heat-collapsed" d="M 116.009 24.683 A 77 77 0 0 1 176.953 97.313" fill="none" stroke="#c41218" stroke-width="17" stroke-linecap="butt" pathLength="1"/>
+
+  <g id="mark-ticks-collapsed">
+    <g id="mark-tick-0-collapsed" data-angle="248.000" data-tick="0">
+      <polygon points="34.839,128.198 22.117,131.467 33.540,124.981" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-1-collapsed" data-angle="269.429" data-tick="1">
+      <polygon points="29.042,102.442 16.004,100.838 29.007,98.973" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-2-collapsed" data-angle="290.857" data-tick="2">
+      <polygon points="33.055,76.350 21.504,70.093 34.290,73.108" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-3-collapsed" data-angle="312.286" data-tick="3">
+      <polygon points="46.323,53.527 37.857,43.482 48.657,50.960" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-4-collapsed" data-angle="333.714" data-tick="4">
+      <polygon points="67.012,37.129 62.801,24.686 70.123,35.592" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-5-collapsed" data-angle="355.143" data-tick="5">
+      <polygon points="92.262,29.423 92.888,16.302 95.719,29.129" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-6-collapsed" data-angle="16.571" data-tick="6">
+      <polygon points="118.581,31.475 123.958,19.489 121.907,32.464" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-7-collapsed" data-angle="38.000" data-tick="7">
+      <polygon points="142.332,43.000 151.716,33.807 145.066,45.136" fill="#201E1E"/>
+    </g>
+  </g>
 
   <defs>
     <clipPath id="clip-banner-left-collapsed">
@@ -555,11 +900,227 @@
   </g>
 
   <g id="mark-needle-collapsed">
-    <path d="M 100.000 13.000 L 102.300 100.000 L 100.000 144.000 Z" fill="#3A3A3A" stroke="#201E1E" stroke-width="0.45" stroke-linejoin="round"/>
-    <path d="M 100.000 13.000 L 100.000 144.000 L 97.700 100.000 Z" fill="#F0F0F0" stroke="#201E1E" stroke-width="0.45" stroke-linejoin="round"/>
+    <g id="mark-needle-mass-collapsed">
+      <path d="M 100.000 13.000 L 102.300 100.000 L 100.000 144.000 Z" fill="#3A3A3A" stroke="#201E1E" stroke-width="0.45" stroke-linejoin="round"/>
+      <path d="M 100.000 13.000 L 100.000 144.000 L 97.700 100.000 Z" fill="#F0F0F0" stroke="#201E1E" stroke-width="0.45" stroke-linejoin="round"/>
+      <circle id="mark-hub-collapsed" cx="100" cy="100" r="2.2" fill="#FFFFFF" stroke="#201E1E" stroke-width="0.8"/>
+    </g>
   </g>
 </svg></div>
       <figcaption>Plate open, words hidden (--word-spread: 0)</figcaption>
+    </figure>
+    <figure class="panel">
+      <div class="mark-wrap"><!--
+  Coordinate contract:
+  - viewBox 0 0 200 200
+  - Center (100, 100)
+  - Needle 0° = 12 o'clock, clockwise positive
+  - Animate via CSS variables on <svg>; never edit path d
+  - No <animate> or @keyframes in this file
+-->
+<svg id="mark-root-needle-presweep" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="Maximum logo mark" style="
+  --needle-angle: 236deg;
+  --word-spread: 1;
+  --plate-open: 1;
+  --red-draw: 1;
+  --ring-spin: 0deg;
+  --mark-scale: 1;
+  --mark-opacity: 1;
+  --tick-react: 0;
+  --needle-impact: 1;
+  --red-heat: 0;
+  --hub-pulse: 1;
+  --tick-kick-0: 0;
+  --tick-kick-1: 0;
+  --tick-kick-2: 0;
+  --tick-kick-3: 0;
+  --tick-kick-4: 0;
+  --tick-kick-5: 0;
+  --tick-kick-6: 0;
+  --tick-kick-7: 0;
+  --red-start: 12deg;
+  --red-end: 88deg;
+">
+  <style>
+    #mark-root-needle-presweep {
+      transform: scale(var(--mark-scale));
+      transform-origin: 100px 100px;
+      opacity: var(--mark-opacity);
+    }
+    #mark-root-needle-presweep #mark-teeth-needle-presweep {
+      transform: rotate(var(--ring-spin));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-needle-presweep #mark-red-needle-presweep,
+    #mark-root-needle-presweep #mark-red-heat-needle-presweep {
+      stroke-dasharray: 1;
+      stroke-dashoffset: calc(1 - var(--red-draw));
+    }
+    #mark-root-needle-presweep #mark-red-heat-needle-presweep {
+      opacity: var(--red-heat);
+    }
+    #mark-root-needle-presweep #mark-needle-needle-presweep {
+      transform: rotate(var(--needle-angle));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-needle-presweep #mark-needle-mass-needle-presweep {
+      transform: scale(var(--needle-impact));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-needle-presweep #mark-hub-needle-presweep {
+      transform: scale(var(--hub-pulse));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-needle-presweep #mark-banner-needle-presweep {
+      transform: scaleX(var(--plate-open));
+      transform-origin: 100px 100px;
+    }
+    #mark-root-needle-presweep #mark-word-left-needle-presweep {
+      transform: translateX(calc((1 - var(--word-spread)) * 58px));
+    }
+    #mark-root-needle-presweep #mark-word-right-needle-presweep {
+      transform: translateX(calc((var(--word-spread) - 1) * 58px));
+    }
+    #mark-root-needle-presweep .mark-word {
+      font-family: 'Russo One', sans-serif;
+      font-style: italic;
+      font-size: 20px;
+      font-weight: 400;
+      letter-spacing: -0.06em;
+    }
+    #mark-root-needle-presweep #mark-tick-0-needle-presweep {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-0) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-needle-presweep #mark-tick-1-needle-presweep {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-1) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-needle-presweep #mark-tick-2-needle-presweep {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-2) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-needle-presweep #mark-tick-3-needle-presweep {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-3) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-needle-presweep #mark-tick-4-needle-presweep {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-4) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-needle-presweep #mark-tick-5-needle-presweep {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-5) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-needle-presweep #mark-tick-6-needle-presweep {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-6) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-needle-presweep #mark-tick-7-needle-presweep {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-7) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+  </style>
+
+  <g id="mark-ring-needle-presweep">
+    <circle cx="100" cy="100" r="77" fill="none" stroke="#FFFFFF" stroke-width="17"/>
+    <circle cx="100" cy="100" r="85.5" fill="none" stroke="#201E1E" stroke-width="1.5"/>
+    <circle cx="100" cy="100" r="68.5" fill="none" stroke="#201E1E" stroke-width="1.20"/>
+  </g>
+
+  <g id="mark-teeth-needle-presweep">
+    <path id="mark-tooth-0-needle-presweep" d="M 170.619 148.199 L 174.058 153.737 L 170.057 158.858 L 163.852 156.861 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    <path id="mark-tooth-1-needle-presweep" d="M 153.052 167.050 L 154.685 173.361 L 149.340 177.057 L 144.011 173.302 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    <path id="mark-tooth-2-needle-presweep" d="M 130.667 179.811 L 130.345 186.322 L 124.142 188.258 L 120.174 183.086 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    <path id="mark-tooth-3-needle-presweep" d="M 105.496 185.323 L 103.249 191.442 L 96.751 191.442 L 94.504 185.323 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    <path id="mark-tooth-4-needle-presweep" d="M 79.826 183.086 L 75.858 188.258 L 69.655 186.322 L 69.333 179.811 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    <path id="mark-tooth-5-needle-presweep" d="M 55.989 173.302 L 50.660 177.057 L 45.315 173.361 L 46.948 167.050 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    <path id="mark-tooth-6-needle-presweep" d="M 36.148 156.861 L 29.943 158.858 L 25.942 153.737 L 29.381 148.199 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+  </g>
+
+  <circle id="mark-disk-needle-presweep" cx="100" cy="100" r="65" fill="#201E1E"/>
+
+  <path id="mark-red-needle-presweep" d="M 116.009 24.683 A 77 77 0 0 1 176.953 97.313" fill="none" stroke="#ED3237" stroke-width="17" stroke-linecap="butt" pathLength="1"/>
+  <path id="mark-red-heat-needle-presweep" d="M 116.009 24.683 A 77 77 0 0 1 176.953 97.313" fill="none" stroke="#c41218" stroke-width="17" stroke-linecap="butt" pathLength="1"/>
+
+  <g id="mark-ticks-needle-presweep">
+    <g id="mark-tick-0-needle-presweep" data-angle="248.000" data-tick="0">
+      <polygon points="34.839,128.198 22.117,131.467 33.540,124.981" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-1-needle-presweep" data-angle="269.429" data-tick="1">
+      <polygon points="29.042,102.442 16.004,100.838 29.007,98.973" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-2-needle-presweep" data-angle="290.857" data-tick="2">
+      <polygon points="33.055,76.350 21.504,70.093 34.290,73.108" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-3-needle-presweep" data-angle="312.286" data-tick="3">
+      <polygon points="46.323,53.527 37.857,43.482 48.657,50.960" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-4-needle-presweep" data-angle="333.714" data-tick="4">
+      <polygon points="67.012,37.129 62.801,24.686 70.123,35.592" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-5-needle-presweep" data-angle="355.143" data-tick="5">
+      <polygon points="92.262,29.423 92.888,16.302 95.719,29.129" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-6-needle-presweep" data-angle="16.571" data-tick="6">
+      <polygon points="118.581,31.475 123.958,19.489 121.907,32.464" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-7-needle-presweep" data-angle="38.000" data-tick="7">
+      <polygon points="142.332,43.000 151.716,33.807 145.066,45.136" fill="#201E1E"/>
+    </g>
+  </g>
+
+  <defs>
+    <clipPath id="clip-banner-left-needle-presweep">
+      <rect x="41.000" y="81.000" width="71" height="38"/>
+    </clipPath>
+    <clipPath id="clip-banner-right-needle-presweep">
+      <rect x="88" y="81.000" width="71" height="38"/>
+    </clipPath>
+    <mask id="mask-word-slash-needle-presweep" maskUnits="userSpaceOnUse">
+      <rect x="0" y="0" width="200" height="200" fill="#ffffff"/>
+      <g transform="rotate(34 100 100)">
+        <path d="M 100.000 13.000 L 102.300 100.000 L 100.000 144.000 Z" fill="#000000"/>
+        <path d="M 100.000 13.000 L 100.000 144.000 L 97.700 100.000 Z" fill="#000000"/>
+      </g>
+    </mask>
+  </defs>
+
+  <g id="mark-banner-needle-presweep">
+    <rect x="41.000" y="87.000" width="118" height="26" rx="2" fill="#1A1B1E" stroke="#F2F2F2" stroke-width="1.8"/>
+    <g clip-path="url(#clip-banner-left-needle-presweep)">
+      <g mask="url(#mask-word-slash-needle-presweep)">
+        <text id="mark-word-left-needle-presweep" class="mark-word" x="100" y="106" text-anchor="end" fill="#FFFFFF">MAXI</text>
+      </g>
+    </g>
+    <g clip-path="url(#clip-banner-right-needle-presweep)">
+      <g mask="url(#mask-word-slash-needle-presweep)">
+        <text id="mark-word-right-needle-presweep" class="mark-word" x="100" y="106" text-anchor="start" fill="#ED3237">MUM</text>
+      </g>
+    </g>
+  </g>
+
+  <g id="mark-needle-needle-presweep">
+    <g id="mark-needle-mass-needle-presweep">
+      <path d="M 100.000 13.000 L 102.300 100.000 L 100.000 144.000 Z" fill="#3A3A3A" stroke="#201E1E" stroke-width="0.45" stroke-linejoin="round"/>
+      <path d="M 100.000 13.000 L 100.000 144.000 L 97.700 100.000 Z" fill="#F0F0F0" stroke="#201E1E" stroke-width="0.45" stroke-linejoin="round"/>
+      <circle id="mark-hub-needle-presweep" cx="100" cy="100" r="2.2" fill="#FFFFFF" stroke="#201E1E" stroke-width="0.8"/>
+    </g>
+  </g>
+</svg></div>
+      <figcaption>Needle pre-sweep (--needle-angle: 236deg)</figcaption>
     </figure>
     <figure class="panel">
       <div class="mark-wrap"><!--
@@ -574,12 +1135,24 @@
   --needle-angle: 80deg;
   --word-spread: 1;
   --plate-open: 1;
-  --red-start: 12deg;
-  --red-end: 88deg;
   --red-draw: 1;
   --ring-spin: 0deg;
   --mark-scale: 1;
   --mark-opacity: 1;
+  --tick-react: 0;
+  --needle-impact: 1;
+  --red-heat: 0;
+  --hub-pulse: 1;
+  --tick-kick-0: 0;
+  --tick-kick-1: 0;
+  --tick-kick-2: 0;
+  --tick-kick-3: 0;
+  --tick-kick-4: 0;
+  --tick-kick-5: 0;
+  --tick-kick-6: 0;
+  --tick-kick-7: 0;
+  --red-start: 12deg;
+  --red-end: 88deg;
 ">
   <style>
     #mark-root-needle-red {
@@ -592,13 +1165,28 @@
       transform-origin: 100px 100px;
       transform-box: view-box;
     }
-    #mark-root-needle-red #mark-red-needle-red {
+    #mark-root-needle-red #mark-red-needle-red,
+    #mark-root-needle-red #mark-red-heat-needle-red {
       stroke-dasharray: 1;
       stroke-dashoffset: calc(1 - var(--red-draw));
+    }
+    #mark-root-needle-red #mark-red-heat-needle-red {
+      opacity: var(--red-heat);
     }
     #mark-root-needle-red #mark-needle-needle-red {
       transform: rotate(var(--needle-angle));
       transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-needle-red #mark-needle-mass-needle-red {
+      transform: scale(var(--needle-impact));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-needle-red #mark-hub-needle-red {
+      transform: scale(var(--hub-pulse));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
     }
     #mark-root-needle-red #mark-banner-needle-red {
       transform: scaleX(var(--plate-open));
@@ -616,6 +1204,46 @@
       font-size: 20px;
       font-weight: 400;
       letter-spacing: -0.06em;
+    }
+    #mark-root-needle-red #mark-tick-0-needle-red {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-0) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-needle-red #mark-tick-1-needle-red {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-1) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-needle-red #mark-tick-2-needle-red {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-2) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-needle-red #mark-tick-3-needle-red {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-3) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-needle-red #mark-tick-4-needle-red {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-4) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-needle-red #mark-tick-5-needle-red {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-5) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-needle-red #mark-tick-6-needle-red {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-6) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-needle-red #mark-tick-7-needle-red {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-7) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
     }
   </style>
 
@@ -635,20 +1263,37 @@
     <path id="mark-tooth-6-needle-red" d="M 36.148 156.861 L 29.943 158.858 L 25.942 153.737 L 29.381 148.199 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
   </g>
 
-  <g id="mark-ticks-needle-red">
-    <polygon id="mark-tick-0-needle-red" points="34.839,128.198 22.117,131.467 33.540,124.981" fill="#201E1E"/>
-    <polygon id="mark-tick-1-needle-red" points="29.042,102.442 16.004,100.838 29.007,98.973" fill="#201E1E"/>
-    <polygon id="mark-tick-2-needle-red" points="33.055,76.350 21.504,70.093 34.290,73.108" fill="#201E1E"/>
-    <polygon id="mark-tick-3-needle-red" points="46.323,53.527 37.857,43.482 48.657,50.960" fill="#201E1E"/>
-    <polygon id="mark-tick-4-needle-red" points="67.012,37.129 62.801,24.686 70.123,35.592" fill="#201E1E"/>
-    <polygon id="mark-tick-5-needle-red" points="92.262,29.423 92.888,16.302 95.719,29.129" fill="#201E1E"/>
-    <polygon id="mark-tick-6-needle-red" points="118.581,31.475 123.958,19.489 121.907,32.464" fill="#201E1E"/>
-    <polygon id="mark-tick-7-needle-red" points="142.332,43.000 151.716,33.807 145.066,45.136" fill="#201E1E"/>
-  </g>
-
   <circle id="mark-disk-needle-red" cx="100" cy="100" r="65" fill="#201E1E"/>
 
   <path id="mark-red-needle-red" d="M 116.009 24.683 A 77 77 0 0 1 176.953 97.313" fill="none" stroke="#ED3237" stroke-width="17" stroke-linecap="butt" pathLength="1"/>
+  <path id="mark-red-heat-needle-red" d="M 116.009 24.683 A 77 77 0 0 1 176.953 97.313" fill="none" stroke="#c41218" stroke-width="17" stroke-linecap="butt" pathLength="1"/>
+
+  <g id="mark-ticks-needle-red">
+    <g id="mark-tick-0-needle-red" data-angle="248.000" data-tick="0">
+      <polygon points="34.839,128.198 22.117,131.467 33.540,124.981" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-1-needle-red" data-angle="269.429" data-tick="1">
+      <polygon points="29.042,102.442 16.004,100.838 29.007,98.973" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-2-needle-red" data-angle="290.857" data-tick="2">
+      <polygon points="33.055,76.350 21.504,70.093 34.290,73.108" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-3-needle-red" data-angle="312.286" data-tick="3">
+      <polygon points="46.323,53.527 37.857,43.482 48.657,50.960" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-4-needle-red" data-angle="333.714" data-tick="4">
+      <polygon points="67.012,37.129 62.801,24.686 70.123,35.592" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-5-needle-red" data-angle="355.143" data-tick="5">
+      <polygon points="92.262,29.423 92.888,16.302 95.719,29.129" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-6-needle-red" data-angle="16.571" data-tick="6">
+      <polygon points="118.581,31.475 123.958,19.489 121.907,32.464" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-7-needle-red" data-angle="38.000" data-tick="7">
+      <polygon points="142.332,43.000 151.716,33.807 145.066,45.136" fill="#201E1E"/>
+    </g>
+  </g>
 
   <defs>
     <clipPath id="clip-banner-left-needle-red">
@@ -681,11 +1326,14 @@
   </g>
 
   <g id="mark-needle-needle-red">
-    <path d="M 100.000 13.000 L 102.300 100.000 L 100.000 144.000 Z" fill="#3A3A3A" stroke="#201E1E" stroke-width="0.45" stroke-linejoin="round"/>
-    <path d="M 100.000 13.000 L 100.000 144.000 L 97.700 100.000 Z" fill="#F0F0F0" stroke="#201E1E" stroke-width="0.45" stroke-linejoin="round"/>
+    <g id="mark-needle-mass-needle-red">
+      <path d="M 100.000 13.000 L 102.300 100.000 L 100.000 144.000 Z" fill="#3A3A3A" stroke="#201E1E" stroke-width="0.45" stroke-linejoin="round"/>
+      <path d="M 100.000 13.000 L 100.000 144.000 L 97.700 100.000 Z" fill="#F0F0F0" stroke="#201E1E" stroke-width="0.45" stroke-linejoin="round"/>
+      <circle id="mark-hub-needle-red" cx="100" cy="100" r="2.2" fill="#FFFFFF" stroke="#201E1E" stroke-width="0.8"/>
+    </g>
   </g>
 </svg></div>
-      <figcaption>Needle in red zone (--needle-angle: 80deg)</figcaption>
+      <figcaption>Needle redline (--needle-angle: 80deg)</figcaption>
     </figure>
     <figure class="panel">
       <div class="mark-wrap"><!--
@@ -700,12 +1348,24 @@
   --needle-angle: 34deg;
   --word-spread: 1;
   --plate-open: 1;
-  --red-start: 12deg;
-  --red-end: 88deg;
   --red-draw: 0;
   --ring-spin: 20deg;
   --mark-scale: 1;
   --mark-opacity: 1;
+  --tick-react: 0;
+  --needle-impact: 1;
+  --red-heat: 0;
+  --hub-pulse: 1;
+  --tick-kick-0: 0;
+  --tick-kick-1: 0;
+  --tick-kick-2: 0;
+  --tick-kick-3: 0;
+  --tick-kick-4: 0;
+  --tick-kick-5: 0;
+  --tick-kick-6: 0;
+  --tick-kick-7: 0;
+  --red-start: 12deg;
+  --red-end: 88deg;
 ">
   <style>
     #mark-root-red-spin {
@@ -718,13 +1378,28 @@
       transform-origin: 100px 100px;
       transform-box: view-box;
     }
-    #mark-root-red-spin #mark-red-red-spin {
+    #mark-root-red-spin #mark-red-red-spin,
+    #mark-root-red-spin #mark-red-heat-red-spin {
       stroke-dasharray: 1;
       stroke-dashoffset: calc(1 - var(--red-draw));
+    }
+    #mark-root-red-spin #mark-red-heat-red-spin {
+      opacity: var(--red-heat);
     }
     #mark-root-red-spin #mark-needle-red-spin {
       transform: rotate(var(--needle-angle));
       transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-red-spin #mark-needle-mass-red-spin {
+      transform: scale(var(--needle-impact));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-red-spin #mark-hub-red-spin {
+      transform: scale(var(--hub-pulse));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
     }
     #mark-root-red-spin #mark-banner-red-spin {
       transform: scaleX(var(--plate-open));
@@ -742,6 +1417,46 @@
       font-size: 20px;
       font-weight: 400;
       letter-spacing: -0.06em;
+    }
+    #mark-root-red-spin #mark-tick-0-red-spin {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-0) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-red-spin #mark-tick-1-red-spin {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-1) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-red-spin #mark-tick-2-red-spin {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-2) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-red-spin #mark-tick-3-red-spin {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-3) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-red-spin #mark-tick-4-red-spin {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-4) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-red-spin #mark-tick-5-red-spin {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-5) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-red-spin #mark-tick-6-red-spin {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-6) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-red-spin #mark-tick-7-red-spin {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-7) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
     }
   </style>
 
@@ -761,20 +1476,37 @@
     <path id="mark-tooth-6-red-spin" d="M 36.148 156.861 L 29.943 158.858 L 25.942 153.737 L 29.381 148.199 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
   </g>
 
-  <g id="mark-ticks-red-spin">
-    <polygon id="mark-tick-0-red-spin" points="34.839,128.198 22.117,131.467 33.540,124.981" fill="#201E1E"/>
-    <polygon id="mark-tick-1-red-spin" points="29.042,102.442 16.004,100.838 29.007,98.973" fill="#201E1E"/>
-    <polygon id="mark-tick-2-red-spin" points="33.055,76.350 21.504,70.093 34.290,73.108" fill="#201E1E"/>
-    <polygon id="mark-tick-3-red-spin" points="46.323,53.527 37.857,43.482 48.657,50.960" fill="#201E1E"/>
-    <polygon id="mark-tick-4-red-spin" points="67.012,37.129 62.801,24.686 70.123,35.592" fill="#201E1E"/>
-    <polygon id="mark-tick-5-red-spin" points="92.262,29.423 92.888,16.302 95.719,29.129" fill="#201E1E"/>
-    <polygon id="mark-tick-6-red-spin" points="118.581,31.475 123.958,19.489 121.907,32.464" fill="#201E1E"/>
-    <polygon id="mark-tick-7-red-spin" points="142.332,43.000 151.716,33.807 145.066,45.136" fill="#201E1E"/>
-  </g>
-
   <circle id="mark-disk-red-spin" cx="100" cy="100" r="65" fill="#201E1E"/>
 
   <path id="mark-red-red-spin" d="M 116.009 24.683 A 77 77 0 0 1 176.953 97.313" fill="none" stroke="#ED3237" stroke-width="17" stroke-linecap="butt" pathLength="1"/>
+  <path id="mark-red-heat-red-spin" d="M 116.009 24.683 A 77 77 0 0 1 176.953 97.313" fill="none" stroke="#c41218" stroke-width="17" stroke-linecap="butt" pathLength="1"/>
+
+  <g id="mark-ticks-red-spin">
+    <g id="mark-tick-0-red-spin" data-angle="248.000" data-tick="0">
+      <polygon points="34.839,128.198 22.117,131.467 33.540,124.981" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-1-red-spin" data-angle="269.429" data-tick="1">
+      <polygon points="29.042,102.442 16.004,100.838 29.007,98.973" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-2-red-spin" data-angle="290.857" data-tick="2">
+      <polygon points="33.055,76.350 21.504,70.093 34.290,73.108" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-3-red-spin" data-angle="312.286" data-tick="3">
+      <polygon points="46.323,53.527 37.857,43.482 48.657,50.960" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-4-red-spin" data-angle="333.714" data-tick="4">
+      <polygon points="67.012,37.129 62.801,24.686 70.123,35.592" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-5-red-spin" data-angle="355.143" data-tick="5">
+      <polygon points="92.262,29.423 92.888,16.302 95.719,29.129" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-6-red-spin" data-angle="16.571" data-tick="6">
+      <polygon points="118.581,31.475 123.958,19.489 121.907,32.464" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-7-red-spin" data-angle="38.000" data-tick="7">
+      <polygon points="142.332,43.000 151.716,33.807 145.066,45.136" fill="#201E1E"/>
+    </g>
+  </g>
 
   <defs>
     <clipPath id="clip-banner-left-red-spin">
@@ -807,11 +1539,866 @@
   </g>
 
   <g id="mark-needle-red-spin">
-    <path d="M 100.000 13.000 L 102.300 100.000 L 100.000 144.000 Z" fill="#3A3A3A" stroke="#201E1E" stroke-width="0.45" stroke-linejoin="round"/>
-    <path d="M 100.000 13.000 L 100.000 144.000 L 97.700 100.000 Z" fill="#F0F0F0" stroke="#201E1E" stroke-width="0.45" stroke-linejoin="round"/>
+    <g id="mark-needle-mass-red-spin">
+      <path d="M 100.000 13.000 L 102.300 100.000 L 100.000 144.000 Z" fill="#3A3A3A" stroke="#201E1E" stroke-width="0.45" stroke-linejoin="round"/>
+      <path d="M 100.000 13.000 L 100.000 144.000 L 97.700 100.000 Z" fill="#F0F0F0" stroke="#201E1E" stroke-width="0.45" stroke-linejoin="round"/>
+      <circle id="mark-hub-red-spin" cx="100" cy="100" r="2.2" fill="#FFFFFF" stroke="#201E1E" stroke-width="0.8"/>
+    </g>
   </g>
 </svg></div>
       <figcaption>Red undrawn + teeth spun (--red-draw: 0, --ring-spin: 20deg)</figcaption>
+    </figure>
+    <figure class="panel">
+      <div class="mark-wrap"><!--
+  Coordinate contract:
+  - viewBox 0 0 200 200
+  - Center (100, 100)
+  - Needle 0° = 12 o'clock, clockwise positive
+  - Animate via CSS variables on <svg>; never edit path d
+  - No <animate> or @keyframes in this file
+-->
+<svg id="mark-root-tick-kick" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="Maximum logo mark" style="
+  --needle-angle: 34deg;
+  --word-spread: 1;
+  --plate-open: 1;
+  --red-draw: 1;
+  --ring-spin: 0deg;
+  --mark-scale: 1;
+  --mark-opacity: 1;
+  --tick-react: 1;
+  --needle-impact: 1;
+  --red-heat: 0;
+  --hub-pulse: 1;
+  --tick-kick-0: 0;
+  --tick-kick-1: 0;
+  --tick-kick-2: 0;
+  --tick-kick-3: 0;
+  --tick-kick-4: 0;
+  --tick-kick-5: 0;
+  --tick-kick-6: 0;
+  --tick-kick-7: 1;
+  --red-start: 12deg;
+  --red-end: 88deg;
+">
+  <style>
+    #mark-root-tick-kick {
+      transform: scale(var(--mark-scale));
+      transform-origin: 100px 100px;
+      opacity: var(--mark-opacity);
+    }
+    #mark-root-tick-kick #mark-teeth-tick-kick {
+      transform: rotate(var(--ring-spin));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-tick-kick #mark-red-tick-kick,
+    #mark-root-tick-kick #mark-red-heat-tick-kick {
+      stroke-dasharray: 1;
+      stroke-dashoffset: calc(1 - var(--red-draw));
+    }
+    #mark-root-tick-kick #mark-red-heat-tick-kick {
+      opacity: var(--red-heat);
+    }
+    #mark-root-tick-kick #mark-needle-tick-kick {
+      transform: rotate(var(--needle-angle));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-tick-kick #mark-needle-mass-tick-kick {
+      transform: scale(var(--needle-impact));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-tick-kick #mark-hub-tick-kick {
+      transform: scale(var(--hub-pulse));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-tick-kick #mark-banner-tick-kick {
+      transform: scaleX(var(--plate-open));
+      transform-origin: 100px 100px;
+    }
+    #mark-root-tick-kick #mark-word-left-tick-kick {
+      transform: translateX(calc((1 - var(--word-spread)) * 58px));
+    }
+    #mark-root-tick-kick #mark-word-right-tick-kick {
+      transform: translateX(calc((var(--word-spread) - 1) * 58px));
+    }
+    #mark-root-tick-kick .mark-word {
+      font-family: 'Russo One', sans-serif;
+      font-style: italic;
+      font-size: 20px;
+      font-weight: 400;
+      letter-spacing: -0.06em;
+    }
+    #mark-root-tick-kick #mark-tick-0-tick-kick {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-0) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-tick-kick #mark-tick-1-tick-kick {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-1) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-tick-kick #mark-tick-2-tick-kick {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-2) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-tick-kick #mark-tick-3-tick-kick {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-3) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-tick-kick #mark-tick-4-tick-kick {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-4) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-tick-kick #mark-tick-5-tick-kick {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-5) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-tick-kick #mark-tick-6-tick-kick {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-6) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-tick-kick #mark-tick-7-tick-kick {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-7) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+  </style>
+
+  <g id="mark-ring-tick-kick">
+    <circle cx="100" cy="100" r="77" fill="none" stroke="#FFFFFF" stroke-width="17"/>
+    <circle cx="100" cy="100" r="85.5" fill="none" stroke="#201E1E" stroke-width="1.5"/>
+    <circle cx="100" cy="100" r="68.5" fill="none" stroke="#201E1E" stroke-width="1.20"/>
+  </g>
+
+  <g id="mark-teeth-tick-kick">
+    <path id="mark-tooth-0-tick-kick" d="M 170.619 148.199 L 174.058 153.737 L 170.057 158.858 L 163.852 156.861 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    <path id="mark-tooth-1-tick-kick" d="M 153.052 167.050 L 154.685 173.361 L 149.340 177.057 L 144.011 173.302 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    <path id="mark-tooth-2-tick-kick" d="M 130.667 179.811 L 130.345 186.322 L 124.142 188.258 L 120.174 183.086 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    <path id="mark-tooth-3-tick-kick" d="M 105.496 185.323 L 103.249 191.442 L 96.751 191.442 L 94.504 185.323 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    <path id="mark-tooth-4-tick-kick" d="M 79.826 183.086 L 75.858 188.258 L 69.655 186.322 L 69.333 179.811 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    <path id="mark-tooth-5-tick-kick" d="M 55.989 173.302 L 50.660 177.057 L 45.315 173.361 L 46.948 167.050 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    <path id="mark-tooth-6-tick-kick" d="M 36.148 156.861 L 29.943 158.858 L 25.942 153.737 L 29.381 148.199 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+  </g>
+
+  <circle id="mark-disk-tick-kick" cx="100" cy="100" r="65" fill="#201E1E"/>
+
+  <path id="mark-red-tick-kick" d="M 116.009 24.683 A 77 77 0 0 1 176.953 97.313" fill="none" stroke="#ED3237" stroke-width="17" stroke-linecap="butt" pathLength="1"/>
+  <path id="mark-red-heat-tick-kick" d="M 116.009 24.683 A 77 77 0 0 1 176.953 97.313" fill="none" stroke="#c41218" stroke-width="17" stroke-linecap="butt" pathLength="1"/>
+
+  <g id="mark-ticks-tick-kick">
+    <g id="mark-tick-0-tick-kick" data-angle="248.000" data-tick="0">
+      <polygon points="34.839,128.198 22.117,131.467 33.540,124.981" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-1-tick-kick" data-angle="269.429" data-tick="1">
+      <polygon points="29.042,102.442 16.004,100.838 29.007,98.973" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-2-tick-kick" data-angle="290.857" data-tick="2">
+      <polygon points="33.055,76.350 21.504,70.093 34.290,73.108" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-3-tick-kick" data-angle="312.286" data-tick="3">
+      <polygon points="46.323,53.527 37.857,43.482 48.657,50.960" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-4-tick-kick" data-angle="333.714" data-tick="4">
+      <polygon points="67.012,37.129 62.801,24.686 70.123,35.592" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-5-tick-kick" data-angle="355.143" data-tick="5">
+      <polygon points="92.262,29.423 92.888,16.302 95.719,29.129" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-6-tick-kick" data-angle="16.571" data-tick="6">
+      <polygon points="118.581,31.475 123.958,19.489 121.907,32.464" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-7-tick-kick" data-angle="38.000" data-tick="7">
+      <polygon points="142.332,43.000 151.716,33.807 145.066,45.136" fill="#201E1E"/>
+    </g>
+  </g>
+
+  <defs>
+    <clipPath id="clip-banner-left-tick-kick">
+      <rect x="41.000" y="81.000" width="71" height="38"/>
+    </clipPath>
+    <clipPath id="clip-banner-right-tick-kick">
+      <rect x="88" y="81.000" width="71" height="38"/>
+    </clipPath>
+    <mask id="mask-word-slash-tick-kick" maskUnits="userSpaceOnUse">
+      <rect x="0" y="0" width="200" height="200" fill="#ffffff"/>
+      <g transform="rotate(34 100 100)">
+        <path d="M 100.000 13.000 L 102.300 100.000 L 100.000 144.000 Z" fill="#000000"/>
+        <path d="M 100.000 13.000 L 100.000 144.000 L 97.700 100.000 Z" fill="#000000"/>
+      </g>
+    </mask>
+  </defs>
+
+  <g id="mark-banner-tick-kick">
+    <rect x="41.000" y="87.000" width="118" height="26" rx="2" fill="#1A1B1E" stroke="#F2F2F2" stroke-width="1.8"/>
+    <g clip-path="url(#clip-banner-left-tick-kick)">
+      <g mask="url(#mask-word-slash-tick-kick)">
+        <text id="mark-word-left-tick-kick" class="mark-word" x="100" y="106" text-anchor="end" fill="#FFFFFF">MAXI</text>
+      </g>
+    </g>
+    <g clip-path="url(#clip-banner-right-tick-kick)">
+      <g mask="url(#mask-word-slash-tick-kick)">
+        <text id="mark-word-right-tick-kick" class="mark-word" x="100" y="106" text-anchor="start" fill="#ED3237">MUM</text>
+      </g>
+    </g>
+  </g>
+
+  <g id="mark-needle-tick-kick">
+    <g id="mark-needle-mass-tick-kick">
+      <path d="M 100.000 13.000 L 102.300 100.000 L 100.000 144.000 Z" fill="#3A3A3A" stroke="#201E1E" stroke-width="0.45" stroke-linejoin="round"/>
+      <path d="M 100.000 13.000 L 100.000 144.000 L 97.700 100.000 Z" fill="#F0F0F0" stroke="#201E1E" stroke-width="0.45" stroke-linejoin="round"/>
+      <circle id="mark-hub-tick-kick" cx="100" cy="100" r="2.2" fill="#FFFFFF" stroke="#201E1E" stroke-width="0.8"/>
+    </g>
+  </g>
+</svg></div>
+      <figcaption>Tick 7 kicked (--tick-react: 1, --tick-kick-7: 1)</figcaption>
+    </figure>
+    <figure class="panel">
+      <div class="mark-wrap"><!--
+  Coordinate contract:
+  - viewBox 0 0 200 200
+  - Center (100, 100)
+  - Needle 0° = 12 o'clock, clockwise positive
+  - Animate via CSS variables on <svg>; never edit path d
+  - No <animate> or @keyframes in this file
+-->
+<svg id="mark-root-needle-impact" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="Maximum logo mark" style="
+  --needle-angle: 34deg;
+  --word-spread: 1;
+  --plate-open: 1;
+  --red-draw: 1;
+  --ring-spin: 0deg;
+  --mark-scale: 1;
+  --mark-opacity: 1;
+  --tick-react: 0;
+  --needle-impact: 1.04;
+  --red-heat: 0;
+  --hub-pulse: 1;
+  --tick-kick-0: 0;
+  --tick-kick-1: 0;
+  --tick-kick-2: 0;
+  --tick-kick-3: 0;
+  --tick-kick-4: 0;
+  --tick-kick-5: 0;
+  --tick-kick-6: 0;
+  --tick-kick-7: 0;
+  --red-start: 12deg;
+  --red-end: 88deg;
+">
+  <style>
+    #mark-root-needle-impact {
+      transform: scale(var(--mark-scale));
+      transform-origin: 100px 100px;
+      opacity: var(--mark-opacity);
+    }
+    #mark-root-needle-impact #mark-teeth-needle-impact {
+      transform: rotate(var(--ring-spin));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-needle-impact #mark-red-needle-impact,
+    #mark-root-needle-impact #mark-red-heat-needle-impact {
+      stroke-dasharray: 1;
+      stroke-dashoffset: calc(1 - var(--red-draw));
+    }
+    #mark-root-needle-impact #mark-red-heat-needle-impact {
+      opacity: var(--red-heat);
+    }
+    #mark-root-needle-impact #mark-needle-needle-impact {
+      transform: rotate(var(--needle-angle));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-needle-impact #mark-needle-mass-needle-impact {
+      transform: scale(var(--needle-impact));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-needle-impact #mark-hub-needle-impact {
+      transform: scale(var(--hub-pulse));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-needle-impact #mark-banner-needle-impact {
+      transform: scaleX(var(--plate-open));
+      transform-origin: 100px 100px;
+    }
+    #mark-root-needle-impact #mark-word-left-needle-impact {
+      transform: translateX(calc((1 - var(--word-spread)) * 58px));
+    }
+    #mark-root-needle-impact #mark-word-right-needle-impact {
+      transform: translateX(calc((var(--word-spread) - 1) * 58px));
+    }
+    #mark-root-needle-impact .mark-word {
+      font-family: 'Russo One', sans-serif;
+      font-style: italic;
+      font-size: 20px;
+      font-weight: 400;
+      letter-spacing: -0.06em;
+    }
+    #mark-root-needle-impact #mark-tick-0-needle-impact {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-0) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-needle-impact #mark-tick-1-needle-impact {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-1) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-needle-impact #mark-tick-2-needle-impact {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-2) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-needle-impact #mark-tick-3-needle-impact {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-3) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-needle-impact #mark-tick-4-needle-impact {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-4) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-needle-impact #mark-tick-5-needle-impact {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-5) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-needle-impact #mark-tick-6-needle-impact {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-6) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-needle-impact #mark-tick-7-needle-impact {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-7) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+  </style>
+
+  <g id="mark-ring-needle-impact">
+    <circle cx="100" cy="100" r="77" fill="none" stroke="#FFFFFF" stroke-width="17"/>
+    <circle cx="100" cy="100" r="85.5" fill="none" stroke="#201E1E" stroke-width="1.5"/>
+    <circle cx="100" cy="100" r="68.5" fill="none" stroke="#201E1E" stroke-width="1.20"/>
+  </g>
+
+  <g id="mark-teeth-needle-impact">
+    <path id="mark-tooth-0-needle-impact" d="M 170.619 148.199 L 174.058 153.737 L 170.057 158.858 L 163.852 156.861 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    <path id="mark-tooth-1-needle-impact" d="M 153.052 167.050 L 154.685 173.361 L 149.340 177.057 L 144.011 173.302 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    <path id="mark-tooth-2-needle-impact" d="M 130.667 179.811 L 130.345 186.322 L 124.142 188.258 L 120.174 183.086 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    <path id="mark-tooth-3-needle-impact" d="M 105.496 185.323 L 103.249 191.442 L 96.751 191.442 L 94.504 185.323 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    <path id="mark-tooth-4-needle-impact" d="M 79.826 183.086 L 75.858 188.258 L 69.655 186.322 L 69.333 179.811 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    <path id="mark-tooth-5-needle-impact" d="M 55.989 173.302 L 50.660 177.057 L 45.315 173.361 L 46.948 167.050 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    <path id="mark-tooth-6-needle-impact" d="M 36.148 156.861 L 29.943 158.858 L 25.942 153.737 L 29.381 148.199 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+  </g>
+
+  <circle id="mark-disk-needle-impact" cx="100" cy="100" r="65" fill="#201E1E"/>
+
+  <path id="mark-red-needle-impact" d="M 116.009 24.683 A 77 77 0 0 1 176.953 97.313" fill="none" stroke="#ED3237" stroke-width="17" stroke-linecap="butt" pathLength="1"/>
+  <path id="mark-red-heat-needle-impact" d="M 116.009 24.683 A 77 77 0 0 1 176.953 97.313" fill="none" stroke="#c41218" stroke-width="17" stroke-linecap="butt" pathLength="1"/>
+
+  <g id="mark-ticks-needle-impact">
+    <g id="mark-tick-0-needle-impact" data-angle="248.000" data-tick="0">
+      <polygon points="34.839,128.198 22.117,131.467 33.540,124.981" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-1-needle-impact" data-angle="269.429" data-tick="1">
+      <polygon points="29.042,102.442 16.004,100.838 29.007,98.973" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-2-needle-impact" data-angle="290.857" data-tick="2">
+      <polygon points="33.055,76.350 21.504,70.093 34.290,73.108" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-3-needle-impact" data-angle="312.286" data-tick="3">
+      <polygon points="46.323,53.527 37.857,43.482 48.657,50.960" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-4-needle-impact" data-angle="333.714" data-tick="4">
+      <polygon points="67.012,37.129 62.801,24.686 70.123,35.592" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-5-needle-impact" data-angle="355.143" data-tick="5">
+      <polygon points="92.262,29.423 92.888,16.302 95.719,29.129" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-6-needle-impact" data-angle="16.571" data-tick="6">
+      <polygon points="118.581,31.475 123.958,19.489 121.907,32.464" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-7-needle-impact" data-angle="38.000" data-tick="7">
+      <polygon points="142.332,43.000 151.716,33.807 145.066,45.136" fill="#201E1E"/>
+    </g>
+  </g>
+
+  <defs>
+    <clipPath id="clip-banner-left-needle-impact">
+      <rect x="41.000" y="81.000" width="71" height="38"/>
+    </clipPath>
+    <clipPath id="clip-banner-right-needle-impact">
+      <rect x="88" y="81.000" width="71" height="38"/>
+    </clipPath>
+    <mask id="mask-word-slash-needle-impact" maskUnits="userSpaceOnUse">
+      <rect x="0" y="0" width="200" height="200" fill="#ffffff"/>
+      <g transform="rotate(34 100 100)">
+        <path d="M 100.000 13.000 L 102.300 100.000 L 100.000 144.000 Z" fill="#000000"/>
+        <path d="M 100.000 13.000 L 100.000 144.000 L 97.700 100.000 Z" fill="#000000"/>
+      </g>
+    </mask>
+  </defs>
+
+  <g id="mark-banner-needle-impact">
+    <rect x="41.000" y="87.000" width="118" height="26" rx="2" fill="#1A1B1E" stroke="#F2F2F2" stroke-width="1.8"/>
+    <g clip-path="url(#clip-banner-left-needle-impact)">
+      <g mask="url(#mask-word-slash-needle-impact)">
+        <text id="mark-word-left-needle-impact" class="mark-word" x="100" y="106" text-anchor="end" fill="#FFFFFF">MAXI</text>
+      </g>
+    </g>
+    <g clip-path="url(#clip-banner-right-needle-impact)">
+      <g mask="url(#mask-word-slash-needle-impact)">
+        <text id="mark-word-right-needle-impact" class="mark-word" x="100" y="106" text-anchor="start" fill="#ED3237">MUM</text>
+      </g>
+    </g>
+  </g>
+
+  <g id="mark-needle-needle-impact">
+    <g id="mark-needle-mass-needle-impact">
+      <path d="M 100.000 13.000 L 102.300 100.000 L 100.000 144.000 Z" fill="#3A3A3A" stroke="#201E1E" stroke-width="0.45" stroke-linejoin="round"/>
+      <path d="M 100.000 13.000 L 100.000 144.000 L 97.700 100.000 Z" fill="#F0F0F0" stroke="#201E1E" stroke-width="0.45" stroke-linejoin="round"/>
+      <circle id="mark-hub-needle-impact" cx="100" cy="100" r="2.2" fill="#FFFFFF" stroke="#201E1E" stroke-width="0.8"/>
+    </g>
+  </g>
+</svg></div>
+      <figcaption>Needle impact (--needle-impact: 1.04)</figcaption>
+    </figure>
+    <figure class="panel">
+      <div class="mark-wrap"><!--
+  Coordinate contract:
+  - viewBox 0 0 200 200
+  - Center (100, 100)
+  - Needle 0° = 12 o'clock, clockwise positive
+  - Animate via CSS variables on <svg>; never edit path d
+  - No <animate> or @keyframes in this file
+-->
+<svg id="mark-root-red-heat" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="Maximum logo mark" style="
+  --needle-angle: 34deg;
+  --word-spread: 1;
+  --plate-open: 1;
+  --red-draw: 1;
+  --ring-spin: 0deg;
+  --mark-scale: 1;
+  --mark-opacity: 1;
+  --tick-react: 0;
+  --needle-impact: 1;
+  --red-heat: 1;
+  --hub-pulse: 1;
+  --tick-kick-0: 0;
+  --tick-kick-1: 0;
+  --tick-kick-2: 0;
+  --tick-kick-3: 0;
+  --tick-kick-4: 0;
+  --tick-kick-5: 0;
+  --tick-kick-6: 0;
+  --tick-kick-7: 0;
+  --red-start: 12deg;
+  --red-end: 88deg;
+">
+  <style>
+    #mark-root-red-heat {
+      transform: scale(var(--mark-scale));
+      transform-origin: 100px 100px;
+      opacity: var(--mark-opacity);
+    }
+    #mark-root-red-heat #mark-teeth-red-heat {
+      transform: rotate(var(--ring-spin));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-red-heat #mark-red-red-heat,
+    #mark-root-red-heat #mark-red-heat-red-heat {
+      stroke-dasharray: 1;
+      stroke-dashoffset: calc(1 - var(--red-draw));
+    }
+    #mark-root-red-heat #mark-red-heat-red-heat {
+      opacity: var(--red-heat);
+    }
+    #mark-root-red-heat #mark-needle-red-heat {
+      transform: rotate(var(--needle-angle));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-red-heat #mark-needle-mass-red-heat {
+      transform: scale(var(--needle-impact));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-red-heat #mark-hub-red-heat {
+      transform: scale(var(--hub-pulse));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-red-heat #mark-banner-red-heat {
+      transform: scaleX(var(--plate-open));
+      transform-origin: 100px 100px;
+    }
+    #mark-root-red-heat #mark-word-left-red-heat {
+      transform: translateX(calc((1 - var(--word-spread)) * 58px));
+    }
+    #mark-root-red-heat #mark-word-right-red-heat {
+      transform: translateX(calc((var(--word-spread) - 1) * 58px));
+    }
+    #mark-root-red-heat .mark-word {
+      font-family: 'Russo One', sans-serif;
+      font-style: italic;
+      font-size: 20px;
+      font-weight: 400;
+      letter-spacing: -0.06em;
+    }
+    #mark-root-red-heat #mark-tick-0-red-heat {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-0) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-red-heat #mark-tick-1-red-heat {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-1) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-red-heat #mark-tick-2-red-heat {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-2) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-red-heat #mark-tick-3-red-heat {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-3) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-red-heat #mark-tick-4-red-heat {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-4) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-red-heat #mark-tick-5-red-heat {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-5) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-red-heat #mark-tick-6-red-heat {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-6) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-red-heat #mark-tick-7-red-heat {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-7) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+  </style>
+
+  <g id="mark-ring-red-heat">
+    <circle cx="100" cy="100" r="77" fill="none" stroke="#FFFFFF" stroke-width="17"/>
+    <circle cx="100" cy="100" r="85.5" fill="none" stroke="#201E1E" stroke-width="1.5"/>
+    <circle cx="100" cy="100" r="68.5" fill="none" stroke="#201E1E" stroke-width="1.20"/>
+  </g>
+
+  <g id="mark-teeth-red-heat">
+    <path id="mark-tooth-0-red-heat" d="M 170.619 148.199 L 174.058 153.737 L 170.057 158.858 L 163.852 156.861 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    <path id="mark-tooth-1-red-heat" d="M 153.052 167.050 L 154.685 173.361 L 149.340 177.057 L 144.011 173.302 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    <path id="mark-tooth-2-red-heat" d="M 130.667 179.811 L 130.345 186.322 L 124.142 188.258 L 120.174 183.086 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    <path id="mark-tooth-3-red-heat" d="M 105.496 185.323 L 103.249 191.442 L 96.751 191.442 L 94.504 185.323 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    <path id="mark-tooth-4-red-heat" d="M 79.826 183.086 L 75.858 188.258 L 69.655 186.322 L 69.333 179.811 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    <path id="mark-tooth-5-red-heat" d="M 55.989 173.302 L 50.660 177.057 L 45.315 173.361 L 46.948 167.050 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    <path id="mark-tooth-6-red-heat" d="M 36.148 156.861 L 29.943 158.858 L 25.942 153.737 L 29.381 148.199 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+  </g>
+
+  <circle id="mark-disk-red-heat" cx="100" cy="100" r="65" fill="#201E1E"/>
+
+  <path id="mark-red-red-heat" d="M 116.009 24.683 A 77 77 0 0 1 176.953 97.313" fill="none" stroke="#ED3237" stroke-width="17" stroke-linecap="butt" pathLength="1"/>
+  <path id="mark-red-heat-red-heat" d="M 116.009 24.683 A 77 77 0 0 1 176.953 97.313" fill="none" stroke="#c41218" stroke-width="17" stroke-linecap="butt" pathLength="1"/>
+
+  <g id="mark-ticks-red-heat">
+    <g id="mark-tick-0-red-heat" data-angle="248.000" data-tick="0">
+      <polygon points="34.839,128.198 22.117,131.467 33.540,124.981" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-1-red-heat" data-angle="269.429" data-tick="1">
+      <polygon points="29.042,102.442 16.004,100.838 29.007,98.973" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-2-red-heat" data-angle="290.857" data-tick="2">
+      <polygon points="33.055,76.350 21.504,70.093 34.290,73.108" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-3-red-heat" data-angle="312.286" data-tick="3">
+      <polygon points="46.323,53.527 37.857,43.482 48.657,50.960" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-4-red-heat" data-angle="333.714" data-tick="4">
+      <polygon points="67.012,37.129 62.801,24.686 70.123,35.592" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-5-red-heat" data-angle="355.143" data-tick="5">
+      <polygon points="92.262,29.423 92.888,16.302 95.719,29.129" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-6-red-heat" data-angle="16.571" data-tick="6">
+      <polygon points="118.581,31.475 123.958,19.489 121.907,32.464" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-7-red-heat" data-angle="38.000" data-tick="7">
+      <polygon points="142.332,43.000 151.716,33.807 145.066,45.136" fill="#201E1E"/>
+    </g>
+  </g>
+
+  <defs>
+    <clipPath id="clip-banner-left-red-heat">
+      <rect x="41.000" y="81.000" width="71" height="38"/>
+    </clipPath>
+    <clipPath id="clip-banner-right-red-heat">
+      <rect x="88" y="81.000" width="71" height="38"/>
+    </clipPath>
+    <mask id="mask-word-slash-red-heat" maskUnits="userSpaceOnUse">
+      <rect x="0" y="0" width="200" height="200" fill="#ffffff"/>
+      <g transform="rotate(34 100 100)">
+        <path d="M 100.000 13.000 L 102.300 100.000 L 100.000 144.000 Z" fill="#000000"/>
+        <path d="M 100.000 13.000 L 100.000 144.000 L 97.700 100.000 Z" fill="#000000"/>
+      </g>
+    </mask>
+  </defs>
+
+  <g id="mark-banner-red-heat">
+    <rect x="41.000" y="87.000" width="118" height="26" rx="2" fill="#1A1B1E" stroke="#F2F2F2" stroke-width="1.8"/>
+    <g clip-path="url(#clip-banner-left-red-heat)">
+      <g mask="url(#mask-word-slash-red-heat)">
+        <text id="mark-word-left-red-heat" class="mark-word" x="100" y="106" text-anchor="end" fill="#FFFFFF">MAXI</text>
+      </g>
+    </g>
+    <g clip-path="url(#clip-banner-right-red-heat)">
+      <g mask="url(#mask-word-slash-red-heat)">
+        <text id="mark-word-right-red-heat" class="mark-word" x="100" y="106" text-anchor="start" fill="#ED3237">MUM</text>
+      </g>
+    </g>
+  </g>
+
+  <g id="mark-needle-red-heat">
+    <g id="mark-needle-mass-red-heat">
+      <path d="M 100.000 13.000 L 102.300 100.000 L 100.000 144.000 Z" fill="#3A3A3A" stroke="#201E1E" stroke-width="0.45" stroke-linejoin="round"/>
+      <path d="M 100.000 13.000 L 100.000 144.000 L 97.700 100.000 Z" fill="#F0F0F0" stroke="#201E1E" stroke-width="0.45" stroke-linejoin="round"/>
+      <circle id="mark-hub-red-heat" cx="100" cy="100" r="2.2" fill="#FFFFFF" stroke="#201E1E" stroke-width="0.8"/>
+    </g>
+  </g>
+</svg></div>
+      <figcaption>Red heat (--red-heat: 1)</figcaption>
+    </figure>
+    <figure class="panel">
+      <div class="mark-wrap"><!--
+  Coordinate contract:
+  - viewBox 0 0 200 200
+  - Center (100, 100)
+  - Needle 0° = 12 o'clock, clockwise positive
+  - Animate via CSS variables on <svg>; never edit path d
+  - No <animate> or @keyframes in this file
+-->
+<svg id="mark-root-hub-pulse" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="Maximum logo mark" style="
+  --needle-angle: 34deg;
+  --word-spread: 1;
+  --plate-open: 1;
+  --red-draw: 1;
+  --ring-spin: 0deg;
+  --mark-scale: 1;
+  --mark-opacity: 1;
+  --tick-react: 0;
+  --needle-impact: 1;
+  --red-heat: 0;
+  --hub-pulse: 1.25;
+  --tick-kick-0: 0;
+  --tick-kick-1: 0;
+  --tick-kick-2: 0;
+  --tick-kick-3: 0;
+  --tick-kick-4: 0;
+  --tick-kick-5: 0;
+  --tick-kick-6: 0;
+  --tick-kick-7: 0;
+  --red-start: 12deg;
+  --red-end: 88deg;
+">
+  <style>
+    #mark-root-hub-pulse {
+      transform: scale(var(--mark-scale));
+      transform-origin: 100px 100px;
+      opacity: var(--mark-opacity);
+    }
+    #mark-root-hub-pulse #mark-teeth-hub-pulse {
+      transform: rotate(var(--ring-spin));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-hub-pulse #mark-red-hub-pulse,
+    #mark-root-hub-pulse #mark-red-heat-hub-pulse {
+      stroke-dasharray: 1;
+      stroke-dashoffset: calc(1 - var(--red-draw));
+    }
+    #mark-root-hub-pulse #mark-red-heat-hub-pulse {
+      opacity: var(--red-heat);
+    }
+    #mark-root-hub-pulse #mark-needle-hub-pulse {
+      transform: rotate(var(--needle-angle));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-hub-pulse #mark-needle-mass-hub-pulse {
+      transform: scale(var(--needle-impact));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-hub-pulse #mark-hub-hub-pulse {
+      transform: scale(var(--hub-pulse));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-hub-pulse #mark-banner-hub-pulse {
+      transform: scaleX(var(--plate-open));
+      transform-origin: 100px 100px;
+    }
+    #mark-root-hub-pulse #mark-word-left-hub-pulse {
+      transform: translateX(calc((1 - var(--word-spread)) * 58px));
+    }
+    #mark-root-hub-pulse #mark-word-right-hub-pulse {
+      transform: translateX(calc((var(--word-spread) - 1) * 58px));
+    }
+    #mark-root-hub-pulse .mark-word {
+      font-family: 'Russo One', sans-serif;
+      font-style: italic;
+      font-size: 20px;
+      font-weight: 400;
+      letter-spacing: -0.06em;
+    }
+    #mark-root-hub-pulse #mark-tick-0-hub-pulse {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-0) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-hub-pulse #mark-tick-1-hub-pulse {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-1) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-hub-pulse #mark-tick-2-hub-pulse {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-2) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-hub-pulse #mark-tick-3-hub-pulse {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-3) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-hub-pulse #mark-tick-4-hub-pulse {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-4) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-hub-pulse #mark-tick-5-hub-pulse {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-5) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-hub-pulse #mark-tick-6-hub-pulse {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-6) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-hub-pulse #mark-tick-7-hub-pulse {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-7) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+  </style>
+
+  <g id="mark-ring-hub-pulse">
+    <circle cx="100" cy="100" r="77" fill="none" stroke="#FFFFFF" stroke-width="17"/>
+    <circle cx="100" cy="100" r="85.5" fill="none" stroke="#201E1E" stroke-width="1.5"/>
+    <circle cx="100" cy="100" r="68.5" fill="none" stroke="#201E1E" stroke-width="1.20"/>
+  </g>
+
+  <g id="mark-teeth-hub-pulse">
+    <path id="mark-tooth-0-hub-pulse" d="M 170.619 148.199 L 174.058 153.737 L 170.057 158.858 L 163.852 156.861 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    <path id="mark-tooth-1-hub-pulse" d="M 153.052 167.050 L 154.685 173.361 L 149.340 177.057 L 144.011 173.302 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    <path id="mark-tooth-2-hub-pulse" d="M 130.667 179.811 L 130.345 186.322 L 124.142 188.258 L 120.174 183.086 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    <path id="mark-tooth-3-hub-pulse" d="M 105.496 185.323 L 103.249 191.442 L 96.751 191.442 L 94.504 185.323 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    <path id="mark-tooth-4-hub-pulse" d="M 79.826 183.086 L 75.858 188.258 L 69.655 186.322 L 69.333 179.811 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    <path id="mark-tooth-5-hub-pulse" d="M 55.989 173.302 L 50.660 177.057 L 45.315 173.361 L 46.948 167.050 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    <path id="mark-tooth-6-hub-pulse" d="M 36.148 156.861 L 29.943 158.858 L 25.942 153.737 L 29.381 148.199 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+  </g>
+
+  <circle id="mark-disk-hub-pulse" cx="100" cy="100" r="65" fill="#201E1E"/>
+
+  <path id="mark-red-hub-pulse" d="M 116.009 24.683 A 77 77 0 0 1 176.953 97.313" fill="none" stroke="#ED3237" stroke-width="17" stroke-linecap="butt" pathLength="1"/>
+  <path id="mark-red-heat-hub-pulse" d="M 116.009 24.683 A 77 77 0 0 1 176.953 97.313" fill="none" stroke="#c41218" stroke-width="17" stroke-linecap="butt" pathLength="1"/>
+
+  <g id="mark-ticks-hub-pulse">
+    <g id="mark-tick-0-hub-pulse" data-angle="248.000" data-tick="0">
+      <polygon points="34.839,128.198 22.117,131.467 33.540,124.981" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-1-hub-pulse" data-angle="269.429" data-tick="1">
+      <polygon points="29.042,102.442 16.004,100.838 29.007,98.973" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-2-hub-pulse" data-angle="290.857" data-tick="2">
+      <polygon points="33.055,76.350 21.504,70.093 34.290,73.108" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-3-hub-pulse" data-angle="312.286" data-tick="3">
+      <polygon points="46.323,53.527 37.857,43.482 48.657,50.960" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-4-hub-pulse" data-angle="333.714" data-tick="4">
+      <polygon points="67.012,37.129 62.801,24.686 70.123,35.592" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-5-hub-pulse" data-angle="355.143" data-tick="5">
+      <polygon points="92.262,29.423 92.888,16.302 95.719,29.129" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-6-hub-pulse" data-angle="16.571" data-tick="6">
+      <polygon points="118.581,31.475 123.958,19.489 121.907,32.464" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-7-hub-pulse" data-angle="38.000" data-tick="7">
+      <polygon points="142.332,43.000 151.716,33.807 145.066,45.136" fill="#201E1E"/>
+    </g>
+  </g>
+
+  <defs>
+    <clipPath id="clip-banner-left-hub-pulse">
+      <rect x="41.000" y="81.000" width="71" height="38"/>
+    </clipPath>
+    <clipPath id="clip-banner-right-hub-pulse">
+      <rect x="88" y="81.000" width="71" height="38"/>
+    </clipPath>
+    <mask id="mask-word-slash-hub-pulse" maskUnits="userSpaceOnUse">
+      <rect x="0" y="0" width="200" height="200" fill="#ffffff"/>
+      <g transform="rotate(34 100 100)">
+        <path d="M 100.000 13.000 L 102.300 100.000 L 100.000 144.000 Z" fill="#000000"/>
+        <path d="M 100.000 13.000 L 100.000 144.000 L 97.700 100.000 Z" fill="#000000"/>
+      </g>
+    </mask>
+  </defs>
+
+  <g id="mark-banner-hub-pulse">
+    <rect x="41.000" y="87.000" width="118" height="26" rx="2" fill="#1A1B1E" stroke="#F2F2F2" stroke-width="1.8"/>
+    <g clip-path="url(#clip-banner-left-hub-pulse)">
+      <g mask="url(#mask-word-slash-hub-pulse)">
+        <text id="mark-word-left-hub-pulse" class="mark-word" x="100" y="106" text-anchor="end" fill="#FFFFFF">MAXI</text>
+      </g>
+    </g>
+    <g clip-path="url(#clip-banner-right-hub-pulse)">
+      <g mask="url(#mask-word-slash-hub-pulse)">
+        <text id="mark-word-right-hub-pulse" class="mark-word" x="100" y="106" text-anchor="start" fill="#ED3237">MUM</text>
+      </g>
+    </g>
+  </g>
+
+  <g id="mark-needle-hub-pulse">
+    <g id="mark-needle-mass-hub-pulse">
+      <path d="M 100.000 13.000 L 102.300 100.000 L 100.000 144.000 Z" fill="#3A3A3A" stroke="#201E1E" stroke-width="0.45" stroke-linejoin="round"/>
+      <path d="M 100.000 13.000 L 100.000 144.000 L 97.700 100.000 Z" fill="#F0F0F0" stroke="#201E1E" stroke-width="0.45" stroke-linejoin="round"/>
+      <circle id="mark-hub-hub-pulse" cx="100" cy="100" r="2.2" fill="#FFFFFF" stroke="#201E1E" stroke-width="0.8"/>
+    </g>
+  </g>
+</svg></div>
+      <figcaption>Hub pulse (--hub-pulse: 1.25)</figcaption>
     </figure>
   </section>
 </body>

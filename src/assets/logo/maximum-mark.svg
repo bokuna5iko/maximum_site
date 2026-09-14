@@ -10,12 +10,24 @@
   --needle-angle: 34deg;
   --word-spread: 1;
   --plate-open: 1;
-  --red-start: 12deg;
-  --red-end: 88deg;
   --red-draw: 1;
   --ring-spin: 0deg;
   --mark-scale: 1;
   --mark-opacity: 1;
+  --tick-react: 0;
+  --needle-impact: 1;
+  --red-heat: 0;
+  --hub-pulse: 1;
+  --tick-kick-0: 0;
+  --tick-kick-1: 0;
+  --tick-kick-2: 0;
+  --tick-kick-3: 0;
+  --tick-kick-4: 0;
+  --tick-kick-5: 0;
+  --tick-kick-6: 0;
+  --tick-kick-7: 0;
+  --red-start: 12deg;
+  --red-end: 88deg;
 ">
   <style>
     #mark-root {
@@ -28,13 +40,28 @@
       transform-origin: 100px 100px;
       transform-box: view-box;
     }
-    #mark-root #mark-red {
+    #mark-root #mark-red,
+    #mark-root #mark-red-heat {
       stroke-dasharray: 1;
       stroke-dashoffset: calc(1 - var(--red-draw));
+    }
+    #mark-root #mark-red-heat {
+      opacity: var(--red-heat);
     }
     #mark-root #mark-needle {
       transform: rotate(var(--needle-angle));
       transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root #mark-needle-mass {
+      transform: scale(var(--needle-impact));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root #mark-hub {
+      transform: scale(var(--hub-pulse));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
     }
     #mark-root #mark-banner {
       transform: scaleX(var(--plate-open));
@@ -52,6 +79,46 @@
       font-size: 20px;
       font-weight: 400;
       letter-spacing: -0.06em;
+    }
+    #mark-root #mark-tick-0 {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-0) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root #mark-tick-1 {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-1) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root #mark-tick-2 {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-2) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root #mark-tick-3 {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-3) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root #mark-tick-4 {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-4) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root #mark-tick-5 {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-5) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root #mark-tick-6 {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-6) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root #mark-tick-7 {
+      transform: scale(calc(1 + var(--tick-react) * var(--tick-kick-7) * 0.07));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
     }
   </style>
 
@@ -71,20 +138,37 @@
     <path id="mark-tooth-6" d="M 36.148 156.861 L 29.943 158.858 L 25.942 153.737 L 29.381 148.199 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
   </g>
 
-  <g id="mark-ticks">
-    <polygon id="mark-tick-0" points="34.839,128.198 22.117,131.467 33.540,124.981" fill="#201E1E"/>
-    <polygon id="mark-tick-1" points="29.042,102.442 16.004,100.838 29.007,98.973" fill="#201E1E"/>
-    <polygon id="mark-tick-2" points="33.055,76.350 21.504,70.093 34.290,73.108" fill="#201E1E"/>
-    <polygon id="mark-tick-3" points="46.323,53.527 37.857,43.482 48.657,50.960" fill="#201E1E"/>
-    <polygon id="mark-tick-4" points="67.012,37.129 62.801,24.686 70.123,35.592" fill="#201E1E"/>
-    <polygon id="mark-tick-5" points="92.262,29.423 92.888,16.302 95.719,29.129" fill="#201E1E"/>
-    <polygon id="mark-tick-6" points="118.581,31.475 123.958,19.489 121.907,32.464" fill="#201E1E"/>
-    <polygon id="mark-tick-7" points="142.332,43.000 151.716,33.807 145.066,45.136" fill="#201E1E"/>
-  </g>
-
   <circle id="mark-disk" cx="100" cy="100" r="65" fill="#201E1E"/>
 
   <path id="mark-red" d="M 116.009 24.683 A 77 77 0 0 1 176.953 97.313" fill="none" stroke="#ED3237" stroke-width="17" stroke-linecap="butt" pathLength="1"/>
+  <path id="mark-red-heat" d="M 116.009 24.683 A 77 77 0 0 1 176.953 97.313" fill="none" stroke="#c41218" stroke-width="17" stroke-linecap="butt" pathLength="1"/>
+
+  <g id="mark-ticks">
+    <g id="mark-tick-0" data-angle="248.000" data-tick="0">
+      <polygon points="34.839,128.198 22.117,131.467 33.540,124.981" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-1" data-angle="269.429" data-tick="1">
+      <polygon points="29.042,102.442 16.004,100.838 29.007,98.973" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-2" data-angle="290.857" data-tick="2">
+      <polygon points="33.055,76.350 21.504,70.093 34.290,73.108" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-3" data-angle="312.286" data-tick="3">
+      <polygon points="46.323,53.527 37.857,43.482 48.657,50.960" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-4" data-angle="333.714" data-tick="4">
+      <polygon points="67.012,37.129 62.801,24.686 70.123,35.592" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-5" data-angle="355.143" data-tick="5">
+      <polygon points="92.262,29.423 92.888,16.302 95.719,29.129" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-6" data-angle="16.571" data-tick="6">
+      <polygon points="118.581,31.475 123.958,19.489 121.907,32.464" fill="#201E1E"/>
+    </g>
+    <g id="mark-tick-7" data-angle="38.000" data-tick="7">
+      <polygon points="142.332,43.000 151.716,33.807 145.066,45.136" fill="#201E1E"/>
+    </g>
+  </g>
 
   <defs>
     <clipPath id="clip-banner-left">
@@ -117,7 +201,10 @@
   </g>
 
   <g id="mark-needle">
-    <path d="M 100.000 13.000 L 102.300 100.000 L 100.000 144.000 Z" fill="#3A3A3A" stroke="#201E1E" stroke-width="0.45" stroke-linejoin="round"/>
-    <path d="M 100.000 13.000 L 100.000 144.000 L 97.700 100.000 Z" fill="#F0F0F0" stroke="#201E1E" stroke-width="0.45" stroke-linejoin="round"/>
+    <g id="mark-needle-mass">
+      <path d="M 100.000 13.000 L 102.300 100.000 L 100.000 144.000 Z" fill="#3A3A3A" stroke="#201E1E" stroke-width="0.45" stroke-linejoin="round"/>
+      <path d="M 100.000 13.000 L 100.000 144.000 L 97.700 100.000 Z" fill="#F0F0F0" stroke="#201E1E" stroke-width="0.45" stroke-linejoin="round"/>
+      <circle id="mark-hub" cx="100" cy="100" r="2.2" fill="#FFFFFF" stroke="#201E1E" stroke-width="0.8"/>
+    </g>
   </g>
 </svg>

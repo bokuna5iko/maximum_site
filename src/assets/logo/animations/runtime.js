@@ -1,27 +1,26 @@
-/** Default rest pose — matches mark.config.js css defaults (numeric). */
-export const REST_KNOBS = {
-  needleAngle: 34,
-  wordSpread: 1,
-  plateOpen: 1,
-  redDraw: 1,
-  ringSpin: 0,
-  markScale: 1,
-  markOpacity: 1,
-};
+import { allKnobs, getTickAngles, mechanics } from '../mark.config.js';
 
-export const cssName = {
-  needleAngle: '--needle-angle',
-  wordSpread: '--word-spread',
-  plateOpen: '--plate-open',
-  redDraw: '--red-draw',
-  ringSpin: '--ring-spin',
-  markScale: '--mark-scale',
-  markOpacity: '--mark-opacity',
-};
+const registry = allKnobs();
+
+export const REST_KNOBS = Object.fromEntries(
+  Object.entries(registry).map(([key, knob]) => [key, knob.rest]),
+);
+
+export const cssName = Object.fromEntries(
+  Object.entries(registry).map(([key, knob]) => [key, knob.css]),
+);
 
 const cssToKey = Object.fromEntries(Object.entries(cssName).map(([key, cssVar]) => [cssVar, key]));
 
-const DEG_KEYS = new Set(['needleAngle', 'ringSpin']);
+const DEG_KEYS = new Set(
+  Object.entries(registry).filter(([, knob]) => knob.unit === 'deg').map(([key]) => key),
+);
+
+const tickAngles = getTickAngles();
+
+function normalizeAngle(deg) {
+  return ((deg % 360) + 360) % 360;
+}
 
 function parseKnobValue(key, value) {
   if (typeof value === 'number') return value;
@@ -56,7 +55,31 @@ export function applyKnobs(svgEl, partial) {
   }
 }
 
+/** True if GSAP's numeric needle path from prev→curr passes tickDeg. */
+function crossedTick(prev, curr, tickDeg) {
+  if (prev === curr) return false;
+  const lo = Math.min(prev, curr);
+  const hi = Math.max(prev, curr);
+  const t0 = normalizeAngle(tickDeg);
+  for (let k = -2; k <= 2; k++) {
+    const t = t0 + k * 360;
+    if (t > lo && t < hi) return true;
+  }
+  return false;
+}
+
+function detectCrossedTicks(prevAngle, currAngle) {
+  const crossed = [];
+  for (let i = 0; i < tickAngles.length; i++) {
+    if (crossedTick(prevAngle, currAngle, tickAngles[i])) {
+      crossed.push(i);
+    }
+  }
+  return crossed;
+}
+
 const tweenStore = new WeakMap();
+const pulseStore = new WeakMap();
 
 function getTween(svgEl) {
   return tweenStore.get(svgEl) ?? svgEl._markTween ?? null;
@@ -72,6 +95,69 @@ function setTween(svgEl, tween) {
   }
 }
 
+function getPulseTweens(svgEl) {
+  return pulseStore.get(svgEl) ?? svgEl._markPulseTweens ?? {};
+}
+
+function setPulseTweens(svgEl, tweens) {
+  if (Object.keys(tweens).length) {
+    pulseStore.set(svgEl, tweens);
+    svgEl._markPulseTweens = tweens;
+  } else {
+    pulseStore.delete(svgEl);
+    delete svgEl._markPulseTweens;
+  }
+}
+
+function killPulseTweens(svgEl) {
+  for (const tween of Object.values(getPulseTweens(svgEl))) {
+    tween.kill();
+  }
+  setPulseTweens(svgEl, {});
+}
+
+function pulseTickKick(svgEl, state, gsap, tickIndex) {
+  const kickKey = `tickKick${tickIndex}`;
+  const pulses = { ...getPulseTweens(svgEl) };
+  pulses[tickIndex]?.kill();
+
+  state[kickKey] = 1;
+  applyKnobs(svgEl, state);
+
+  const tween = gsap.to(state, {
+    duration: mechanics.tickStrike.decaySec,
+    ease: 'power2.out',
+    [kickKey]: 0,
+    onUpdate: () => applyKnobs(svgEl, state),
+    onComplete: () => {
+      const next = { ...getPulseTweens(svgEl) };
+      if (next[tickIndex] === tween) delete next[tickIndex];
+      setPulseTweens(svgEl, next);
+    },
+  });
+
+  pulses[tickIndex] = tween;
+  setPulseTweens(svgEl, pulses);
+}
+
+function makeTickStrikeHandler(svgEl, state, gsap) {
+  let prevAngle = state.needleAngle;
+
+  return () => {
+    const currAngle = state.needleAngle;
+    if (state.tickReact <= 0 || prevAngle === currAngle) {
+      prevAngle = currAngle;
+      return;
+    }
+
+    const crossed = detectCrossedTicks(prevAngle, currAngle);
+    for (const i of crossed) {
+      pulseTickKick(svgEl, state, gsap, i);
+    }
+    prevAngle = currAngle;
+  };
+}
+
 /** Kill any active timeline and optionally snap to rest. */
 export function stop(svgEl, gsap, snapToRest = true) {
   const tween = getTween(svgEl);
@@ -79,6 +165,7 @@ export function stop(svgEl, gsap, snapToRest = true) {
     tween.kill();
     setTween(svgEl, null);
   }
+  killPulseTweens(svgEl);
   if (snapToRest) applyKnobs(svgEl, REST_KNOBS);
 }
 
@@ -95,6 +182,7 @@ export function play(svgEl, scene, gsap) {
   applyKnobs(svgEl, fromState);
 
   const state = { ...fromState };
+  const onTickStrike = makeTickStrikeHandler(svgEl, state, gsap);
   const tl = gsap.timeline();
 
   for (const step of scene.steps ?? []) {
@@ -103,7 +191,10 @@ export function play(svgEl, scene, gsap) {
       duration: step.duration,
       ease: step.ease ?? 'none',
       ...targets,
-      onUpdate: () => applyKnobs(svgEl, state),
+      onUpdate: () => {
+        onTickStrike();
+        applyKnobs(svgEl, state);
+      },
     });
   }
 
