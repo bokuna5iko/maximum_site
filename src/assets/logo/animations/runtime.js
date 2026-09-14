@@ -2,6 +2,7 @@
 export const REST_KNOBS = {
   needleAngle: 34,
   wordSpread: 1,
+  plateOpen: 1,
   redDraw: 1,
   ringSpin: 0,
   markScale: 1,
@@ -11,6 +12,7 @@ export const REST_KNOBS = {
 export const cssName = {
   needleAngle: '--needle-angle',
   wordSpread: '--word-spread',
+  plateOpen: '--plate-open',
   redDraw: '--red-draw',
   ringSpin: '--ring-spin',
   markScale: '--mark-scale',

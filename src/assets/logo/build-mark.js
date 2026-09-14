@@ -147,14 +147,14 @@ ${varBlock}
       transform-origin: ${cx}px ${cy}px;
     }
     #${rootId} #${bannerId} {
-      transform: scaleX(var(--word-spread));
+      transform: scaleX(var(--plate-open));
       transform-origin: ${cx}px ${cy}px;
     }
     #${rootId} #${wordLeftId} {
-      transform: translateX(calc((1 - var(--word-spread)) * ${word.travelPx}px)) skewX(${word.skewDeg}deg);
+      transform: translateX(calc((1 - var(--word-spread)) * ${word.travelPx}px));
     }
     #${rootId} #${wordRightId} {
-      transform: translateX(calc((var(--word-spread) - 1) * ${word.travelPx}px)) skewX(${word.skewDeg}deg);
+      transform: translateX(calc((var(--word-spread) - 1) * ${word.travelPx}px));
     }
     #${rootId} .mark-word {
       font-family: 'Russo One', sans-serif;
@@ -183,28 +183,34 @@ ${buildTicks(suffix)}
 
   <path id="${redId}" d="${redArc}" fill="none" stroke="${colors.red}" stroke-width="${ring.thickness}" stroke-linecap="butt" pathLength="1"/>
 
-  <g id="${bannerId}">
-    <rect x="${bannerX.toFixed(3)}" y="${bannerY.toFixed(3)}" width="${banner.width}" height="${banner.height}" fill="${colors.white}" stroke="${colors.black}" stroke-width="${banner.borderWidth}"/>
-    <rect x="${bannerX.toFixed(3)}" y="${bannerY.toFixed(3)}" width="${banner.blackInsertWidth}" height="${banner.height}" fill="${colors.black}"/>
-    <rect x="${bannerX.toFixed(3)}" y="${bannerY.toFixed(3)}" width="${banner.width}" height="${banner.height}" fill="none" stroke="${colors.black}" stroke-width="${banner.borderWidth}"/>
-  </g>
+${clipDefs(suffix)}
 
-  <text id="${wordLeftId}" class="mark-word" x="${leftTextX}" y="${word.y}" text-anchor="end" fill="${colors.white}">MAXI</text>
-  <text id="${wordRightId}" class="mark-word" x="${rightTextX}" y="${word.y}" text-anchor="start" fill="${colors.red}">MUM</text>
+  <g id="${bannerId}">
+    <rect x="${bannerX.toFixed(3)}" y="${bannerY.toFixed(3)}" width="${banner.width}" height="${banner.height}" rx="${banner.radius}" fill="${colors.plate}" stroke="${colors.plateStroke}" stroke-width="${banner.borderWidth}"/>
+    <g clip-path="url(#${elId('clip-banner-left', suffix)})">
+      <g mask="url(#${elId('mask-word-slash', suffix)})">
+        <text id="${wordLeftId}" class="mark-word" x="${leftTextX}" y="${word.y}" text-anchor="end" fill="${colors.white}">${word.left}</text>
+      </g>
+    </g>
+    <g clip-path="url(#${elId('clip-banner-right', suffix)})">
+      <g mask="url(#${elId('mask-word-slash', suffix)})">
+        <text id="${wordRightId}" class="mark-word" x="${rightTextX}" y="${word.y}" text-anchor="start" fill="${colors.red}">${word.right}</text>
+      </g>
+    </g>
+  </g>
 
   <g id="${needleId}">
-    <path d="${needlePath.left}" fill="${colors.needleDark}" stroke="${colors.needleStroke}" stroke-width="0.6" stroke-linejoin="round"/>
-    <path d="${needlePath.right}" fill="${colors.needleFill}" stroke="${colors.needleStroke}" stroke-width="0.6" stroke-linejoin="round"/>
+    <path d="${needlePath.left}" fill="${colors.needleDark}" stroke="${colors.needleStroke}" stroke-width="0.45" stroke-linejoin="round"/>
+    <path d="${needlePath.right}" fill="${colors.needleFill}" stroke="${colors.needleStroke}" stroke-width="0.45" stroke-linejoin="round"/>
   </g>
-
-  <circle id="${elId('mark-hub', suffix)}" cx="${cx}" cy="${cy}" r="${hub.r}" fill="${colors.hubFill}" stroke="${colors.hubStroke}" stroke-width="${hub.strokeWidth}"/>
 </svg>`;
 }
 
 function buildPreviewHtml(svgBody) {
   const states = [
     { label: 'Rest / final logo', overrides: {}, suffix: 'rest' },
-    { label: 'Words collapsed (--word-spread: 0)', overrides: { '--word-spread': '0' }, suffix: 'collapsed' },
+    { label: 'Plate closed (--plate-open: 0)', overrides: { '--plate-open': '0', '--word-spread': '0' }, suffix: 'plate-shut' },
+    { label: 'Plate open, words hidden (--word-spread: 0)', overrides: { '--word-spread': '0' }, suffix: 'collapsed' },
     { label: 'Needle in red zone (--needle-angle: 80deg)', overrides: { '--needle-angle': '80deg' }, suffix: 'needle-red' },
     {
       label: 'Red undrawn + teeth spun (--red-draw: 0, --ring-spin: 20deg)',
@@ -296,10 +302,36 @@ const ringOuterR = ring.midR + ring.thickness / 2;
 const ringInnerR = ring.midR - ring.thickness / 2;
 const bannerX = cx - banner.width / 2;
 const bannerY = banner.y - banner.height / 2;
+const bannerHalf = banner.width / 2;
 const leftTextX = cx - word.centerGapPx / 2;
 const rightTextX = cx + word.centerGapPx / 2;
+const needleRestDeg = parseFloat(String(css['--needle-angle']));
 const redArc = arcPath(cx, cy, ring.midR, red.startDeg, red.endDeg);
 const needlePath = buildNeedle();
+
+function clipDefs(suffix) {
+  const bannerLeftId = elId('clip-banner-left', suffix);
+  const bannerRightId = elId('clip-banner-right', suffix);
+  const slashMaskId = elId('mask-word-slash', suffix);
+  const clipY = bannerY - 6;
+  const clipH = banner.height + 12;
+  const clipOverlap = 12;
+  return `  <defs>
+    <clipPath id="${bannerLeftId}">
+      <rect x="${bannerX.toFixed(3)}" y="${clipY.toFixed(3)}" width="${bannerHalf + clipOverlap}" height="${clipH}"/>
+    </clipPath>
+    <clipPath id="${bannerRightId}">
+      <rect x="${cx - clipOverlap}" y="${clipY.toFixed(3)}" width="${bannerHalf + clipOverlap}" height="${clipH}"/>
+    </clipPath>
+    <mask id="${slashMaskId}" maskUnits="userSpaceOnUse">
+      <rect x="0" y="0" width="${config.viewBox}" height="${config.viewBox}" fill="#ffffff"/>
+      <g transform="rotate(${needleRestDeg} ${cx} ${cy})">
+        <path d="${needlePath.left}" fill="#000000"/>
+        <path d="${needlePath.right}" fill="#000000"/>
+      </g>
+    </mask>
+  </defs>`;
+}
 
 const svg = buildSvg();
 const previewPath = join(__dirname, 'preview.html');

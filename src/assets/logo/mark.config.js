@@ -17,6 +17,8 @@ export const config = {
     red: '#ED3237',
     redAlt: '#c41218',
     white: '#FFFFFF',
+    plate: '#1A1B1E',
+    plateStroke: '#F2F2F2',
     needleFill: '#F0F0F0',
     needleDark: '#3A3A3A',
     needleHighlight: '#FFFFFF',
@@ -62,7 +64,8 @@ export const config = {
   needle: {
     tipR: 87,
     tailR: 44,
-    halfWidth: 7,
+    /** Thin blade so the slash cuts letters instead of covering them */
+    halfWidth: 2.3,
   },
 
   hub: {
@@ -71,17 +74,19 @@ export const config = {
   },
 
   banner: {
-    width: 148,
-    height: 28,
-    /** Left black panel meets the needle at center */
-    blackInsertWidth: 74,
-    borderWidth: 1.6,
+    width: 118,
+    height: 26,
+    borderWidth: 1.8,
+    radius: 2,
     y: 100,
   },
 
   word: {
+    left: 'MAXI',
+    right: 'MUM',
     fontSize: 20,
-    travelPx: 22,
+    /** Must exceed half-word width so spread 0 hides glyphs inside the clip */
+    travelPx: 58,
     centerGapPx: 0,
     y: 106,
     skewDeg: -9,
@@ -92,6 +97,7 @@ export const config = {
   css: {
     '--needle-angle': '34deg',
     '--word-spread': '1',
+    '--plate-open': '1',
     '--red-start': '12deg',
     '--red-end': '88deg',
     '--red-draw': '1',

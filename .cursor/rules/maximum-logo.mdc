@@ -8,6 +8,8 @@ alwaysApply: false
 
 Перед любой правкой лого прочитай `src/assets/logo/AGENTS.md`.
 
+- Это интерпретация для анимации, не копия `reference.png`
+- Intro: после стрелки `plateOpen` и `wordSpread` в одном шаге — не показывать пустой шильдик
 - Геометрия только в `mark.config.js`, затем `node src/assets/logo/build-mark.js`
 - Анимация только CSS-ручками через `animations/runtime.js`
 - Новый ролик = новый файл в `animations/` + запись в `animations/index.js`

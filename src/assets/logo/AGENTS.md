@@ -2,6 +2,8 @@
 
 Не анализируй SVG с нуля и не правь path руками. Источник правды — этот файл + `mark.config.js`.
 
+Это **интерпретация** знака для анимации, не копия `reference.png`. Растр — вдохновение. Не подгонять плашку под чёрно-белый шильдик оригинала и не трассировать PNG.
+
 ## Карта файлов
 
 | Файл | Роль |
@@ -10,10 +12,12 @@
 | `build-mark.js` | Генератор. Пишет `maximum-mark.svg` и статичный `preview.html` |
 | `maximum-mark.svg` | Картинка. Слои + CSS-переменные. Без `@keyframes` и SMIL |
 | `preview.html` | Статичные состояния ручек. **Перезаписывается генератором** |
-| `play.js` | Песочница анимаций. Страница: корневой `logo-play.html` |
-| `animations/runtime.js` | Единственный способ играть сцену: выставляет ручки на `<svg>` |
-| `animations/*.js` | Одна сцена = один файл. Реестр: `animations/index.js` |
-| `reference.png` | Оригинал для сверки |
+| `play.js` | Песочница. SVG через `?raw` (только Vite) |
+| `logo-play.html` | Корень репо. Плеер: `/logo-play.html` |
+| `animations/runtime.js` | Единственный плеер: выставляет ручки на `<svg>` |
+| `animations/intro.js` | Зафиксированная intro-сцена |
+| `animations/index.js` | Реестр сцен |
+| `reference.png` | Исторический оригинал, не эталон пиксель-в-пиксель |
 
 Сайт (`index.html`, шапка) не трогать, пока пользователь явно не попросит вставить знак.
 
@@ -21,43 +25,60 @@
 
 - viewBox `0 0 200 200`, центр `(100, 100)`
 - Стрелка: `0deg` = 12 часов, дальше по часовой
-- Покой знака (финал intro): `--needle-angle: 34deg`, `--word-spread: 1`, `--red-draw: 1`, `--ring-spin: 0deg`, `--mark-scale: 1`, `--mark-opacity: 1`
+- Покой: `--needle-angle: 34deg`, `--plate-open: 1`, `--word-spread: 1`, `--red-draw: 1`, `--ring-spin: 0deg`, `--mark-scale: 1`, `--mark-opacity: 1`
 
 ## Ручки (анимация только ими)
 
 На корневом `<svg>`:
 
 - `--needle-angle` — `deg`
-- `--word-spread` — `0` слово на оси, `1` MAXIMUM
+- `--plate-open` — `0` шильдик в оси, `1` раскрыт (`scaleX` у `#mark-banner`)
+- `--word-spread` — `0` MAXI/MUM спрятаны в клипах, `1` выехали
 - `--red-draw` — `0..1` дорисовка красной дуги
 - `--ring-spin` — `deg`, крутит только `#mark-teeth`
 - `--mark-scale`, `--mark-opacity` — появление всего знака
 
-`--red-start` / `--red-end` записаны в SVG для справки; дуга запечена генератором. Чтобы сменить сектор — правь `mark.config.js` и пересобери, не анимируй эти две переменные.
+`--red-start` / `--red-end` в SVG для справки; дуга запечена. Сектор менять в `mark.config.js` + пересборка, не анимировать эти две переменные.
 
-Нет ручки на покадровые риски. Не имитируй вспышку рисок правкой DOM/`d`. Нужен stagger — сначала новая ручка в конструкторе.
+Нет ручки на покадровые риски. Нужен stagger — сначала новая ручка в конструкторе, не правь DOM/`d`.
+
+## Зафиксированная intro
+
+Порядок в `animations/intro.js` (не вставляй лишний такт):
+
+1. Появление циферблата (`markOpacity` / `markScale`)
+2. Красная зона (`redDraw`)
+3. Стрелка: заброс ~42° → покой 34°
+4. **Одновременно** `plateOpen: 1` и `wordSpread: 1`
+
+Не раскрывать пустой шильдик до текста: получается «квадрат, потом буквы». Плашка и слово растут от лезвия вместе.
 
 ## Слои (id без суффикса в `maximum-mark.svg`)
 
-`mark-ring` → `mark-teeth` → `mark-ticks` → `mark-disk` → `mark-red` → `mark-banner` → `mark-word-left` → `mark-word-right` → `mark-needle` → `mark-hub`
+`mark-ring` → `mark-teeth` → `mark-ticks` → `mark-disk` → `mark-red` → `mark-banner` → MAXI/MUM → `mark-needle`
 
-В `preview.html` id с суффиксом (`-rest`, `-collapsed`, …). Для сцен брать экземпляр из `logo-play.html` с id `mark-root`.
+Шильдик — один тёмный HUD-бар на диске, светлая обводка. Не чёрно-белый флаг: белая половина сливается с кольцом.
+
+Текст: `MAXI` белый слева, `MUM` красный справа (не `MA`/`IMUM`). Живёт в клипах половинок плашки. Маска вычитает форму лезвия в покое — стрелка тонкий слеш, не толстый ромб поверх букв. Не поднимай `needle.halfWidth` «под оригинал».
+
+В `preview.html` id с суффиксом. Сцены играть на `logo-play.html`, svg id `mark-root`.
 
 ## Как добавить анимацию
 
-1. Новый файл `animations/<id>.js`. Копируй форму `intro.js`: `{ id, title, from, steps }`.
-2. `from` — стартовые ручки. `steps` — `{ duration, ease, vars }` только из списка ручек.
-3. Зарегистрируй в `animations/index.js`.
-4. Не дублируй GSAP-логику: только данные сцены. Играет `runtime.js`.
-5. `prefers-reduced-motion`: runtime прыгает в покой из конфига, без таймлайна.
-6. Проверка: `npm run dev`, в терминале взять `Local: http://localhost:ПОРТ/`, открыть `http://localhost:ПОРТ/logo-play.html`. Не `file://` и не `/play.html`.
+1. Новый файл `animations/<id>.js` по форме `intro.js`: `{ id, title, from, steps }`.
+2. `from` / `steps[].vars` — только ручки из списка.
+3. Запись в `animations/index.js`.
+4. GSAP только в `runtime.js`.
+5. `prefers-reduced-motion`: runtime сразу в покой.
+6. Смотреть: `npm run dev` → в терминале `Local: http://localhost:ПОРТ/` → `http://localhost:ПОРТ/logo-play.html`. Не `file://`, не `/play.html`.
 
 ## Запрещено
 
 - Править `d="..."` в `maximum-mark.svg`
-- Писать `<animate>` / сцену `@keyframes` в SVG
-- Копировать SVG внутрь каждого файла анимации
-- Открывать плеер как `file://` или `/play.html` (нужен Vite: `/logo-play.html`)
+- `<animate>` / сцену `@keyframes` в SVG
+- Копировать SVG в каждый файл анимации
+- Гнаться за `reference.png` ценой анимации (трассировка, булевы дырки в каждой букве)
+- Отдельный шаг «пустая плашка», потом текст
 - Вставлять знак в шапку/герой без явной просьбы
 
 ## Пересборка знака

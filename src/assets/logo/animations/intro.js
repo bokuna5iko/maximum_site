@@ -6,6 +6,7 @@ export const intro = {
     markOpacity: 0,
     markScale: 0.88,
     wordSpread: 0,
+    plateOpen: 0,
     redDraw: 0,
     needleAngle: -50,
     ringSpin: 0,
@@ -41,9 +42,10 @@ export const intro = {
       },
     },
     {
-      duration: 0.5,
+      duration: 0.55,
       ease: 'power2.out',
       vars: {
+        plateOpen: 1,
         wordSpread: 1,
       },
     },

@@ -66,6 +66,7 @@
 <svg id="mark-root" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="Maximum logo mark" style="
   --needle-angle: 34deg;
   --word-spread: 1;
+  --plate-open: 1;
   --red-start: 12deg;
   --red-end: 88deg;
   --red-draw: 1;
@@ -93,14 +94,14 @@
       transform-origin: 100px 100px;
     }
     #mark-root #mark-banner {
-      transform: scaleX(var(--word-spread));
+      transform: scaleX(var(--plate-open));
       transform-origin: 100px 100px;
     }
     #mark-root #mark-word-left {
-      transform: translateX(calc((1 - var(--word-spread)) * 22px)) skewX(-9deg);
+      transform: translateX(calc((1 - var(--word-spread)) * 58px));
     }
     #mark-root #mark-word-right {
-      transform: translateX(calc((var(--word-spread) - 1) * 22px)) skewX(-9deg);
+      transform: translateX(calc((var(--word-spread) - 1) * 58px));
     }
     #mark-root .mark-word {
       font-family: 'Russo One', sans-serif;
@@ -142,21 +143,40 @@
 
   <path id="mark-red" d="M 116.009 24.683 A 77 77 0 0 1 176.953 97.313" fill="none" stroke="#ED3237" stroke-width="17" stroke-linecap="butt" pathLength="1"/>
 
-  <g id="mark-banner">
-    <rect x="26.000" y="86.000" width="148" height="28" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.6"/>
-    <rect x="26.000" y="86.000" width="74" height="28" fill="#201E1E"/>
-    <rect x="26.000" y="86.000" width="148" height="28" fill="none" stroke="#201E1E" stroke-width="1.6"/>
-  </g>
+  <defs>
+    <clipPath id="clip-banner-left">
+      <rect x="41.000" y="81.000" width="71" height="38"/>
+    </clipPath>
+    <clipPath id="clip-banner-right">
+      <rect x="88" y="81.000" width="71" height="38"/>
+    </clipPath>
+    <mask id="mask-word-slash" maskUnits="userSpaceOnUse">
+      <rect x="0" y="0" width="200" height="200" fill="#ffffff"/>
+      <g transform="rotate(34 100 100)">
+        <path d="M 100.000 13.000 L 102.300 100.000 L 100.000 144.000 Z" fill="#000000"/>
+        <path d="M 100.000 13.000 L 100.000 144.000 L 97.700 100.000 Z" fill="#000000"/>
+      </g>
+    </mask>
+  </defs>
 
-  <text id="mark-word-left" class="mark-word" x="100" y="106" text-anchor="end" fill="#FFFFFF">MAXI</text>
-  <text id="mark-word-right" class="mark-word" x="100" y="106" text-anchor="start" fill="#ED3237">MUM</text>
+  <g id="mark-banner">
+    <rect x="41.000" y="87.000" width="118" height="26" rx="2" fill="#1A1B1E" stroke="#F2F2F2" stroke-width="1.8"/>
+    <g clip-path="url(#clip-banner-left)">
+      <g mask="url(#mask-word-slash)">
+        <text id="mark-word-left" class="mark-word" x="100" y="106" text-anchor="end" fill="#FFFFFF">MAXI</text>
+      </g>
+    </g>
+    <g clip-path="url(#clip-banner-right)">
+      <g mask="url(#mask-word-slash)">
+        <text id="mark-word-right" class="mark-word" x="100" y="106" text-anchor="start" fill="#ED3237">MUM</text>
+      </g>
+    </g>
+  </g>
 
   <g id="mark-needle">
-    <path d="M 100.000 13.000 L 107.000 100.000 L 100.000 144.000 Z" fill="#3A3A3A" stroke="#201E1E" stroke-width="0.6" stroke-linejoin="round"/>
-    <path d="M 100.000 13.000 L 100.000 144.000 L 93.000 100.000 Z" fill="#F0F0F0" stroke="#201E1E" stroke-width="0.6" stroke-linejoin="round"/>
+    <path d="M 100.000 13.000 L 102.300 100.000 L 100.000 144.000 Z" fill="#3A3A3A" stroke="#201E1E" stroke-width="0.45" stroke-linejoin="round"/>
+    <path d="M 100.000 13.000 L 100.000 144.000 L 97.700 100.000 Z" fill="#F0F0F0" stroke="#201E1E" stroke-width="0.45" stroke-linejoin="round"/>
   </g>
-
-  <circle id="mark-hub" cx="100" cy="100" r="2.2" fill="#FFFFFF" stroke="#201E1E" stroke-width="0.8"/>
 </svg></div>
       <figcaption>Generated maximum-mark.svg (defaults)</figcaption>
     </figure>
@@ -175,6 +195,7 @@
 <svg id="mark-root-rest" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="Maximum logo mark" style="
   --needle-angle: 34deg;
   --word-spread: 1;
+  --plate-open: 1;
   --red-start: 12deg;
   --red-end: 88deg;
   --red-draw: 1;
@@ -202,14 +223,14 @@
       transform-origin: 100px 100px;
     }
     #mark-root-rest #mark-banner-rest {
-      transform: scaleX(var(--word-spread));
+      transform: scaleX(var(--plate-open));
       transform-origin: 100px 100px;
     }
     #mark-root-rest #mark-word-left-rest {
-      transform: translateX(calc((1 - var(--word-spread)) * 22px)) skewX(-9deg);
+      transform: translateX(calc((1 - var(--word-spread)) * 58px));
     }
     #mark-root-rest #mark-word-right-rest {
-      transform: translateX(calc((var(--word-spread) - 1) * 22px)) skewX(-9deg);
+      transform: translateX(calc((var(--word-spread) - 1) * 58px));
     }
     #mark-root-rest .mark-word {
       font-family: 'Russo One', sans-serif;
@@ -251,23 +272,168 @@
 
   <path id="mark-red-rest" d="M 116.009 24.683 A 77 77 0 0 1 176.953 97.313" fill="none" stroke="#ED3237" stroke-width="17" stroke-linecap="butt" pathLength="1"/>
 
-  <g id="mark-banner-rest">
-    <rect x="26.000" y="86.000" width="148" height="28" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.6"/>
-    <rect x="26.000" y="86.000" width="74" height="28" fill="#201E1E"/>
-    <rect x="26.000" y="86.000" width="148" height="28" fill="none" stroke="#201E1E" stroke-width="1.6"/>
-  </g>
+  <defs>
+    <clipPath id="clip-banner-left-rest">
+      <rect x="41.000" y="81.000" width="71" height="38"/>
+    </clipPath>
+    <clipPath id="clip-banner-right-rest">
+      <rect x="88" y="81.000" width="71" height="38"/>
+    </clipPath>
+    <mask id="mask-word-slash-rest" maskUnits="userSpaceOnUse">
+      <rect x="0" y="0" width="200" height="200" fill="#ffffff"/>
+      <g transform="rotate(34 100 100)">
+        <path d="M 100.000 13.000 L 102.300 100.000 L 100.000 144.000 Z" fill="#000000"/>
+        <path d="M 100.000 13.000 L 100.000 144.000 L 97.700 100.000 Z" fill="#000000"/>
+      </g>
+    </mask>
+  </defs>
 
-  <text id="mark-word-left-rest" class="mark-word" x="100" y="106" text-anchor="end" fill="#FFFFFF">MAXI</text>
-  <text id="mark-word-right-rest" class="mark-word" x="100" y="106" text-anchor="start" fill="#ED3237">MUM</text>
+  <g id="mark-banner-rest">
+    <rect x="41.000" y="87.000" width="118" height="26" rx="2" fill="#1A1B1E" stroke="#F2F2F2" stroke-width="1.8"/>
+    <g clip-path="url(#clip-banner-left-rest)">
+      <g mask="url(#mask-word-slash-rest)">
+        <text id="mark-word-left-rest" class="mark-word" x="100" y="106" text-anchor="end" fill="#FFFFFF">MAXI</text>
+      </g>
+    </g>
+    <g clip-path="url(#clip-banner-right-rest)">
+      <g mask="url(#mask-word-slash-rest)">
+        <text id="mark-word-right-rest" class="mark-word" x="100" y="106" text-anchor="start" fill="#ED3237">MUM</text>
+      </g>
+    </g>
+  </g>
 
   <g id="mark-needle-rest">
-    <path d="M 100.000 13.000 L 107.000 100.000 L 100.000 144.000 Z" fill="#3A3A3A" stroke="#201E1E" stroke-width="0.6" stroke-linejoin="round"/>
-    <path d="M 100.000 13.000 L 100.000 144.000 L 93.000 100.000 Z" fill="#F0F0F0" stroke="#201E1E" stroke-width="0.6" stroke-linejoin="round"/>
+    <path d="M 100.000 13.000 L 102.300 100.000 L 100.000 144.000 Z" fill="#3A3A3A" stroke="#201E1E" stroke-width="0.45" stroke-linejoin="round"/>
+    <path d="M 100.000 13.000 L 100.000 144.000 L 97.700 100.000 Z" fill="#F0F0F0" stroke="#201E1E" stroke-width="0.45" stroke-linejoin="round"/>
   </g>
-
-  <circle id="mark-hub-rest" cx="100" cy="100" r="2.2" fill="#FFFFFF" stroke="#201E1E" stroke-width="0.8"/>
 </svg></div>
       <figcaption>Rest / final logo</figcaption>
+    </figure>
+    <figure class="panel">
+      <div class="mark-wrap"><!--
+  Coordinate contract:
+  - viewBox 0 0 200 200
+  - Center (100, 100)
+  - Needle 0° = 12 o'clock, clockwise positive
+  - Animate via CSS variables on <svg>; never edit path d
+  - No <animate> or @keyframes in this file
+-->
+<svg id="mark-root-plate-shut" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="Maximum logo mark" style="
+  --needle-angle: 34deg;
+  --word-spread: 0;
+  --plate-open: 0;
+  --red-start: 12deg;
+  --red-end: 88deg;
+  --red-draw: 1;
+  --ring-spin: 0deg;
+  --mark-scale: 1;
+  --mark-opacity: 1;
+">
+  <style>
+    #mark-root-plate-shut {
+      transform: scale(var(--mark-scale));
+      transform-origin: 100px 100px;
+      opacity: var(--mark-opacity);
+    }
+    #mark-root-plate-shut #mark-teeth-plate-shut {
+      transform: rotate(var(--ring-spin));
+      transform-origin: 100px 100px;
+      transform-box: view-box;
+    }
+    #mark-root-plate-shut #mark-red-plate-shut {
+      stroke-dasharray: 1;
+      stroke-dashoffset: calc(1 - var(--red-draw));
+    }
+    #mark-root-plate-shut #mark-needle-plate-shut {
+      transform: rotate(var(--needle-angle));
+      transform-origin: 100px 100px;
+    }
+    #mark-root-plate-shut #mark-banner-plate-shut {
+      transform: scaleX(var(--plate-open));
+      transform-origin: 100px 100px;
+    }
+    #mark-root-plate-shut #mark-word-left-plate-shut {
+      transform: translateX(calc((1 - var(--word-spread)) * 58px));
+    }
+    #mark-root-plate-shut #mark-word-right-plate-shut {
+      transform: translateX(calc((var(--word-spread) - 1) * 58px));
+    }
+    #mark-root-plate-shut .mark-word {
+      font-family: 'Russo One', sans-serif;
+      font-style: italic;
+      font-size: 20px;
+      font-weight: 400;
+      letter-spacing: -0.06em;
+    }
+  </style>
+
+  <g id="mark-ring-plate-shut">
+    <circle cx="100" cy="100" r="77" fill="none" stroke="#FFFFFF" stroke-width="17"/>
+    <circle cx="100" cy="100" r="85.5" fill="none" stroke="#201E1E" stroke-width="1.5"/>
+    <circle cx="100" cy="100" r="68.5" fill="none" stroke="#201E1E" stroke-width="1.20"/>
+  </g>
+
+  <g id="mark-teeth-plate-shut">
+    <path id="mark-tooth-0-plate-shut" d="M 170.619 148.199 L 174.058 153.737 L 170.057 158.858 L 163.852 156.861 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    <path id="mark-tooth-1-plate-shut" d="M 153.052 167.050 L 154.685 173.361 L 149.340 177.057 L 144.011 173.302 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    <path id="mark-tooth-2-plate-shut" d="M 130.667 179.811 L 130.345 186.322 L 124.142 188.258 L 120.174 183.086 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    <path id="mark-tooth-3-plate-shut" d="M 105.496 185.323 L 103.249 191.442 L 96.751 191.442 L 94.504 185.323 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    <path id="mark-tooth-4-plate-shut" d="M 79.826 183.086 L 75.858 188.258 L 69.655 186.322 L 69.333 179.811 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    <path id="mark-tooth-5-plate-shut" d="M 55.989 173.302 L 50.660 177.057 L 45.315 173.361 L 46.948 167.050 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+    <path id="mark-tooth-6-plate-shut" d="M 36.148 156.861 L 29.943 158.858 L 25.942 153.737 L 29.381 148.199 Z" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.5" stroke-linejoin="miter"/>
+  </g>
+
+  <g id="mark-ticks-plate-shut">
+    <polygon id="mark-tick-0-plate-shut" points="34.839,128.198 22.117,131.467 33.540,124.981" fill="#201E1E"/>
+    <polygon id="mark-tick-1-plate-shut" points="29.042,102.442 16.004,100.838 29.007,98.973" fill="#201E1E"/>
+    <polygon id="mark-tick-2-plate-shut" points="33.055,76.350 21.504,70.093 34.290,73.108" fill="#201E1E"/>
+    <polygon id="mark-tick-3-plate-shut" points="46.323,53.527 37.857,43.482 48.657,50.960" fill="#201E1E"/>
+    <polygon id="mark-tick-4-plate-shut" points="67.012,37.129 62.801,24.686 70.123,35.592" fill="#201E1E"/>
+    <polygon id="mark-tick-5-plate-shut" points="92.262,29.423 92.888,16.302 95.719,29.129" fill="#201E1E"/>
+    <polygon id="mark-tick-6-plate-shut" points="118.581,31.475 123.958,19.489 121.907,32.464" fill="#201E1E"/>
+    <polygon id="mark-tick-7-plate-shut" points="142.332,43.000 151.716,33.807 145.066,45.136" fill="#201E1E"/>
+  </g>
+
+  <circle id="mark-disk-plate-shut" cx="100" cy="100" r="65" fill="#201E1E"/>
+
+  <path id="mark-red-plate-shut" d="M 116.009 24.683 A 77 77 0 0 1 176.953 97.313" fill="none" stroke="#ED3237" stroke-width="17" stroke-linecap="butt" pathLength="1"/>
+
+  <defs>
+    <clipPath id="clip-banner-left-plate-shut">
+      <rect x="41.000" y="81.000" width="71" height="38"/>
+    </clipPath>
+    <clipPath id="clip-banner-right-plate-shut">
+      <rect x="88" y="81.000" width="71" height="38"/>
+    </clipPath>
+    <mask id="mask-word-slash-plate-shut" maskUnits="userSpaceOnUse">
+      <rect x="0" y="0" width="200" height="200" fill="#ffffff"/>
+      <g transform="rotate(34 100 100)">
+        <path d="M 100.000 13.000 L 102.300 100.000 L 100.000 144.000 Z" fill="#000000"/>
+        <path d="M 100.000 13.000 L 100.000 144.000 L 97.700 100.000 Z" fill="#000000"/>
+      </g>
+    </mask>
+  </defs>
+
+  <g id="mark-banner-plate-shut">
+    <rect x="41.000" y="87.000" width="118" height="26" rx="2" fill="#1A1B1E" stroke="#F2F2F2" stroke-width="1.8"/>
+    <g clip-path="url(#clip-banner-left-plate-shut)">
+      <g mask="url(#mask-word-slash-plate-shut)">
+        <text id="mark-word-left-plate-shut" class="mark-word" x="100" y="106" text-anchor="end" fill="#FFFFFF">MAXI</text>
+      </g>
+    </g>
+    <g clip-path="url(#clip-banner-right-plate-shut)">
+      <g mask="url(#mask-word-slash-plate-shut)">
+        <text id="mark-word-right-plate-shut" class="mark-word" x="100" y="106" text-anchor="start" fill="#ED3237">MUM</text>
+      </g>
+    </g>
+  </g>
+
+  <g id="mark-needle-plate-shut">
+    <path d="M 100.000 13.000 L 102.300 100.000 L 100.000 144.000 Z" fill="#3A3A3A" stroke="#201E1E" stroke-width="0.45" stroke-linejoin="round"/>
+    <path d="M 100.000 13.000 L 100.000 144.000 L 97.700 100.000 Z" fill="#F0F0F0" stroke="#201E1E" stroke-width="0.45" stroke-linejoin="round"/>
+  </g>
+</svg></div>
+      <figcaption>Plate closed (--plate-open: 0)</figcaption>
     </figure>
     <figure class="panel">
       <div class="mark-wrap"><!--
@@ -281,6 +447,7 @@
 <svg id="mark-root-collapsed" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="Maximum logo mark" style="
   --needle-angle: 34deg;
   --word-spread: 0;
+  --plate-open: 1;
   --red-start: 12deg;
   --red-end: 88deg;
   --red-draw: 1;
@@ -308,14 +475,14 @@
       transform-origin: 100px 100px;
     }
     #mark-root-collapsed #mark-banner-collapsed {
-      transform: scaleX(var(--word-spread));
+      transform: scaleX(var(--plate-open));
       transform-origin: 100px 100px;
     }
     #mark-root-collapsed #mark-word-left-collapsed {
-      transform: translateX(calc((1 - var(--word-spread)) * 22px)) skewX(-9deg);
+      transform: translateX(calc((1 - var(--word-spread)) * 58px));
     }
     #mark-root-collapsed #mark-word-right-collapsed {
-      transform: translateX(calc((var(--word-spread) - 1) * 22px)) skewX(-9deg);
+      transform: translateX(calc((var(--word-spread) - 1) * 58px));
     }
     #mark-root-collapsed .mark-word {
       font-family: 'Russo One', sans-serif;
@@ -357,23 +524,42 @@
 
   <path id="mark-red-collapsed" d="M 116.009 24.683 A 77 77 0 0 1 176.953 97.313" fill="none" stroke="#ED3237" stroke-width="17" stroke-linecap="butt" pathLength="1"/>
 
-  <g id="mark-banner-collapsed">
-    <rect x="26.000" y="86.000" width="148" height="28" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.6"/>
-    <rect x="26.000" y="86.000" width="74" height="28" fill="#201E1E"/>
-    <rect x="26.000" y="86.000" width="148" height="28" fill="none" stroke="#201E1E" stroke-width="1.6"/>
-  </g>
+  <defs>
+    <clipPath id="clip-banner-left-collapsed">
+      <rect x="41.000" y="81.000" width="71" height="38"/>
+    </clipPath>
+    <clipPath id="clip-banner-right-collapsed">
+      <rect x="88" y="81.000" width="71" height="38"/>
+    </clipPath>
+    <mask id="mask-word-slash-collapsed" maskUnits="userSpaceOnUse">
+      <rect x="0" y="0" width="200" height="200" fill="#ffffff"/>
+      <g transform="rotate(34 100 100)">
+        <path d="M 100.000 13.000 L 102.300 100.000 L 100.000 144.000 Z" fill="#000000"/>
+        <path d="M 100.000 13.000 L 100.000 144.000 L 97.700 100.000 Z" fill="#000000"/>
+      </g>
+    </mask>
+  </defs>
 
-  <text id="mark-word-left-collapsed" class="mark-word" x="100" y="106" text-anchor="end" fill="#FFFFFF">MAXI</text>
-  <text id="mark-word-right-collapsed" class="mark-word" x="100" y="106" text-anchor="start" fill="#ED3237">MUM</text>
+  <g id="mark-banner-collapsed">
+    <rect x="41.000" y="87.000" width="118" height="26" rx="2" fill="#1A1B1E" stroke="#F2F2F2" stroke-width="1.8"/>
+    <g clip-path="url(#clip-banner-left-collapsed)">
+      <g mask="url(#mask-word-slash-collapsed)">
+        <text id="mark-word-left-collapsed" class="mark-word" x="100" y="106" text-anchor="end" fill="#FFFFFF">MAXI</text>
+      </g>
+    </g>
+    <g clip-path="url(#clip-banner-right-collapsed)">
+      <g mask="url(#mask-word-slash-collapsed)">
+        <text id="mark-word-right-collapsed" class="mark-word" x="100" y="106" text-anchor="start" fill="#ED3237">MUM</text>
+      </g>
+    </g>
+  </g>
 
   <g id="mark-needle-collapsed">
-    <path d="M 100.000 13.000 L 107.000 100.000 L 100.000 144.000 Z" fill="#3A3A3A" stroke="#201E1E" stroke-width="0.6" stroke-linejoin="round"/>
-    <path d="M 100.000 13.000 L 100.000 144.000 L 93.000 100.000 Z" fill="#F0F0F0" stroke="#201E1E" stroke-width="0.6" stroke-linejoin="round"/>
+    <path d="M 100.000 13.000 L 102.300 100.000 L 100.000 144.000 Z" fill="#3A3A3A" stroke="#201E1E" stroke-width="0.45" stroke-linejoin="round"/>
+    <path d="M 100.000 13.000 L 100.000 144.000 L 97.700 100.000 Z" fill="#F0F0F0" stroke="#201E1E" stroke-width="0.45" stroke-linejoin="round"/>
   </g>
-
-  <circle id="mark-hub-collapsed" cx="100" cy="100" r="2.2" fill="#FFFFFF" stroke="#201E1E" stroke-width="0.8"/>
 </svg></div>
-      <figcaption>Words collapsed (--word-spread: 0)</figcaption>
+      <figcaption>Plate open, words hidden (--word-spread: 0)</figcaption>
     </figure>
     <figure class="panel">
       <div class="mark-wrap"><!--
@@ -387,6 +573,7 @@
 <svg id="mark-root-needle-red" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="Maximum logo mark" style="
   --needle-angle: 80deg;
   --word-spread: 1;
+  --plate-open: 1;
   --red-start: 12deg;
   --red-end: 88deg;
   --red-draw: 1;
@@ -414,14 +601,14 @@
       transform-origin: 100px 100px;
     }
     #mark-root-needle-red #mark-banner-needle-red {
-      transform: scaleX(var(--word-spread));
+      transform: scaleX(var(--plate-open));
       transform-origin: 100px 100px;
     }
     #mark-root-needle-red #mark-word-left-needle-red {
-      transform: translateX(calc((1 - var(--word-spread)) * 22px)) skewX(-9deg);
+      transform: translateX(calc((1 - var(--word-spread)) * 58px));
     }
     #mark-root-needle-red #mark-word-right-needle-red {
-      transform: translateX(calc((var(--word-spread) - 1) * 22px)) skewX(-9deg);
+      transform: translateX(calc((var(--word-spread) - 1) * 58px));
     }
     #mark-root-needle-red .mark-word {
       font-family: 'Russo One', sans-serif;
@@ -463,21 +650,40 @@
 
   <path id="mark-red-needle-red" d="M 116.009 24.683 A 77 77 0 0 1 176.953 97.313" fill="none" stroke="#ED3237" stroke-width="17" stroke-linecap="butt" pathLength="1"/>
 
-  <g id="mark-banner-needle-red">
-    <rect x="26.000" y="86.000" width="148" height="28" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.6"/>
-    <rect x="26.000" y="86.000" width="74" height="28" fill="#201E1E"/>
-    <rect x="26.000" y="86.000" width="148" height="28" fill="none" stroke="#201E1E" stroke-width="1.6"/>
-  </g>
+  <defs>
+    <clipPath id="clip-banner-left-needle-red">
+      <rect x="41.000" y="81.000" width="71" height="38"/>
+    </clipPath>
+    <clipPath id="clip-banner-right-needle-red">
+      <rect x="88" y="81.000" width="71" height="38"/>
+    </clipPath>
+    <mask id="mask-word-slash-needle-red" maskUnits="userSpaceOnUse">
+      <rect x="0" y="0" width="200" height="200" fill="#ffffff"/>
+      <g transform="rotate(34 100 100)">
+        <path d="M 100.000 13.000 L 102.300 100.000 L 100.000 144.000 Z" fill="#000000"/>
+        <path d="M 100.000 13.000 L 100.000 144.000 L 97.700 100.000 Z" fill="#000000"/>
+      </g>
+    </mask>
+  </defs>
 
-  <text id="mark-word-left-needle-red" class="mark-word" x="100" y="106" text-anchor="end" fill="#FFFFFF">MAXI</text>
-  <text id="mark-word-right-needle-red" class="mark-word" x="100" y="106" text-anchor="start" fill="#ED3237">MUM</text>
+  <g id="mark-banner-needle-red">
+    <rect x="41.000" y="87.000" width="118" height="26" rx="2" fill="#1A1B1E" stroke="#F2F2F2" stroke-width="1.8"/>
+    <g clip-path="url(#clip-banner-left-needle-red)">
+      <g mask="url(#mask-word-slash-needle-red)">
+        <text id="mark-word-left-needle-red" class="mark-word" x="100" y="106" text-anchor="end" fill="#FFFFFF">MAXI</text>
+      </g>
+    </g>
+    <g clip-path="url(#clip-banner-right-needle-red)">
+      <g mask="url(#mask-word-slash-needle-red)">
+        <text id="mark-word-right-needle-red" class="mark-word" x="100" y="106" text-anchor="start" fill="#ED3237">MUM</text>
+      </g>
+    </g>
+  </g>
 
   <g id="mark-needle-needle-red">
-    <path d="M 100.000 13.000 L 107.000 100.000 L 100.000 144.000 Z" fill="#3A3A3A" stroke="#201E1E" stroke-width="0.6" stroke-linejoin="round"/>
-    <path d="M 100.000 13.000 L 100.000 144.000 L 93.000 100.000 Z" fill="#F0F0F0" stroke="#201E1E" stroke-width="0.6" stroke-linejoin="round"/>
+    <path d="M 100.000 13.000 L 102.300 100.000 L 100.000 144.000 Z" fill="#3A3A3A" stroke="#201E1E" stroke-width="0.45" stroke-linejoin="round"/>
+    <path d="M 100.000 13.000 L 100.000 144.000 L 97.700 100.000 Z" fill="#F0F0F0" stroke="#201E1E" stroke-width="0.45" stroke-linejoin="round"/>
   </g>
-
-  <circle id="mark-hub-needle-red" cx="100" cy="100" r="2.2" fill="#FFFFFF" stroke="#201E1E" stroke-width="0.8"/>
 </svg></div>
       <figcaption>Needle in red zone (--needle-angle: 80deg)</figcaption>
     </figure>
@@ -493,6 +699,7 @@
 <svg id="mark-root-red-spin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="Maximum logo mark" style="
   --needle-angle: 34deg;
   --word-spread: 1;
+  --plate-open: 1;
   --red-start: 12deg;
   --red-end: 88deg;
   --red-draw: 0;
@@ -520,14 +727,14 @@
       transform-origin: 100px 100px;
     }
     #mark-root-red-spin #mark-banner-red-spin {
-      transform: scaleX(var(--word-spread));
+      transform: scaleX(var(--plate-open));
       transform-origin: 100px 100px;
     }
     #mark-root-red-spin #mark-word-left-red-spin {
-      transform: translateX(calc((1 - var(--word-spread)) * 22px)) skewX(-9deg);
+      transform: translateX(calc((1 - var(--word-spread)) * 58px));
     }
     #mark-root-red-spin #mark-word-right-red-spin {
-      transform: translateX(calc((var(--word-spread) - 1) * 22px)) skewX(-9deg);
+      transform: translateX(calc((var(--word-spread) - 1) * 58px));
     }
     #mark-root-red-spin .mark-word {
       font-family: 'Russo One', sans-serif;
@@ -569,21 +776,40 @@
 
   <path id="mark-red-red-spin" d="M 116.009 24.683 A 77 77 0 0 1 176.953 97.313" fill="none" stroke="#ED3237" stroke-width="17" stroke-linecap="butt" pathLength="1"/>
 
-  <g id="mark-banner-red-spin">
-    <rect x="26.000" y="86.000" width="148" height="28" fill="#FFFFFF" stroke="#201E1E" stroke-width="1.6"/>
-    <rect x="26.000" y="86.000" width="74" height="28" fill="#201E1E"/>
-    <rect x="26.000" y="86.000" width="148" height="28" fill="none" stroke="#201E1E" stroke-width="1.6"/>
-  </g>
+  <defs>
+    <clipPath id="clip-banner-left-red-spin">
+      <rect x="41.000" y="81.000" width="71" height="38"/>
+    </clipPath>
+    <clipPath id="clip-banner-right-red-spin">
+      <rect x="88" y="81.000" width="71" height="38"/>
+    </clipPath>
+    <mask id="mask-word-slash-red-spin" maskUnits="userSpaceOnUse">
+      <rect x="0" y="0" width="200" height="200" fill="#ffffff"/>
+      <g transform="rotate(34 100 100)">
+        <path d="M 100.000 13.000 L 102.300 100.000 L 100.000 144.000 Z" fill="#000000"/>
+        <path d="M 100.000 13.000 L 100.000 144.000 L 97.700 100.000 Z" fill="#000000"/>
+      </g>
+    </mask>
+  </defs>
 
-  <text id="mark-word-left-red-spin" class="mark-word" x="100" y="106" text-anchor="end" fill="#FFFFFF">MAXI</text>
-  <text id="mark-word-right-red-spin" class="mark-word" x="100" y="106" text-anchor="start" fill="#ED3237">MUM</text>
+  <g id="mark-banner-red-spin">
+    <rect x="41.000" y="87.000" width="118" height="26" rx="2" fill="#1A1B1E" stroke="#F2F2F2" stroke-width="1.8"/>
+    <g clip-path="url(#clip-banner-left-red-spin)">
+      <g mask="url(#mask-word-slash-red-spin)">
+        <text id="mark-word-left-red-spin" class="mark-word" x="100" y="106" text-anchor="end" fill="#FFFFFF">MAXI</text>
+      </g>
+    </g>
+    <g clip-path="url(#clip-banner-right-red-spin)">
+      <g mask="url(#mask-word-slash-red-spin)">
+        <text id="mark-word-right-red-spin" class="mark-word" x="100" y="106" text-anchor="start" fill="#ED3237">MUM</text>
+      </g>
+    </g>
+  </g>
 
   <g id="mark-needle-red-spin">
-    <path d="M 100.000 13.000 L 107.000 100.000 L 100.000 144.000 Z" fill="#3A3A3A" stroke="#201E1E" stroke-width="0.6" stroke-linejoin="round"/>
-    <path d="M 100.000 13.000 L 100.000 144.000 L 93.000 100.000 Z" fill="#F0F0F0" stroke="#201E1E" stroke-width="0.6" stroke-linejoin="round"/>
+    <path d="M 100.000 13.000 L 102.300 100.000 L 100.000 144.000 Z" fill="#3A3A3A" stroke="#201E1E" stroke-width="0.45" stroke-linejoin="round"/>
+    <path d="M 100.000 13.000 L 100.000 144.000 L 97.700 100.000 Z" fill="#F0F0F0" stroke="#201E1E" stroke-width="0.45" stroke-linejoin="round"/>
   </g>
-
-  <circle id="mark-hub-red-spin" cx="100" cy="100" r="2.2" fill="#FFFFFF" stroke="#201E1E" stroke-width="0.8"/>
 </svg></div>
       <figcaption>Red undrawn + teeth spun (--red-draw: 0, --ring-spin: 20deg)</figcaption>
     </figure>
