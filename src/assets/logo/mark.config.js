@@ -38,6 +38,7 @@ export const mechanics = {
   /** Px each half moves from the blade when --word-gap is 1. Right is smaller so M matches I (italic + 34° slash). */
   wordGapLeftPx: 5,
   wordGapRightPx: 2,
+  scrollDegPerPx: 0.2,
 };
 
 export const config = {

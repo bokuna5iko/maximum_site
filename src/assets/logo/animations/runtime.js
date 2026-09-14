@@ -6,6 +6,22 @@ export const REST_KNOBS = Object.fromEntries(
   Object.entries(registry).map(([key, knob]) => [key, knob.rest]),
 );
 
+/** Site header rest — intro v2 final pose (wordGap open around blade). */
+export const HEADER_REST = {
+  ...REST_KNOBS,
+  wordGap: 1,
+  plateOpen: 1,
+  wordSpread: 1,
+  tickReact: 1,
+  toothReact: 0,
+  markOpacity: 1,
+  markScale: 1,
+  redDraw: 1,
+  needleImpact: 1,
+  redHeat: 0,
+  hubPulse: 1,
+};
+
 export const cssName = Object.fromEntries(
   Object.entries(registry).map(([key, knob]) => [key, knob.css]),
 );
@@ -193,23 +209,29 @@ function latchToothReveal(svgEl, state, gsap, toothIndex) {
   setLatchTweens(svgEl, latches);
 }
 
-function makeNeedleCrossHandler(svgEl, state, gsap) {
+/** Scroll / manual needle updates — pulse ticks and latch teeth on angle crossings. */
+export function createNeedleDriver(svgEl, gsap, state) {
   let prevAngle = state.needleAngle;
 
-  return () => {
-    const currAngle = state.needleAngle;
-    if (prevAngle === currAngle) return;
-    if (state.tickReact > 0) {
-      for (const i of detectCrossedTicks(prevAngle, currAngle)) {
-        pulseTickKick(svgEl, state, gsap, i);
+  return {
+    onNeedleMove() {
+      const currAngle = state.needleAngle;
+      if (prevAngle === currAngle) return;
+      if (state.tickReact > 0) {
+        for (const i of detectCrossedTicks(prevAngle, currAngle)) {
+          pulseTickKick(svgEl, state, gsap, i);
+        }
       }
-    }
-    if (state.toothReact > 0) {
-      for (const i of detectCrossedTeeth(prevAngle, currAngle)) {
-        latchToothReveal(svgEl, state, gsap, i);
+      if (state.toothReact > 0) {
+        for (const i of detectCrossedTeeth(prevAngle, currAngle)) {
+          latchToothReveal(svgEl, state, gsap, i);
+        }
       }
-    }
-    prevAngle = currAngle;
+      prevAngle = currAngle;
+    },
+    resetPrevAngle(angle) {
+      prevAngle = angle;
+    },
   };
 }
 
@@ -226,19 +248,24 @@ export function stop(svgEl, gsap, snapToRest = true) {
 }
 
 /** Play a declarative scene on the given <svg>. Returns a GSAP timeline. */
-export function play(svgEl, scene, gsap) {
+export function play(svgEl, scene, gsap, options = {}) {
+  const restKnobs = options.restKnobs ?? REST_KNOBS;
   stop(svgEl, gsap, false);
 
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    applyKnobs(svgEl, REST_KNOBS);
+    if (options.state) Object.assign(options.state, restKnobs);
+    applyKnobs(svgEl, restKnobs);
     return gsap.timeline();
   }
 
-  const fromState = { ...REST_KNOBS, ...normalizePartial(scene.from) };
-  applyKnobs(svgEl, fromState);
+  const fromState = { ...restKnobs, ...normalizePartial(scene.from) };
+  if (options.state) {
+    Object.assign(options.state, fromState);
+  }
+  const state = options.state ?? { ...fromState };
+  applyKnobs(svgEl, state);
 
-  const state = { ...fromState };
-  const onNeedleCross = makeNeedleCrossHandler(svgEl, state, gsap);
+  const needleDriver = createNeedleDriver(svgEl, gsap, state);
   const tl = gsap.timeline();
 
   for (const step of scene.steps ?? []) {
@@ -248,7 +275,7 @@ export function play(svgEl, scene, gsap) {
       ease: step.ease ?? 'none',
       ...targets,
       onUpdate: () => {
-        onNeedleCross();
+        needleDriver.onNeedleMove();
         applyKnobs(svgEl, state);
       },
     });

@@ -19,8 +19,11 @@
 | `animations/intro-v2.js` | Intro + щель MAXI/MUM вокруг клинка (`wordGap`) |
 | `animations/index.js` | Реестр сцен |
 | `reference.png` | Исторический оригинал, не эталон пиксель-в-пиксель |
+| `../../js/mark-header.js` | Знак в шапке сайта: intro v2, scroll-needle, collapse |
 
-Сайт (`index.html`, шапка) не трогать, пока пользователь явно не попросит вставить знак.
+Сайт: знак в `#header-mark` (`src/js/mark-header.js`). Песочница сцен — `/logo-play.html` (без изменений).
+
+**HEADER_REST** (`runtime.js`) — покой шапки после intro v2 (`wordGap: 1`, зубья/плашка раскрыты). **REST_KNOBS** — покой SVG / Reset в плеере (`wordGap: 0`). На шапке не вызывать `stop(svg, gsap, true)` — сбросит `wordGap` в 0.
 
 ## Координаты
 
@@ -119,7 +122,7 @@
 - Копировать SVG в каждый файл анимации
 - Гнаться за `reference.png` ценой анимации (трассировка, булевы дырки в каждой букве)
 - Отдельный шаг «пустая плашка», потом текст
-- Вставлять знак в шапку/герой без явной просьбы
+- Менять сцену шапки (`intro-v2`) без явной просьбы; песочница `/logo-play.html` не ломать
 - Анимировать `--red-start` / `--red-end`
 - Blade gleam, particles, per-letter knobs
 

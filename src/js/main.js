@@ -6,6 +6,7 @@ import { initQuiz } from "./quiz.js";
 import { initModals } from "./modal.js";
 import { initWaterDrops } from "./parallax.js";
 import { initVideoSlider } from "./video-slider.js";
+import { initMarkHeader } from "./mark-header.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   initAnalytics();
@@ -13,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
   renderInventory();
   initModals();
   initQuiz();
+  initMarkHeader();
   initMobileNav();
   initClickTracking();
   if (
