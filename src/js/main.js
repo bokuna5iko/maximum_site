@@ -15,6 +15,11 @@ document.addEventListener("DOMContentLoaded", () => {
   initQuiz();
   initMobileNav();
   initClickTracking();
-  initWaterDrops();
+  if (
+    !window.matchMedia("(max-width: 768px)").matches &&
+    !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  ) {
+    initWaterDrops();
+  }
   initVideoSlider();
 });

@@ -3,6 +3,10 @@
 .visit {
   padding: 80px 0;
   background-color: $bg-main;
+
+  @media (max-width: 768px) {
+    padding: 60px 0;
+  }
 }
 
 .visit__grid {
@@ -21,6 +25,10 @@
   border: 1px solid #e2e8f0;
   border-radius: $radius-md;
   padding: 24px 22px;
+
+  @media (max-width: 768px) {
+    padding: 18px 16px;
+  }
 
   &__step {
     display: inline-block;
@@ -62,6 +70,14 @@
   color: $text-light;
   border-radius: $radius-md;
   padding: 28px 24px;
+
+  @media (max-width: 768px) {
+    padding: 20px 18px;
+
+    .btn {
+      width: 100%;
+    }
+  }
 
   &--light {
     background: $bg-surface;
@@ -105,6 +121,10 @@
   padding: 80px 0 40px;
   background-color: $bg-main-alt;
 
+  @media (max-width: 768px) {
+    padding: 60px 0 32px;
+  }
+
   .text-left {
     text-align: left;
   }
@@ -117,6 +137,11 @@
   align-items: flex-end;
   margin-bottom: 28px;
   flex-wrap: wrap;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 .gis-score {
@@ -189,4 +214,12 @@
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+
+    .btn {
+      width: 100%;
+    }
+  }
 }

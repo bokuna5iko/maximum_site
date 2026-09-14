@@ -4,6 +4,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  min-height: 44px;
   padding: 14px 28px;
   border-radius: $radius-sm;
   font-family: $font-header;
@@ -21,8 +22,13 @@
     box-shadow: 0 4px 15px $accent-orange-glow;
 
     &:hover {
-      transform: translateY(-2px);
       box-shadow: 0 6px 20px rgba(255, 85, 0, 0.5);
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        transform: translateY(-2px);
+      }
     }
   }
 
@@ -34,7 +40,12 @@
     &:hover {
       background: rgba(255, 255, 255, 0.1);
       border-color: rgba(255, 255, 255, 0.5);
-      transform: translateY(-2px);
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        transform: translateY(-2px);
+      }
     }
   }
 
@@ -47,7 +58,12 @@
       background: #f8fafc;
       border-color: $accent-orange;
       color: $accent-orange;
-      transform: translateY(-2px);
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        transform: translateY(-2px);
+      }
     }
   }
 

@@ -174,7 +174,62 @@
 
     @media (max-width: 768px) {
       grid-template-columns: repeat(2, 1fr);
-      bottom: 15px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    min-height: auto;
+    padding: calc(76px + env(safe-area-inset-top, 0px)) 16px
+      calc(16px + 65px + env(safe-area-inset-bottom, 0px));
+    justify-content: flex-start;
+
+    &__container {
+      margin: 0;
+    }
+
+    &__badge {
+      flex-wrap: wrap;
+      justify-content: center;
+      font-size: 0.78rem;
+      padding: 6px 14px;
+      margin-bottom: 12px;
+    }
+
+    &__brand {
+      margin-bottom: 8px;
+    }
+
+    &__title {
+      margin-bottom: 10px;
+    }
+
+    &__subtitle {
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+
+      &[data-season-line] {
+        margin-top: 0 !important;
+        margin-bottom: 16px;
+      }
+    }
+
+    &__actions {
+      flex-direction: column;
+      width: 100%;
+      gap: 10px;
+
+      .btn {
+        width: 100%;
+      }
+    }
+
+    &__season-bar {
+      position: static;
+      transform: none;
+      width: 100%;
+      max-width: none;
+      margin-top: 16px;
+      gap: 8px;
     }
   }
 }
@@ -224,7 +279,12 @@
   &:hover {
     background: rgba(24, 25, 28, 0.8);
     border-color: rgba(255, 255, 255, 0.25);
-    transform: translateY(-2px);
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      transform: translateY(-2px);
+    }
   }
 
   &.active {
@@ -238,6 +298,23 @@
 
     .season-card__line {
       width: 100%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 10px 12px;
+  }
+
+  @media (max-width: 640px) {
+    padding: 8px 10px;
+
+    .season-card__label {
+      font-size: 0.6rem;
+      margin-bottom: 2px;
+    }
+
+    .season-card__title {
+      font-size: 0.78rem;
     }
   }
 }

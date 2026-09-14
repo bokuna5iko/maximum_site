@@ -4,6 +4,10 @@
   padding: 80px 0;
   background-color: $bg-main;
 
+  @media (max-width: 768px) {
+    padding: 60px 0;
+  }
+
   &__grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -28,10 +32,19 @@
     box-shadow $transition-fast;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
 
+  @media (max-width: 768px) {
+    padding: 24px 20px;
+  }
+
   &:hover {
-    transform: translateY(-4px);
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
     border-color: rgba(255, 85, 0, 0.3);
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      transform: translateY(-4px);
+    }
   }
 
   &__icon {

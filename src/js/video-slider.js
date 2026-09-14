@@ -13,7 +13,17 @@ export function initVideoSlider() {
 
   function goToSlide(index) {
     slides.forEach((slide, i) => {
-      slide.classList.toggle("active", i === index);
+      const isActive = i === index;
+      slide.classList.toggle("active", isActive);
+
+      const video = slide.querySelector("video");
+      if (video) {
+        if (isActive) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      }
     });
 
     tabs.forEach((tab, i) => {

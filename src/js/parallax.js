@@ -48,6 +48,13 @@ export function initHeroParallax() {
  * 2. Эффект стекающих капель воды на экране (Water Drops Canvas)
  */
 export function initWaterDrops() {
+  if (
+    window.matchMedia("(max-width: 768px)").matches ||
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  ) {
+    return;
+  }
+
   const canvas = document.querySelector("#water-drops-canvas");
   if (!canvas) return;
 
