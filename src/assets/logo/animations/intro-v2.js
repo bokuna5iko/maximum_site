@@ -1,16 +1,17 @@
-/** Intro scene — declarative knobs only; GSAP lives in runtime.js */
+/** Intro v2 — same beats as intro, MAXI/MUM land with a gap around the blade */
 import { introNeedleSweep, hiddenTeethFrom } from '../mark.config.js';
 
 const needle = introNeedleSweep();
 
-export const intro = {
-  id: 'intro',
-  title: 'Intro',
+export const introV2 = {
+  id: 'intro-v2',
+  title: 'Intro v2',
   from: {
     markOpacity: 0,
     markScale: 0.88,
     wordSpread: 0,
     plateOpen: 0,
+    wordGap: 0,
     redDraw: 0,
     needleAngle: needle.start,
     ringSpin: 0,
@@ -63,6 +64,7 @@ export const intro = {
       vars: {
         plateOpen: 1,
         wordSpread: 1,
+        wordGap: 1,
       },
     },
     {

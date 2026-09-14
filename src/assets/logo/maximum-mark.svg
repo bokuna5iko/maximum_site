@@ -19,6 +19,7 @@
   --needle-impact: 1;
   --red-heat: 0;
   --hub-pulse: 1;
+  --word-gap: 0;
   --tick-kick-0: 0;
   --tick-kick-1: 0;
   --tick-kick-2: 0;
@@ -76,10 +77,10 @@
       transform-origin: 100px 100px;
     }
     #mark-root #mark-word-left {
-      transform: translateX(calc((1 - var(--word-spread)) * 58px));
+      transform: translateX(calc((1 - var(--word-spread)) * 58px - var(--word-gap) * 5px));
     }
     #mark-root #mark-word-right {
-      transform: translateX(calc((var(--word-spread) - 1) * 58px));
+      transform: translateX(calc((var(--word-spread) - 1) * 58px + var(--word-gap) * 2px));
     }
     #mark-root .mark-word {
       font-family: 'Russo One', sans-serif;

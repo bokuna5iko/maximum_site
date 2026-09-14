@@ -15,7 +15,8 @@
 | `play.js` | Песочница. SVG через `?raw` (только Vite) |
 | `logo-play.html` | Корень репо. Плеер: `/logo-play.html` |
 | `animations/runtime.js` | Единственный плеер: выставляет ручки на `<svg>` |
-| `animations/intro.js` | Зафиксированная intro-сцена |
+| `animations/intro.js` | Базовая intro-сцена |
+| `animations/intro-v2.js` | Intro + щель MAXI/MUM вокруг клинка (`wordGap`) |
 | `animations/index.js` | Реестр сцен |
 | `reference.png` | Исторический оригинал, не эталон пиксель-в-пиксель |
 
@@ -25,7 +26,7 @@
 
 - viewBox `0 0 200 200`, центр `(100, 100)`
 - Стрелка: `0deg` = 12 часов, дальше по часовой
-- Покой (identity): `--needle-angle: 34deg`, `--plate-open: 1`, `--word-spread: 1`, `--red-draw: 1`, `--ring-spin: 0deg`, `--mark-scale: 1`, `--mark-opacity: 1`, `--tick-react: 0`, `--tooth-react: 0`, все `--tick-kick-N: 0`, все `--tooth-reveal-N: 1`, `--needle-impact: 1`, `--red-heat: 0`, `--hub-pulse: 1`
+- Покой (identity): `--needle-angle: 34deg`, `--plate-open: 1`, `--word-spread: 1`, `--word-gap: 0`, `--red-draw: 1`, `--ring-spin: 0deg`, `--mark-scale: 1`, `--mark-opacity: 1`, `--tick-react: 0`, `--tooth-react: 0`, все `--tick-kick-N: 0`, все `--tooth-reveal-N: 1`, `--needle-impact: 1`, `--red-heat: 0`, `--hub-pulse: 1`
 
 ## Ручки (анимация только ими)
 
@@ -37,6 +38,7 @@
 - `--needle-impact` — `1` в покое, `scale` на `#mark-needle-mass`
 - `--plate-open` — `0` шильдик в оси, `1` раскрыт (`scaleX` у `#mark-banner`)
 - `--word-spread` — `0` MAXI/MUM спрятаны в клипах, `1` выехали
+- `--word-gap` — `0` половины встык (база), `1` MAXI уезжает влево на `mechanics.wordGapLeftPx`, MUM вправо на `wordGapRightPx` (сейчас 5 / 2) — щель вокруг клинка, без смены слоя
 - `--red-draw` — `0..1` дорисовка красной дуги (`#mark-red`)
 - `--red-heat` — `0..1` оверлей `#mark-red-heat` (тот же path/dash, opacity overlay; базовый красный не трогать)
 - `--ring-spin` — `deg`, крутит только `#mark-teeth`
@@ -69,15 +71,18 @@
 
 ## Зафиксированная intro
 
-Порядок в `animations/intro.js` (не вставляй лишний такт):
+Порядок в `animations/intro.js` (не вставляй лишний такт сверх этого списка):
 
-1. Появление циферблата (`markOpacity` / `markScale`)
-2. Красная зона (`redDraw`)
-3. Стрелка: clockwise pre-sweep (`introNeedleSweep().start` → `.peak`, 1.7s) — зубья по одному, все риски, вход в красную зону
-4. Отскок к покою (`needle.peak` → `needle.settled`)
+1. Появление прибора **и** красная дуга вместе (`markOpacity` / `markScale` / `redDraw`) — не отдельный такт «сначала нарисовать лого»
+2. Зажигание оси (`hubPulse` 1 → 1.28)
+3. Стрелка: clockwise sweep (`introNeedleSweep().start` → `.peak`, 1.7s) — зубья по одному, все риски, вход в красное; к пику `needleImpact` 1.04, `redHeat` 1, `hubPulse` обратно в 1
+4. Отскок к покою (`needle.peak` → `needle.settled`) + сброс impact/heat в identity
 5. **Одновременно** `plateOpen: 1` и `wordSpread: 1`
+6. Hold ~0.38s (пустой `vars`) — знак читается перед будущим хэндоффом на сайт
 
 В `from` включены `tickReact: 1`, `toothReact: 1` и `hiddenTeethFrom()` (все `--tooth-reveal-N: 0`) — зубья и риски реагируют при движении стрелки. Не раскрывать пустой шильдик до текста: получается «квадрат, потом буквы». Плашка и слово растут от лезвия вместе.
+
+`animations/intro-v2.js` — копия тех же тактов. На шаге плашки ещё `wordGap: 1`: MAXI и MUM садятся по сторонам клинка, без смены z-order. Базовый `intro` `wordGap` не трогает (rest 0). Reset в плеере всегда rest с `wordGap: 0`.
 
 ## Слои (id без суффикса в `maximum-mark.svg`)
 

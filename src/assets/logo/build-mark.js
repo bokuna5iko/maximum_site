@@ -195,10 +195,10 @@ ${varBlock}
       transform-origin: ${cx}px ${cy}px;
     }
     #${rootId} #${wordLeftId} {
-      transform: translateX(calc((1 - var(--word-spread)) * ${word.travelPx}px));
+      transform: translateX(calc((1 - var(--word-spread)) * ${word.travelPx}px - var(--word-gap) * ${mechanics.wordGapLeftPx}px));
     }
     #${rootId} #${wordRightId} {
-      transform: translateX(calc((var(--word-spread) - 1) * ${word.travelPx}px));
+      transform: translateX(calc((var(--word-spread) - 1) * ${word.travelPx}px + var(--word-gap) * ${mechanics.wordGapRightPx}px));
     }
     #${rootId} .mark-word {
       font-family: 'Russo One', sans-serif;
@@ -301,6 +301,11 @@ function buildPreviewHtml(svgBody) {
       label: 'Hub pulse (--hub-pulse: 1.25)',
       overrides: { '--hub-pulse': '1.25' },
       suffix: 'hub-pulse',
+    },
+    {
+      label: 'Word gap (--word-gap: 1)',
+      overrides: { '--word-gap': '1' },
+      suffix: 'word-gap',
     },
   ];
 

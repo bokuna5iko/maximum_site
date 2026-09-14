@@ -20,6 +20,7 @@ export const knobs = {
   needleImpact: { css: '--needle-impact', rest: 1, unit: '' },
   redHeat: { css: '--red-heat', rest: 0, unit: '' },
   hubPulse: { css: '--hub-pulse', rest: 1, unit: '' },
+  wordGap: { css: '--word-gap', rest: 0, unit: '' },
 };
 
 export const mechanics = {
@@ -34,6 +35,9 @@ export const mechanics = {
     leadDeg: 12,
     redInsetDeg: 8,
   },
+  /** Px each half moves from the blade when --word-gap is 1. Right is smaller so M matches I (italic + 34° slash). */
+  wordGapLeftPx: 5,
+  wordGapRightPx: 2,
 };
 
 export const config = {

@@ -242,7 +242,7 @@ export function play(svgEl, scene, gsap) {
   const tl = gsap.timeline();
 
   for (const step of scene.steps ?? []) {
-    const targets = normalizePartial(step.vars);
+    const targets = normalizePartial(step.vars ?? {});
     tl.to(state, {
       duration: step.duration,
       ease: step.ease ?? 'none',
