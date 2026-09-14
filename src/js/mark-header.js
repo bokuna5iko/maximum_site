@@ -7,8 +7,6 @@ import {
 } from "../assets/logo/animations/runtime.js";
 import { createIntroV3 } from "../assets/logo/animations/intro-v3.js";
 
-const COMPACT_HEIGHT = 65;
-
 /** @type {SVGSVGElement | null} */
 let svgEl = null;
 /** @type {Record<string, number> | null} */
@@ -26,17 +24,12 @@ function getHeaderEl() {
   return document.querySelector(".header");
 }
 
-function getSafeTop() {
-  const header = getHeaderEl();
-  if (!header) return 0;
-  return parseFloat(getComputedStyle(header).paddingTop) || 0;
-}
-
 function getCollapseDistance() {
-  const spacer = document.querySelector(".header-spacer");
-  const compact = COMPACT_HEIGHT + getSafeTop();
-  const expanded = spacer?.offsetHeight || compact + 280;
-  return Math.max(1, expanded - compact);
+  const raw = getComputedStyle(document.documentElement).getPropertyValue(
+    "--header-collapse-scroll",
+  );
+  const scrollRange = parseFloat(raw);
+  return Math.max(1, Number.isFinite(scrollRange) ? scrollRange : 280);
 }
 
 function getPageScrollDistance() {
