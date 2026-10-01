@@ -132,12 +132,11 @@
     }
   }
 
-  &__brand {
-    font-family: $font-header;
-    font-size: clamp(1.1rem, 2vw, 1.35rem);
-    letter-spacing: 4px;
-    color: $accent-orange;
-    margin-bottom: 12px;
+  &__brand-anchor {
+    width: clamp(200px, 52vw, 260px);
+    aspect-ratio: 118 / 26;
+    margin: 0 auto 14px;
+    position: relative;
   }
 
   &__title {
@@ -204,8 +203,9 @@
       margin-bottom: 12px;
     }
 
-    &__brand {
-      margin-bottom: 8px;
+    &__brand-anchor {
+      width: min(220px, 78vw);
+      margin-bottom: 10px;
     }
 
     &__title {
@@ -325,5 +325,46 @@
     .season-card__title {
       font-size: 0.78rem;
     }
+  }
+}
+
+.brand-plate {
+  position: absolute;
+  inset: 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  background: #1a1b1e;
+  border: 1.5px solid #f2f2f2;
+  border-radius: 2px;
+  container-type: inline-size;
+  font-family: $font-header;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.06em;
+  line-height: 1;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 6;
+
+  &__maxi,
+  &__mum {
+    font-size: calc(100cqi * 20 / 118);
+  }
+
+  &.is-fixed {
+    position: fixed;
+    inset: auto;
+    z-index: 940;
+  }
+
+  &__maxi {
+    color: #ffffff;
+  }
+
+  &__mum {
+    color: #ed3237;
   }
 }

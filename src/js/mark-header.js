@@ -5,6 +5,14 @@ import {
   applyKnobs,
   HEADER_REST,
 } from "../assets/logo/animations/runtime.js";
+
+/** Header gauge: needle and dial only. The word stays in the hero title. */
+const HEADER_GAUGE = {
+  ...HEADER_REST,
+  wordGap: 0,
+  plateOpen: 0,
+  wordSpread: 0,
+};
 import { createIntroV3 } from "../assets/logo/animations/intro-v3.js";
 
 /** @type {SVGSVGElement | null} */
@@ -47,10 +55,8 @@ function setDocked(docked) {
   if (!header) return;
   header.classList.toggle("is-docked", docked);
 
-  const burger = header.querySelector(".header__burger");
-  if (burger) burger.disabled = !docked;
-
   if (!docked) {
+    const burger = header.querySelector(".header__burger");
     header.querySelector(".header__nav")?.classList.remove("is-open");
     burger?.classList.remove("is-open");
     if (burger) burger.setAttribute("aria-expanded", "false");
@@ -107,10 +113,10 @@ function mountFilm() {
   if (!svgEl || !state) return;
 
   lastFilmUnits = getFilmUnits();
-  const scene = createIntroV3({ units: lastFilmUnits });
+  const scene = createIntroV3({ units: lastFilmUnits, showWord: false });
 
   introTl = play(svgEl, scene, gsap, {
-    restKnobs: HEADER_REST,
+    restKnobs: HEADER_GAUGE,
     state,
   });
   introTl.pause();
@@ -148,14 +154,14 @@ export function initMarkHeader() {
     return;
   }
 
-  state = { ...HEADER_REST };
+  state = { ...HEADER_GAUGE };
   applyKnobs(svgEl, state);
 
   bindHeroDock();
 
   if (reducedMotion) {
     document.documentElement.classList.add("header-reduced");
-    applyKnobs(svgEl, HEADER_REST);
+    applyKnobs(svgEl, HEADER_GAUGE);
     window.addEventListener("resize", onResize, { passive: true });
     return;
   }

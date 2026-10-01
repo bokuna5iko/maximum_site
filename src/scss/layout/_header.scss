@@ -30,6 +30,10 @@
     background-color 0.2s ease,
     border-color 0.2s ease;
 
+  &:has(.header__nav.is-open) {
+    z-index: 960;
+  }
+
   &.is-docked {
     background-color: #ffffff;
     border-bottom-color: #e2e8f0;
@@ -54,6 +58,20 @@
     flex-shrink: 0;
     text-decoration: none;
     line-height: 0;
+  }
+
+  &__brand-slot {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex: 0 0 auto;
+    margin-left: 10px;
+    pointer-events: none;
+  }
+
+  &__brand-target {
+    width: 148px;
+    aspect-ratio: 118 / 26;
   }
 
   &__mark {
@@ -171,56 +189,40 @@
   @media (max-width: 768px) {
     &__container {
       position: relative;
-      gap: 6px;
-      padding-left: 8px;
-      padding-right: 8px;
     }
 
     &__phone {
       display: none;
     }
 
-    &__nav {
-      justify-content: flex-start;
-      gap: 2px;
-      overflow-x: auto;
-      scrollbar-width: none;
-      transition:
-        opacity 0.2s ease,
-        transform 0.2s ease,
-        visibility 0s linear;
-
-      &::-webkit-scrollbar {
-        display: none;
-      }
-    }
-
-    &.is-docked &__nav:not(.is-open) {
+    &__nav:not(.is-open) {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
       opacity: 0;
-      transform: translateX(28px);
-      pointer-events: none;
       visibility: hidden;
-      transition:
-        opacity 0.2s ease,
-        transform 0.2s ease,
-        visibility 0s linear 0.2s;
+      pointer-events: none;
     }
 
-    &__link {
-      padding: 3px 4px;
-      font-size: 0.68rem;
+    &__brand-slot {
+      flex: 1;
+      justify-content: center;
+      margin-left: 6px;
+      margin-right: 6px;
+    }
+
+    &__brand-target {
+      width: min(132px, 100%);
     }
 
     &__burger {
       display: flex;
-      pointer-events: none;
     }
 
-    &.is-docked &__burger {
-      pointer-events: auto;
-    }
-
-    &.is-docked &__nav.is-open {
+    &__nav.is-open {
       display: flex;
       visibility: visible;
       pointer-events: auto;

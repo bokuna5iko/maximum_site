@@ -7,6 +7,7 @@ import { initModals } from "./modal.js";
 import { initWaterDrops } from "./parallax.js";
 import { initVideoSlider } from "./video-slider.js";
 import { initMarkHeader } from "./mark-header.js";
+import { initBrandPlate } from "./brand-plate.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   initAnalytics();
@@ -15,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initModals();
   initQuiz();
   initMarkHeader();
+  initBrandPlate();
   initMobileNav();
   initClickTracking();
   if (

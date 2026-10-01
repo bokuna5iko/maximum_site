@@ -10,32 +10,45 @@ export const introV3Film = {
 
 const restNeedle = knobs.needleAngle.rest;
 
-export function createIntroV3({ units = introV3Film.units } = {}) {
+export function createIntroV3({
+  units = introV3Film.units,
+  showWord = true,
+} = {}) {
   const { textUnits, degPerUnit } = introV3Film;
   const safeUnits = Math.max(textUnits, units);
   const travel = safeUnits * degPerUnit;
   const needleOnlyDur = safeUnits - textUnits;
 
   const steps = [];
-  if (needleOnlyDur > 0) {
+  if (!showWord) {
     steps.push({
-      duration: needleOnlyDur,
+      duration: safeUnits,
       ease: 'none',
       vars: {
-        needleAngle: restNeedle - degPerUnit * textUnits,
+        needleAngle: restNeedle,
+      },
+    });
+  } else {
+    if (needleOnlyDur > 0) {
+      steps.push({
+        duration: needleOnlyDur,
+        ease: 'none',
+        vars: {
+          needleAngle: restNeedle - degPerUnit * textUnits,
+        },
+      });
+    }
+    steps.push({
+      duration: textUnits,
+      ease: 'none',
+      vars: {
+        needleAngle: restNeedle,
+        plateOpen: 1,
+        wordSpread: 1,
+        wordGap: 1,
       },
     });
   }
-  steps.push({
-    duration: textUnits,
-    ease: 'none',
-    vars: {
-      needleAngle: restNeedle,
-      plateOpen: 1,
-      wordSpread: 1,
-      wordGap: 1,
-    },
-  });
 
   return {
     id: 'intro-v3',
