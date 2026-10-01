@@ -1,18 +1,10 @@
 @use "../abstract/variables" as *;
 
 :root {
-  --header-progress: 0;
-  --header-compact-h: 65px;
   --header-safe-top: env(safe-area-inset-top, 0px);
   --header-collapse-scroll: 280px;
-  --mark-size-expanded: 80px;
-  --mark-size-compact: 44px;
-  --header-expanded-body: 96px;
-  --mark-size: calc(
-    var(--mark-size-compact) +
-      (var(--mark-size-expanded) - var(--mark-size-compact)) *
-      (1 - var(--header-progress))
-  );
+  --mark-size: 72px;
+  --header-bar-h: 88px;
 }
 
 .header-spacer {
@@ -26,40 +18,31 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: calc(
-    var(--header-safe-top) + var(--header-compact-h) +
-      (var(--header-expanded-body) - var(--header-compact-h)) *
-      (1 - var(--header-progress))
-  );
+  height: calc(var(--header-safe-top) + var(--header-bar-h));
   padding-top: var(--header-safe-top);
-  background-color: rgba(
-    255,
-    255,
-    255,
-    calc(0.06 + 0.82 * var(--header-progress))
-  );
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid
-    rgba(0, 0, 0, calc(0.02 + 0.1 * var(--header-progress)));
+  background-color: transparent;
+  border-bottom: 1px solid transparent;
   z-index: 900;
   display: flex;
   align-items: stretch;
-  overflow: hidden;
+  overflow: visible;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
 
-  &.is-compact {
-    overflow: visible;
+  &.is-docked {
+    background-color: #ffffff;
+    border-bottom-color: #e2e8f0;
   }
 
   &__container {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
-    gap: 12px 16px;
+    gap: 12px;
     width: 100%;
     min-width: 0;
-    padding-top: calc(8px * (1 - var(--header-progress)));
-    padding-bottom: calc(8px * (1 - var(--header-progress)));
+    height: 100%;
   }
 
   &__logo {
@@ -87,10 +70,12 @@
 
   &__nav {
     display: flex;
-    flex-wrap: wrap;
+    flex: 1;
+    flex-wrap: nowrap;
     align-items: center;
     justify-content: center;
     gap: 8px;
+    min-width: 0;
   }
 
   &__link {
@@ -104,6 +89,7 @@
     color: $text-dark;
     text-decoration: none;
     white-space: nowrap;
+    flex-shrink: 0;
     transition:
       border-color $transition-fast,
       color $transition-fast;
@@ -112,6 +98,10 @@
       border-color: $accent-orange;
       color: $accent-orange;
     }
+  }
+
+  &__phone {
+    flex-shrink: 0;
   }
 
   &__phone-link {
@@ -128,136 +118,109 @@
 
   &__burger {
     display: none;
-    width: 44px;
-    height: 44px;
+    position: relative;
+    width: 32px;
+    height: 32px;
     border: 1px solid #e2e8f0;
     border-radius: 8px;
     background: $bg-surface;
     cursor: pointer;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    padding: 0;
     flex-shrink: 0;
+    padding: 0;
+
+    &:disabled {
+      opacity: 1;
+      cursor: default;
+    }
 
     span {
+      position: absolute;
+      left: 50%;
+      top: 50%;
       display: block;
-      width: 18px;
+      width: 14px;
       height: 2px;
       background: $text-dark;
-      transition:
-        transform $transition-fast,
-        opacity $transition-fast;
+      transform: translate(-50%, -50%);
+      transition: transform $transition-fast;
+    }
+
+    span:nth-child(2) {
+      transform: translate(-50%, -50%) rotate(90deg);
     }
 
     &.is-open span:nth-child(1) {
-      transform: translateY(7px) rotate(45deg);
+      transform: translate(-50%, -50%) rotate(45deg);
     }
 
     &.is-open span:nth-child(2) {
-      opacity: 0;
-    }
-
-    &.is-open span:nth-child(3) {
-      transform: translateY(-7px) rotate(-45deg);
+      transform: translate(-50%, -50%) rotate(-45deg);
     }
   }
 
   @media (min-width: 769px) {
     &__burger {
-      display: none !important;
-    }
-
-    &__nav {
-      display: flex;
-      position: static;
-      flex: 1;
-      flex-wrap: nowrap;
-      justify-content: center;
+      display: none;
     }
 
     &__phone {
       display: block;
-      flex-shrink: 0;
-    }
-
-    &.is-compact .header__container {
-      flex-wrap: nowrap;
     }
   }
 
   @media (max-width: 768px) {
+    &__container {
+      position: relative;
+      gap: 6px;
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+
     &__phone {
       display: none;
     }
 
-    &__container {
-      position: relative;
-      display: grid;
-      grid-template-columns: minmax(0, 1fr);
-      grid-template-rows: auto auto;
-      align-items: center;
-      align-content: center;
-      justify-items: stretch;
-      height: 100%;
-      gap: 6px 8px;
+    &__nav {
+      justify-content: flex-start;
+      gap: 2px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      transition:
+        opacity 0.2s ease,
+        transform 0.2s ease,
+        visibility 0s linear;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
     }
 
-    &__logo {
-      grid-column: 1;
-      grid-row: 1;
-      justify-self: center;
+    &.is-docked &__nav:not(.is-open) {
+      opacity: 0;
+      transform: translateX(28px);
+      pointer-events: none;
+      visibility: hidden;
+      transition:
+        opacity 0.2s ease,
+        transform 0.2s ease,
+        visibility 0s linear 0.2s;
+    }
+
+    &__link {
+      padding: 3px 4px;
+      font-size: 0.68rem;
     }
 
     &__burger {
       display: flex;
-      position: absolute;
-      top: 8px;
-      right: 0;
-      z-index: 2;
-      opacity: var(--header-progress);
       pointer-events: none;
     }
 
-    &.is-compact .header__logo {
-      justify-self: start;
-    }
-
-    &.is-compact .header__burger {
-      top: 50%;
-      transform: translateY(-50%);
+    &.is-docked &__burger {
       pointer-events: auto;
     }
 
-    &__nav {
-      grid-column: 1;
-      grid-row: 2;
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, auto));
-      justify-content: center;
-      justify-items: center;
-      width: 100%;
-      max-width: 100%;
-      min-width: 0;
-      gap: 6px;
-      opacity: calc(1 - var(--header-progress));
-      max-height: calc(80px * (1 - var(--header-progress)));
-      overflow: hidden;
-      transform: none;
-    }
-
-    &__link {
-      padding: 5px 10px;
-      font-size: 0.75rem;
-    }
-
-    &.is-compact .header__nav:not(.is-open) {
-      pointer-events: none;
-      visibility: hidden;
-    }
-
-    &.is-compact .header__nav.is-open {
+    &.is-docked &__nav.is-open {
       display: flex;
       visibility: visible;
       pointer-events: auto;
@@ -271,7 +234,6 @@
       justify-content: flex-start;
       gap: 0;
       opacity: 1;
-      max-height: none;
       overflow: visible;
       transform: none;
       background: $bg-surface;
@@ -300,7 +262,15 @@
 
 @media (max-width: 768px) {
   :root {
-    --mark-size-expanded: 56px;
-    --header-expanded-body: 148px;
+    --mark-size: 56px;
+    --header-bar-h: 64px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header,
+  .header__nav,
+  .header__burger span {
+    transition: none;
   }
 }

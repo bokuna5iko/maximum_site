@@ -42,27 +42,43 @@ function getFilmUnits() {
   return getPageScrollDistance() / getCollapseDistance();
 }
 
-function getProgress() {
-  if (reducedMotion) return 1;
-  return Math.min(1, Math.max(0, window.scrollY / getCollapseDistance()));
-}
-
-function updateHeaderLayout() {
-  const progress = getProgress();
-  document.documentElement.style.setProperty(
-    "--header-progress",
-    String(progress),
-  );
+function setDocked(docked) {
   const header = getHeaderEl();
-  const compact = progress >= 0.85;
-  header?.classList.toggle("is-compact", compact);
-  if (!compact) {
-    header?.querySelector(".header__nav")?.classList.remove("is-open");
-    header?.querySelector(".header__burger")?.classList.remove("is-open");
-    const burger = header?.querySelector(".header__burger");
+  if (!header) return;
+  header.classList.toggle("is-docked", docked);
+
+  const burger = header.querySelector(".header__burger");
+  if (burger) burger.disabled = !docked;
+
+  if (!docked) {
+    header.querySelector(".header__nav")?.classList.remove("is-open");
+    burger?.classList.remove("is-open");
     if (burger) burger.setAttribute("aria-expanded", "false");
     document.body.style.overflow = "";
   }
+}
+
+/** @type {IntersectionObserver | null} */
+let dockObserver = null;
+
+function bindHeroDock() {
+  dockObserver?.disconnect();
+  const hero = document.getElementById("hero");
+  const header = getHeaderEl();
+  if (!hero || !header || typeof IntersectionObserver === "undefined") return;
+
+  const offset = Math.max(1, Math.ceil(header.getBoundingClientRect().height));
+  dockObserver = new IntersectionObserver(
+    ([entry]) => {
+      setDocked(!entry.isIntersecting);
+    },
+    {
+      root: null,
+      rootMargin: `-${offset}px 0px 0px 0px`,
+      threshold: 0,
+    },
+  );
+  dockObserver.observe(hero);
 }
 
 function injectMark(mount) {
@@ -110,12 +126,11 @@ function syncFilm() {
 }
 
 function onScroll() {
-  updateHeaderLayout();
   if (!reducedMotion) applyScrub(window.scrollY);
 }
 
 function onResize() {
-  updateHeaderLayout();
+  bindHeroDock();
   if (!reducedMotion) syncFilm();
 }
 
@@ -136,15 +151,15 @@ export function initMarkHeader() {
   state = { ...HEADER_REST };
   applyKnobs(svgEl, state);
 
+  bindHeroDock();
+
   if (reducedMotion) {
-    document.documentElement.style.setProperty("--header-progress", "1");
     document.documentElement.classList.add("header-reduced");
-    getHeaderEl()?.classList.add("is-compact");
     applyKnobs(svgEl, HEADER_REST);
+    window.addEventListener("resize", onResize, { passive: true });
     return;
   }
 
-  updateHeaderLayout();
   mountFilm();
 
   window.addEventListener("scroll", onScroll, { passive: true });
