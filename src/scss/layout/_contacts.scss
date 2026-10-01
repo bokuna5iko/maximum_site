@@ -145,7 +145,7 @@
   font-size: 0.85rem;
 
   @media (max-width: 768px) {
-    padding-bottom: calc(65px + env(safe-area-inset-bottom) + 16px);
+    padding-bottom: calc(24px + env(safe-area-inset-bottom));
   }
 
   &__note {
@@ -172,7 +172,7 @@
   font-size: 0.9rem;
 
   @media (max-width: 768px) {
-    padding-bottom: calc(65px + env(safe-area-inset-bottom) + 24px);
+    padding-bottom: calc(32px + env(safe-area-inset-bottom));
   }
 
   h2 {
