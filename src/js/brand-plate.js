@@ -13,10 +13,11 @@ export function initBrandPlate() {
   const plate = document.getElementById("brand-plate");
   const anchor = document.getElementById("brand-anchor");
   const slot = document.getElementById("brand-slot");
-  if (!plate || !anchor || !slot) return;
+  const header = document.querySelector(".header");
+  if (!plate || !anchor || !slot || !header) return;
 
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  document.body.appendChild(plate);
+  header.appendChild(plate);
 
   function place(x, y, width) {
     plate.classList.add("is-fixed");
