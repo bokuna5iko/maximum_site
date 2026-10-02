@@ -21,7 +21,7 @@ export function initQuiz() {
     });
 
     if (progressBar) {
-      progressBar.style.width = `${(currentStep / totalSteps) * 100}%`;
+      progressBar.style.transform = `scaleX(${currentStep / totalSteps})`;
     }
     prevBtn.style.display = currentStep > 1 ? "inline-flex" : "none";
     nextBtn.style.display = currentStep === totalSteps ? "none" : "inline-flex";

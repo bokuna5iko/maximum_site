@@ -453,7 +453,7 @@
               <div
                 class="quiz-progress__bar"
                 id="quiz-progress-bar"
-                style="width: 33%"
+                style="transform: scaleX(0.333)"
               ></div>
             </div>
           </div>
@@ -896,10 +896,18 @@
 
     </main>
 
-    <div class="modal" id="modal-lead">
+    <div
+      class="modal"
+      id="modal-lead"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-lead-title"
+      inert
+    >
       <div class="modal__overlay" id="modal-overlay"></div>
       <div class="modal__content">
-        <button class="modal__close" id="modal-close" type="button">
+        <h2 class="modal__title" id="modal-lead-title">Заявка</h2>
+        <button class="modal__close" id="modal-close" type="button" aria-label="Закрыть">
           &times;
         </button>
 
@@ -1078,13 +1086,20 @@
       </div>
     </div>
 
-    <div class="modal modal--success" id="modal-success">
+    <div
+      class="modal modal--success"
+      id="modal-success"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="success-title"
+      inert
+    >
       <div class="modal__overlay" id="success-overlay"></div>
       <div class="modal__content">
-        <button class="modal__close" id="success-close" type="button">
+        <button class="modal__close" id="success-close" type="button" aria-label="Закрыть">
           &times;
         </button>
-        <h3 class="modal__success-title" id="success-title">Заявка принята</h3>
+        <h3 class="modal__success-title" id="success-title" tabindex="-1">Заявка принята</h3>
         <p class="modal__success-text" id="success-text">
           Менеджер подтвердит визит и подготовит модели к показу.
         </p>
