@@ -104,8 +104,10 @@
           id="header-burger"
           type="button"
           aria-label="Открыть меню"
+          aria-controls="header-nav"
           aria-expanded="false"
         >
+          <span></span>
           <span></span>
           <span></span>
         </button>
@@ -148,11 +150,6 @@
       </div>
 
       <div class="container hero__container">
-        <div class="hero__badge">
-          <span class="pulse-dot"></span>
-          Официальный дилер BRP, Suzuki, Tohatsu, Русская Механика
-        </div>
-
         <div class="hero__brand-anchor" id="brand-anchor">
           <p class="brand-plate" id="brand-plate">
             <span class="brand-plate__maxi">MAXI</span><span class="brand-plate__mum">MUM</span>
@@ -173,32 +170,32 @@
         <div class="hero__actions">
           <a href="#in-stock" class="btn btn--primary">Смотреть наличие</a>
           <button class="btn btn--outline" id="open-service-modal" type="button">
-            Записаться на сервис
+            Записаться в сервис
           </button>
         </div>
       </div>
 
       <div class="hero__season-bar">
         <button class="season-card active" data-slide="0" type="button">
-          <span class="season-card__label">OFF-ROAD / 4X4</span>
+          <span class="season-card__label">Бездорожье</span>
           <span class="season-card__title">КВАДРОЦИКЛЫ</span>
           <span class="season-card__line"></span>
         </button>
 
         <button class="season-card" data-slide="1" type="button">
-          <span class="season-card__label">MARINE / OUTBOARD</span>
+          <span class="season-card__label">Рыбалка</span>
           <span class="season-card__title">ЛОДКИ И МОТОРЫ</span>
           <span class="season-card__line"></span>
         </button>
 
         <button class="season-card" data-slide="2" type="button">
-          <span class="season-card__label">GTR / WATER</span>
+          <span class="season-card__label">Вода</span>
           <span class="season-card__title">ГИДРОЦИКЛЫ</span>
           <span class="season-card__line"></span>
         </button>
 
         <button class="season-card" data-slide="3" type="button">
-          <span class="season-card__label">SNOW / СЕЗОН</span>
+          <span class="season-card__label">Зима</span>
           <span class="season-card__title">СНЕГОХОДЫ</span>
           <span class="season-card__line"></span>
         </button>
@@ -210,13 +207,12 @@
         <div class="section-header">
           <h2 class="section-title">Сейчас в салоне</h2>
           <p class="section-subtitle">
-            Живые единицы. Приезжайте посмотреть, не выбирайте вслепую
+            Модели в зале. Приезжайте посмотреть, не выбирайте по фото
           </p>
         </div>
         <div class="instock__grid" id="in-stock-grid"></div>
         <p class="instock__note">
-          Наличие демо для запуска сайта — перед визитом уточните у менеджера.
-          Живые фото зала и техники смотрите в
+          Перед визитом уточните наличие у менеджера. Фото зала и техники — в
           <a href="https://2gis.ru/yakutsk/firm/7037402698753912/tab/photos" data-bind-href="MAPS_PHOTOS" target="_blank" rel="noopener noreferrer">карточке 2ГИС</a>.
         </p>
       </div>
@@ -275,7 +271,7 @@
               лодки. Пока техника на ТО — можно зайти в зал.
             </p>
             <button class="btn btn--primary" id="visit-open-service" type="button">
-              Записаться на ТО
+              Записаться в сервис
             </button>
           </div>
         </div>
@@ -313,7 +309,7 @@
           <article class="card">
             <div class="card__tag">В наличии</div>
             <div class="card__content">
-              <h3 class="card__title">Квадроциклы & Снегоходы</h3>
+              <h3 class="card__title">Квадроциклы и снегоходы</h3>
               <ul class="card__specs">
                 <li><span>Бренды:</span> BRP, Русская Механика</li>
                 <li><span>Привод:</span> 4x4 / Утилитарные</li>
@@ -323,7 +319,7 @@
                 type="button"
                 data-target="test-drive"
               >
-                Уточнить наличие / Тест-драйв
+                Записаться в салон
               </button>
             </div>
           </article>
@@ -331,7 +327,7 @@
           <article class="card">
             <div class="card__tag">Хит продаж</div>
             <div class="card__content">
-              <h3 class="card__title">Лодки & Моторы</h3>
+              <h3 class="card__title">Лодки и моторы</h3>
               <ul class="card__specs">
                 <li><span>Моторы:</span> Suzuki, Tohatsu (2-4 такта)</li>
                 <li><span>Лодки:</span> V-BOATS, SOLAR, ПВХ/РИБ</li>
@@ -341,7 +337,7 @@
                 type="button"
                 data-target="boat-kit"
               >
-                Подобрать комплект в салоне
+                Записаться в салон
               </button>
             </div>
           </article>
@@ -359,7 +355,7 @@
                 type="button"
                 data-target="store-stock"
               >
-                Узнать наличие в салоне
+                Записаться в салон
               </button>
             </div>
           </article>
@@ -367,7 +363,7 @@
           <article class="card">
             <div class="card__tag">В наличии</div>
             <div class="card__content">
-              <h3 class="card__title">Экипировка & Защита</h3>
+              <h3 class="card__title">Экипировка и защита</h3>
               <ul class="card__specs">
                 <li><span>Экипировка:</span> Костюмы, шлемы, вейдерсы</li>
                 <li><span>Защита:</span> Мото / Снегоходная</li>
@@ -377,14 +373,14 @@
                 type="button"
                 data-target="gear-size"
               >
-                Забронировать размер в зале
+                Записаться на примерку
               </button>
             </div>
           </article>
 
           <article class="card">
             <div class="card__content">
-              <h3 class="card__title">Запчасти & Масла</h3>
+              <h3 class="card__title">Запчасти и масла</h3>
               <ul class="card__specs">
                 <li><span>Детали:</span> Оригиналы BRP, Suzuki, Tohatsu</li>
                 <li><span>Расходники:</span> Масла, фильтры, свечи</li>
@@ -394,7 +390,7 @@
                 type="button"
                 data-target="parts-order"
               >
-                Оставить заявку на подбор
+                Подобрать запчасть
               </button>
             </div>
           </article>
@@ -402,24 +398,24 @@
           <article class="card card--accent">
             <div class="card__tag card__tag--red">Авторизованный СТО</div>
             <div class="card__content">
-              <h3 class="card__title">Сервис & Плановое ТО</h3>
+              <h3 class="card__title">Сервис и плановое ТО</h3>
               <ul class="card__specs">
                 <li><span>Услуги:</span> Диагностика, ремонт, консервация</li>
-                <li><span>Гарантия:</span> Сертифицированные станции</li>
+                <li><span>Гарантия:</span> Официальный сервис</li>
               </ul>
               <button
                 class="btn btn--primary btn--full card__action"
                 type="button"
                 data-target="service-modal"
               >
-                Записаться на ТО / Ремонт
+                Записаться в сервис
               </button>
             </div>
           </article>
 
           <article class="card">
             <div class="card__content">
-              <h3 class="card__title">Рыбалка & Кемпинг</h3>
+              <h3 class="card__title">Рыбалка и кемпинг</h3>
               <ul class="card__specs">
                 <li><span>Оснащение:</span> Эхолоты, навигаторы, палатки</li>
                 <li><span>Туризм:</span> Термосы, удилища, экипировка</li>
@@ -429,7 +425,7 @@
                 type="button"
                 data-target="store-stock"
               >
-                Узнать наличие в магазине
+                Записаться в салон
               </button>
             </div>
           </article>
@@ -477,7 +473,7 @@
                   />
                   <div class="quiz-option__content">
                     <span class="quiz-option__title"
-                      >Квадроциклы & Снегоходы</span
+                      >Квадроциклы и снегоходы</span
                     >
                   </div>
                 </label>
@@ -485,7 +481,7 @@
                   <input type="radio" name="category" value="Лодки / Моторы" />
                   <div class="quiz-option__content">
                     <span class="quiz-option__title"
-                      >Лодки & Лодочные моторы</span
+                      >Лодки и лодочные моторы</span
                     >
                   </div>
                 </label>
@@ -502,14 +498,14 @@
                     value="Экипировка / Защита"
                   />
                   <div class="quiz-option__content">
-                    <span class="quiz-option__title">Экипировка & Защита</span>
+                    <span class="quiz-option__title">Экипировка и защита</span>
                   </div>
                 </label>
                 <label class="quiz-option">
                   <input type="radio" name="category" value="Запчасти / ТО" />
                   <div class="quiz-option__content">
                     <span class="quiz-option__title"
-                      >Запчасти & Обслуживание</span
+                      >Запчасти и обслуживание</span
                     >
                   </div>
                 </label>
@@ -529,7 +525,7 @@
                     checked
                   />
                   <div class="quiz-option__content">
-                    <span class="quiz-option__title">Охота & Рыбалка</span>
+                    <span class="quiz-option__title">Охота и рыбалка</span>
                   </div>
                 </label>
                 <label class="quiz-option">
@@ -540,14 +536,14 @@
                   />
                   <div class="quiz-option__content">
                     <span class="quiz-option__title"
-                      >Активный отдых & Семейный туризм</span
+                      >Активный отдых и семейный туризм</span
                     >
                   </div>
                 </label>
                 <label class="quiz-option">
                   <input type="radio" name="purpose" value="Спорт и Экстрим" />
                   <div class="quiz-option__content">
-                    <span class="quiz-option__title">Спорт & Экстрим</span>
+                    <span class="quiz-option__title">Спорт и экстрим</span>
                   </div>
                 </label>
                 <label class="quiz-option">
@@ -558,7 +554,7 @@
                   />
                   <div class="quiz-option__content">
                     <span class="quiz-option__title"
-                      >Работа & Хозяйственные задачи</span
+                      >Работа и хозяйственные задачи</span
                     >
                   </div>
                 </label>
@@ -631,7 +627,7 @@
                   id="send-quiz-btn"
                   type="button"
                 >
-                  Записаться и получить подборку
+                  Записаться в салон
                 </button>
               </div>
             </div>
@@ -672,12 +668,12 @@
               id="btn-open-service"
               type="button"
             >
-              Записаться на ТО
+              Записаться в сервис
             </button>
           </div>
 
           <div class="service-card">
-            <h3 class="service-card__title">Запчасти & Расходники</h3>
+            <h3 class="service-card__title">Запчасти и расходники</h3>
             <p class="service-card__desc">
               Оригинальные детали BRP, Suzuki, Tohatsu, РМ. Подберём по VIN-коду
               за 15 минут.
@@ -687,7 +683,7 @@
               id="btn-open-parts"
               type="button"
             >
-              Заказать подбор запчастей
+              Подобрать запчасть
             </button>
           </div>
         </div>
@@ -700,8 +696,7 @@
           <div>
             <h2 class="section-title text-left">Нас выбирают в 2ГИС</h2>
             <p class="section-subtitle" style="text-align: left">
-              Живые фото зала, комментарии и оценки — только там. Яндекс и Google
-              салон не ведёт.
+              Фото зала, отзывы и оценки — в 2ГИС.
             </p>
           </div>
           <div class="gis-score">
@@ -902,10 +897,10 @@
 
         <div class="modal__tabs">
           <button class="modal__tab active" data-tab="tab-testdrive" type="button">
-            Тест-драйв
+            В салон
           </button>
           <button class="modal__tab" data-tab="tab-service" type="button">
-            Запись на ТО
+            В сервис
           </button>
           <button class="modal__tab" data-tab="tab-parts" type="button">
             Запчасти
@@ -1009,7 +1004,7 @@
           </label>
           <p class="form-error"></p>
           <button type="submit" class="btn btn--primary btn--full">
-            Отправить заявку на ТО
+            Отправить заявку в сервис
           </button>
         </form>
 

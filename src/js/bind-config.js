@@ -137,6 +137,7 @@ export function initMobileNav() {
     nav.classList.toggle("is-open", open);
     burger.classList.toggle("is-open", open);
     burger.setAttribute("aria-expanded", String(open));
+    burger.setAttribute("aria-label", open ? "Закрыть меню" : "Открыть меню");
     document.body.style.overflow = open ? "hidden" : "";
   }
 

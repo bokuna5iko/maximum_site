@@ -193,26 +193,42 @@
 
     span {
       position: absolute;
-      left: 50%;
-      top: 50%;
+      left: 9px;
       display: block;
       width: 14px;
       height: 2px;
+      border-radius: 1px;
       background: $text-dark;
-      transform: translate(-50%, -50%);
-      transition: transform $transition-fast;
+      transition:
+        top $transition-fast,
+        transform $transition-fast,
+        opacity $transition-fast;
+    }
+
+    span:nth-child(1) {
+      top: 10px;
     }
 
     span:nth-child(2) {
-      transform: translate(-50%, -50%) rotate(90deg);
+      top: 15px;
+    }
+
+    span:nth-child(3) {
+      top: 20px;
     }
 
     &.is-open span:nth-child(1) {
-      transform: translate(-50%, -50%) rotate(45deg);
+      top: 15px;
+      transform: rotate(45deg);
     }
 
     &.is-open span:nth-child(2) {
-      transform: translate(-50%, -50%) rotate(-45deg);
+      opacity: 0;
+    }
+
+    &.is-open span:nth-child(3) {
+      top: 15px;
+      transform: rotate(-45deg);
     }
   }
 
