@@ -6,19 +6,19 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     />
-    <title>Центр Техники МАКСИМУМ | Якутск, техника в наличии</title>
+    <title>Центр Техники МАКСИМУМ | Якутск, запись в салон</title>
     <meta
       name="description"
-      content="Салон техники Maximum в Якутске, ул. 50 лет Советской Армии, 77. Квадроциклы, лодки, прицепы, снегоходы и сервис. Рейтинг 4.9 на 2ГИС. Запись на тест-драйв."
+      content="Салон техники Maximum в Якутске, ул. 50 лет Советской Армии, 77. Квадроциклы, лодки, прицепы, снегоходы и сервис. Что стоит в зале, скажет менеджер. Рейтинг 4.9 на 2ГИС."
     />
     <meta property="og:type" content="website" />
     <meta
       property="og:title"
-      content="Центр Техники МАКСИМУМ | Якутск, техника в наличии"
+      content="Центр Техники МАКСИМУМ | Якутск, запись в салон"
     />
     <meta
       property="og:description"
-      content="Живые модели в салоне на 50 лет Советской Армии, 77. Отзывы и фото — в 2ГИС. Запишитесь на визит."
+      content="Запишитесь в салон на 50 лет Советской Армии, 77. Что стоит в зале, скажет менеджер. Отзывы и фото — в 2ГИС."
     />
     <meta property="og:locale" content="ru_RU" />
 
@@ -43,7 +43,7 @@
 
         <nav class="header__nav" id="header-nav">
           <div class="header__menu">
-            <a href="#in-stock" class="header__link">Наличие</a>
+            <a href="#in-stock" class="header__link">Примеры</a>
             <a href="#quiz" class="header__link">Подбор</a>
             <a href="#reviews" class="header__link">2ГИС</a>
             <a href="#service-hub" class="header__link">Сервис</a>
@@ -158,19 +158,20 @@
           </p>
         </div>
         <h1 class="hero__title">
-          Техника в наличии.<br />
-          Запишитесь на тест-драйв
+          Запишитесь в салон
         </h1>
         <p class="hero__subtitle">
-          Якутск, ул. 50 лет Советской Армии, 77. Живые модели в салоне
+          Якутск, ул. 50 лет Советской Армии, 77. Что стоит в зале, скажет
+          менеджер
         </p>
         <p class="hero__subtitle" data-season-line style="margin-top: -18px; font-size: 0.95rem">
-          Сейчас в Якутске: лодки, моторы и квадры в зале. Снегоходы — запись на
-          сезон
+          Межсезонье в Якутске: квадры, прицепы и подготовка снегоходов к сезону
         </p>
 
         <div class="hero__actions">
-          <a href="#in-stock" class="btn btn--primary">Смотреть наличие</a>
+          <button class="btn btn--primary" type="button" data-open-intent="testdrive">
+            Записаться в салон
+          </button>
           <button class="btn btn--outline" id="open-service-modal" type="button">
             Записаться в сервис
           </button>
@@ -269,6 +270,9 @@
               <li>Оплата картой, наличными, по QR и через банк</li>
               <li>Как удобнее купить — покажем на выбранной модели в зале</li>
             </ul>
+            <button class="btn btn--primary" type="button" data-open-intent="testdrive">
+              Записаться в салон
+            </button>
           </div>
           <div class="deal-card deal-card--light">
             <h3 class="deal-card__title">Сервис рядом</h3>
@@ -276,7 +280,7 @@
               Отдельный номер на ремонт и запчасти: моторы, снегоходы, надувные
               лодки. Пока техника на ТО — можно зайти в зал.
             </p>
-            <button class="btn btn--primary" id="visit-open-service" type="button">
+            <button class="btn btn--outline-dark" id="visit-open-service" type="button">
               Записаться в сервис
             </button>
           </div>
@@ -289,13 +293,12 @@
         <div class="section-header">
           <h2 class="section-title">Направления салона</h2>
           <p class="section-subtitle">
-            Визит, сервис или подбор запчастей — каждый сценарий отдельно
+            Ассортимент салона. Что стоит в зале, скажет менеджер
           </p>
         </div>
 
         <div class="showcase__grid">
           <article class="card">
-            <div class="card__tag">В наличии</div>
             <div class="card__content">
               <h3 class="card__title">Гидроциклы</h3>
               <ul class="card__specs">
@@ -303,25 +306,7 @@
                 <li><span>Сезон:</span> вода, прогулки, семья</li>
               </ul>
               <button
-                class="btn btn--primary btn--full card__action"
-                type="button"
-                data-target="test-drive"
-              >
-                Записаться на тест-драйв
-              </button>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="card__tag">В наличии</div>
-            <div class="card__content">
-              <h3 class="card__title">Квадроциклы и снегоходы</h3>
-              <ul class="card__specs">
-                <li><span>Бренды:</span> BRP, Русская Механика</li>
-                <li><span>Привод:</span> 4x4 / Утилитарные</li>
-              </ul>
-              <button
-                class="btn btn--primary btn--full card__action"
+                class="btn btn--outline btn--full card__action"
                 type="button"
                 data-target="test-drive"
               >
@@ -331,7 +316,23 @@
           </article>
 
           <article class="card">
-            <div class="card__tag">Хит продаж</div>
+            <div class="card__content">
+              <h3 class="card__title">Квадроциклы и снегоходы</h3>
+              <ul class="card__specs">
+                <li><span>Бренды:</span> BRP, Русская Механика</li>
+                <li><span>Привод:</span> 4x4 / Утилитарные</li>
+              </ul>
+              <button
+                class="btn btn--outline btn--full card__action"
+                type="button"
+                data-target="test-drive"
+              >
+                Записаться в салон
+              </button>
+            </div>
+          </article>
+
+          <article class="card">
             <div class="card__content">
               <h3 class="card__title">Лодки и моторы</h3>
               <ul class="card__specs">
@@ -339,7 +340,7 @@
                 <li><span>Лодки:</span> V-BOATS, SOLAR, ПВХ/РИБ</li>
               </ul>
               <button
-                class="btn btn--primary btn--full card__action"
+                class="btn btn--outline btn--full card__action"
                 type="button"
                 data-target="boat-kit"
               >
@@ -349,7 +350,6 @@
           </article>
 
           <article class="card">
-            <div class="card__tag">В наличии</div>
             <div class="card__content">
               <h3 class="card__title">Прицепы</h3>
               <ul class="card__specs">
@@ -357,7 +357,7 @@
                 <li><span>Зал:</span> смотрим живьём, подбираем под задачу</li>
               </ul>
               <button
-                class="btn btn--primary btn--full card__action"
+                class="btn btn--outline btn--full card__action"
                 type="button"
                 data-target="store-stock"
               >
@@ -367,7 +367,6 @@
           </article>
 
           <article class="card">
-            <div class="card__tag">В наличии</div>
             <div class="card__content">
               <h3 class="card__title">Экипировка и защита</h3>
               <ul class="card__specs">
@@ -375,11 +374,11 @@
                 <li><span>Защита:</span> Мото / Снегоходная</li>
               </ul>
               <button
-                class="btn btn--primary btn--full card__action"
+                class="btn btn--outline btn--full card__action"
                 type="button"
                 data-target="gear-size"
               >
-                Записаться на примерку
+                Записаться в салон
               </button>
             </div>
           </article>
@@ -410,7 +409,7 @@
                 <li><span>Гарантия:</span> Официальный сервис</li>
               </ul>
               <button
-                class="btn btn--primary btn--full card__action"
+                class="btn btn--outline btn--full card__action"
                 type="button"
                 data-target="service-modal"
               >
@@ -475,7 +474,6 @@
                     type="radio"
                     name="category"
                     value="Квадроциклы / Снегоходы"
-                    checked
                   />
                   <div class="quiz-option__content">
                     <span class="quiz-option__title"
@@ -528,7 +526,6 @@
                     type="radio"
                     name="purpose"
                     value="Охота и Рыбалка"
-                    checked
                   />
                   <div class="quiz-option__content">
                     <span class="quiz-option__title">Охота и рыбалка</span>
@@ -571,43 +568,7 @@
               <h3 class="quiz-step__question">
                 3. Когда удобно приехать в салон?
               </h3>
-              <div class="quiz-options">
-                <label class="quiz-option">
-                  <input
-                    type="radio"
-                    name="visit_slot"
-                    value="Завтра 12:00"
-                    checked
-                  />
-                  <div class="quiz-option__content">
-                    <span class="quiz-option__title">Завтра 12:00</span>
-                  </div>
-                </label>
-                <label class="quiz-option">
-                  <input type="radio" name="visit_slot" value="Завтра 18:00" />
-                  <div class="quiz-option__content">
-                    <span class="quiz-option__title">Завтра 18:00</span>
-                  </div>
-                </label>
-                <label class="quiz-option">
-                  <input type="radio" name="visit_slot" value="Суббота" />
-                  <div class="quiz-option__content">
-                    <span class="quiz-option__title">Суббота</span>
-                  </div>
-                </label>
-                <label class="quiz-option">
-                  <input
-                    type="radio"
-                    name="visit_slot"
-                    value="Перезвоните, согласуем"
-                  />
-                  <div class="quiz-option__content">
-                    <span class="quiz-option__title"
-                      >Перезвоните, согласуем</span
-                    >
-                  </div>
-                </label>
-              </div>
+              <div class="quiz-options" id="quiz-slots"></div>
 
               <div class="quiz-form" style="margin-top: 24px">
                 <div class="quiz-form__group">
@@ -627,7 +588,7 @@
                     <a href="#privacy">обработку персональных данных</a></span
                   >
                 </label>
-                <p class="quiz-error" id="quiz-error"></p>
+                <p class="quiz-error" id="quiz-error" role="status"></p>
                 <button
                   class="btn btn--primary btn--full quiz-submit-btn"
                   id="send-quiz-btn"
@@ -681,8 +642,8 @@
           <div class="service-card">
             <h3 class="service-card__title">Запчасти и расходники</h3>
             <p class="service-card__desc">
-              Оригинальные детали BRP, Suzuki, Tohatsu, РМ. Подберём по VIN-коду
-              за 15 минут.
+              Оригинальные детали BRP, Suzuki, Tohatsu, РМ. Подберём по VIN в
+              салоне.
             </p>
             <button
               class="btn btn--outline-dark btn--full"
@@ -758,8 +719,8 @@
           <div class="contacts-info">
             <h2 class="section-title text-left">Дилерский центр МАКСИМУМ</h2>
             <p class="contacts-desc">
-              Якутск, Промышленный округ. Техника в наличии, тест-драйв,
-              оригинальные запчасти.
+              Якутск, Промышленный округ. Запись в салон, сервис и оригинальные
+              запчасти.
             </p>
 
             <div class="contacts-list">
@@ -936,16 +897,14 @@
               name="testdrive_model"
               required
             ></select>
+            <p class="form-hint">
+              Менеджер подтвердит, есть ли модель в зале, до визита.
+            </p>
           </div>
           <div class="form-group">
             <label for="testdrive-slot">Когда приехать</label>
             <select class="form-input" id="testdrive-slot" name="testdrive_slot" required>
-              <option value="Завтра 12:00">Завтра 12:00</option>
-              <option value="Завтра 18:00">Завтра 18:00</option>
-              <option value="Суббота">Суббота</option>
-              <option value="Перезвоните, согласуем">
-                Перезвоните, согласуем
-              </option>
+              <option value="Перезвоните, согласуем">Перезвоните, согласуем</option>
             </select>
           </div>
           <div class="form-group">
@@ -967,7 +926,7 @@
               <a href="#privacy">обработку персональных данных</a></span
             >
           </label>
-          <p class="form-error"></p>
+          <p class="form-error" role="status"></p>
           <button type="submit" class="btn btn--primary btn--full">
             Записаться в салон
           </button>
@@ -1020,7 +979,7 @@
               <a href="#privacy">обработку персональных данных</a></span
             >
           </label>
-          <p class="form-error"></p>
+          <p class="form-error" role="status"></p>
           <button type="submit" class="btn btn--primary btn--full">
             Отправить заявку в сервис
           </button>
@@ -1078,7 +1037,7 @@
               <a href="#privacy">обработку персональных данных</a></span
             >
           </label>
-          <p class="form-error"></p>
+          <p class="form-error" role="status"></p>
           <button type="submit" class="btn btn--primary btn--full">
             Запросить подбор запчастей
           </button>

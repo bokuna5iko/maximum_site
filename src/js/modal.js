@@ -2,6 +2,7 @@ import { CONFIG, getWhatsAppUrl, isTelegramConfigured, isValidRuPhone } from "./
 import { getInventoryItem } from "./inventory.js";
 import { fillModelSelect } from "./inventory-render.js";
 import { sendLead } from "./lead-sender.js";
+import { renderVisitSlots } from "./visit-slots.js";
 
 const TARGET_TO_INTENT = {
   testdrive: "testdrive",
@@ -65,6 +66,7 @@ export function initModals() {
   if (!modal) return;
 
   fillModelSelect(modelSelect);
+  renderVisitSlots();
 
   function openModal(intent = "testdrive", { modelId } = {}) {
     switchTab(TAB_BY_INTENT[intent] || "tab-testdrive");

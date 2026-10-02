@@ -1,6 +1,7 @@
 import { isValidRuPhone } from "./config.js";
 import { sendLead } from "./lead-sender.js";
 import { showSuccessModal } from "./modal.js";
+import { renderVisitSlots } from "./visit-slots.js";
 
 export function initQuiz() {
   let currentStep = 1;
@@ -14,6 +15,8 @@ export function initQuiz() {
   const errorNode = document.querySelector("#quiz-error");
 
   if (!nextBtn || !prevBtn) return;
+
+  renderVisitSlots();
 
   function updateQuiz() {
     document.querySelectorAll(".quiz-step").forEach((step) => {
@@ -47,6 +50,17 @@ export function initQuiz() {
     const phone = phoneInput.value.trim();
     const slot = document.querySelector('input[name="visit_slot"]:checked')?.value;
     const consent = document.querySelector("#quiz-consent")?.checked;
+    const category = document.querySelector('input[name="category"]:checked')?.value;
+    const purpose = document.querySelector('input[name="purpose"]:checked')?.value;
+
+    if (!category) {
+      errorNode.textContent = "Выберите категорию.";
+      return;
+    }
+    if (!purpose) {
+      errorNode.textContent = "Выберите, для каких целей подбираете.";
+      return;
+    }
 
     if (!slot) {
       errorNode.textContent = "Выберите удобное время визита.";
@@ -68,9 +82,8 @@ export function initQuiz() {
       const result = await sendLead({
         type: "quiz",
         fields: {
-          Категория:
-            document.querySelector('input[name="category"]:checked')?.value || "Не указано",
-          Цель: document.querySelector('input[name="purpose"]:checked')?.value || "Не указано",
+          Категория: category,
+          Цель: purpose,
           "Слот визита": slot,
           Телефон: phone,
         },

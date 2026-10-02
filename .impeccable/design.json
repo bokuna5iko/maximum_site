@@ -67,7 +67,7 @@
       "muted": {
         "role": "neutral",
         "displayName": "Приглушённый текст",
-        "canonical": "#617087",
+        "canonical": "#556070",
         "tonalRamp": ["#0e1217", "#2a2e34", "#494d54", "#6a6f76", "#8e939a", "#b3b8bf", "#d3d8e0", "#e9eff7"]
       },
       "on-dark": {
