@@ -31,7 +31,7 @@
     display: inline-block;
     padding: 6px 14px;
     background: rgba(255, 85, 0, 0.1);
-    color: $accent-orange;
+    color: $accent-orange-ink;
     border-radius: 20px;
     font-size: 0.85rem;
     font-weight: 700;
@@ -112,15 +112,29 @@
 }
 
 .quiz-option {
+  position: relative;
   cursor: pointer;
 
   input[type="radio"] {
-    display: none;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
 
     &:checked + .quiz-option__content {
       border-color: $accent-orange;
       background: rgba(255, 85, 0, 0.06);
       box-shadow: 0 0 15px $accent-orange-glow;
+    }
+
+    &:focus-visible + .quiz-option__content {
+      outline: 2px solid $accent-orange-ink;
+      outline-offset: 3px;
     }
   }
 
@@ -188,7 +202,7 @@
 .quiz-error {
   min-height: 1.2em;
   font-size: 0.85rem;
-  color: $accent-red;
+  color: $accent-red-ink;
   margin-top: 8px;
   text-align: left;
 }

@@ -30,6 +30,7 @@
     />
   </head>
   <body>
+    <a class="skip-link" href="#main">К содержанию</a>
     <header class="header">
       <div class="container header__container">
         <a href="#hero" class="header__logo" aria-label="Максимум — на главную">
@@ -115,32 +116,33 @@
     </header>
     <div class="header-spacer" aria-hidden="true"></div>
 
+    <main id="main">
     <section class="hero" id="hero">
       <canvas id="water-drops-canvas" class="hero__water-canvas"></canvas>
 
       <div class="hero__video-slider">
         <div class="hero__video-slide active" data-season="atv">
-          <video autoplay loop muted playsinline class="hero__video">
-            <source src="/src/assets/images/hero-atv.mp4" type="video/mp4" />
+          <video muted loop playsinline preload="none" class="hero__video">
+            <source data-src="/src/assets/images/hero-atv.mp4" type="video/mp4" />
           </video>
         </div>
 
         <div class="hero__video-slide" data-season="boat">
-          <video autoplay loop muted playsinline class="hero__video">
-            <source src="/src/assets/images/hero-boat.mp4" type="video/mp4" />
+          <video muted loop playsinline preload="none" class="hero__video">
+            <source data-src="/src/assets/images/hero-boat.mp4" type="video/mp4" />
           </video>
         </div>
 
         <div class="hero__video-slide" data-season="jetski">
-          <video autoplay loop muted playsinline class="hero__video">
-            <source src="/src/assets/images/hero-jetski.mp4" type="video/mp4" />
+          <video muted loop playsinline preload="none" class="hero__video">
+            <source data-src="/src/assets/images/hero-jetski.mp4" type="video/mp4" />
           </video>
         </div>
 
         <div class="hero__video-slide" data-season="snow">
-          <video autoplay loop muted playsinline class="hero__video">
+          <video muted loop playsinline preload="none" class="hero__video">
             <source
-              src="/src/assets/images/hero-snowmobile.mp4"
+              data-src="/src/assets/images/hero-snowmobile.mp4"
               type="video/mp4"
             />
           </video>
@@ -200,14 +202,18 @@
           <span class="season-card__line"></span>
         </button>
       </div>
+      <button class="hero__playback" id="hero-playback" type="button" aria-pressed="false">
+        Пауза слайдов
+      </button>
     </section>
 
     <section class="instock" id="in-stock">
       <div class="container">
         <div class="section-header">
-          <h2 class="section-title">Сейчас в салоне</h2>
+          <h2 class="section-title">Примеры техники</h2>
           <p class="section-subtitle">
-            Модели в зале. Приезжайте посмотреть, не выбирайте по фото
+            Это не склад и не прайс. Что стоит в зале и сколько стоит, скажет
+            менеджер
           </p>
         </div>
         <div class="instock__grid" id="in-stock-grid"></div>
@@ -231,8 +237,8 @@
             <span class="visit-card__step">Шаг 1</span>
             <h3 class="visit-card__title">Запишитесь на время</h3>
             <p class="visit-card__text">
-              Выберите модель из наличия и слот. Менеджер подтвердит визит и
-              подготовит технику к показу.
+              Назовите модель и время. Менеджер подтвердит, есть ли она в зале,
+              и подготовит показ.
             </p>
           </article>
           <article class="visit-card">
@@ -888,6 +894,8 @@
       </div>
     </section>
 
+    </main>
+
     <div class="modal" id="modal-lead">
       <div class="modal__overlay" id="modal-overlay"></div>
       <div class="modal__content">
@@ -913,7 +921,7 @@
           data-tab-content="tab-testdrive"
         >
           <div class="form-group">
-            <label for="testdrive-model">Модель из наличия</label>
+            <label for="testdrive-model">Модель</label>
             <select
               class="form-input"
               id="testdrive-model"
@@ -963,8 +971,8 @@
           data-tab-content="tab-service"
         >
           <div class="form-group">
-            <label>Категория техники</label>
-            <select class="form-input" name="service_category" required>
+            <label for="service-category">Категория техники</label>
+            <select class="form-input" id="service-category" name="service_category" required>
               <option value="Квадроцикл / Снегоход">
                 Квадроцикл / Снегоход
               </option>
@@ -975,20 +983,22 @@
             </select>
           </div>
           <div class="form-group">
-            <label>Желаемая дата и услуга</label>
+            <label for="service-details">Желаемая дата и услуга</label>
             <input
               type="text"
               class="form-input"
+              id="service-details"
               name="service_details"
               placeholder="Например: ТО-2, 15 августа"
               required
             />
           </div>
           <div class="form-group">
-            <label>Телефон / WhatsApp</label>
+            <label for="service-phone">Телефон / WhatsApp</label>
             <input
               type="tel"
               class="form-input"
+              id="service-phone"
               name="client_phone"
               placeholder="+7 (9XX) XXX-XX-XX"
               autocomplete="tel"
@@ -1010,39 +1020,43 @@
 
         <form class="modal__form" id="form-parts" data-tab-content="tab-parts">
           <div class="form-group">
-            <label>Марка и модель техники</label>
+            <label for="parts-brand">Марка и модель техники</label>
             <input
               type="text"
               class="form-input"
+              id="parts-brand"
               name="parts_brand"
               placeholder="Например: BRP Outlander 1000"
               required
             />
           </div>
           <div class="form-group">
-            <label>VIN-код / № кузова (опционально)</label>
+            <label for="parts-vin">VIN-код / № кузова (опционально)</label>
             <input
               type="text"
               class="form-input"
+              id="parts-vin"
               name="parts_vin"
               placeholder="Заполните для точного совпадения"
             />
           </div>
           <div class="form-group">
-            <label>Что требуется подобрать / купить?</label>
+            <label for="parts-needed">Что требуется подобрать / купить?</label>
             <input
               type="text"
               class="form-input"
+              id="parts-needed"
               name="parts_needed"
               placeholder="Например: Масляный фильтр, ремень вариатора"
               required
             />
           </div>
           <div class="form-group">
-            <label>Телефон / WhatsApp</label>
+            <label for="parts-phone">Телефон / WhatsApp</label>
             <input
               type="tel"
               class="form-input"
+              id="parts-phone"
               name="client_phone"
               placeholder="+7 (9XX) XXX-XX-XX"
               autocomplete="tel"

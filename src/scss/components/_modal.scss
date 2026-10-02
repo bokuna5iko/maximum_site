@@ -142,7 +142,7 @@
     transition: all $transition-fast;
 
     &.active {
-      color: $accent-orange;
+      color: $accent-orange-ink;
       background: rgba(255, 85, 0, 0.1);
     }
   }
@@ -199,13 +199,13 @@
   }
 
   a {
-    color: $accent-orange;
+    color: $accent-orange-ink;
   }
 }
 
 .form-error {
   min-height: 1.2em;
   font-size: 0.8rem;
-  color: $accent-red;
+  color: $accent-red-ink;
   margin: -8px 0 12px;
 }

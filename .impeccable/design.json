@@ -1,0 +1,228 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-02T15:45:00+09:00",
+  "title": "Design System: Центр Техники МАКСИМУМ",
+  "extensions": {
+    "colorMeta": {
+      "orange": {
+        "role": "primary",
+        "displayName": "Оранжевый",
+        "canonical": "#ff5500",
+        "tonalRamp": ["#370000", "#6e0000", "#a20000", "#cd1c00", "#f2581c", "#ff946f", "#ffc5af", "#ffe2d3"]
+      },
+      "red": {
+        "role": "secondary",
+        "displayName": "Красный",
+        "canonical": "#ff2a00",
+        "tonalRamp": ["#3b0000", "#760000", "#ad0000", "#d90000", "#fe4428", "#ff8b73", "#ffc1b1", "#ffe0d4"]
+      },
+      "cyan": {
+        "role": "tertiary",
+        "displayName": "Голубой",
+        "canonical": "#00b4d8",
+        "tonalRamp": ["#001727", "#003752", "#005b7c", "#007ea1", "#07a3c3", "#74c5dd", "#b4e0ee", "#d7f4fe"]
+      },
+      "graphite": {
+        "role": "neutral",
+        "displayName": "Графит",
+        "canonical": "#18191c",
+        "tonalRamp": ["#111114", "#2d2e31", "#4c4d50", "#6d6e72", "#919296", "#b6b7bb", "#d6d7dc", "#edeef3"]
+      },
+      "graphite-hover": {
+        "role": "neutral",
+        "displayName": "Графит при наведении",
+        "canonical": "#222429",
+        "tonalRamp": ["#101116", "#2c2e33", "#4b4d53", "#6c6f75", "#8f9298", "#b5b7be", "#d5d7de", "#eceef5"]
+      },
+      "hall": {
+        "role": "neutral",
+        "displayName": "Светло-серый",
+        "canonical": "#f4f6f9",
+        "tonalRamp": ["#101214", "#2c2e30", "#4b4d50", "#6d6f71", "#909295", "#b5b7ba", "#d6d7da", "#edeff1"]
+      },
+      "hall-alt": {
+        "role": "neutral",
+        "displayName": "Серый",
+        "canonical": "#e9ecef",
+        "tonalRamp": ["#101214", "#2c2e30", "#4b4d50", "#6c6f72", "#909295", "#b5b8ba", "#d5d8db", "#eceff2"]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Белый",
+        "canonical": "#ffffff",
+        "tonalRamp": ["#121212", "#2e2e2e", "#4d4d4d", "#6f6f6f", "#929292", "#b7b7b7", "#d7d7d7", "#eeeeee"]
+      },
+      "field": {
+        "role": "neutral",
+        "displayName": "Поле",
+        "canonical": "#f8fafc",
+        "tonalRamp": ["#101213", "#2c2e2f", "#4c4d4f", "#6d6f71", "#909294", "#b6b7b9", "#d6d8da", "#edeff1"]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Тёмный текст",
+        "canonical": "#1e293b",
+        "tonalRamp": ["#0c121b", "#252e3e", "#414e62", "#626f85", "#8693a8", "#aeb8c8", "#d2d8e1", "#ebeff5"]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Приглушённый текст",
+        "canonical": "#617087",
+        "tonalRamp": ["#0e1217", "#2a2e34", "#494d54", "#6a6f76", "#8e939a", "#b3b8bf", "#d3d8e0", "#e9eff7"]
+      },
+      "on-dark": {
+        "role": "neutral",
+        "displayName": "Белый на тёмном",
+        "canonical": "#ffffff",
+        "tonalRamp": ["#121212", "#2e2e2e", "#4d4d4d", "#6f6f6f", "#929292", "#b7b7b7", "#d7d7d7", "#eeeeee"]
+      },
+      "on-dark-muted": {
+        "role": "neutral",
+        "displayName": "Приглушённый на тёмном",
+        "canonical": "#94a3b8",
+        "tonalRamp": ["#0e1217", "#2a2e34", "#494d54", "#6a6f76", "#8e939a", "#b3b8bf", "#d2d8e0", "#e9eff7"]
+      },
+      "on-dark-soft": {
+        "role": "neutral",
+        "displayName": "Мягкий на тёмном",
+        "canonical": "#e2e8f0",
+        "tonalRamp": ["#0e1217", "#2a2e34", "#494d54", "#6a6f76", "#8d939a", "#b2b8bf", "#d2d8df", "#e9eff7"]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Линия",
+        "canonical": "#cbd5e1",
+        "tonalRamp": ["#0e1217", "#2a2e34", "#494e54", "#6a6f76", "#8d939a", "#b2b8bf", "#d2d8df", "#e9eff7"]
+      },
+      "line-soft": {
+        "role": "neutral",
+        "displayName": "Мягкая линия",
+        "canonical": "#e2e8f0",
+        "tonalRamp": ["#0e1217", "#2a2e34", "#494d54", "#6a6f76", "#8d939a", "#b2b8bf", "#d2d8df", "#e9eff7"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Заголовок героя на тёмном." },
+      "headline": { "displayName": "Headline", "purpose": "Заголовок секции, верхний регистр." },
+      "title": { "displayName": "Title", "purpose": "Название на тёмной карточке." },
+      "body": { "displayName": "Body", "purpose": "Основной текст и подзаголовок секции." },
+      "label": { "displayName": "Label", "purpose": "Подпись кнопки." }
+    },
+    "shadows": [
+      { "name": "hall-rest", "value": "0 4px 15px rgba(0, 0, 0, 0.04)", "purpose": "Белая карточка на светлом поле." },
+      { "name": "hall-hover", "value": "0 12px 30px rgba(0, 0, 0, 0.08)", "purpose": "Та же карточка при наведении." },
+      { "name": "plate", "value": "0 15px 35px rgba(0, 0, 0, 0.3)", "purpose": "Ховер тёмной карточки. Не ставить в покое." },
+      { "name": "menu", "value": "0 18px 36px rgba(0, 0, 0, 0.35)", "purpose": "Выпадающий слой шапки." },
+      { "name": "modal", "value": "0 25px 50px rgba(0, 0, 0, 0.25)", "purpose": "Диалог над страницей." },
+      { "name": "action-glow", "value": "0 4px 15px rgba(255, 85, 0, 0.35)", "purpose": "Только текущая главная кнопка. Новым действиям не давать." }
+    ],
+    "motion": [
+      { "name": "ease-standard", "value": "0.25s cubic-bezier(0.4, 0, 0.2, 1)", "purpose": "Переход цвета, обводки и тени." }
+    ],
+    "breakpoints": [
+      { "name": "desktop", "value": "993px" },
+      { "name": "tablet", "value": "992px" },
+      { "name": "mobile", "value": "768px" },
+      { "name": "small", "value": "640px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Главное действие. Градиент оранжевый к красному. Свечение в коде есть, новым кнопкам его не копировать.",
+      "html": "<button class=\"ds-btn-primary\" type=\"button\">Смотреть наличие</button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 14px 28px; border: none; border-radius: 8px; background: linear-gradient(135deg, #cc3c00 0%, #d23219 100%); color: #ffffff; font-family: \"Russo One\", Montserrat, sans-serif; font-size: 0.95rem; font-weight: 400; letter-spacing: 0.5px; text-decoration: none; cursor: pointer; box-shadow: 0 4px 15px rgba(204, 60, 0, 0.35); transition: box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1), transform 0.25s cubic-bezier(0.4, 0, 0.2, 1); } .ds-btn-primary:hover { box-shadow: 0 6px 20px rgba(204, 60, 0, 0.45); transform: translateY(-2px); } .ds-btn-primary:focus-visible { outline: 2px solid #ff5500; outline-offset: 3px; }"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Второе действие на тёмном герое.",
+      "html": "<button class=\"ds-btn-outline\" type=\"button\">Записаться в сервис</button>",
+      "css": ".ds-btn-outline { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 14px 28px; border-radius: 8px; background: transparent; color: #ffffff; border: 1px solid rgba(255, 255, 255, 0.25); font-family: \"Russo One\", Montserrat, sans-serif; font-size: 0.95rem; font-weight: 400; letter-spacing: 0.5px; cursor: pointer; transition: background 0.25s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1); } .ds-btn-outline:hover { background: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.5); } .ds-btn-outline:focus-visible { outline: 2px solid #ff5500; outline-offset: 3px; }"
+    },
+    {
+      "name": "Outline Dark Button",
+      "kind": "button",
+      "refersTo": "button-outline-dark",
+      "description": "Тихое действие на светлом зале.",
+      "html": "<button class=\"ds-btn-outline-dark\" type=\"button\">Подробнее</button>",
+      "css": ".ds-btn-outline-dark { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 14px 28px; border-radius: 8px; background: transparent; color: #1e293b; border: 1px solid #cbd5e1; font-family: \"Russo One\", Montserrat, sans-serif; font-size: 0.95rem; font-weight: 400; letter-spacing: 0.5px; cursor: pointer; transition: background 0.25s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), color 0.25s cubic-bezier(0.4, 0, 0.2, 1); } .ds-btn-outline-dark:hover { background: #f8fafc; border-color: #ff5500; color: #ff5500; } .ds-btn-outline-dark:focus-visible { outline: 2px solid #ff5500; outline-offset: 3px; }"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Поле квиза и модалки. Фокус — оранжевая обводка, без свечения.",
+      "html": "<label class=\"ds-field\"><span class=\"ds-field__label\">Телефон</span><input class=\"ds-input\" type=\"tel\" placeholder=\"+7\"></label>",
+      "css": ".ds-field { display: block; text-align: left; } .ds-field__label { display: block; margin-bottom: 6px; font-family: Inter, system-ui, sans-serif; font-size: 0.85rem; color: #64748b; } .ds-input { width: 100%; padding: 14px 16px; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; color: #1e293b; font-family: Inter, system-ui, sans-serif; font-size: 16px; outline: none; transition: border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), background 0.25s cubic-bezier(0.4, 0, 0.2, 1); } .ds-input:hover { border-color: #94a3b8; } .ds-input:focus { border-color: #ff5500; background: #ffffff; }"
+    },
+    {
+      "name": "Dark Card",
+      "kind": "card",
+      "refersTo": "card-dark",
+      "description": "Плита направления салона на светлом полу.",
+      "html": "<article class=\"ds-card\"><h3 class=\"ds-card__title\">Квадроциклы</h3><p class=\"ds-card__text\">Смотрим в салоне в Якутске</p></article>",
+      "css": ".ds-card { background: #18191c; color: #ffffff; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px; padding: 30px 24px; transition: background 0.25s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1); } .ds-card__title { margin: 0 0 16px; font-family: \"Russo One\", Montserrat, sans-serif; font-size: 1.3rem; font-weight: 400; letter-spacing: 1px; color: #ffffff; } .ds-card__text { margin: 0; font-family: Inter, system-ui, sans-serif; font-size: 0.9rem; line-height: 1.4; color: #94a3b8; } .ds-card:hover { background: #222429; border-color: rgba(255, 85, 0, 0.5); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3); }"
+    },
+    {
+      "name": "Stock Chip",
+      "kind": "chip",
+      "refersTo": "chip-stock",
+      "description": "Метка наличия. Голубой больше нигде не используется.",
+      "html": "<span class=\"ds-chip\">В наличии</span>",
+      "css": ".ds-chip { display: inline-block; padding: 4px 10px; border-radius: 6px; background: rgba(0, 180, 216, 0.15); color: #00b4d8; border: 1px solid rgba(0, 180, 216, 0.3); font-family: Inter, system-ui, sans-serif; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }"
+    },
+    {
+      "name": "Nav Link",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Ссылка шапки, белая пилюля.",
+      "html": "<a class=\"ds-nav\" href=\"#in-stock\">Наличие</a>",
+      "css": ".ds-nav { display: inline-block; padding: 6px 12px; border-radius: 20px; background: #ffffff; border: 1px solid #e2e8f0; color: #1e293b; font-family: Inter, system-ui, sans-serif; font-size: 0.82rem; font-weight: 600; text-decoration: none; transition: border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), color 0.25s cubic-bezier(0.4, 0, 0.2, 1); } .ds-nav:hover { border-color: #ff5500; color: #ff5500; } .ds-nav:focus-visible { outline: 2px solid #ff5500; outline-offset: 3px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Фасад салона",
+    "overview": "Страница устроена как зал: светлый пол, тёмные плиты с техникой, оранжевый как вывеска на двери. Заголовки технические и прямые, набор Russo One. Текст спокойный, Inter. Контраст зала и плит — характер системы, не украшение.\n\nПлотность средняя: контейнер 1200px, секции с большим вертикальным воздухом, карточки плотнее текста. Новые элементы остаются сдержанными. Свечение и подъём при наведении есть у текущей главной кнопки и у ховера тёмной карточки; это не образец, который копируют.",
+    "keyCharacteristics": [
+      "Светлый зал и тёмные плиты",
+      "Заголовки Russo One, текст Inter",
+      "Оранжевый на действие и фокус, красный только в паре с ним на главной кнопке",
+      "Голубой только на метке наличия",
+      "Новые элементы без свечения и без подъёма"
+    ],
+    "rules": [
+      {
+        "name": "The One Action Color Rule",
+        "body": "Оранжевый красит одно действие на экране и фокус поля. Голубой остаётся меткой наличия. Красный не выходит из градиента главной кнопки и красной метки.",
+        "section": "colors"
+      },
+      {
+        "name": "The Two Families Rule",
+        "body": "Russo One только у заголовков и кнопок. Inter у текста, полей, меток и ссылок шапки. Тело страницы не набирается вывесочным шрифтом.",
+        "section": "typography"
+      },
+      {
+        "name": "The Hall and Plate Rule",
+        "body": "Светлая секция остаётся плоской. Тёмная поверхность — плита на этом полу. Оранжевое свечение не создаёт новый слой.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do красить пол секций в #f4f6f9, а тёмные плиты в #18191c.",
+      "Do набирать заголовки Russo One, а текст Inter.",
+      "Do оставлять оранжевый #ff5500 главному действию и фокусу поля.",
+      "Do оставлять голубой #00b4d8 метке наличия.",
+      "Do держать новые элементы плоскими: обводка и смена цвета, не тень и не подъём."
+    ],
+    "donts": [
+      "Don't добавлять новым компонентам оранжевое свечение или translateY при наведении.",
+      "Don't перекрашивать зал в тёмный фон или герой в светлый.",
+      "Don't менять знак MAXIMUM и его анимацию.",
+      "Don't вводить четвёртый акцент. Зелёный #25d366 остаётся только у знака WhatsApp."
+    ]
+  }
+}

@@ -17,12 +17,12 @@
   transition: all $transition-fast;
 
   &--primary {
-    background: linear-gradient(135deg, $accent-orange 0%, $accent-red 100%);
+    background: linear-gradient(135deg, $accent-orange-ink 0%, $accent-red-ink 100%);
     color: #ffffff;
     box-shadow: 0 4px 15px $accent-orange-glow;
 
     &:hover {
-      box-shadow: 0 6px 20px rgba(255, 85, 0, 0.5);
+      box-shadow: 0 6px 20px rgba(204, 60, 0, 0.45);
     }
 
     @media (hover: hover) {
@@ -57,7 +57,7 @@
     &:hover {
       background: #f8fafc;
       border-color: $accent-orange;
-      color: $accent-orange;
+      color: $accent-orange-ink;
     }
 
     @media (hover: hover) {
