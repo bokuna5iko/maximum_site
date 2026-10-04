@@ -121,14 +121,48 @@ function injectJsonLd() {
 export function initMobileNav() {
   const burger = document.querySelector("#header-burger");
   const nav = document.querySelector("#header-nav");
+  const shield = document.querySelector("#header-shield");
   if (!burger || !nav) return;
 
+  let revealTimer = 0;
+
+  function markClosed() {
+    window.clearTimeout(revealTimer);
+    burger.setAttribute("aria-expanded", "false");
+    burger.setAttribute("aria-label", "Открыть меню");
+  }
+
+  function markReady() {
+    if (!nav.classList.contains("is-open")) return;
+    burger.setAttribute("aria-expanded", "true");
+    burger.setAttribute("aria-label", "Закрыть меню");
+  }
+
   function setMenuOpen(open) {
+    window.clearTimeout(revealTimer);
     nav.classList.toggle("is-open", open);
     burger.classList.toggle("is-open", open);
-    burger.setAttribute("aria-expanded", String(open));
-    burger.setAttribute("aria-label", open ? "Закрыть меню" : "Открыть меню");
+    shield?.classList.toggle("is-on", open);
     document.body.style.overflow = open ? "hidden" : "";
+
+    if (!open) {
+      markClosed();
+      return;
+    }
+
+    burger.setAttribute("aria-expanded", "true");
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) {
+      markReady();
+      return;
+    }
+    const onEnd = (event) => {
+      if (event.target !== nav || event.propertyName !== "grid-template-rows") return;
+      nav.removeEventListener("transitionend", onEnd);
+      markReady();
+    };
+    nav.addEventListener("transitionend", onEnd);
+    revealTimer = window.setTimeout(markReady, 480);
   }
 
   function closeMenu() {

@@ -12,12 +12,6 @@
   transition: all $transition-fast;
   overflow: hidden;
 
-  &__photo {
-    aspect-ratio: 16 / 10;
-    background: #121316;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  }
-
   &__content {
     padding: 24px 24px 30px;
     display: flex;
@@ -98,6 +92,24 @@
     display: inline-flex;
     align-self: flex-start;
     margin-bottom: 12px;
+  }
+
+  &--parts {
+    background-color: $bg-surface;
+    border-color: #e2e8f0;
+
+    .card__title,
+    .card__open {
+      color: $text-dark;
+    }
+
+    .card__specs li {
+      color: $text-muted;
+    }
+
+    .card__specs li span {
+      color: $text-dark;
+    }
   }
 
   &__specs {

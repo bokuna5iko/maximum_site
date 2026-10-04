@@ -7,7 +7,6 @@ export function renderInventory() {
   root.innerHTML = INVENTORY.map(
     (item) => `
       <article class="instock-card">
-        <div class="instock-card__visual" aria-hidden="true"></div>
         <div class="instock-card__body">
           <span class="instock-card__badge">${item.badge}</span>
           <h3 class="instock-card__title">
@@ -21,6 +20,12 @@ export function renderInventory() {
           <ul class="instock-card__specs">
             ${item.specs.map((spec) => `<li>${spec}</li>`).join("")}
           </ul>
+          <button
+            type="button"
+            class="instock-card__action"
+            data-open-intent="testdrive"
+            data-model-id="${item.id}"
+          >Записаться на показ</button>
         </div>
       </article>
     `,

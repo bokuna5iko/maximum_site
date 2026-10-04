@@ -38,7 +38,12 @@ function dayLabel(date, today) {
   if (sameDay(date, today)) return `Сегодня, ${dateText}`;
   if (sameDay(date, addDays(today, 1))) return `Завтра, ${dateText}`;
   if (date.getDay() === 6) return `Суббота, ${dateText}`;
+  if (date.getDay() === 0) return `Воскресенье, ${dateText}`;
   return dateText;
+}
+
+function windowsFor(date) {
+  return hoursFor(date).close <= 16 ? [10, 14] : [10, 16];
 }
 
 function slot(date, today, hour) {
@@ -50,7 +55,7 @@ function pushDay(slots, date, today) {
   const { open, close } = hoursFor(date);
   const isToday = sameDay(date, today);
   const nowHour = today.getHours();
-  const hours = [12, close <= 16 ? 14 : 16];
+  const hours = windowsFor(date);
 
   for (const hour of hours) {
     if (hour < open || hour >= close) continue;
@@ -61,19 +66,9 @@ function pushDay(slots, date, today) {
 
 export function visitSlots(now = new Date()) {
   const slots = [];
-  const tomorrow = addDays(now, 1);
-  const dayAfter = addDays(now, 2);
-  pushDay(slots, now, now);
-  pushDay(slots, tomorrow, now);
-  pushDay(slots, dayAfter, now);
-
-  let daysUntilSaturday = (6 - now.getDay() + 7) % 7;
-  if (daysUntilSaturday === 0) daysUntilSaturday = 7;
-  let saturday = addDays(now, daysUntilSaturday);
-  if (sameDay(saturday, now) || sameDay(saturday, tomorrow) || sameDay(saturday, dayAfter)) {
-    saturday = addDays(saturday, 7);
+  for (let day = 0; day < 7; day += 1) {
+    pushDay(slots, addDays(now, day), now);
   }
-  slots.push(slot(saturday, now, 12));
 
   slots.push({
     value: "Перезвоните, согласуем",

@@ -53,11 +53,6 @@
     }
   }
 
-  &__visual {
-    aspect-ratio: 16 / 10;
-    background: $bg-dark-card;
-  }
-
   &__open {
     display: inline-block;
     max-width: 100%;
@@ -125,13 +120,40 @@
 
   &__specs {
     list-style: none;
-    margin-bottom: 18px;
+    margin-bottom: 12px;
     flex-grow: 1;
 
     li {
       font-size: 0.88rem;
       color: $text-muted;
       margin-bottom: 4px;
+    }
+  }
+
+  &__action {
+    align-self: flex-start;
+    margin-top: auto;
+    min-height: 44px;
+    padding: 8px 0;
+    border: 0;
+    background: none;
+    color: $accent-orange-ink;
+    font-family: $font-header;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    text-align: left;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 5px;
+    cursor: pointer;
+
+    &:hover {
+      color: $text-dark;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $accent-orange;
+      outline-offset: 3px;
     }
   }
 }
