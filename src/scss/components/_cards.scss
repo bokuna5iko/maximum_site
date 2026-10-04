@@ -36,6 +36,10 @@
     border: 0;
     padding: 8px 0;
     text-align: left;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 5px;
+    text-decoration-color: $accent-orange;
     cursor: pointer;
 
     &:hover {

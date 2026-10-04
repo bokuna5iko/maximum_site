@@ -91,11 +91,19 @@ export function initModals() {
       selectedTitle: item?.title || "",
     });
 
+    const hasExample = Boolean(label) && [...(modelSelect?.options || [])].some(
+      (option) => option.value && option.value !== label,
+    );
+    const onlyDirection = Boolean(label) && !hasExample;
+
+    if (modelSelect) {
+      modelSelect.hidden = onlyDirection;
+      modelSelect.required = !onlyDirection;
+    }
+
     if (fieldLabel) {
-      const hasExample = Boolean(label) && [...(modelSelect?.options || [])].some(
-        (option) => option.value && option.value !== label,
-      );
-      fieldLabel.textContent = label && !hasExample ? "Направление" : "Модель";
+      fieldLabel.hidden = onlyDirection;
+      fieldLabel.textContent = onlyDirection ? "Направление" : "Модель";
     }
 
     if (note) {

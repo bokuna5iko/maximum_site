@@ -61,14 +61,16 @@ function pushDay(slots, date, today) {
 
 export function visitSlots(now = new Date()) {
   const slots = [];
+  const tomorrow = addDays(now, 1);
+  const dayAfter = addDays(now, 2);
   pushDay(slots, now, now);
-  pushDay(slots, addDays(now, 1), now);
+  pushDay(slots, tomorrow, now);
+  pushDay(slots, dayAfter, now);
 
   let daysUntilSaturday = (6 - now.getDay() + 7) % 7;
   if (daysUntilSaturday === 0) daysUntilSaturday = 7;
   let saturday = addDays(now, daysUntilSaturday);
-  const tomorrow = addDays(now, 1);
-  if (sameDay(saturday, now) || sameDay(saturday, tomorrow)) {
+  if (sameDay(saturday, now) || sameDay(saturday, tomorrow) || sameDay(saturday, dayAfter)) {
     saturday = addDays(saturday, 7);
   }
   slots.push(slot(saturday, now, 12));

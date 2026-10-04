@@ -98,7 +98,8 @@
     position: absolute;
     top: 15px;
     right: 18px;
-    background: none;
+    z-index: 5;
+    background: $bg-surface;
     border: none;
     color: $text-muted;
     font-size: 1.8rem;
