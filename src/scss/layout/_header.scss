@@ -134,6 +134,13 @@
   }
 
   &__phone-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 12px;
+    border-radius: $radius-sm;
+    border: 1px solid #e2e8f0;
+    background: #ffffff;
     color: $accent-orange-ink;
     text-decoration: none;
     font-size: 0.95rem;
@@ -141,7 +148,12 @@
     white-space: nowrap;
 
     &:hover {
-      text-decoration: underline;
+      border-color: $accent-orange;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $accent-orange;
+      outline-offset: 3px;
     }
   }
 
@@ -272,9 +284,13 @@
       top: 100%;
       left: 0;
       right: 0;
+      width: 100%;
       z-index: 1000;
       display: grid;
       grid-template-rows: 0fr;
+      align-items: stretch;
+      justify-content: stretch;
+      justify-items: stretch;
       margin: 0;
       overflow: hidden;
       visibility: hidden;
@@ -290,15 +306,22 @@
     &__menu {
       display: flex;
       flex-direction: column;
+      align-items: stretch;
+      align-self: stretch;
+      justify-self: stretch;
+      width: 100%;
       min-height: 0;
       overflow: hidden;
-      padding: 0 20px;
+      padding: 0;
     }
 
     &__nav .header__link {
-      display: block;
+      display: flex;
+      align-items: center;
+      align-self: stretch;
       width: 100%;
-      padding: 14px 0;
+      box-sizing: border-box;
+      padding: 14px 20px;
       border: none;
       border-radius: 0;
       background: transparent;
@@ -378,7 +401,7 @@
       }
 
       .header__menu {
-        padding: 8px 20px 16px;
+        padding: 8px 0 12px;
       }
     }
 

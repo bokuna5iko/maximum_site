@@ -39,9 +39,9 @@
     box-shadow: 0 0 10px $accent-cyan-glow;
 
     &--red {
-      background: rgba(255, 42, 0, 0.2);
-      color: $accent-red;
-      border: 1px solid rgba(255, 42, 0, 0.3);
+      background: $accent-red-ink;
+      color: #ffffff;
+      border: 1px solid $accent-red-ink;
       box-shadow: none;
     }
   }

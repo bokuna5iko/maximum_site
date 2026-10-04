@@ -22,6 +22,16 @@ const TAB_BY_INTENT = {
   parts: "tab-parts",
 };
 
+const CARD_CATEGORY = {
+  Гидроциклы: "jetski",
+  Квадроциклы: "atv",
+  Снегоходы: "snow",
+  "Лодки и моторы": "boat",
+  Прицепы: "trailer",
+  "Экипировка и защита": "gear",
+  "Рыбалка и кемпинг": "camping",
+};
+
 let returnFocus = null;
 
 function rememberFocus() {
@@ -68,15 +78,46 @@ export function initModals() {
   fillModelSelect(modelSelect);
   renderVisitSlots();
 
-  function openModal(intent = "testdrive", { modelId } = {}) {
+  function applySalonChoice({ modelId, direction } = {}) {
+    const item = modelId ? getInventoryItem(modelId) : null;
+    const label = direction || item?.categoryLabel || "";
+    const category = item?.category || (direction ? CARD_CATEGORY[direction] : undefined);
+    const note = document.querySelector("#testdrive-direction");
+    const fieldLabel = document.querySelector('label[for="testdrive-model"]');
+
+    fillModelSelect(modelSelect, {
+      direction: label,
+      category,
+      selectedTitle: item?.title || "",
+    });
+
+    if (fieldLabel) {
+      const hasExample = Boolean(label) && [...(modelSelect?.options || [])].some(
+        (option) => option.value && option.value !== label,
+      );
+      fieldLabel.textContent = label && !hasExample ? "Направление" : "Модель";
+    }
+
+    if (note) {
+      if (label) {
+        note.hidden = false;
+        note.textContent = `Направление: ${label}.`;
+      } else {
+        note.hidden = true;
+        note.textContent = "";
+      }
+    }
+  }
+
+  function openModal(intent = "testdrive", { modelId, direction } = {}) {
     switchTab(TAB_BY_INTENT[intent] || "tab-testdrive");
 
-    if (modelId && modelSelect) {
-      const item = getInventoryItem(modelId);
-      modelSelect.value = item ? item.title : "";
-    } else if (modelSelect) {
-      modelSelect.value = "";
+    if ((TAB_BY_INTENT[intent] || "tab-testdrive") === "tab-testdrive") {
+      applySalonChoice({ modelId, direction });
     }
+
+    const privacy = document.querySelector("#modal-privacy");
+    if (privacy) privacy.hidden = true;
 
     openDialog(modal);
   }
@@ -159,17 +200,23 @@ export function initModals() {
     if (!intent) return;
 
     event.preventDefault();
-    openModal(intent, { modelId: trigger.dataset.modelId });
+    openModal(intent, {
+      modelId: trigger.dataset.modelId,
+      direction: trigger.dataset.direction,
+    });
   });
 
   document.querySelectorAll(".modal__tab").forEach((tab) => {
     tab.addEventListener("click", () => switchTab(tab.dataset.tab));
   });
 
-  document.querySelectorAll('#modal-lead a[href="#privacy"]').forEach((link) => {
-    link.addEventListener("click", () => {
-      closeDialog(modal, { restore: false });
-      returnFocus = null;
+  document.querySelectorAll('#modal-lead a[href="#modal-privacy"]').forEach((link) => {
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+      const note = document.querySelector("#modal-privacy");
+      if (!note) return;
+      note.hidden = false;
+      note.focus();
     });
   });
 

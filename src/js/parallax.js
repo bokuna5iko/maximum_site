@@ -59,12 +59,20 @@ export function initWaterDrops() {
   if (!canvas) return;
 
   const ctx = canvas.getContext("2d");
-  let width = (canvas.width = window.innerWidth);
-  let height = (canvas.height = window.innerHeight);
+
+  function sizeCanvas() {
+    const box = canvas.parentElement?.getBoundingClientRect();
+    const nextWidth = Math.max(1, Math.round(box?.width || canvas.clientWidth || 1));
+    const nextHeight = Math.max(1, Math.round(box?.height || canvas.clientHeight || 1));
+    canvas.width = nextWidth;
+    canvas.height = nextHeight;
+    return { width: nextWidth, height: nextHeight };
+  }
+
+  let { width, height } = sizeCanvas();
 
   window.addEventListener("resize", () => {
-    width = canvas.width = window.innerWidth;
-    height = canvas.height = window.innerHeight;
+    ({ width, height } = sizeCanvas());
   });
 
   // Генерация случайных капель

@@ -23,8 +23,11 @@ export function initVideoSlider() {
 
   function setPlaybackLabel() {
     if (!playback) return;
-    playback.setAttribute("aria-pressed", String(paused));
-    playback.textContent = paused ? "Запустить слайды" : "Пауза слайдов";
+    const autoplay = !paused;
+    playback.setAttribute("aria-pressed", String(autoplay));
+    playback.textContent = autoplay
+      ? "Остановить автопрокрутку"
+      : "Включить автопрокрутку";
   }
 
   function goToSlide(index) {

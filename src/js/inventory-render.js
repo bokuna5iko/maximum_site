@@ -30,17 +30,41 @@ export function renderInventory() {
   ).join("");
 }
 
-export function fillModelSelect(select) {
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
+}
+
+export function fillModelSelect(select, { direction = "", category, selectedTitle = "" } = {}) {
   if (!select) return;
-  const current = select.value;
-  select.innerHTML = [
-    `<option value="">Выберите пример</option>`,
-    ...INVENTORY.map(
-      (item) =>
-        `<option value="${item.title}">${item.title} — пример</option>`,
-    ),
-  ].join("");
-  select.value = current && [...select.options].some((option) => option.value === current)
-    ? current
-    : "";
+
+  const scoped = Boolean(direction);
+  const items = scoped
+    ? INVENTORY.filter((item) => category && item.category === category)
+    : INVENTORY;
+
+  const options = scoped
+    ? [
+        `<option value="${escapeHtml(direction)}">${escapeHtml(direction)} — менеджер подтвердит наличие</option>`,
+      ]
+    : [`<option value="">Выберите пример</option>`];
+
+  for (const item of items) {
+    options.push(
+      `<option value="${escapeHtml(item.title)}">${escapeHtml(item.title)} — пример</option>`,
+    );
+  }
+
+  select.innerHTML = options.join("");
+
+  if (selectedTitle && [...select.options].some((option) => option.value === selectedTitle)) {
+    select.value = selectedTitle;
+  } else if (scoped) {
+    select.value = direction;
+  } else {
+    select.value = "";
+  }
 }

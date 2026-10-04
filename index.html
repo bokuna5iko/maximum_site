@@ -203,9 +203,52 @@
           <span class="season-card__line"></span>
         </button>
       </div>
-      <button class="hero__playback" id="hero-playback" type="button" aria-pressed="true">
-        Запустить слайды
+      <button class="hero__playback" id="hero-playback" type="button" aria-pressed="false">
+        Включить автопрокрутку
       </button>
+    </section>
+
+    <section class="paths" aria-label="Визит и сервис">
+      <div class="container">
+        <div class="paths__grid">
+          <article class="paths__card">
+            <h2 class="paths__title">В зал</h2>
+            <p class="paths__text">
+              ул. 50 лет Советской Армии, 77. Что стоит в зале, скажет менеджер.
+            </p>
+            <a
+              class="paths__phone"
+              href="tel:+79247659421"
+              data-bind-href="PHONE_SALES"
+              data-bind-text="PHONE_SALES_DISPLAY"
+              >+7 (924) 765-94-21</a
+            >
+            <p class="paths__note" data-bind-text="PHONE_SALES_NOTE">магазин, 2 этаж</p>
+            <button class="btn btn--outline-dark btn--full" type="button" data-open-intent="testdrive">
+              Записаться в салон
+            </button>
+          </article>
+          <article class="paths__card">
+            <h2 class="paths__title">В сервис</h2>
+            <p class="paths__text">
+              Пока техника на ТО, можно зайти в зал.
+            </p>
+            <a
+              class="paths__phone"
+              href="tel:+79247659728"
+              data-bind-href="PHONE_SERVICE"
+              data-bind-text="PHONE_SERVICE_DISPLAY"
+              >+7 (924) 765-97-28</a
+            >
+            <p class="paths__note" data-bind-text="PHONE_SERVICE_NOTE">
+              ремонт и запчасти: моторы, снегоходы
+            </p>
+            <button class="btn btn--outline-dark btn--full" type="button" data-open-intent="service">
+              Записаться в сервис
+            </button>
+          </article>
+        </div>
+      </div>
     </section>
 
     <section class="instock" id="in-stock">
@@ -309,6 +352,7 @@
                 class="btn btn--outline btn--full card__action"
                 type="button"
                 data-target="test-drive"
+                data-direction="Гидроциклы"
               >
                 Записаться в салон
               </button>
@@ -326,6 +370,7 @@
                 class="btn btn--outline btn--full card__action"
                 type="button"
                 data-target="test-drive"
+                data-direction="Квадроциклы"
               >
                 Записаться в салон
               </button>
@@ -343,6 +388,7 @@
                 class="btn btn--outline btn--full card__action"
                 type="button"
                 data-target="test-drive"
+                data-direction="Снегоходы"
               >
                 Записаться в салон
               </button>
@@ -360,6 +406,7 @@
                 class="btn btn--outline btn--full card__action"
                 type="button"
                 data-target="boat-kit"
+                data-direction="Лодки и моторы"
               >
                 Записаться в салон
               </button>
@@ -377,6 +424,7 @@
                 class="btn btn--outline btn--full card__action"
                 type="button"
                 data-target="store-stock"
+                data-direction="Прицепы"
               >
                 Записаться в салон
               </button>
@@ -394,6 +442,7 @@
                 class="btn btn--outline btn--full card__action"
                 type="button"
                 data-target="gear-size"
+                data-direction="Экипировка и защита"
               >
                 Записаться в салон
               </button>
@@ -446,6 +495,7 @@
                 class="btn btn--outline btn--full card__action"
                 type="button"
                 data-target="store-stock"
+                data-direction="Рыбалка и кемпинг"
               >
                 Записаться в салон
               </button>
@@ -897,6 +947,7 @@
         >
           <div class="form-group">
             <label for="testdrive-model">Модель</label>
+            <p class="form-hint" id="testdrive-direction" hidden></p>
             <select
               class="form-input"
               id="testdrive-model"
@@ -930,7 +981,7 @@
             <input type="checkbox" name="consent" required />
             <span
               >Согласен на
-              <a href="#privacy">обработку персональных данных</a></span
+              <a href="#modal-privacy">обработку персональных данных</a></span
             >
           </label>
           <p class="form-error" role="status"></p>
@@ -983,7 +1034,7 @@
             <input type="checkbox" name="consent" required />
             <span
               >Согласен на
-              <a href="#privacy">обработку персональных данных</a></span
+              <a href="#modal-privacy">обработку персональных данных</a></span
             >
           </label>
           <p class="form-error" role="status"></p>
@@ -1041,7 +1092,7 @@
             <input type="checkbox" name="consent" required />
             <span
               >Согласен на
-              <a href="#privacy">обработку персональных данных</a></span
+              <a href="#modal-privacy">обработку персональных данных</a></span
             >
           </label>
           <p class="form-error" role="status"></p>
@@ -1049,6 +1100,14 @@
             Запросить подбор запчастей
           </button>
         </form>
+        <div class="modal__privacy" id="modal-privacy" hidden tabindex="0">
+          <p>
+            Отправляя заявку, вы соглашаетесь на обработку номера телефона и
+            указанных сведений для связи по записи в салон, сервису и подбору
+            техники. Данные не передаются третьим лицам, кроме канала доставки
+            заявки (Telegram / WhatsApp).
+          </p>
+        </div>
       </div>
     </div>
 
