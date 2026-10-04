@@ -92,15 +92,17 @@ function escapeHtml(value) {
 export function renderVisitSlots(now = new Date()) {
   const slots = visitSlots(now);
 
-  const select = document.querySelector("#testdrive-slot");
-  if (select) {
-    select.innerHTML = [
-      `<option value="">Выберите время</option>`,
-      ...slots.map(
-        (item) =>
-          `<option value="${escapeHtml(item.value)}">${escapeHtml(item.label)}</option>`,
-      ),
-    ].join("");
+  const markup = [
+    `<option value="">Выберите время</option>`,
+    ...slots.map(
+      (item) =>
+        `<option value="${escapeHtml(item.value)}">${escapeHtml(item.label)}</option>`,
+    ),
+  ].join("");
+
+  for (const id of ["#testdrive-slot", "#service-slot"]) {
+    const select = document.querySelector(id);
+    if (select) select.innerHTML = markup;
   }
 
   document.querySelectorAll("[data-visit-hours]").forEach((node) => {

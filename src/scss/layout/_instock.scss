@@ -54,38 +54,30 @@
   }
 
   &__visual {
-    height: 132px;
-    display: flex;
-    align-items: flex-end;
-    padding: 14px 18px;
-    color: $text-light;
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    aspect-ratio: 16 / 10;
+    background: $bg-dark-card;
+  }
 
-    &.is-jetski {
-      background: linear-gradient(135deg, #0e7490, #155e75);
+  &__open {
+    display: inline-block;
+    max-width: 100%;
+    font: inherit;
+    line-height: 1.45;
+    letter-spacing: inherit;
+    color: inherit;
+    background: none;
+    border: 0;
+    padding: 8px 0;
+    text-align: left;
+    cursor: pointer;
+
+    &:hover {
+      color: $accent-orange-ink;
     }
 
-    &.is-atv {
-      background: linear-gradient(135deg, #3f6212, #1a2e05);
-    }
-
-    &.is-boat {
-      background: linear-gradient(135deg, #1d4ed8, #1e3a8a);
-    }
-
-    &.is-snow {
-      background: linear-gradient(135deg, #334155, #0f172a);
-    }
-
-    &.is-trailer {
-      background: linear-gradient(135deg, #57534e, #292524);
-    }
-
-    &.is-gear {
-      background: linear-gradient(135deg, #9a3412, #7c2d12);
+    &:focus-visible {
+      outline: 2px solid $accent-orange;
+      outline-offset: 3px;
     }
   }
 
@@ -116,6 +108,7 @@
   &__title {
     font-family: $font-header;
     font-size: 1.15rem;
+    line-height: 1.45;
     color: $text-dark;
     margin-bottom: 6px;
   }

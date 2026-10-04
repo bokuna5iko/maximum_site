@@ -7,23 +7,20 @@ export function renderInventory() {
   root.innerHTML = INVENTORY.map(
     (item) => `
       <article class="instock-card">
-        <div class="instock-card__visual is-${item.category}">
-          <span class="instock-card__category">${item.categoryLabel}</span>
-        </div>
+        <div class="instock-card__visual" aria-hidden="true"></div>
         <div class="instock-card__body">
           <span class="instock-card__badge">${item.badge}</span>
-          <h3 class="instock-card__title">${item.title}</h3>
+          <h3 class="instock-card__title">
+            <button
+              type="button"
+              class="instock-card__open"
+              data-open-intent="testdrive"
+              data-model-id="${item.id}"
+            >${item.title}</button>
+          </h3>
           <ul class="instock-card__specs">
             ${item.specs.map((spec) => `<li>${spec}</li>`).join("")}
           </ul>
-          <button
-            type="button"
-            class="btn btn--outline-dark btn--full"
-            data-open-intent="testdrive"
-            data-model-id="${item.id}"
-          >
-            ${item.cta}
-          </button>
         </div>
       </article>
     `,
@@ -48,13 +45,13 @@ export function fillModelSelect(select, { direction = "", category, selectedTitl
 
   const options = scoped
     ? [
-        `<option value="${escapeHtml(direction)}">${escapeHtml(direction)} — менеджер подтвердит наличие</option>`,
+        `<option value="${escapeHtml(direction)}">${escapeHtml(direction)}</option>`,
       ]
     : [`<option value="">Выберите пример</option>`];
 
   for (const item of items) {
     options.push(
-      `<option value="${escapeHtml(item.title)}">${escapeHtml(item.title)} — пример</option>`,
+      `<option value="${escapeHtml(item.title)}">${escapeHtml(item.title)}</option>`,
     );
   }
 

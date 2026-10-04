@@ -126,6 +126,12 @@ export function initModals() {
     closeDialog(modal);
   }
 
+  const TITLE_BY_TAB = {
+    "tab-testdrive": "Запись в салон",
+    "tab-service": "Запись в сервис",
+    "tab-parts": "Подбор запчастей",
+  };
+
   function switchTab(tabName) {
     document.querySelectorAll(".modal__tab").forEach((tab) => {
       tab.classList.toggle("active", tab.dataset.tab === tabName);
@@ -133,6 +139,8 @@ export function initModals() {
     document.querySelectorAll(".modal__form").forEach((form) => {
       form.classList.toggle("active", form.dataset.tabContent === tabName);
     });
+    const title = document.querySelector("#modal-lead-title");
+    if (title) title.textContent = TITLE_BY_TAB[tabName] || "Запись в салон";
   }
 
   window.openLeadModal = openModal;
@@ -192,7 +200,7 @@ export function initModals() {
   });
 
   document.addEventListener("click", (event) => {
-    const trigger = event.target.closest("[data-open-intent], .card__action");
+    const trigger = event.target.closest("[data-open-intent], [data-target], .card__action");
     if (!trigger) return;
 
     const raw = trigger.dataset.openIntent || trigger.dataset.target;
@@ -216,7 +224,7 @@ export function initModals() {
       const note = document.querySelector("#modal-privacy");
       if (!note) return;
       note.hidden = false;
-      note.focus();
+      note.focus({ preventScroll: true });
     });
   });
 
@@ -227,7 +235,8 @@ export function initModals() {
   });
   setupFormSubmit("#form-service", "service", {
     service_category: "Категория",
-    service_details: "Дата и услуга",
+    service_slot: "Когда приехать",
+    service_details: "Услуга",
     client_phone: "Телефон",
   });
   setupFormSubmit("#form-parts", "parts", {

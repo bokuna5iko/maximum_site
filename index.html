@@ -75,13 +75,14 @@
             href="tel:+79247659421"
             class="header__quick-link"
             data-bind-href="PHONE_SALES"
-            aria-label="Позвонить"
+            aria-label="Позвонить в магазин, 2 этаж"
           >
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path
                 d="M7 3.8h2.6l1.2 3.1-1.7 1.1a12.2 12.2 0 0 0 5.9 5.9l1.1-1.7 3.1 1.2V16a1.8 1.8 0 0 1-2 1.8A15.2 15.2 0 0 1 4.2 5.8 1.8 1.8 0 0 1 7 3.8z"
               />
             </svg>
+            <span class="header__quick-caption" data-bind-text="PHONE_SALES_NOTE">магазин, 2 этаж</span>
           </a>
           <a
             href="https://wa.me/79247659421"
@@ -224,9 +225,6 @@
               >+7 (924) 765-94-21</a
             >
             <p class="paths__note" data-bind-text="PHONE_SALES_NOTE">магазин, 2 этаж</p>
-            <button class="btn btn--outline-dark btn--full" type="button" data-open-intent="testdrive">
-              Записаться в салон
-            </button>
           </article>
           <article class="paths__card">
             <h2 class="paths__title">В сервис</h2>
@@ -243,9 +241,6 @@
             <p class="paths__note" data-bind-text="PHONE_SERVICE_NOTE">
               ремонт и запчасти: моторы, снегоходы
             </p>
-            <button class="btn btn--outline-dark btn--full" type="button" data-open-intent="service">
-              Записаться в сервис
-            </button>
           </article>
         </div>
       </div>
@@ -313,9 +308,6 @@
               <li>Оплата картой, наличными, по QR и через банк</li>
               <li>Как удобнее купить — покажем на выбранной модели в зале</li>
             </ul>
-            <button class="btn btn--primary" type="button" data-open-intent="testdrive">
-              Записаться в салон
-            </button>
           </div>
           <div class="deal-card deal-card--light">
             <h3 class="deal-card__title">Сервис рядом</h3>
@@ -323,9 +315,6 @@
               Отдельный номер на ремонт и запчасти: моторы, снегоходы, надувные
               лодки. Пока техника на ТО — можно зайти в зал.
             </p>
-            <button class="btn btn--outline-dark" id="visit-open-service" type="button">
-              Записаться в сервис
-            </button>
           </div>
         </div>
       </div>
@@ -342,163 +331,134 @@
 
         <div class="showcase__grid">
           <article class="card">
+            <div class="card__photo" aria-hidden="true"></div>
             <div class="card__content">
-              <h3 class="card__title">Гидроциклы</h3>
+              <h3 class="card__title">
+                <button class="card__open" type="button" data-target="test-drive" data-direction="Гидроциклы">
+                  Гидроциклы
+                </button>
+              </h3>
               <ul class="card__specs">
                 <li><span>Бренды:</span> BRP Sea-Doo</li>
                 <li><span>Сезон:</span> вода, прогулки, семья</li>
               </ul>
-              <button
-                class="btn btn--outline btn--full card__action"
-                type="button"
-                data-target="test-drive"
-                data-direction="Гидроциклы"
-              >
-                Записаться в салон
-              </button>
             </div>
           </article>
 
           <article class="card">
+            <div class="card__photo" aria-hidden="true"></div>
             <div class="card__content">
-              <h3 class="card__title">Квадроциклы</h3>
+              <h3 class="card__title">
+                <button class="card__open" type="button" data-target="test-drive" data-direction="Квадроциклы">
+                  Квадроциклы
+                </button>
+              </h3>
               <ul class="card__specs">
                 <li><span>Бренды:</span> BRP</li>
                 <li><span>Привод:</span> 4x4, охота и хозяйство</li>
               </ul>
-              <button
-                class="btn btn--outline btn--full card__action"
-                type="button"
-                data-target="test-drive"
-                data-direction="Квадроциклы"
-              >
-                Записаться в салон
-              </button>
             </div>
           </article>
 
           <article class="card">
+            <div class="card__photo" aria-hidden="true"></div>
             <div class="card__content">
-              <h3 class="card__title">Снегоходы</h3>
+              <h3 class="card__title">
+                <button class="card__open" type="button" data-target="test-drive" data-direction="Снегоходы">
+                  Снегоходы
+                </button>
+              </h3>
               <ul class="card__specs">
                 <li><span>Бренды:</span> Русская Механика</li>
                 <li><span>Сезон:</span> зима, подготовка к сезону</li>
               </ul>
-              <button
-                class="btn btn--outline btn--full card__action"
-                type="button"
-                data-target="test-drive"
-                data-direction="Снегоходы"
-              >
-                Записаться в салон
-              </button>
             </div>
           </article>
 
           <article class="card">
+            <div class="card__photo" aria-hidden="true"></div>
             <div class="card__content">
-              <h3 class="card__title">Лодки и моторы</h3>
+              <h3 class="card__title">
+                <button class="card__open" type="button" data-target="boat-kit" data-direction="Лодки и моторы">
+                  Лодки и моторы
+                </button>
+              </h3>
               <ul class="card__specs">
                 <li><span>Моторы:</span> Suzuki, Tohatsu (2-4 такта)</li>
                 <li><span>Лодки:</span> V-BOATS, SOLAR, ПВХ/РИБ</li>
               </ul>
-              <button
-                class="btn btn--outline btn--full card__action"
-                type="button"
-                data-target="boat-kit"
-                data-direction="Лодки и моторы"
-              >
-                Записаться в салон
-              </button>
             </div>
           </article>
 
           <article class="card">
+            <div class="card__photo" aria-hidden="true"></div>
             <div class="card__content">
-              <h3 class="card__title">Прицепы</h3>
+              <h3 class="card__title">
+                <button class="card__open" type="button" data-target="store-stock" data-direction="Прицепы">
+                  Прицепы
+                </button>
+              </h3>
               <ul class="card__specs">
                 <li><span>Для:</span> техника, хозяйство, перевозка</li>
                 <li><span>Зал:</span> смотрим живьём, подбираем под задачу</li>
               </ul>
-              <button
-                class="btn btn--outline btn--full card__action"
-                type="button"
-                data-target="store-stock"
-                data-direction="Прицепы"
-              >
-                Записаться в салон
-              </button>
             </div>
           </article>
 
           <article class="card">
+            <div class="card__photo" aria-hidden="true"></div>
             <div class="card__content">
-              <h3 class="card__title">Экипировка и защита</h3>
+              <h3 class="card__title">
+                <button class="card__open" type="button" data-target="gear-size" data-direction="Экипировка и защита">
+                  Экипировка и защита
+                </button>
+              </h3>
               <ul class="card__specs">
                 <li><span>Экипировка:</span> Костюмы, шлемы, вейдерсы</li>
                 <li><span>Защита:</span> Мото / Снегоходная</li>
               </ul>
-              <button
-                class="btn btn--outline btn--full card__action"
-                type="button"
-                data-target="gear-size"
-                data-direction="Экипировка и защита"
-              >
-                Записаться в салон
-              </button>
             </div>
           </article>
 
           <article class="card">
+            <div class="card__photo" aria-hidden="true"></div>
             <div class="card__content">
-              <h3 class="card__title">Запчасти и масла</h3>
+              <h3 class="card__title">
+                <button class="card__open" type="button" data-target="parts-order">
+                  Запчасти и масла
+                </button>
+              </h3>
               <ul class="card__specs">
                 <li><span>Детали:</span> Оригиналы BRP, Suzuki, Tohatsu</li>
                 <li><span>Расходники:</span> Масла, фильтры, свечи</li>
               </ul>
-              <button
-                class="btn btn--outline btn--full card__action"
-                type="button"
-                data-target="parts-order"
-              >
-                Подобрать запчасть
-              </button>
             </div>
           </article>
 
           <article class="card card--accent">
-            <div class="card__tag card__tag--red">Авторизованный СТО</div>
+            <div class="card__photo" aria-hidden="true"></div>
             <div class="card__content">
+              <div class="card__tag card__tag--red">Авторизованный СТО</div>
               <h3 class="card__title">Сервис и плановое ТО</h3>
               <ul class="card__specs">
                 <li><span>Услуги:</span> Диагностика, ремонт, консервация</li>
                 <li><span>Гарантия:</span> Официальный сервис</li>
               </ul>
-              <button
-                class="btn btn--outline btn--full card__action"
-                type="button"
-                data-target="service-modal"
-              >
-                Записаться в сервис
-              </button>
             </div>
           </article>
 
           <article class="card">
+            <div class="card__photo" aria-hidden="true"></div>
             <div class="card__content">
-              <h3 class="card__title">Рыбалка и кемпинг</h3>
+              <h3 class="card__title">
+                <button class="card__open" type="button" data-target="store-stock" data-direction="Рыбалка и кемпинг">
+                  Рыбалка и кемпинг
+                </button>
+              </h3>
               <ul class="card__specs">
                 <li><span>Оснащение:</span> Эхолоты, навигаторы, палатки</li>
                 <li><span>Туризм:</span> Термосы, удилища, экипировка</li>
               </ul>
-              <button
-                class="btn btn--outline btn--full card__action"
-                type="button"
-                data-target="store-stock"
-                data-direction="Рыбалка и кемпинг"
-              >
-                Записаться в салон
-              </button>
             </div>
           </article>
         </div>
@@ -684,30 +644,16 @@
             <h3 class="service-card__title">Авторизованный сервис</h3>
             <p class="service-card__desc">
               Плановое ТО, диагностика, консервация и ремонт техники с
-              сохранением гарантии завода.
+              сохранением гарантии завода. Запись — кнопкой «Записаться в сервис» в начале страницы.
             </p>
-            <button
-              class="btn btn--primary btn--full"
-              id="btn-open-service"
-              type="button"
-            >
-              Записаться в сервис
-            </button>
           </div>
 
           <div class="service-card">
             <h3 class="service-card__title">Запчасти и расходники</h3>
             <p class="service-card__desc">
               Оригинальные детали BRP, Suzuki, Tohatsu, РМ. Подберём по VIN в
-              салоне.
+              салоне, в карточке «Запчасти и масла».
             </p>
-            <button
-              class="btn btn--outline-dark btn--full"
-              id="btn-open-parts"
-              type="button"
-            >
-              Подобрать запчасть
-            </button>
           </div>
         </div>
       </div>
@@ -955,7 +901,7 @@
               required
             ></select>
             <p class="form-hint">
-              Менеджер подтвердит, есть ли модель в зале, до визита.
+              Менеджер подтвердит наличие до визита.
             </p>
           </div>
           <div class="form-group">
@@ -1008,13 +954,20 @@
             </select>
           </div>
           <div class="form-group">
-            <label for="service-details">Желаемая дата и услуга</label>
+            <label for="service-slot">Когда приехать</label>
+            <p class="form-hint" data-visit-hours></p>
+            <select class="form-input" id="service-slot" name="service_slot" required>
+              <option value="">Выберите время</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="service-details">Услуга</label>
             <input
               type="text"
               class="form-input"
               id="service-details"
               name="service_details"
-              placeholder="Например: ТО-2, 15 августа"
+              placeholder="Например: ТО-2, диагностика"
               required
             />
           </div>

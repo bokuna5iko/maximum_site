@@ -188,9 +188,29 @@
       color: #25d366;
     }
 
+    &:has(.header__quick-caption) {
+      width: auto;
+      height: auto;
+      min-width: 44px;
+      min-height: 44px;
+      padding: 6px 8px;
+      gap: 2px;
+      flex-direction: column;
+    }
+
     &:active {
       opacity: 0.7;
     }
+  }
+
+  &__quick-caption {
+    max-width: 4.8rem;
+    color: $text-dark;
+    font-family: $font-main;
+    font-size: 0.62rem;
+    font-weight: 700;
+    line-height: 1.15;
+    text-align: center;
   }
 
   &__burger {
