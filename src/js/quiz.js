@@ -1,4 +1,4 @@
-import { isValidRuPhone } from "./config.js";
+import { isValidRuPhone, SEASON_DIRECTIONS } from "./config.js";
 import { sendLead } from "./lead-sender.js";
 import { showSuccessModal } from "./modal.js";
 import { renderVisitSlots } from "./visit-slots.js";
@@ -19,6 +19,35 @@ export function initQuiz() {
   if (!nextBtn || !prevBtn) return;
 
   renderVisitSlots();
+
+  let categoryTouched = false;
+
+  function seasonCategory() {
+    const slide = Number(document.querySelector(".season-card.active")?.dataset.slide);
+    return SEASON_DIRECTIONS[slide] || "";
+  }
+
+  function applySeasonCategory() {
+    if (categoryTouched || currentStep > 2) return;
+    const value = seasonCategory();
+    const radio = [...document.querySelectorAll('input[name="category"]')].find(
+      (input) => input.value === value,
+    );
+    if (!radio) return;
+    radio.checked = true;
+    if (currentStep === 1) {
+      currentStep = 2;
+      updateQuiz();
+    }
+  }
+
+  document.querySelectorAll('input[name="category"]').forEach((input) => {
+    input.addEventListener("change", () => {
+      categoryTouched = true;
+    });
+  });
+
+  document.addEventListener("season-change", applySeasonCategory);
 
   function updateQuiz() {
     document.querySelectorAll(".quiz-step").forEach((step) => {

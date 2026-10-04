@@ -1,4 +1,4 @@
-import { CONFIG, getWhatsAppUrl, isTelegramConfigured, isValidRuPhone } from "./config.js";
+import { CONFIG, SEASON_DIRECTIONS, getWhatsAppUrl, isTelegramConfigured, isValidRuPhone } from "./config.js";
 import { getInventoryItem } from "./inventory.js";
 import { fillModelSelect } from "./inventory-render.js";
 import { sendLead } from "./lead-sender.js";
@@ -215,10 +215,16 @@ export function initModals() {
     const intent = TARGET_TO_INTENT[raw];
     if (!intent) return;
 
+    let direction = trigger.dataset.direction;
+    if (!direction && !trigger.dataset.modelId && intent === "testdrive") {
+      const slide = Number(document.querySelector(".season-card.active")?.dataset.slide);
+      direction = SEASON_DIRECTIONS[slide];
+    }
+
     event.preventDefault();
     openModal(intent, {
       modelId: trigger.dataset.modelId,
-      direction: trigger.dataset.direction,
+      direction,
     });
   });
 
@@ -255,6 +261,25 @@ export function initModals() {
   });
 }
 
+function firstEmptyField(form) {
+  const checks = [
+    ["#testdrive-model", "Выберите пример."],
+    ["[name='testdrive_slot']", "Выберите время."],
+    ["[name='service_category']", "Выберите категорию."],
+    ["[name='service_slot']", "Выберите время."],
+    ["[name='service_details']", "Напишите, какая услуга нужна."],
+    ["[name='parts_brand']", "Напишите марку и модель."],
+    ["[name='parts_needed']", "Напишите, что подобрать."],
+  ];
+
+  for (const [selector, message] of checks) {
+    const field = form.querySelector(selector);
+    if (!field || field.hidden || field.disabled) continue;
+    if (!String(field.value || "").trim()) return message;
+  }
+  return "";
+}
+
 function setupFormSubmit(formSelector, type, labels) {
   const form = document.querySelector(formSelector);
   if (!form) return;
@@ -265,13 +290,19 @@ function setupFormSubmit(formSelector, type, labels) {
     const phone = String(formData.get("client_phone") || "").trim();
     const errorNode = form.querySelector(".form-error");
 
-    if (!formData.get("consent")) {
-      if (errorNode) errorNode.textContent = "Нужно согласие на обработку персональных данных.";
+    const gap = firstEmptyField(form);
+    if (gap) {
+      if (errorNode) errorNode.textContent = gap;
       return;
     }
 
     if (!isValidRuPhone(phone)) {
       if (errorNode) errorNode.textContent = "Введите номер телефона в формате +7 9XX XXX-XX-XX.";
+      return;
+    }
+
+    if (!formData.get("consent")) {
+      if (errorNode) errorNode.textContent = "Нужно согласие на обработку персональных данных.";
       return;
     }
 

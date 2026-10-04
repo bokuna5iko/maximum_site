@@ -54,6 +54,7 @@ export function initVideoSlider() {
 
     if (seasonLine) seasonLine.textContent = seasonLineForSlide(index);
     currentIndex = index;
+    document.dispatchEvent(new CustomEvent("season-change", { detail: { index } }));
   }
 
   function startAutoPlay() {

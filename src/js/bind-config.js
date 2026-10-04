@@ -181,6 +181,21 @@ export function initMobileNav() {
   document.addEventListener("click", (e) => {
     if (!nav.classList.contains("is-open")) return;
     if (nav.contains(e.target) || burger.contains(e.target)) return;
+
+    const link = [...nav.querySelectorAll("a")].find((item) => {
+      const rect = item.getBoundingClientRect();
+      return (
+        e.clientX >= rect.left &&
+        e.clientX <= rect.right &&
+        e.clientY >= rect.top &&
+        e.clientY <= rect.bottom
+      );
+    });
+    if (link) {
+      e.preventDefault();
+      link.click();
+      return;
+    }
     closeMenu();
   });
 

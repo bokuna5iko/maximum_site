@@ -43,7 +43,7 @@ function dayLabel(date, today) {
 }
 
 function windowsFor(date) {
-  return hoursFor(date).close <= 16 ? [10, 14] : [10, 16];
+  return hoursFor(date).close <= 16 ? [10, 12, 14] : [10, 13, 16];
 }
 
 function slot(date, today, hour) {

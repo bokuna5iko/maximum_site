@@ -111,6 +111,13 @@ export function getSeason() {
 
 const SLIDE_BY_SEASON = { offroad: 0, water: 1, snow: 3 };
 
+export const SEASON_DIRECTIONS = [
+  "Квадроциклы",
+  "Лодки и моторы",
+  "Гидроциклы",
+  "Снегоходы",
+];
+
 export const SEASON_LINES = [
   "Квадроциклы: охота и хозяйство.",
   "Лодки и моторы: рыбалка.",
