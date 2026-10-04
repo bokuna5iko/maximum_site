@@ -46,7 +46,7 @@
 
     &:hover {
       border-color: $accent-orange;
-      color: $accent-orange;
+      color: $accent-orange-ink;
     }
 
     @media (hover: hover) {
@@ -121,7 +121,7 @@
   }
 
   a:hover {
-    color: $accent-orange;
+    color: $accent-orange-ink;
   }
 }
 

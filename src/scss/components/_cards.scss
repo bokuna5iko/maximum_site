@@ -51,7 +51,13 @@
     font-size: 1.3rem;
     margin-bottom: 16px;
     color: $text-light;
-    padding-right: 40px;
+  }
+
+  &--accent &__tag {
+    position: static;
+    display: inline-flex;
+    align-self: flex-start;
+    margin-bottom: 12px;
   }
 
   &__specs {

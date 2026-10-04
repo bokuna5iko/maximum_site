@@ -13,7 +13,6 @@ export function renderInventory() {
         <div class="instock-card__body">
           <span class="instock-card__badge">${item.badge}</span>
           <h3 class="instock-card__title">${item.title}</h3>
-          <p class="instock-card__price">от ${item.priceFrom}</p>
           <ul class="instock-card__specs">
             ${item.specs.map((spec) => `<li>${spec}</li>`).join("")}
           </ul>
@@ -36,7 +35,7 @@ export function fillModelSelect(select) {
   const current = select.value;
   select.innerHTML = INVENTORY.map(
     (item) =>
-      `<option value="${item.title}">${item.title} — от ${item.priceFrom}</option>`,
+      `<option value="${item.title}">${item.title}</option>`,
   ).join("");
   if (current) select.value = current;
 }

@@ -119,7 +119,7 @@
 
   &__title {
     font-family: $font-header;
-    font-size: clamp(1.7rem, 4.4vw, 3.1rem);
+    font-size: clamp(2.15rem, 4.8vw, 3.4rem);
     font-weight: 400;
     line-height: 1.2;
     margin-bottom: 16px;
@@ -238,7 +238,7 @@
   overflow: hidden;
 
   &__label {
-    font-size: 0.68rem;
+    font-size: 0.8rem;
     font-weight: 700;
     color: $text-light-muted;
     letter-spacing: 1px;
@@ -257,10 +257,12 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 0%;
+    width: 100%;
     height: 3px;
+    transform: scaleX(0);
+    transform-origin: left center;
     background: linear-gradient(90deg, $accent-orange, $accent-red);
-    transition: width 0.3s ease;
+    transition: transform 0.3s ease;
   }
 
   &:hover {
@@ -284,7 +286,7 @@
     }
 
     .season-card__line {
-      width: 100%;
+      transform: scaleX(1);
     }
   }
 
@@ -296,13 +298,55 @@
     padding: 8px 10px;
 
     .season-card__label {
-      font-size: 0.6rem;
+      font-size: 0.75rem;
       margin-bottom: 2px;
     }
 
     .season-card__title {
-      font-size: 0.78rem;
+      font-size: 0.85rem;
     }
+  }
+}
+
+.hero__playback {
+  position: absolute;
+  z-index: 6;
+  right: 24px;
+  bottom: 132px;
+  min-height: 44px;
+  padding: 8px 14px;
+  border-radius: $radius-sm;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(24, 25, 28, 0.82);
+  color: $text-light;
+  font-family: $font-main;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: 2px solid $accent-orange;
+    outline-offset: 3px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero__playback {
+    position: static;
+    margin-top: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__video-slide,
+  .season-card,
+  .season-card__line {
+    transition: none;
+  }
+
+  .hero__video-slide,
+  .hero__video-slide.active {
+    transform: none;
   }
 }
 

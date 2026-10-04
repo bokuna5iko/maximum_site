@@ -2,6 +2,7 @@ import { CONFIG, getWhatsAppUrl, isTelegramConfigured, isValidRuPhone } from "./
 import { getInventoryItem } from "./inventory.js";
 import { fillModelSelect } from "./inventory-render.js";
 import { sendLead } from "./lead-sender.js";
+import { renderVisitSlots } from "./visit-slots.js";
 
 const TARGET_TO_INTENT = {
   testdrive: "testdrive",
@@ -21,6 +22,38 @@ const TAB_BY_INTENT = {
   parts: "tab-parts",
 };
 
+let returnFocus = null;
+
+function rememberFocus() {
+  const current = document.activeElement;
+  if (!returnFocus && current instanceof HTMLElement && current !== document.body) {
+    returnFocus = current;
+  }
+}
+
+function focusDialog(dialog) {
+  const field = dialog.querySelector(".modal__form.active .form-input");
+  const title = dialog.querySelector(".modal__success-title");
+  const close = dialog.querySelector(".modal__close");
+  (field || title || close)?.focus();
+}
+
+function openDialog(dialog) {
+  rememberFocus();
+  dialog.inert = false;
+  dialog.classList.add("active");
+  window.requestAnimationFrame(() => focusDialog(dialog));
+}
+
+function closeDialog(dialog, { restore = true } = {}) {
+  dialog.classList.remove("active");
+  dialog.inert = true;
+  if (!restore) return;
+  const back = returnFocus;
+  returnFocus = null;
+  if (back?.isConnected) back.focus();
+}
+
 export function initModals() {
   const modal = document.querySelector("#modal-lead");
   const overlay = document.querySelector("#modal-overlay");
@@ -33,19 +66,21 @@ export function initModals() {
   if (!modal) return;
 
   fillModelSelect(modelSelect);
+  renderVisitSlots();
 
   function openModal(intent = "testdrive", { modelId } = {}) {
-    modal.classList.add("active");
     switchTab(TAB_BY_INTENT[intent] || "tab-testdrive");
 
     if (modelId && modelSelect) {
       const item = getInventoryItem(modelId);
       if (item) modelSelect.value = item.title;
     }
+
+    openDialog(modal);
   }
 
   function closeModal() {
-    modal.classList.remove("active");
+    closeDialog(modal);
   }
 
   function switchTab(tabName) {
@@ -75,8 +110,43 @@ export function initModals() {
 
   closeBtn?.addEventListener("click", closeModal);
   overlay?.addEventListener("click", closeModal);
-  successClose?.addEventListener("click", () => success?.classList.remove("active"));
-  successOverlay?.addEventListener("click", () => success?.classList.remove("active"));
+  successClose?.addEventListener("click", () => success && closeDialog(success));
+  successOverlay?.addEventListener("click", () => success && closeDialog(success));
+
+  document.addEventListener("keydown", (event) => {
+    const dialog = success?.classList.contains("active")
+      ? success
+      : modal.classList.contains("active")
+        ? modal
+        : null;
+    if (!dialog) return;
+
+    if (event.key === "Escape") {
+      event.preventDefault();
+      closeDialog(dialog);
+      return;
+    }
+
+    if (event.key !== "Tab") return;
+
+    const focusable = [...dialog.querySelectorAll(
+      'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex="0"]',
+    )].filter((node) => node instanceof HTMLElement && node.offsetParent !== null);
+
+    if (!focusable.length) return;
+
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    const active = document.activeElement;
+
+    if (event.shiftKey && (active === first || !dialog.contains(active))) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && (active === last || !dialog.contains(active))) {
+      event.preventDefault();
+      first.focus();
+    }
+  });
 
   document.addEventListener("click", (event) => {
     const trigger = event.target.closest("[data-open-intent], .card__action");
@@ -95,7 +165,10 @@ export function initModals() {
   });
 
   document.querySelectorAll('#modal-lead a[href="#privacy"]').forEach((link) => {
-    link.addEventListener("click", closeModal);
+    link.addEventListener("click", () => {
+      closeDialog(modal, { restore: false });
+      returnFocus = null;
+    });
   });
 
   setupFormSubmit("#form-testdrive", "testdrive", {
@@ -150,7 +223,8 @@ function setupFormSubmit(formSelector, type, labels) {
     try {
       const result = await sendLead({ type, fields });
       form.reset();
-      document.querySelector("#modal-lead")?.classList.remove("active");
+      const lead = document.querySelector("#modal-lead");
+      if (lead?.classList.contains("active")) closeDialog(lead, { restore: false });
       showSuccessModal(result);
     } finally {
       if (submitBtn) submitBtn.disabled = false;
@@ -211,5 +285,5 @@ export function showSuccessModal({ deliveredVia, whatsappUrl, type, fields = {} 
     route.dataset.track = "route";
   }
 
-  modal.classList.add("active");
+  openDialog(modal);
 }

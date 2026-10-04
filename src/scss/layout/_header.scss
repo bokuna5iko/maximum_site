@@ -101,8 +101,10 @@
   }
 
   &__link {
-    display: inline-block;
-    padding: 6px 12px;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 14px;
     border-radius: 20px;
     background: $bg-surface;
     border: 1px solid #e2e8f0;
@@ -118,7 +120,12 @@
 
     &:hover {
       border-color: $accent-orange;
-      color: $accent-orange;
+      color: $accent-orange-ink;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $accent-orange;
+      outline-offset: 3px;
     }
   }
 
@@ -127,7 +134,7 @@
   }
 
   &__phone-link {
-    color: $accent-orange;
+    color: $accent-orange-ink;
     text-decoration: none;
     font-size: 0.95rem;
     font-weight: 700;
@@ -149,8 +156,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 32px;
-    height: 32px;
+    width: 44px;
+    height: 44px;
     border: 1px solid #e2e8f0;
     border-radius: 8px;
     background: $bg-surface;
@@ -177,8 +184,8 @@
   &__burger {
     display: none;
     position: relative;
-    width: 32px;
-    height: 32px;
+    width: 44px;
+    height: 44px;
     border: 1px solid #e2e8f0;
     border-radius: 8px;
     background: $bg-surface;
@@ -193,7 +200,7 @@
 
     span {
       position: absolute;
-      left: 9px;
+      left: 15px;
       display: block;
       width: 14px;
       height: 2px;
@@ -206,19 +213,19 @@
     }
 
     span:nth-child(1) {
-      top: 10px;
+      top: 16px;
     }
 
     span:nth-child(2) {
-      top: 15px;
+      top: 21px;
     }
 
     span:nth-child(3) {
-      top: 20px;
+      top: 26px;
     }
 
     &.is-open span:nth-child(1) {
-      top: 15px;
+      top: 21px;
       transform: rotate(45deg);
     }
 
@@ -227,7 +234,7 @@
     }
 
     &.is-open span:nth-child(3) {
-      top: 15px;
+      top: 21px;
       transform: rotate(-45deg);
     }
   }
@@ -286,7 +293,6 @@
       min-height: 0;
       overflow: hidden;
       padding: 0 20px;
-      transition: padding 0.42s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     &__nav .header__link {
@@ -308,7 +314,7 @@
         border-color $transition-fast;
 
       &:hover {
-        color: $accent-orange;
+        color: $accent-orange-ink;
         border-color: #f1f5f9;
       }
     }
@@ -377,10 +383,9 @@
     }
 
     &:not(.is-docked) &__nav {
-      background: rgba(24, 25, 28, 0.92);
+      background: $bg-dark-card;
       border-bottom-color: transparent;
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: none;
 
       .header__link {
         color: #e2e8f0;

@@ -74,13 +74,17 @@ function bindHeroDock() {
   if (!hero || !header || typeof IntersectionObserver === "undefined") return;
 
   const offset = Math.max(1, Math.ceil(header.getBoundingClientRect().height));
+  const seasonBar = hero.querySelector(".hero__season-bar");
+  const seasonHeight = seasonBar
+    ? Math.ceil(seasonBar.getBoundingClientRect().height)
+    : 0;
   dockObserver = new IntersectionObserver(
     ([entry]) => {
       setDocked(!entry.isIntersecting);
     },
     {
       root: null,
-      rootMargin: `-${offset}px 0px 0px 0px`,
+      rootMargin: `-${offset + seasonHeight}px 0px 0px 0px`,
       threshold: 0,
     },
   );
