@@ -1,4 +1,4 @@
-import { CONFIG, GIS_HIGHLIGHTS, GIS_REVIEWS, getSeason, getWhatsAppUrl } from "./config.js";
+import { CONFIG, GIS_HIGHLIGHTS, GIS_REVIEWS, getSeason, getWhatsAppUrl, seasonLineForSlide, seasonSlideIndex } from "./config.js";
 
 export function applyConfig() {
   document.querySelectorAll("[data-bind]").forEach((node) => {
@@ -75,17 +75,7 @@ function renderSocialProof() {
 function applySeasonCopy() {
   const line = document.querySelector("[data-season-line]");
   if (!line) return;
-  const season = getSeason();
-  if (season === "snow") {
-    line.textContent =
-      "Зимний сезон в Якутске: снегоходы в приоритете, запись на осмотр в салоне";
-  } else if (season === "water") {
-    line.textContent =
-      "Сезон воды: лодки, моторы и квадры. Что в зале, скажет менеджер. Снегоходы — запись на сезон";
-  } else {
-    line.textContent =
-      "Межсезонье в Якутске: квадры, прицепы и подготовка снегоходов к сезону";
-  }
+  line.textContent = seasonLineForSlide(seasonSlideIndex(getSeason()));
 }
 
 function injectJsonLd() {

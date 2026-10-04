@@ -18,7 +18,7 @@ export function renderInventory() {
           </ul>
           <button
             type="button"
-            class="btn btn--primary btn--full"
+            class="btn btn--outline-dark btn--full"
             data-open-intent="testdrive"
             data-model-id="${item.id}"
           >
@@ -33,9 +33,14 @@ export function renderInventory() {
 export function fillModelSelect(select) {
   if (!select) return;
   const current = select.value;
-  select.innerHTML = INVENTORY.map(
-    (item) =>
-      `<option value="${item.title}">${item.title}</option>`,
-  ).join("");
-  if (current) select.value = current;
+  select.innerHTML = [
+    `<option value="">Выберите пример</option>`,
+    ...INVENTORY.map(
+      (item) =>
+        `<option value="${item.title}">${item.title} — пример</option>`,
+    ),
+  ].join("");
+  select.value = current && [...select.options].some((option) => option.value === current)
+    ? current
+    : "";
 }

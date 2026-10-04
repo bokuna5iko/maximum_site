@@ -73,7 +73,9 @@ export function initModals() {
 
     if (modelId && modelSelect) {
       const item = getInventoryItem(modelId);
-      if (item) modelSelect.value = item.title;
+      modelSelect.value = item ? item.title : "";
+    } else if (modelSelect) {
+      modelSelect.value = "";
     }
 
     openDialog(modal);

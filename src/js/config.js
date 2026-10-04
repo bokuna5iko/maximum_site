@@ -108,3 +108,20 @@ export function getSeason() {
   if (month >= 6 && month <= 8) return "water";
   return "offroad";
 }
+
+const SLIDE_BY_SEASON = { offroad: 0, water: 1, snow: 3 };
+
+export const SEASON_LINES = [
+  "Квадроциклы: охота и хозяйство. Что в зале, скажет менеджер.",
+  "Лодки и моторы: рыбалка. Что в зале, скажет менеджер.",
+  "Гидроциклы: вода и прогулки. Что в зале, скажет менеджер.",
+  "Снегоходы: зима и подготовка к сезону. Что в зале, скажет менеджер.",
+];
+
+export function seasonSlideIndex(season = getSeason()) {
+  return SLIDE_BY_SEASON[season] ?? 0;
+}
+
+export function seasonLineForSlide(index) {
+  return SEASON_LINES[index] ?? SEASON_LINES[0];
+}

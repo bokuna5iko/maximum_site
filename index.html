@@ -165,7 +165,7 @@
           менеджер
         </p>
         <p class="hero__subtitle" data-season-line style="margin-top: -18px; font-size: 0.95rem">
-          Межсезонье в Якутске: квадры, прицепы и подготовка снегоходов к сезону
+          Квадроциклы: охота и хозяйство. Что в зале, скажет менеджер.
         </p>
 
         <div class="hero__actions">
@@ -203,8 +203,8 @@
           <span class="season-card__line"></span>
         </button>
       </div>
-      <button class="hero__playback" id="hero-playback" type="button" aria-pressed="false">
-        Пауза слайдов
+      <button class="hero__playback" id="hero-playback" type="button" aria-pressed="true">
+        Запустить слайды
       </button>
     </section>
 
@@ -317,10 +317,27 @@
 
           <article class="card">
             <div class="card__content">
-              <h3 class="card__title">Квадроциклы и снегоходы</h3>
+              <h3 class="card__title">Квадроциклы</h3>
               <ul class="card__specs">
-                <li><span>Бренды:</span> BRP, Русская Механика</li>
-                <li><span>Привод:</span> 4x4 / Утилитарные</li>
+                <li><span>Бренды:</span> BRP</li>
+                <li><span>Привод:</span> 4x4, охота и хозяйство</li>
+              </ul>
+              <button
+                class="btn btn--outline btn--full card__action"
+                type="button"
+                data-target="test-drive"
+              >
+                Записаться в салон
+              </button>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card__content">
+              <h3 class="card__title">Снегоходы</h3>
+              <ul class="card__specs">
+                <li><span>Бренды:</span> Русская Механика</li>
+                <li><span>Сезон:</span> зима, подготовка к сезону</li>
               </ul>
               <button
                 class="btn btn--outline btn--full card__action"
@@ -448,6 +465,7 @@
               Подберём 1–2 модели под задачу и запишем вас в салон
             </p>
 
+            <p class="quiz-progress__label" id="quiz-step-label">Шаг 1 из 3</p>
             <div class="quiz-progress">
               <div
                 class="quiz-progress__bar"
@@ -464,29 +482,27 @@
               </h3>
               <div class="quiz-options">
                 <label class="quiz-option">
+                  <input type="radio" name="category" value="Квадроциклы" />
+                  <div class="quiz-option__content">
+                    <span class="quiz-option__title">Квадроциклы</span>
+                  </div>
+                </label>
+                <label class="quiz-option">
+                  <input type="radio" name="category" value="Лодки и моторы" />
+                  <div class="quiz-option__content">
+                    <span class="quiz-option__title">Лодки и моторы</span>
+                  </div>
+                </label>
+                <label class="quiz-option">
                   <input type="radio" name="category" value="Гидроциклы" />
                   <div class="quiz-option__content">
                     <span class="quiz-option__title">Гидроциклы</span>
                   </div>
                 </label>
                 <label class="quiz-option">
-                  <input
-                    type="radio"
-                    name="category"
-                    value="Квадроциклы / Снегоходы"
-                  />
+                  <input type="radio" name="category" value="Снегоходы" />
                   <div class="quiz-option__content">
-                    <span class="quiz-option__title"
-                      >Квадроциклы и снегоходы</span
-                    >
-                  </div>
-                </label>
-                <label class="quiz-option">
-                  <input type="radio" name="category" value="Лодки / Моторы" />
-                  <div class="quiz-option__content">
-                    <span class="quiz-option__title"
-                      >Лодки и лодочные моторы</span
-                    >
+                    <span class="quiz-option__title">Снегоходы</span>
                   </div>
                 </label>
                 <label class="quiz-option">
@@ -496,21 +512,9 @@
                   </div>
                 </label>
                 <label class="quiz-option">
-                  <input
-                    type="radio"
-                    name="category"
-                    value="Экипировка / Защита"
-                  />
+                  <input type="radio" name="category" value="Экипировка и защита" />
                   <div class="quiz-option__content">
                     <span class="quiz-option__title">Экипировка и защита</span>
-                  </div>
-                </label>
-                <label class="quiz-option">
-                  <input type="radio" name="category" value="Запчасти / ТО" />
-                  <div class="quiz-option__content">
-                    <span class="quiz-option__title"
-                      >Запчасти и обслуживание</span
-                    >
                   </div>
                 </label>
               </div>
@@ -568,6 +572,7 @@
               <h3 class="quiz-step__question">
                 3. Когда удобно приехать в салон?
               </h3>
+              <p class="form-hint" data-visit-hours></p>
               <div class="quiz-options" id="quiz-slots"></div>
 
               <div class="quiz-form" style="margin-top: 24px">
@@ -600,6 +605,7 @@
             </div>
           </div>
 
+          <p class="quiz-error" id="quiz-nav-error" role="status"></p>
           <div class="quiz-card__footer">
             <button
               class="btn btn--outline-dark quiz-nav-btn"
@@ -867,7 +873,7 @@
     >
       <div class="modal__overlay" id="modal-overlay"></div>
       <div class="modal__content">
-        <h2 class="modal__title" id="modal-lead-title">Заявка</h2>
+        <h2 class="modal__title" id="modal-lead-title">Запись в салон</h2>
         <button class="modal__close" id="modal-close" type="button" aria-label="Закрыть">
           &times;
         </button>
@@ -903,6 +909,7 @@
           </div>
           <div class="form-group">
             <label for="testdrive-slot">Когда приехать</label>
+            <p class="form-hint" data-visit-hours></p>
             <select class="form-input" id="testdrive-slot" name="testdrive_slot" required>
               <option value="Перезвоните, согласуем">Перезвоните, согласуем</option>
             </select>

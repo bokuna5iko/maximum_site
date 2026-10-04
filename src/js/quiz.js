@@ -13,6 +13,8 @@ export function initQuiz() {
   const sendBtn = document.querySelector("#send-quiz-btn");
   const phoneInput = document.querySelector("#quiz-phone");
   const errorNode = document.querySelector("#quiz-error");
+  const stepError = document.querySelector("#quiz-nav-error");
+  const stepLabel = document.querySelector("#quiz-step-label");
 
   if (!nextBtn || !prevBtn) return;
 
@@ -26,11 +28,27 @@ export function initQuiz() {
     if (progressBar) {
       progressBar.style.transform = `scaleX(${currentStep / totalSteps})`;
     }
+    if (stepLabel) stepLabel.textContent = `Шаг ${currentStep} из ${totalSteps}`;
     prevBtn.style.display = currentStep > 1 ? "inline-flex" : "none";
     nextBtn.style.display = currentStep === totalSteps ? "none" : "inline-flex";
   }
 
+  function validateStep(step) {
+    if (!stepError) return true;
+    if (step === 1 && !document.querySelector('input[name="category"]:checked')) {
+      stepError.textContent = "Выберите категорию.";
+      return false;
+    }
+    if (step === 2 && !document.querySelector('input[name="purpose"]:checked')) {
+      stepError.textContent = "Выберите, для каких целей подбираете.";
+      return false;
+    }
+    stepError.textContent = "";
+    return true;
+  }
+
   nextBtn.addEventListener("click", () => {
+    if (!validateStep(currentStep)) return;
     if (currentStep < totalSteps) {
       currentStep += 1;
       updateQuiz();
@@ -38,6 +56,7 @@ export function initQuiz() {
   });
 
   prevBtn.addEventListener("click", () => {
+    if (stepError) stepError.textContent = "";
     if (currentStep > 1) {
       currentStep -= 1;
       updateQuiz();
@@ -93,4 +112,6 @@ export function initQuiz() {
       sendBtn.disabled = false;
     }
   });
+
+  updateQuiz();
 }

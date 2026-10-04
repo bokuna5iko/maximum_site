@@ -1,18 +1,18 @@
-import { getSeason } from "./config.js";
+import { seasonLineForSlide, seasonSlideIndex } from "./config.js";
 
 export function initVideoSlider() {
   const slides = document.querySelectorAll(".hero__video-slide");
   const tabs = document.querySelectorAll(".season-card");
   const playback = document.querySelector("#hero-playback");
+  const seasonLine = document.querySelector("[data-season-line]");
 
   if (!slides.length || !tabs.length) return;
 
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const startBySeason = { offroad: 0, water: 1, snow: 3 };
-  let currentIndex = startBySeason[getSeason()] ?? 0;
+  let currentIndex = seasonSlideIndex();
   const slideInterval = 6500;
   let timer = null;
-  let paused = reduced;
+  let paused = true;
 
   function loadVideo(video) {
     const source = video.querySelector("source");
@@ -34,9 +34,10 @@ export function initVideoSlider() {
 
       const video = slide.querySelector("video");
       if (!video) return;
-      if (isActive && !paused) {
+      if (isActive) {
         loadVideo(video);
-        video.play().catch(() => {});
+        if (reduced) video.pause();
+        else video.play().catch(() => {});
       } else {
         video.pause();
       }
@@ -48,6 +49,7 @@ export function initVideoSlider() {
       tab.setAttribute("aria-pressed", String(isActive));
     });
 
+    if (seasonLine) seasonLine.textContent = seasonLineForSlide(index);
     currentIndex = index;
   }
 
@@ -68,7 +70,7 @@ export function initVideoSlider() {
     tab.addEventListener("click", (event) => {
       const slideIndex = parseInt(event.currentTarget.dataset.slide, 10);
       goToSlide(slideIndex);
-      startAutoPlay();
+      if (!paused) startAutoPlay();
     });
   });
 
@@ -77,7 +79,6 @@ export function initVideoSlider() {
     setPlaybackLabel();
     if (paused) {
       stopAutoPlay();
-      slides.forEach((slide) => slide.querySelector("video")?.pause());
       return;
     }
     goToSlide(currentIndex);
@@ -96,5 +97,4 @@ export function initVideoSlider() {
 
   setPlaybackLabel();
   goToSlide(currentIndex);
-  startAutoPlay();
 }
