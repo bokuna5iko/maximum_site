@@ -355,99 +355,92 @@
         <div class="showcase__grid">
           <article class="card">
             <div class="card__content">
-              <h3 class="card__title">
-                <button class="card__open" type="button" data-target="test-drive" data-direction="Гидроциклы">
-                  Гидроциклы
-                </button>
-              </h3>
+              <h3 class="card__title">Гидроциклы</h3>
               <ul class="card__specs">
                 <li><span>Бренды:</span> BRP Sea-Doo</li>
                 <li><span>Сезон:</span> вода, прогулки, семья</li>
               </ul>
+              <button class="card__action" type="button" data-target="test-drive" data-direction="Гидроциклы" aria-label="Записаться: Гидроциклы">
+                Записаться
+              </button>
             </div>
           </article>
 
           <article class="card">
             <div class="card__content">
-              <h3 class="card__title">
-                <button class="card__open" type="button" data-target="test-drive" data-direction="Квадроциклы">
-                  Квадроциклы
-                </button>
-              </h3>
+              <h3 class="card__title">Квадроциклы</h3>
               <ul class="card__specs">
                 <li><span>Бренды:</span> BRP</li>
                 <li><span>Привод:</span> 4x4, охота и хозяйство</li>
               </ul>
+              <button class="card__action" type="button" data-target="test-drive" data-direction="Квадроциклы" aria-label="Записаться: Квадроциклы">
+                Записаться
+              </button>
             </div>
           </article>
 
           <article class="card">
             <div class="card__content">
-              <h3 class="card__title">
-                <button class="card__open" type="button" data-target="test-drive" data-direction="Снегоходы">
-                  Снегоходы
-                </button>
-              </h3>
+              <h3 class="card__title">Снегоходы</h3>
               <ul class="card__specs">
                 <li><span>Бренды:</span> Русская Механика</li>
                 <li><span>Сезон:</span> зима, подготовка к сезону</li>
               </ul>
+              <button class="card__action" type="button" data-target="test-drive" data-direction="Снегоходы" aria-label="Записаться: Снегоходы">
+                Записаться
+              </button>
             </div>
           </article>
 
           <article class="card">
             <div class="card__content">
-              <h3 class="card__title">
-                <button class="card__open" type="button" data-target="boat-kit" data-direction="Лодки и моторы">
-                  Лодки и моторы
-                </button>
-              </h3>
+              <h3 class="card__title">Лодки и моторы</h3>
               <ul class="card__specs">
                 <li><span>Моторы:</span> Suzuki, Tohatsu (2-4 такта)</li>
                 <li><span>Лодки:</span> V-BOATS, SOLAR, ПВХ/РИБ</li>
               </ul>
+              <button class="card__action" type="button" data-target="boat-kit" data-direction="Лодки и моторы" aria-label="Записаться: Лодки и моторы">
+                Записаться
+              </button>
             </div>
           </article>
 
           <article class="card">
             <div class="card__content">
-              <h3 class="card__title">
-                <button class="card__open" type="button" data-target="store-stock" data-direction="Прицепы">
-                  Прицепы
-                </button>
-              </h3>
+              <h3 class="card__title">Прицепы</h3>
               <ul class="card__specs">
                 <li><span>Для:</span> техника, хозяйство, перевозка</li>
                 <li><span>Зал:</span> смотрим живьём, подбираем под задачу</li>
               </ul>
+              <button class="card__action" type="button" data-target="store-stock" data-direction="Прицепы" aria-label="Записаться: Прицепы">
+                Записаться
+              </button>
             </div>
           </article>
 
           <article class="card">
             <div class="card__content">
-              <h3 class="card__title">
-                <button class="card__open" type="button" data-target="gear-size" data-direction="Экипировка и защита">
-                  Экипировка и защита
-                </button>
-              </h3>
+              <h3 class="card__title">Экипировка и защита</h3>
               <ul class="card__specs">
                 <li><span>Экипировка:</span> Костюмы, шлемы, вейдерсы</li>
                 <li><span>Защита:</span> Мото / Снегоходная</li>
               </ul>
+              <button class="card__action" type="button" data-target="gear-size" data-direction="Экипировка и защита" aria-label="Записаться: Экипировка и защита">
+                Записаться
+              </button>
             </div>
           </article>
 
           <article class="card">
             <div class="card__content">
-              <h3 class="card__title">
-                <button class="card__open" type="button" data-target="store-stock" data-direction="Рыбалка и кемпинг">
-                  Рыбалка и кемпинг
-                </button>
-              </h3>
+              <h3 class="card__title">Рыбалка и кемпинг</h3>
               <ul class="card__specs">
                 <li><span>Оснащение:</span> Эхолоты, навигаторы, палатки</li>
-              <li><span>Туризм:</span> Термосы, удилища, экипировка</li>
-            </ul>
+                <li><span>Туризм:</span> Термосы, удилища, экипировка</li>
+              </ul>
+              <button class="card__action" type="button" data-target="store-stock" data-direction="Рыбалка и кемпинг" aria-label="Записаться: Рыбалка и кемпинг">
+                Записаться
+              </button>
           </div>
         </article>
         </div>
@@ -921,6 +914,23 @@
           data-tab-content="tab-testdrive"
           novalidate
         >
+          <div class="form-group">
+            <label for="testdrive-direction-select">Направление</label>
+            <select
+              class="form-input"
+              id="testdrive-direction-select"
+              name="testdrive_direction"
+              required
+            >
+              <option value="Гидроциклы">Гидроциклы</option>
+              <option value="Квадроциклы">Квадроциклы</option>
+              <option value="Снегоходы">Снегоходы</option>
+              <option value="Лодки и моторы">Лодки и моторы</option>
+              <option value="Прицепы">Прицепы</option>
+              <option value="Экипировка и защита">Экипировка и защита</option>
+              <option value="Рыбалка и кемпинг">Рыбалка и кемпинг</option>
+            </select>
+          </div>
           <div class="form-group">
             <label for="testdrive-model">Модель</label>
             <p class="form-hint" id="testdrive-direction" hidden></p>

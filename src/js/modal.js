@@ -78,12 +78,27 @@ export function initModals() {
   fillModelSelect(modelSelect);
   renderVisitSlots();
 
+  function directionNameFor(item, direction) {
+    if (direction && CARD_CATEGORY[direction]) return direction;
+    if (!item) return "";
+    const match = Object.entries(CARD_CATEGORY).find(([, category]) => category === item.category);
+    return match?.[0] || "";
+  }
+
+  function seasonDirection() {
+    const slide = Number(document.querySelector(".season-card.active")?.dataset.slide);
+    return SEASON_DIRECTIONS[slide] || "Квадроциклы";
+  }
+
   function applySalonChoice({ modelId, direction } = {}) {
     const item = modelId ? getInventoryItem(modelId) : null;
-    const label = direction || item?.categoryLabel || "";
-    const category = item?.category || (direction ? CARD_CATEGORY[direction] : undefined);
+    const label = directionNameFor(item, direction) || seasonDirection();
+    const category = CARD_CATEGORY[label] || item?.category;
     const note = document.querySelector("#testdrive-direction");
     const fieldLabel = document.querySelector('label[for="testdrive-model"]');
+    const directionSelect = document.querySelector("#testdrive-direction-select");
+
+    if (directionSelect && label) directionSelect.value = label;
 
     fillModelSelect(modelSelect, {
       direction: label,
@@ -103,17 +118,12 @@ export function initModals() {
 
     if (fieldLabel) {
       fieldLabel.hidden = onlyDirection;
-      fieldLabel.textContent = onlyDirection ? "Направление" : "Модель";
+      fieldLabel.textContent = "Модель";
     }
 
     if (note) {
-      if (label) {
-        note.hidden = false;
-        note.textContent = `Направление: ${label}.`;
-      } else {
-        note.hidden = true;
-        note.textContent = "";
-      }
+      note.hidden = true;
+      note.textContent = "";
     }
   }
 
@@ -232,6 +242,13 @@ export function initModals() {
     tab.addEventListener("click", () => switchTab(tab.dataset.tab));
   });
 
+  document.querySelector("#testdrive-direction-select")?.addEventListener("change", (event) => {
+    const direction = event.target instanceof HTMLSelectElement ? event.target.value : "";
+    applySalonChoice({ direction });
+  });
+
+  applySalonChoice({ direction: seasonDirection() });
+
   document.querySelectorAll('#modal-lead a[href="#modal-privacy"]').forEach((link) => {
     link.addEventListener("click", (event) => {
       event.preventDefault();
@@ -243,6 +260,7 @@ export function initModals() {
   });
 
   setupFormSubmit("#form-testdrive", "testdrive", {
+    testdrive_direction: "Направление",
     testdrive_model: "Модель",
     testdrive_slot: "Слот визита",
     client_phone: "Телефон",
@@ -340,24 +358,27 @@ export function showSuccessModal({ deliveredVia, whatsappUrl, type, fields = {} 
   if (!modal) return;
 
   const slot = fields["Слот визита"];
-  const model = fields["Модель"] || fields["Категория"];
+  const subject = fields["Модель"] || fields["Направление"] || fields["Категория"];
   const sent = deliveredVia === "telegram";
   const visit = type === "testdrive" || type === "quiz";
+  const when = slot || "время согласуем";
+  const place = CONFIG.ADDRESS;
 
   if (visit && sent) {
     if (title) title.textContent = "Ждём вас в салоне";
     if (text) {
-      const when = slot || "в согласованное время";
-      text.textContent = model
-        ? `Запись: ${when}. Подготовим ${model}. Менеджер подтвердит визит.`
+      text.textContent = subject
+        ? `Запись: ${when}. Подготовим ${subject}. Менеджер подтвердит визит.`
         : `Запись: ${when}. Менеджер подтвердит визит и подготовит модели.`;
     }
   } else if (visit) {
     if (title) title.textContent = "Заявка ещё не ушла";
     if (text) {
+      const summary = [subject, when].filter(Boolean).join(", ");
+      const pending = `Салон её не получил. В сообщении: ${summary}. Адрес: ${place}.`;
       text.textContent = isTelegramConfigured(type)
-        ? "Не удалось отправить менеджеру. Салон заявку не получил. Отправьте сообщение в WhatsApp, чтобы запись дошла."
-        : "Салон её не получил. Отправьте сообщение в WhatsApp, чтобы запись дошла.";
+        ? `Не удалось отправить менеджеру. ${pending}`
+        : pending;
     }
   } else if (type === "service") {
     if (title) title.textContent = "Заявка на ТО принята";
