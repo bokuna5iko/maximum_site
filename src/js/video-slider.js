@@ -1,4 +1,15 @@
 import { seasonLineForSlide, seasonSlideIndex } from "./config.js";
+import heroAtv from "../assets/images/hero-atv.mp4";
+import heroBoat from "../assets/images/hero-boat.mp4";
+import heroJetski from "../assets/images/hero-jetski.mp4";
+import heroSnowmobile from "../assets/images/hero-snowmobile.mp4";
+
+const HERO_VIDEOS = {
+  atv: heroAtv,
+  boat: heroBoat,
+  jetski: heroJetski,
+  snow: heroSnowmobile,
+};
 
 export function initVideoSlider() {
   const slides = document.querySelectorAll(".hero__video-slide");
@@ -16,8 +27,12 @@ export function initVideoSlider() {
 
   function loadVideo(video) {
     const source = video.querySelector("source");
-    if (!source?.dataset.src || source.getAttribute("src")) return;
-    source.src = source.dataset.src;
+    if (!source || source.getAttribute("src")) return;
+    const season = video.closest(".hero__video-slide")?.dataset.season;
+    const url = HERO_VIDEOS[season];
+    if (!url) return;
+    source.src = url;
+    video.style.removeProperty("display");
     video.load();
   }
 
@@ -41,7 +56,7 @@ export function initVideoSlider() {
         loadVideo(video);
         if (reduced) video.pause();
         else video.play().catch(() => {});
-      } else {
+      } else if (video.querySelector("source")?.getAttribute("src")) {
         video.pause();
       }
     });
@@ -91,10 +106,8 @@ export function initVideoSlider() {
 
   document.querySelectorAll(".hero__video").forEach((video) => {
     video.addEventListener("error", () => {
-      video.style.display = "none";
-    });
-    const source = video.querySelector("source");
-    source?.addEventListener("error", () => {
+      const source = video.querySelector("source");
+      if (!source?.getAttribute("src")) return;
       video.style.display = "none";
     });
   });
