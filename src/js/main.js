@@ -2,6 +2,7 @@ import "../scss/main.scss";
 import { initAnalytics, initClickTracking } from "./analytics.js";
 import { applyConfig, initMobileNav } from "./bind-config.js";
 import { renderInventory } from "./inventory-render.js";
+import { initSpecSheet } from "./spec-sheet.js";
 import { initQuiz } from "./quiz.js";
 import { initModals } from "./modal.js";
 import { initWaterDrops } from "./parallax.js";
@@ -14,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
   applyConfig();
   renderInventory();
   initModals();
+  initSpecSheet();
   initQuiz();
   initMarkHeader();
   initBrandPlate();

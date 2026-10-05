@@ -9,28 +9,50 @@ export function renderInventory() {
       <article class="instock-card">
         ${cardVisual(item)}
         <div class="instock-card__body">
-          <span class="instock-card__badge">${item.badge}</span>
+          <span class="instock-card__badge">${escapeHtml(item.badge)}</span>
           <h3 class="instock-card__title">
             <button
               type="button"
               class="instock-card__open"
               data-open-intent="testdrive"
-              data-model-id="${item.id}"
-            >${item.title}</button>
+              data-model-id="${escapeHtml(item.id)}"
+            >${escapeHtml(item.title)}</button>
           </h3>
-          <ul class="instock-card__specs">
-            ${item.specs.map((spec) => `<li>${spec}</li>`).join("")}
-          </ul>
+          <div class="instock-card__copy">
+            <p class="instock-card__summary">${escapeHtml(item.summary || "")}</p>
+            ${highlights(item)}
+            ${specsButton(item)}
+          </div>
           <button
             type="button"
             class="instock-card__action"
             data-open-intent="testdrive"
-            data-model-id="${item.id}"
+            data-model-id="${escapeHtml(item.id)}"
           >Записаться на показ</button>
         </div>
       </article>
     `,
   ).join("");
+}
+
+function highlights(item) {
+  if (!item.highlights?.length) return "";
+
+  const bits = item.highlights
+    .map((fact, index) => {
+      const dot =
+        index > 0 ? `<span class="instock-card__dot" aria-hidden="true">·</span>` : "";
+      return `${dot}<span>${escapeHtml(fact)}</span>`;
+    })
+    .join("");
+
+  return `<p class="instock-card__facts">${bits}</p>`;
+}
+
+function specsButton(item) {
+  if (!item.specGroups?.length) return "";
+
+  return `<button type="button" class="instock-card__more" data-open-specs="${escapeHtml(item.id)}" aria-label="Характеристики: ${escapeHtml(item.title)}">Характеристики</button>`;
 }
 
 function cardVisual(item) {
