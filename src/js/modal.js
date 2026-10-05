@@ -341,14 +341,23 @@ export function showSuccessModal({ deliveredVia, whatsappUrl, type, fields = {} 
 
   const slot = fields["Слот визита"];
   const model = fields["Модель"] || fields["Категория"];
+  const sent = deliveredVia === "telegram";
+  const visit = type === "testdrive" || type === "quiz";
 
-  if (type === "testdrive" || type === "quiz") {
+  if (visit && sent) {
     if (title) title.textContent = "Ждём вас в салоне";
     if (text) {
       const when = slot || "в согласованное время";
       text.textContent = model
         ? `Запись: ${when}. Подготовим ${model}. Менеджер подтвердит визит.`
         : `Запись: ${when}. Менеджер подтвердит визит и подготовит модели.`;
+    }
+  } else if (visit) {
+    if (title) title.textContent = "Заявка ещё не ушла";
+    if (text) {
+      text.textContent = isTelegramConfigured(type)
+        ? "Не удалось отправить менеджеру. Салон заявку не получил. Отправьте сообщение в WhatsApp, чтобы запись дошла."
+        : "Салон её не получил. Отправьте сообщение в WhatsApp, чтобы запись дошла.";
     }
   } else if (type === "service") {
     if (title) title.textContent = "Заявка на ТО принята";
@@ -359,8 +368,9 @@ export function showSuccessModal({ deliveredVia, whatsappUrl, type, fields = {} 
   }
 
   if (note) {
-    if (deliveredVia === "telegram") {
+    if (sent || visit) {
       note.hidden = true;
+      note.textContent = "";
     } else if (isTelegramConfigured(type)) {
       note.hidden = false;
       note.textContent =

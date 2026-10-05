@@ -47,12 +47,12 @@ export function fillModelSelect(select, { direction = "", category, selectedTitl
   const items = scoped
     ? INVENTORY.filter((item) => category && item.category === category)
     : INVENTORY;
+  const sole = scoped && items.length === 1 ? items[0] : null;
+  const options = [];
 
-  const options = scoped
-    ? [
-        `<option value="${escapeHtml(direction)}">${escapeHtml(direction)}</option>`,
-      ]
-    : [`<option value="">Выберите пример</option>`];
+  if (!sole) {
+    options.push(`<option value="">Выберите пример</option>`);
+  }
 
   for (const item of items) {
     options.push(
@@ -64,8 +64,8 @@ export function fillModelSelect(select, { direction = "", category, selectedTitl
 
   if (selectedTitle && [...select.options].some((option) => option.value === selectedTitle)) {
     select.value = selectedTitle;
-  } else if (scoped) {
-    select.value = direction;
+  } else if (sole) {
+    select.value = sole.title;
   } else {
     select.value = "";
   }
