@@ -98,6 +98,11 @@
     background-color: $bg-surface;
     border-color: #e2e8f0;
 
+    &:hover {
+      background-color: $bg-surface;
+      border-color: rgba(255, 85, 0, 0.5);
+    }
+
     .card__title,
     .card__open {
       color: $text-dark;
