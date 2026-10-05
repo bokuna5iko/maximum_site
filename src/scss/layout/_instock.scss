@@ -16,7 +16,10 @@
   color: $text-muted;
 
   a {
-    color: $accent-orange-ink;
+    color: $text-dark;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
 }
 
