@@ -16,7 +16,10 @@
   color: $text-muted;
 
   a {
-    color: $accent-orange-ink;
+    color: $text-dark;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
 }
 
@@ -53,39 +56,30 @@
     }
   }
 
-  &__visual {
-    height: 132px;
-    display: flex;
-    align-items: flex-end;
-    padding: 14px 18px;
-    color: $text-light;
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+  &__open {
+    display: inline-block;
+    max-width: 100%;
+    font: inherit;
+    line-height: 1.45;
+    letter-spacing: inherit;
+    color: inherit;
+    background: none;
+    border: 0;
+    padding: 8px 0;
+    text-align: left;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 5px;
+    text-decoration-color: $accent-orange-ink;
+    cursor: pointer;
 
-    &.is-jetski {
-      background: linear-gradient(135deg, #0e7490, #155e75);
+    &:hover {
+      color: $accent-orange-ink;
     }
 
-    &.is-atv {
-      background: linear-gradient(135deg, #3f6212, #1a2e05);
-    }
-
-    &.is-boat {
-      background: linear-gradient(135deg, #1d4ed8, #1e3a8a);
-    }
-
-    &.is-snow {
-      background: linear-gradient(135deg, #334155, #0f172a);
-    }
-
-    &.is-trailer {
-      background: linear-gradient(135deg, #57534e, #292524);
-    }
-
-    &.is-gear {
-      background: linear-gradient(135deg, #9a3412, #7c2d12);
+    &:focus-visible {
+      outline: 2px solid $accent-orange;
+      outline-offset: 3px;
     }
   }
 
@@ -105,9 +99,9 @@
     font-size: 0.72rem;
     font-weight: 700;
     text-transform: uppercase;
-    color: $accent-cyan;
-    background: rgba(0, 180, 216, 0.12);
-    border: 1px solid rgba(0, 180, 216, 0.25);
+    color: $text-dark;
+    background: $bg-main;
+    border: 1px solid #cbd5e1;
     border-radius: 6px;
     padding: 3px 8px;
     margin-bottom: 10px;
@@ -116,6 +110,7 @@
   &__title {
     font-family: $font-header;
     font-size: 1.15rem;
+    line-height: 1.45;
     color: $text-dark;
     margin-bottom: 6px;
   }
@@ -128,13 +123,40 @@
 
   &__specs {
     list-style: none;
-    margin-bottom: 18px;
+    margin-bottom: 12px;
     flex-grow: 1;
 
     li {
       font-size: 0.88rem;
       color: $text-muted;
       margin-bottom: 4px;
+    }
+  }
+
+  &__action {
+    align-self: flex-start;
+    margin-top: auto;
+    min-height: 44px;
+    padding: 8px 0;
+    border: 0;
+    background: none;
+    color: $accent-orange-ink;
+    font-family: $font-header;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    text-align: left;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 5px;
+    cursor: pointer;
+
+    &:hover {
+      color: $text-dark;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $accent-orange;
+      outline-offset: 3px;
     }
   }
 }

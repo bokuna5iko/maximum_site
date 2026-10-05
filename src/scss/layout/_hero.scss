@@ -10,6 +10,9 @@
   justify-content: center;
   padding: calc(var(--header-bar-h) + env(safe-area-inset-top, 0px) + 12px)
     20px 110px;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   overflow: hidden;
   color: $text-light;
   background-color: $bg-dark-card;
@@ -20,8 +23,10 @@
     top: 0;
     left: 0;
     width: 100%;
+    max-width: 100%;
     height: 100%;
     z-index: 1;
+    overflow: clip;
   }
 
   &__video-slide {
@@ -38,7 +43,7 @@
     pointer-events: none;
 
     &[data-season="jetski"] {
-      background: linear-gradient(135deg, #082f49, #0e7490);
+      background: linear-gradient(135deg, #0f172a, #1e3a5f);
     }
 
     &[data-season="atv"] {
@@ -91,6 +96,8 @@
     top: 0;
     left: 0;
     width: 100%;
+    max-width: 100%;
+    min-width: 0;
     height: 100%;
     pointer-events: none;
     z-index: 3;
@@ -148,14 +155,15 @@
   &__season-bar {
     position: absolute;
     bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 0;
+    right: 0;
     z-index: 5;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 12px;
-    width: calc(100% - 40px);
-    max-width: 1000px;
+    width: min(1000px, calc(100% - 40px));
+    max-width: 100%;
+    margin-inline: auto;
 
     @media (max-width: 768px) {
       grid-template-columns: repeat(2, 1fr);
@@ -212,7 +220,6 @@
 
     &__season-bar {
       position: static;
-      transform: none;
       width: 100%;
       max-width: none;
       margin-top: 16px;
@@ -282,7 +289,7 @@
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
 
     .season-card__label {
-      color: $accent-cyan;
+      color: $accent-orange;
     }
 
     .season-card__line {

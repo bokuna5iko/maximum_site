@@ -1,4 +1,4 @@
-import { CONFIG, getWhatsAppUrl, isTelegramConfigured, isValidRuPhone } from "./config.js";
+import { CONFIG, SEASON_DIRECTIONS, getWhatsAppUrl, isTelegramConfigured, isValidRuPhone } from "./config.js";
 import { getInventoryItem } from "./inventory.js";
 import { fillModelSelect } from "./inventory-render.js";
 import { sendLead } from "./lead-sender.js";
@@ -20,6 +20,16 @@ const TAB_BY_INTENT = {
   testdrive: "tab-testdrive",
   service: "tab-service",
   parts: "tab-parts",
+};
+
+const CARD_CATEGORY = {
+  Гидроциклы: "jetski",
+  Квадроциклы: "atv",
+  Снегоходы: "snow",
+  "Лодки и моторы": "boat",
+  Прицепы: "trailer",
+  "Экипировка и защита": "gear",
+  "Рыбалка и кемпинг": "camping",
 };
 
 let returnFocus = null;
@@ -68,13 +78,64 @@ export function initModals() {
   fillModelSelect(modelSelect);
   renderVisitSlots();
 
-  function openModal(intent = "testdrive", { modelId } = {}) {
+  function directionNameFor(item, direction) {
+    if (direction && CARD_CATEGORY[direction]) return direction;
+    if (!item) return "";
+    const match = Object.entries(CARD_CATEGORY).find(([, category]) => category === item.category);
+    return match?.[0] || "";
+  }
+
+  function seasonDirection() {
+    const slide = Number(document.querySelector(".season-card.active")?.dataset.slide);
+    return SEASON_DIRECTIONS[slide] || "Квадроциклы";
+  }
+
+  function applySalonChoice({ modelId, direction } = {}) {
+    const item = modelId ? getInventoryItem(modelId) : null;
+    const label = directionNameFor(item, direction) || seasonDirection();
+    const category = CARD_CATEGORY[label] || item?.category;
+    const note = document.querySelector("#testdrive-direction");
+    const fieldLabel = document.querySelector('label[for="testdrive-model"]');
+    const directionSelect = document.querySelector("#testdrive-direction-select");
+
+    if (directionSelect && label) directionSelect.value = label;
+
+    fillModelSelect(modelSelect, {
+      direction: label,
+      category,
+      selectedTitle: item?.title || "",
+    });
+
+    const hasExample = Boolean(label) && [...(modelSelect?.options || [])].some(
+      (option) => option.value && option.value !== label,
+    );
+    const onlyDirection = Boolean(label) && !hasExample;
+
+    if (modelSelect) {
+      modelSelect.hidden = onlyDirection;
+      modelSelect.required = !onlyDirection;
+    }
+
+    if (fieldLabel) {
+      fieldLabel.hidden = onlyDirection;
+      fieldLabel.textContent = "Модель";
+    }
+
+    if (note) {
+      note.hidden = true;
+      note.textContent = "";
+    }
+  }
+
+  function openModal(intent = "testdrive", { modelId, direction } = {}) {
     switchTab(TAB_BY_INTENT[intent] || "tab-testdrive");
 
-    if (modelId && modelSelect) {
-      const item = getInventoryItem(modelId);
-      if (item) modelSelect.value = item.title;
+    if ((TAB_BY_INTENT[intent] || "tab-testdrive") === "tab-testdrive") {
+      applySalonChoice({ modelId, direction });
     }
+
+    const privacy = document.querySelector("#modal-privacy");
+    if (privacy) privacy.hidden = true;
 
     openDialog(modal);
   }
@@ -83,6 +144,12 @@ export function initModals() {
     closeDialog(modal);
   }
 
+  const TITLE_BY_TAB = {
+    "tab-testdrive": "Запись в салон",
+    "tab-service": "Запись в сервис",
+    "tab-parts": "Подбор запчастей",
+  };
+
   function switchTab(tabName) {
     document.querySelectorAll(".modal__tab").forEach((tab) => {
       tab.classList.toggle("active", tab.dataset.tab === tabName);
@@ -90,6 +157,8 @@ export function initModals() {
     document.querySelectorAll(".modal__form").forEach((form) => {
       form.classList.toggle("active", form.dataset.tabContent === tabName);
     });
+    const title = document.querySelector("#modal-lead-title");
+    if (title) title.textContent = TITLE_BY_TAB[tabName] || "Запись в салон";
   }
 
   window.openLeadModal = openModal;
@@ -149,36 +218,57 @@ export function initModals() {
   });
 
   document.addEventListener("click", (event) => {
-    const trigger = event.target.closest("[data-open-intent], .card__action");
+    const trigger = event.target.closest("[data-open-intent], [data-target], .card__action");
     if (!trigger) return;
 
     const raw = trigger.dataset.openIntent || trigger.dataset.target;
     const intent = TARGET_TO_INTENT[raw];
     if (!intent) return;
 
+    let direction = trigger.dataset.direction;
+    if (!direction && !trigger.dataset.modelId && intent === "testdrive") {
+      const slide = Number(document.querySelector(".season-card.active")?.dataset.slide);
+      direction = SEASON_DIRECTIONS[slide];
+    }
+
     event.preventDefault();
-    openModal(intent, { modelId: trigger.dataset.modelId });
+    openModal(intent, {
+      modelId: trigger.dataset.modelId,
+      direction,
+    });
   });
 
   document.querySelectorAll(".modal__tab").forEach((tab) => {
     tab.addEventListener("click", () => switchTab(tab.dataset.tab));
   });
 
-  document.querySelectorAll('#modal-lead a[href="#privacy"]').forEach((link) => {
-    link.addEventListener("click", () => {
-      closeDialog(modal, { restore: false });
-      returnFocus = null;
+  document.querySelector("#testdrive-direction-select")?.addEventListener("change", (event) => {
+    const direction = event.target instanceof HTMLSelectElement ? event.target.value : "";
+    applySalonChoice({ direction });
+  });
+
+  applySalonChoice({ direction: seasonDirection() });
+
+  document.querySelectorAll('#modal-lead a[href="#modal-privacy"]').forEach((link) => {
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+      const note = document.querySelector("#modal-privacy");
+      if (!note) return;
+      note.hidden = false;
+      note.focus({ preventScroll: true });
     });
   });
 
   setupFormSubmit("#form-testdrive", "testdrive", {
+    testdrive_direction: "Направление",
     testdrive_model: "Модель",
     testdrive_slot: "Слот визита",
     client_phone: "Телефон",
   });
   setupFormSubmit("#form-service", "service", {
     service_category: "Категория",
-    service_details: "Дата и услуга",
+    service_slot: "Когда приехать",
+    service_details: "Услуга",
     client_phone: "Телефон",
   });
   setupFormSubmit("#form-parts", "parts", {
@@ -187,6 +277,25 @@ export function initModals() {
     parts_needed: "Что подобрать",
     client_phone: "Телефон",
   });
+}
+
+function firstEmptyField(form) {
+  const checks = [
+    ["#testdrive-model", "Выберите пример."],
+    ["[name='testdrive_slot']", "Выберите время."],
+    ["[name='service_category']", "Выберите категорию."],
+    ["[name='service_slot']", "Выберите время."],
+    ["[name='service_details']", "Напишите, какая услуга нужна."],
+    ["[name='parts_brand']", "Напишите марку и модель."],
+    ["[name='parts_needed']", "Напишите, что подобрать."],
+  ];
+
+  for (const [selector, message] of checks) {
+    const field = form.querySelector(selector);
+    if (!field || field.hidden || field.disabled) continue;
+    if (!String(field.value || "").trim()) return message;
+  }
+  return "";
 }
 
 function setupFormSubmit(formSelector, type, labels) {
@@ -199,13 +308,19 @@ function setupFormSubmit(formSelector, type, labels) {
     const phone = String(formData.get("client_phone") || "").trim();
     const errorNode = form.querySelector(".form-error");
 
-    if (!formData.get("consent")) {
-      if (errorNode) errorNode.textContent = "Нужно согласие на обработку персональных данных.";
+    const gap = firstEmptyField(form);
+    if (gap) {
+      if (errorNode) errorNode.textContent = gap;
       return;
     }
 
     if (!isValidRuPhone(phone)) {
       if (errorNode) errorNode.textContent = "Введите номер телефона в формате +7 9XX XXX-XX-XX.";
+      return;
+    }
+
+    if (!formData.get("consent")) {
+      if (errorNode) errorNode.textContent = "Нужно согласие на обработку персональных данных.";
       return;
     }
 
@@ -243,15 +358,27 @@ export function showSuccessModal({ deliveredVia, whatsappUrl, type, fields = {} 
   if (!modal) return;
 
   const slot = fields["Слот визита"];
-  const model = fields["Модель"] || fields["Категория"];
+  const subject = fields["Модель"] || fields["Направление"] || fields["Категория"];
+  const sent = deliveredVia === "telegram";
+  const visit = type === "testdrive" || type === "quiz";
+  const when = slot || "время согласуем";
+  const place = CONFIG.ADDRESS;
 
-  if (type === "testdrive" || type === "quiz") {
+  if (visit && sent) {
     if (title) title.textContent = "Ждём вас в салоне";
     if (text) {
-      const when = slot || "в согласованное время";
-      text.textContent = model
-        ? `Запись: ${when}. Подготовим ${model}. Менеджер подтвердит визит.`
+      text.textContent = subject
+        ? `Запись: ${when}. Подготовим ${subject}. Менеджер подтвердит визит.`
         : `Запись: ${when}. Менеджер подтвердит визит и подготовит модели.`;
+    }
+  } else if (visit) {
+    if (title) title.textContent = "Заявка ещё не ушла";
+    if (text) {
+      const summary = [subject, when].filter(Boolean).join(", ");
+      const pending = `Салон её не получил. В сообщении: ${summary}. Адрес: ${place}.`;
+      text.textContent = isTelegramConfigured(type)
+        ? `Не удалось отправить менеджеру. ${pending}`
+        : pending;
     }
   } else if (type === "service") {
     if (title) title.textContent = "Заявка на ТО принята";
@@ -262,8 +389,9 @@ export function showSuccessModal({ deliveredVia, whatsappUrl, type, fields = {} 
   }
 
   if (note) {
-    if (deliveredVia === "telegram") {
+    if (sent || visit) {
       note.hidden = true;
+      note.textContent = "";
     } else if (isTelegramConfigured(type)) {
       note.hidden = false;
       note.textContent =

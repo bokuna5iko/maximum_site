@@ -7,7 +7,7 @@ import {
 import { trackGoal } from "./analytics.js";
 
 const LEAD_TITLES = {
-  testdrive: "ПРОДАЖИ: запись на тест-драйв / визит",
+  testdrive: "ПРОДАЖИ: запись в салон",
   quiz: "ПРОДАЖИ: квиз, подбор и визит",
   service: "СЕРВИС: запись на ТО",
   parts: "СЕРВИС: подбор запчастей",

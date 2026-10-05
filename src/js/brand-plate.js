@@ -95,7 +95,7 @@ export function initBrandPlate() {
     const cover = coverScroll();
     const dock = Math.max(dockScroll(), cover);
 
-    if (y < cover) {
+    if (slotWidth < 64 || y < cover) {
       rest();
       return;
     }

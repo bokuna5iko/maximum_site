@@ -7,35 +7,66 @@ export function renderInventory() {
   root.innerHTML = INVENTORY.map(
     (item) => `
       <article class="instock-card">
-        <div class="instock-card__visual is-${item.category}">
-          <span class="instock-card__category">${item.categoryLabel}</span>
-        </div>
         <div class="instock-card__body">
           <span class="instock-card__badge">${item.badge}</span>
-          <h3 class="instock-card__title">${item.title}</h3>
+          <h3 class="instock-card__title">
+            <button
+              type="button"
+              class="instock-card__open"
+              data-open-intent="testdrive"
+              data-model-id="${item.id}"
+            >${item.title}</button>
+          </h3>
           <ul class="instock-card__specs">
             ${item.specs.map((spec) => `<li>${spec}</li>`).join("")}
           </ul>
           <button
             type="button"
-            class="btn btn--primary btn--full"
+            class="instock-card__action"
             data-open-intent="testdrive"
             data-model-id="${item.id}"
-          >
-            ${item.cta}
-          </button>
+          >Записаться на показ</button>
         </div>
       </article>
     `,
   ).join("");
 }
 
-export function fillModelSelect(select) {
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
+}
+
+export function fillModelSelect(select, { direction = "", category, selectedTitle = "" } = {}) {
   if (!select) return;
-  const current = select.value;
-  select.innerHTML = INVENTORY.map(
-    (item) =>
-      `<option value="${item.title}">${item.title}</option>`,
-  ).join("");
-  if (current) select.value = current;
+
+  const scoped = Boolean(direction);
+  const items = scoped
+    ? INVENTORY.filter((item) => category && item.category === category)
+    : INVENTORY;
+  const sole = scoped && items.length === 1 ? items[0] : null;
+  const options = [];
+
+  if (!sole) {
+    options.push(`<option value="">Выберите пример</option>`);
+  }
+
+  for (const item of items) {
+    options.push(
+      `<option value="${escapeHtml(item.title)}">${escapeHtml(item.title)}</option>`,
+    );
+  }
+
+  select.innerHTML = options.join("");
+
+  if (selectedTitle && [...select.options].some((option) => option.value === selectedTitle)) {
+    select.value = selectedTitle;
+  } else if (sole) {
+    select.value = sole.title;
+  } else {
+    select.value = "";
+  }
 }

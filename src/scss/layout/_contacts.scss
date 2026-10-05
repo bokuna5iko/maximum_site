@@ -120,8 +120,21 @@
     font-weight: 600;
   }
 
-  a:hover {
-    color: $accent-orange-ink;
+  a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    margin-top: 2px;
+
+    &:hover {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $accent-orange;
+      outline-offset: 3px;
+    }
   }
 }
 
@@ -150,8 +163,8 @@
 
   &__note {
     margin-top: 6px;
-    font-size: 0.75rem;
-    opacity: 0.6;
+    font-size: 0.85rem;
+    color: $text-light-muted;
   }
 
   &__links {

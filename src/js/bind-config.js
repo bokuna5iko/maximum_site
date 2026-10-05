@@ -1,4 +1,4 @@
-import { CONFIG, GIS_HIGHLIGHTS, GIS_REVIEWS, getSeason, getWhatsAppUrl } from "./config.js";
+import { CONFIG, GIS_HIGHLIGHTS, GIS_REVIEWS, getSeason, getWhatsAppUrl, seasonLineForSlide, seasonSlideIndex } from "./config.js";
 
 export function applyConfig() {
   document.querySelectorAll("[data-bind]").forEach((node) => {
@@ -75,17 +75,7 @@ function renderSocialProof() {
 function applySeasonCopy() {
   const line = document.querySelector("[data-season-line]");
   if (!line) return;
-  const season = getSeason();
-  if (season === "snow") {
-    line.textContent =
-      "Зимний сезон в Якутске: снегоходы в приоритете, запись на осмотр в салоне";
-  } else if (season === "water") {
-    line.textContent =
-      "Сезон воды: лодки, моторы и квадры. Что в зале, скажет менеджер. Снегоходы — запись на сезон";
-  } else {
-    line.textContent =
-      "Межсезонье в Якутске: квадры, прицепы и подготовка снегоходов к сезону";
-  }
+  line.textContent = seasonLineForSlide(seasonSlideIndex(getSeason()));
 }
 
 function injectJsonLd() {
@@ -131,14 +121,48 @@ function injectJsonLd() {
 export function initMobileNav() {
   const burger = document.querySelector("#header-burger");
   const nav = document.querySelector("#header-nav");
+  const shield = document.querySelector("#header-shield");
   if (!burger || !nav) return;
 
+  let revealTimer = 0;
+
+  function markClosed() {
+    window.clearTimeout(revealTimer);
+    burger.setAttribute("aria-expanded", "false");
+    burger.setAttribute("aria-label", "Открыть меню");
+  }
+
+  function markReady() {
+    if (!nav.classList.contains("is-open")) return;
+    burger.setAttribute("aria-expanded", "true");
+    burger.setAttribute("aria-label", "Закрыть меню");
+  }
+
   function setMenuOpen(open) {
+    window.clearTimeout(revealTimer);
     nav.classList.toggle("is-open", open);
     burger.classList.toggle("is-open", open);
-    burger.setAttribute("aria-expanded", String(open));
-    burger.setAttribute("aria-label", open ? "Закрыть меню" : "Открыть меню");
+    shield?.classList.toggle("is-on", open);
     document.body.style.overflow = open ? "hidden" : "";
+
+    if (!open) {
+      markClosed();
+      return;
+    }
+
+    burger.setAttribute("aria-expanded", "true");
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) {
+      markReady();
+      return;
+    }
+    const onEnd = (event) => {
+      if (event.target !== nav || event.propertyName !== "grid-template-rows") return;
+      nav.removeEventListener("transitionend", onEnd);
+      markReady();
+    };
+    nav.addEventListener("transitionend", onEnd);
+    revealTimer = window.setTimeout(markReady, 480);
   }
 
   function closeMenu() {
@@ -157,6 +181,21 @@ export function initMobileNav() {
   document.addEventListener("click", (e) => {
     if (!nav.classList.contains("is-open")) return;
     if (nav.contains(e.target) || burger.contains(e.target)) return;
+
+    const link = [...nav.querySelectorAll("a")].find((item) => {
+      const rect = item.getBoundingClientRect();
+      return (
+        e.clientX >= rect.left &&
+        e.clientX <= rect.right &&
+        e.clientY >= rect.top &&
+        e.clientY <= rect.bottom
+      );
+    });
+    if (link) {
+      e.preventDefault();
+      link.click();
+      return;
+    }
     closeMenu();
   });
 

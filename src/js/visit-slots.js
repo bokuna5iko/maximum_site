@@ -1,3 +1,5 @@
+import { CONFIG } from "./config.js";
+
 const MONTHS = [
   "января",
   "февраля",
@@ -33,9 +35,15 @@ function hoursFor(date) {
 
 function dayLabel(date, today) {
   const dateText = `${date.getDate()} ${MONTHS[date.getMonth()]}`;
+  if (sameDay(date, today)) return `Сегодня, ${dateText}`;
   if (sameDay(date, addDays(today, 1))) return `Завтра, ${dateText}`;
   if (date.getDay() === 6) return `Суббота, ${dateText}`;
+  if (date.getDay() === 0) return `Воскресенье, ${dateText}`;
   return dateText;
+}
+
+function windowsFor(date) {
+  return hoursFor(date).close <= 16 ? [10, 12, 14] : [10, 13, 16];
 }
 
 function slot(date, today, hour) {
@@ -43,25 +51,24 @@ function slot(date, today, hour) {
   return { value: label, label };
 }
 
+function pushDay(slots, date, today) {
+  const { open, close } = hoursFor(date);
+  const isToday = sameDay(date, today);
+  const nowHour = today.getHours();
+  const hours = windowsFor(date);
+
+  for (const hour of hours) {
+    if (hour < open || hour >= close) continue;
+    if (isToday && hour <= nowHour) continue;
+    slots.push(slot(date, today, hour));
+  }
+}
+
 export function visitSlots(now = new Date()) {
   const slots = [];
-  const tomorrow = addDays(now, 1);
-  const tomorrowHours = hoursFor(tomorrow);
-
-  if (tomorrowHours.open <= 12 && 12 < tomorrowHours.close) {
-    slots.push(slot(tomorrow, now, 12));
+  for (let day = 0; day < 7; day += 1) {
+    pushDay(slots, addDays(now, day), now);
   }
-
-  const afternoon = tomorrowHours.close <= 16 ? 14 : 16;
-  if (tomorrowHours.open < afternoon && afternoon < tomorrowHours.close) {
-    slots.push(slot(tomorrow, now, afternoon));
-  }
-
-  let daysUntilSaturday = (6 - now.getDay() + 7) % 7;
-  if (daysUntilSaturday === 0) daysUntilSaturday = 7;
-  let saturday = addDays(now, daysUntilSaturday);
-  if (sameDay(saturday, tomorrow)) saturday = addDays(saturday, 7);
-  slots.push(slot(saturday, now, 12));
 
   slots.push({
     value: "Перезвоните, согласуем",
@@ -82,15 +89,22 @@ function escapeHtml(value) {
 export function renderVisitSlots(now = new Date()) {
   const slots = visitSlots(now);
 
-  const select = document.querySelector("#testdrive-slot");
-  if (select) {
-    select.innerHTML = slots
-      .map(
-        (item) =>
-          `<option value="${escapeHtml(item.value)}">${escapeHtml(item.label)}</option>`,
-      )
-      .join("");
+  const markup = [
+    `<option value="">Выберите время</option>`,
+    ...slots.map(
+      (item) =>
+        `<option value="${escapeHtml(item.value)}">${escapeHtml(item.label)}</option>`,
+    ),
+  ].join("");
+
+  for (const id of ["#testdrive-slot", "#service-slot"]) {
+    const select = document.querySelector(id);
+    if (select) select.innerHTML = markup;
   }
+
+  document.querySelectorAll("[data-visit-hours]").forEach((node) => {
+    node.textContent = `Часы салона: ${CONFIG.HOURS}`;
+  });
 
   const quiz = document.querySelector("#quiz-slots");
   if (quiz) {

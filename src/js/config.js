@@ -108,3 +108,27 @@ export function getSeason() {
   if (month >= 6 && month <= 8) return "water";
   return "offroad";
 }
+
+const SLIDE_BY_SEASON = { offroad: 0, water: 1, snow: 3 };
+
+export const SEASON_DIRECTIONS = [
+  "Квадроциклы",
+  "Лодки и моторы",
+  "Гидроциклы",
+  "Снегоходы",
+];
+
+export const SEASON_LINES = [
+  "Квадроциклы: охота и хозяйство.",
+  "Лодки и моторы: рыбалка.",
+  "Гидроциклы: вода и прогулки.",
+  "Снегоходы: зима и подготовка к сезону.",
+];
+
+export function seasonSlideIndex(season = getSeason()) {
+  return SLIDE_BY_SEASON[season] ?? 0;
+}
+
+export function seasonLineForSlide(index) {
+  return SEASON_LINES[index] ?? SEASON_LINES[0];
+}
