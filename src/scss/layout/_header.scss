@@ -205,12 +205,11 @@
 
     &:has(.header__quick-caption) {
       width: auto;
-      height: auto;
-      min-width: 44px;
-      min-height: 44px;
-      padding: 6px 8px;
-      gap: 2px;
-      flex-direction: column;
+      height: 44px;
+      min-width: 5.625rem;
+      padding: 0 8px;
+      gap: 4px;
+      flex-direction: row;
     }
 
     &:active {
@@ -224,13 +223,13 @@
   }
 
   &__quick-caption {
-    max-width: 5.4rem;
-    color: $text-dark;
+    color: inherit;
     font-family: $font-main;
     font-size: 0.75rem;
     font-weight: 700;
-    line-height: 1.2;
-    text-align: center;
+    line-height: 1;
+    text-align: left;
+    white-space: nowrap;
   }
 
   &__burger {
@@ -345,6 +344,7 @@
 
     &__container {
       position: relative;
+      gap: 8px;
     }
 
     &__phones {
@@ -432,6 +432,37 @@
 
     &__quick {
       display: flex;
+    }
+
+    &__quick-link,
+    &__burger {
+      background: rgba(24, 25, 28, 0.62);
+      border-color: rgba(255, 255, 255, 0.16);
+      color: #f4f6f9;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    &__burger span {
+      background: #f4f6f9;
+    }
+
+    &.is-docked &__quick-link,
+    &.is-docked &__burger {
+      background: #f4f6f9;
+      border-color: #e2e8f0;
+      color: $text-dark;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+
+    &.is-docked &__burger span {
+      background: $text-dark;
+    }
+
+    &__quick-link--wa,
+    &.is-docked &__quick-link--wa {
+      color: #25d366;
     }
 
     &__nav.is-open {
