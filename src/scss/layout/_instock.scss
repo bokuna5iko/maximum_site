@@ -83,6 +83,51 @@
     }
   }
 
+  &__visual {
+    position: relative;
+    display: block;
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: $bg-surface;
+    color: inherit;
+    font: inherit;
+    cursor: default;
+
+    &:is(button) {
+      cursor: pointer;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $accent-orange;
+      outline-offset: -4px;
+    }
+
+    img {
+      position: absolute;
+      inset: 14px 18px 8px;
+      width: calc(100% - 36px);
+      height: calc(100% - 22px);
+      object-fit: contain;
+      object-position: center;
+      transition: transform $transition-fast;
+    }
+  }
+
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    &:hover &__visual img {
+      transform: scale(1.03);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &__visual img {
+      transition: none;
+    }
+  }
+
   &__body {
     padding: 20px 20px 22px;
     display: flex;

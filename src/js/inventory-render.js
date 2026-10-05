@@ -7,6 +7,7 @@ export function renderInventory() {
   root.innerHTML = INVENTORY.map(
     (item) => `
       <article class="instock-card">
+        ${cardVisual(item)}
         <div class="instock-card__body">
           <span class="instock-card__badge">${item.badge}</span>
           <h3 class="instock-card__title">
@@ -30,6 +31,14 @@ export function renderInventory() {
       </article>
     `,
   ).join("");
+}
+
+function cardVisual(item) {
+  if (!item.image) {
+    return `<div class="instock-card__visual"></div>`;
+  }
+
+  return `<button type="button" class="instock-card__visual" data-open-intent="testdrive" data-model-id="${escapeHtml(item.id)}" aria-label="Записаться на показ: ${escapeHtml(item.title)}"><img src="${item.image}" alt="" width="${item.imageWidth}" height="${item.imageHeight}" decoding="async"></button>`;
 }
 
 function escapeHtml(value) {
