@@ -5,10 +5,14 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  width: min(1440px, 100%);
-  margin: 0 auto;
-  padding: calc(var(--header-bar-h) + env(safe-area-inset-top, 0px) + 16px) 16px
-    16px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#main > :not(.hero) {
+  width: min(1440px, calc(100% - 32px));
+  margin-inline: auto;
 }
 
 .container {
@@ -16,9 +20,9 @@
   padding: 0;
 }
 
-.header {
-  background-color: $bg-surface;
-  border-bottom: 1px solid #cbd5e1;
+.hero .container {
+  max-width: 850px;
+  padding: 0 20px;
 }
 
 .header__link,
@@ -96,8 +100,7 @@
 .card,
 .instock-card,
 .brand-item,
-.btn,
-.season-card {
+.btn {
   &:hover {
     transform: none;
     box-shadow: none;

@@ -2,23 +2,31 @@
 
 .hero {
   position: relative;
-  min-height: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
-  justify-content: flex-start;
-  gap: 8px;
-  padding: 0;
+  align-items: center;
+  justify-content: center;
+  padding: calc(var(--header-bar-h) + env(safe-area-inset-top, 0px) + 12px)
+    20px 110px;
   width: 100%;
   max-width: 100%;
   min-width: 0;
-  overflow: visible;
+  overflow: hidden;
   color: $text-light;
-  background-color: transparent;
+  background-color: $bg-dark-card;
 
-  // Ролики остаются в разметке для сезона, на плитах не занимают кадр
+  // Видео-слайдер
   &__video-slider {
-    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    z-index: 1;
+    overflow: clip;
   }
 
   &__video-slide {
@@ -84,23 +92,29 @@
   }
 
   &__water-canvas {
-    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    height: 100%;
+    pointer-events: none;
+    z-index: 3;
+    opacity: 0.7;
   }
 
   // Центральный контент
   &__container {
     position: relative;
     z-index: 4;
-    order: 2;
-    max-width: none;
+    max-width: 850px;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    margin: 0;
-    padding: 48px 40px;
-    background: $bg-dark-card;
+    margin: auto 0;
   }
 
   &__brand-anchor {
@@ -118,6 +132,7 @@
     margin-bottom: 16px;
     color: $text-light;
     letter-spacing: 1px;
+    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.7);
   }
 
   &__subtitle {
@@ -126,6 +141,7 @@
     line-height: 1.4;
     margin-bottom: 32px;
     color: #e2e8f0;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
   }
 
   &__actions {
@@ -137,15 +153,17 @@
 
   // 🔲 НИЖНЯЯ ПАНЕЛЬ МИНИМАЛИСТИЧНЫХ ТАБОВ
   &__season-bar {
-    position: static;
-    order: 1;
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
     z-index: 5;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
-    width: 100%;
-    max-width: none;
-    margin: 0;
+    gap: 12px;
+    width: min(1000px, calc(100% - 40px));
+    max-width: 100%;
+    margin-inline: auto;
 
     @media (max-width: 768px) {
       grid-template-columns: repeat(2, 1fr);
@@ -153,12 +171,14 @@
   }
 
   @media (max-width: 768px) {
-    min-height: 0;
-    padding: 0;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: calc(var(--header-bar-h) + env(safe-area-inset-top, 0px) + 12px)
+      16px calc(16px + env(safe-area-inset-bottom, 0px));
+    justify-content: flex-start;
 
     &__container {
       margin: 0;
-      padding: 32px 16px;
     }
 
     &__badge {
@@ -199,7 +219,11 @@
     }
 
     &__season-bar {
-      grid-template-columns: repeat(2, 1fr);
+      position: static;
+      width: 100%;
+      max-width: none;
+      margin-top: 16px;
+      gap: 8px;
     }
   }
 }
@@ -207,30 +231,32 @@
 // Карточка отдельного таба
 .season-card {
   position: relative;
-  background: $bg-surface;
-  border: 1px solid #cbd5e1;
-  padding: 16px 16px 20px;
-  border-radius: 0;
+  background: rgba(24, 25, 28, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+  padding: 14px 16px;
+  border-radius: 8px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
   cursor: pointer;
+  transition: all $transition-fast;
   overflow: hidden;
 
   &__label {
-    font-size: 0.75rem;
-    font-weight: 400;
-    color: $text-muted;
-    letter-spacing: 0;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: $text-light-muted;
+    letter-spacing: 1px;
     margin-bottom: 4px;
-    text-transform: none;
+    text-transform: uppercase;
   }
 
   &__title {
     font-family: $font-header;
-    font-size: 0.95rem;
-    color: $text-dark;
+    font-size: 0.9rem;
+    color: $text-light;
     letter-spacing: 0.5px;
   }
 
@@ -239,29 +265,35 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 4px;
-    transform: none;
-    background: #cbd5e1;
+    height: 3px;
+    transform: scaleX(0);
+    transform-origin: left center;
+    background: linear-gradient(90deg, $accent-orange, $accent-red);
+    transition: transform 0.3s ease;
   }
 
   &:hover {
-    border-color: #94a3b8;
+    background: rgba(24, 25, 28, 0.8);
+    border-color: rgba(255, 255, 255, 0.25);
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      transform: translateY(-2px);
+    }
   }
 
   &.active {
-    background: $bg-dark-card;
-    border-color: $bg-dark-card;
+    background: rgba(24, 25, 28, 0.85);
+    border-color: rgba(255, 85, 0, 0.6);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
 
     .season-card__label {
-      color: $text-light-muted;
-    }
-
-    .season-card__title {
-      color: $text-light;
+      color: $accent-orange;
     }
 
     .season-card__line {
-      background: $accent-orange-ink;
+      transform: scaleX(1);
     }
   }
 
@@ -284,16 +316,16 @@
 }
 
 .hero__playback {
-  position: static;
-  align-self: flex-end;
-  order: 3;
+  position: absolute;
   z-index: 6;
+  right: 24px;
+  bottom: 132px;
   min-height: 44px;
   padding: 8px 14px;
-  border-radius: 0;
-  border: 1px solid #cbd5e1;
-  background: $bg-surface;
-  color: $text-dark;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(24, 25, 28, 0.82);
+  color: $text-light;
   font-family: $font-main;
   font-size: 0.85rem;
   font-weight: 600;
@@ -335,7 +367,7 @@
   margin: 0;
   background: #1a1b1e;
   border: 1.5px solid #f2f2f2;
-  border-radius: 0;
+  border-radius: 2px;
   container-type: inline-size;
   font-family: $font-header;
   font-style: italic;
