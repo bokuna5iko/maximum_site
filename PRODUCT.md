@@ -38,7 +38,7 @@ web
 
 ## Brand Commitments
 
-Имя: Центр Техники МАКСИМУМ. Знак MAXIMUM и его анимацию не менять без отдельной просьбы. Правила знака: `src/assets/logo/AGENTS.md`.
+Имя: Центр Техники МАКСИМУМ. Знак MAXIMUM и его анимацию не менять без отдельной просьбы. Правила знака: `src/assets/logo/mark.md`.
 
 ## Evidence on Hand
 

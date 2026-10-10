@@ -6,7 +6,7 @@ alwaysApply: false
 
 # Maximum logo
 
-Перед любой правкой лого прочитай `src/assets/logo/AGENTS.md`.
+Перед любой правкой лого прочитай `src/assets/logo/mark.md`. `AGENTS.md` рядом — только отсылка, полный текст там не держать.
 
 - Это интерпретация для анимации, не копия `reference.png`
 - Intro: после стрелки `plateOpen` и `wordSpread` в одном шаге — не показывать пустой шильдик
