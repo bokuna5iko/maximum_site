@@ -1,0 +1,260 @@
+@use "../abstract/variables" as *;
+
+// Страница как ряд плит: светлый зал в швах, прямой угол.
+#main {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: min(1440px, 100%);
+  margin: 0 auto;
+  padding: calc(var(--header-bar-h) + env(safe-area-inset-top, 0px) + 16px) 16px
+    16px;
+}
+
+.container {
+  max-width: none;
+  padding: 0;
+}
+
+.header {
+  background-color: $bg-surface;
+  border-bottom: 1px solid #cbd5e1;
+}
+
+.header__link,
+.header__phone-link,
+.header__burger,
+.header__quick-link {
+  border-radius: 0;
+}
+
+.paths,
+.instock,
+.visit,
+.showcase,
+.quiz-section,
+.gis-proof,
+.contacts-section {
+  padding: 0;
+  background: transparent;
+}
+
+.section-header,
+.showcase__label,
+.instock__note,
+.brands-block {
+  background: $bg-surface;
+  border: 1px solid #cbd5e1;
+  margin: 0;
+  padding: 24px;
+}
+
+.section-header {
+  margin-bottom: 0;
+}
+
+.showcase__label {
+  font-size: 1.15rem;
+  margin-top: 8px;
+}
+
+.showcase__grid + .showcase__label {
+  margin-top: 8px;
+}
+
+.paths__grid,
+.instock__grid,
+.visit__grid,
+.visit .deal,
+.showcase__grid,
+.showcase__doors,
+.gis-reviews,
+.contacts-grid,
+.quiz-options,
+.brands-grid {
+  gap: 8px;
+}
+
+.paths__card,
+.visit-card,
+.deal-card,
+.card,
+.instock-card,
+.quiz-card,
+.quiz-option__content,
+.quiz-card__badge,
+.gis-tag,
+.gis-review,
+.brand-item,
+.contacts-map,
+.footer,
+.privacy {
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.card,
+.instock-card,
+.brand-item,
+.btn,
+.season-card {
+  &:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+.btn {
+  border-radius: 0;
+  box-shadow: none;
+
+  &:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+.btn--primary {
+  background: $accent-orange-ink;
+}
+
+.btn--primary:hover,
+.btn--outline:hover,
+.btn--outline-dark:hover,
+.card:hover,
+.instock-card:hover,
+.brand-item:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.instock-card {
+  background: $bg-dark-card;
+  border: 0;
+
+  &__visual {
+    background: $bg-dark-card;
+
+    img {
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__badge {
+    color: $accent-cyan;
+    background: rgba(0, 180, 216, 0.15);
+    border: 0;
+    border-radius: 0;
+  }
+
+  &__title,
+  &__open {
+    color: $text-light;
+  }
+
+  &__summary,
+  &__facts,
+  &__dot {
+    color: $text-light-muted;
+  }
+
+  &__more {
+    color: #e2e8f0;
+  }
+
+  &__action {
+    align-self: stretch;
+    justify-content: center;
+    display: inline-flex;
+    margin-top: 16px;
+    padding: 14px 16px;
+    border: 1px solid $text-light;
+    color: $text-light;
+    text-decoration: none;
+
+    &:hover {
+      color: $text-light;
+    }
+  }
+}
+
+.card--parts {
+  background: $bg-dark-card;
+  border-color: transparent;
+
+  .card__title,
+  .card__open {
+    color: $text-light;
+  }
+
+  .card__specs li,
+  .card__specs li span {
+    color: $text-light-muted;
+  }
+}
+
+.quiz-card {
+  max-width: none;
+}
+
+.quiz-option input[type="radio"]:checked + .quiz-option__content {
+  background: $bg-dark-card;
+  border-color: $bg-dark-card;
+  color: $text-light;
+  box-shadow: none;
+}
+
+.gis-score {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  padding: 12px 16px;
+  background: $bg-dark-card;
+}
+
+.gis-score__value {
+  color: $text-light;
+}
+
+.gis-score__meta {
+  color: $text-light-muted;
+}
+
+.brand-item {
+  background: $bg-dark-card;
+  color: $text-light;
+  border: 0;
+}
+
+.contacts-info {
+  background: $bg-surface;
+  border: 1px solid #cbd5e1;
+  padding: 24px;
+}
+
+.contacts-map {
+  background: $bg-dark-card;
+  border: 0;
+  box-shadow: none;
+  min-height: 100%;
+
+  iframe {
+    border-radius: 0;
+  }
+}
+
+.footer,
+.privacy {
+  background: $bg-dark-card;
+}
+
+.footer {
+  padding: 20px 24px;
+}
+
+.privacy {
+  padding: 24px;
+}

@@ -33,9 +33,9 @@ $font-main:
   sans-serif;
 
 // Скругляния и эффекты
-$radius-sm: 8px;
-$radius-md: 16px;
-$radius-lg: 24px;
+$radius-sm: 0;
+$radius-md: 0;
+$radius-lg: 0;
 $transition-fast: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 
 // Алиасы совместимости (чтобы старые селекторы не выбивали ошибку)
