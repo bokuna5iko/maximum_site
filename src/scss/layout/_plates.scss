@@ -10,6 +10,11 @@
   padding: 0;
 }
 
+// Двери остаются в шве 8px под героем. Дальше раздел отделяет пауза, не плита.
+#main > .paths ~ section {
+  margin-top: 40px;
+}
+
 #main > :not(.hero) {
   width: min(1440px, calc(100% - 32px));
   margin-inline: auto;
@@ -43,8 +48,6 @@
   background: transparent;
 }
 
-.section-header,
-.showcase__label,
 .instock__note,
 .brands-block {
   background: $bg-surface;
@@ -54,12 +57,18 @@
 }
 
 .section-header {
-  margin-bottom: 0;
+  background: transparent;
+  border: 0;
+  margin: 0;
+  padding: 0 0 8px;
 }
 
 .showcase__label {
+  background: transparent;
+  border: 0;
+  margin: 8px 0 0;
+  padding: 0 0 8px;
   font-size: 1.15rem;
-  margin-top: 8px;
 }
 
 .showcase__grid + .showcase__label {
