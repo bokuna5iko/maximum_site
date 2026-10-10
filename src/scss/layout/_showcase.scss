@@ -44,4 +44,22 @@
       grid-template-columns: 1fr;
     }
   }
+
+  .card__title {
+    font-size: 1.5rem;
+    line-height: 1.15;
+    margin-bottom: 8px;
+  }
+
+  .card__support {
+    margin: 0;
+    color: $text-light-muted;
+    font-size: 0.95rem;
+    line-height: 1.45;
+
+    span {
+      color: #e2e8f0;
+      font-weight: 600;
+    }
+  }
 }
